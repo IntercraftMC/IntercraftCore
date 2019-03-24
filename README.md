@@ -1,4 +1,4 @@
-tercraft Core
+# Intercraft Core
 Core mod for InterCraft 1.13.2 modpack.
 
 
