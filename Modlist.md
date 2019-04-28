@@ -1,5 +1,7 @@
 :heavy_check_mark: `:heavy_check_mark:` for approved and :heavy_multiplication_x: `:heavy_multiplication_x:` for disapproved.
 
+If mod uses a dependency add in parentheses the name of it at the end of the mod entry and link in the `Core mods/libraries` list, not after the new mod entry.
+
 - [Better Than Bunnies](https://minecraft.curseforge.com/projects/better-than-bunnies)
 - [Better Than Llamas](https://minecraft.curseforge.com/projects/better-than-llamas)
 - [BiblioCraft](https://minecraft.curseforge.com/projects/bibliocraft)
@@ -9,6 +11,7 @@
 - [Computronics](https://github.com/Vexatos/Computronics)
 - [Consecration](https://minecraft.curseforge.com/projects/consecration)
 - [Deep Resonance](https://minecraft.curseforge.com/projects/deep-resonance) (ElecCore, McJtyLib)
+- [MmmMmmMmmMmm](https://minecraft.curseforge.com/projects/mmmmmmmmmmmm) :heavy_multiplication_x:
 - [OpenComputers](https://minecraft.curseforge.com/projects/opencomputers) :heavy_check_mark:
 - [OpenGlasses2](https://minecraft.curseforge.com/projects/openglasses2)
 - [Pam's Harvestcraft](https://minecraft.curseforge.com/projects/pams-harvestcraft)
