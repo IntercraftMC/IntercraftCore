@@ -11,6 +11,8 @@ If mod uses a dependency add in parentheses the name of it at the end of the mod
 - [Computronics](https://github.com/Vexatos/Computronics)
 - [Consecration](https://minecraft.curseforge.com/projects/consecration)
 - [Deep Resonance](https://minecraft.curseforge.com/projects/deep-resonance) (ElecCore, McJtyLib)
+- [Dynamic Surroundings](https://minecraft.curseforge.com/projects/dynamic-surroundings) (OreLib)
+- [Galacticraft](https://micdoodle8.com/mods/galacticraft) (MicdoodleCore)
 - [MmmMmmMmmMmm](https://minecraft.curseforge.com/projects/mmmmmmmmmmmm) :heavy_multiplication_x:
 - [OpenComputers](https://minecraft.curseforge.com/projects/opencomputers) :heavy_check_mark:
 - [OpenGlasses2](https://minecraft.curseforge.com/projects/openglasses2)
@@ -32,6 +34,8 @@ If mod uses a dependency add in parentheses the name of it at the end of the mod
 - [Guidebook](https://minecraft.curseforge.com/projects/guidebook)
 - [McJtyLib](https://minecraft.curseforge.com/projects/mcjtylib)
 - [MCMultiPart](https://minecraft.curseforge.com/projects/mcmultipart)
+- [MicdoodleCore](https://micdoodle8.com/mods/galacticraft)
+- [OreLib](https://minecraft.curseforge.com/projects/orelib)
 - [Phosphor](https://minecraft.curseforge.com/projects/phosphor)
 - [Proportional Destruction Particles](https://minecraft.curseforge.com/projects/proportional-destruction-particles)
 - [QuackLib](https://minecraft.curseforge.com/projects/quacklib)
