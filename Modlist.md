@@ -5,7 +5,7 @@ If mod uses a dependency add in parentheses the name of it at the end of the mod
 - [Better Than Bunnies](https://minecraft.curseforge.com/projects/better-than-bunnies)
 - [Better Than Llamas](https://minecraft.curseforge.com/projects/better-than-llamas)
 - [BiblioCraft](https://minecraft.curseforge.com/projects/bibliocraft)
-- [BitHop](https://minecraft.curseforge.com/projects/bithop) (Shadowfacts' Forgelin)
+- [BitHop](https://minecraft.curseforge.com/projects/bithop) (Shadowfacts' Forgelin) :heavy_multiplication_x:
 - [Bloodmoon](https://minecraft.curseforge.com/projects/bloodmoon)
 - [Comforts](https://minecraft.curseforge.com/projects/comforts)
 - [Computronics](https://github.com/Vexatos/Computronics)
@@ -24,7 +24,7 @@ If mod uses a dependency add in parentheses the name of it at the end of the mod
 - [Rockhounding: Chemistry](https://minecraft.curseforge.com/projects/rockhounding-mod-chemistry) (Bookshelf, Guidebook, Redstone Flux, Rockhounding Mod: Core) :heavy_check_mark:
 - [Serene Seasons](https://minecraft.curseforge.com/projects/serene-seasons)
 - [SGCraft](https://ore.spongepowered.org/Dockter/SGCraft)
-- [The Betweenlands](https://minecraft.curseforge.com/projects/angry-pixel-the-betweenlands-mod)
+- [The Betweenlands](https://minecraft.curseforge.com/projects/angry-pixel-the-betweenlands-mod) :heavy_multiplication_x:
 
 ## Core mods/libraries
 
@@ -42,4 +42,4 @@ If mod uses a dependency add in parentheses the name of it at the end of the mod
 - [Redstone Flux](https://minecraft.curseforge.com/projects/redstone-flux)
 - [Rockhounding Mod: Core](https://minecraft.curseforge.com/projects/rockhounding-mod-core)
 - [Shadowfacts' Forgelin](https://minecraft.curseforge.com/projects/shadowfacts-forgelin)
-- [The Spice of Life](https://minecraft.curseforge.com/projects/the-spice-of-life)
+- [The Spice of Life](https://minecraft.curseforge.com/projects/the-spice-of-life) :heavy_multiplication_x:
