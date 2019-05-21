@@ -1,6 +1,6 @@
-package net.intercraft.intercraftCore.elements;
+package net.intercraft.intercraftcore.elements;
 
-import net.intercraft.intercraftCore.Reference;
+import net.intercraft.intercraftcore.Reference;
 import net.minecraft.item.Item;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;

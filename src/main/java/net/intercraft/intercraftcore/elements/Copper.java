@@ -1,4 +1,4 @@
-package net.intercraft.intercraftCore.elements;
+package net.intercraft.intercraftcore.elements;
 
 public class Copper extends ElementBase {
     /*
