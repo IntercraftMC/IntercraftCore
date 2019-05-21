@@ -3,7 +3,7 @@ loaderVersion="[25,)"
 issueTrackerURL="https://github.com/IntercraftMC/IntercraftCore/issues"
 
 [[mods]]
-    modId="iccore"
+    modId="intercraftcore"
     version="${file.jarVersion}"
     displayName="Intercraft Core"
     authors="Simon, SirDavidLudwig"

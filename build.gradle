@@ -14,8 +14,8 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
 version = '0.0.1'
-group = 'net.intercraft.iccore' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = 'iccore'
+group = 'net.intercraft.intercraftcore' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = 'intercraftcore'
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 
