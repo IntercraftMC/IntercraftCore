@@ -5,6 +5,7 @@ public class Copper extends ElementBase {
     *
     * */
     public Copper() {
-        super("Cu","Copper",0xffb732);
+
+        super("Cu","copper",0xffb732);
     }
 }
