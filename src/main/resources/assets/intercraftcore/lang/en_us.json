@@ -6,6 +6,7 @@
   "item.intercraftcore.ag_ingot": "Silver Ingot",
   "item.intercraftcore.pb_ingot": "Lead Ingot",
   "item.intercraftcore.w_ingot": "Tungsten Ingot",
+  "item.intercraftcore.u_ingot": "Uranium Ingot",
 
   "itemGroup.resources": "Resources"
 }

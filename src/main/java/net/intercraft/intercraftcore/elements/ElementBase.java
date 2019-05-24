@@ -3,10 +3,8 @@ package net.intercraft.intercraftcore.elements;
 import net.intercraft.intercraftcore.IntercraftCore;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 
-import javax.annotation.Nonnull;
 import java.awt.*;
 
 public class ElementBase extends Item implements IItemColor {
