@@ -51,7 +51,6 @@ public class ItemRegistry {
      * Register items
      * @param event
      */
-    @SubscribeEvent
     public static void registerItems(final RegistryEvent.Register<Item> event)
     {
         if (event.getGenericType() == Item.class)

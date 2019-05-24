@@ -2,6 +2,7 @@ package net.intercraft.intercraftcore;
 
 import net.intercraft.intercraftcore.init.CreativeTabBase;
 import net.intercraft.intercraftcore.init.ItemRegistry;
+import net.intercraft.intercraftcore.init.PotionRegistry;
 import net.minecraft.item.ItemGroup;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -27,6 +28,7 @@ public class IntercraftCore {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onCommonSetup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onClientSetup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(ItemRegistry::registerItems);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(PotionRegistry::registerPotions);
     }
 
     public void onCommonSetup(final FMLCommonSetupEvent event) {
