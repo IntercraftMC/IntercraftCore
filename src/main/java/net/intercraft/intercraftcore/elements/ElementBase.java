@@ -1,15 +1,16 @@
 package net.intercraft.intercraftcore.elements;
 
-import net.intercraft.intercraftcore.Reference;
+import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.minecraft.item.ItemStack;
 
-@Mod.EventBusSubscriber(modid = Reference.MODID,bus = Mod.EventBusSubscriber.Bus.MOD)
-public class ElementBase extends Item {
+import javax.annotation.Nonnull;
+import java.awt.*;
+
+public class ElementBase extends Item implements IItemColor {
+
+    protected int tint;
     /*
     * Should register an ore (hard), dust (+ tiny), ingot (+ nugget), block, plate, frame.
     * Is going to be a extension of this class to make code shorter.
@@ -18,8 +19,28 @@ public class ElementBase extends Item {
     public ElementBase(String name, String oredict, int tint) {
         super(new Item.Properties().group(ItemGroup.REDSTONE));
 
-        setRegistryName(name);
+        this.tint = tint;
+        setRegistryName(name+"_ingot");
 
+
+
+
+    }
+
+    @Override
+    public int getColor(ItemStack itemStack, int tint) {
+
+        {
+            switch (tint) {
+                case 0: {
+                    return Color.GREEN.getRGB();
+                }
+
+                default: {
+                    return Color.RED.getRGB();
+                }
+            }
+        }
 
     }
 }

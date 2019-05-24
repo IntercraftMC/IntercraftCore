@@ -21,10 +21,11 @@ If mod uses a dependency add in parentheses the name of it at the end of the mod
 - [PeacefulSurface](https://minecraft.curseforge.com/projects/peacefulsurface) :large_orange_diamond:
 - [Railcraft](https://minecraft.curseforge.com/projects/railcraft)
 - [Regeneration](https://minecraft.curseforge.com/projects/regeneration) :large_orange_diamond:
-- [RetroComputers](https://minecraft.curseforge.com/projects/retrocomputers) (MCMultiPart, QuackLib, Shadowfacts' Forgelin)
+- [RetroComputers](https://minecraft.curseforge.com/projects/retrocomputers) (MCMultiPart, QuackLib, Shadowfacts' Forgelin) :large_orange_diamond: :heavy_check_mark:
 - [Rockhounding: Chemistry](https://minecraft.curseforge.com/projects/rockhounding-mod-chemistry) (Bookshelf, Guidebook, Redstone Flux, Rockhounding Mod: Core) :heavy_check_mark:
 - [Serene Seasons](https://minecraft.curseforge.com/projects/serene-seasons)
 - [SGCraft](https://ore.spongepowered.org/Dockter/SGCraft)
+- [TIS-3D](https://minecraft.curseforge.com/projects/tis-3d) :heavy_check_mark:
 - [The Betweenlands](https://minecraft.curseforge.com/projects/angry-pixel-the-betweenlands-mod) :heavy_multiplication_x:
 
 ## Core mods/libraries

@@ -1,6 +1,6 @@
 package net.intercraft.intercraftcore.init;
 
-import net.intercraft.intercraftcore.elements.Copper;
+import net.intercraft.intercraftcore.elements.*;
 import net.intercraft.intercraftcore.item.ItemTest;
 import net.minecraft.block.Block;
 import net.minecraft.init.Items;
@@ -20,6 +20,10 @@ public class ItemRegistry {
     public static final Item ITEM_TEST;
 
     public static final Item COPPER;
+    public static final Item LEAD;
+    public static final Item SILVER;
+    public static final Item TIN;
+    public static final Item TUNGSTEN;
 
     /**
      * The complete list of items to help automate registration
@@ -33,7 +37,12 @@ public class ItemRegistry {
          */
         items = Arrays.asList(
                 ITEM_TEST = new ItemTest((new Item.Properties()).group(ItemGroup.REDSTONE)),
-                COPPER = new Copper()
+
+                COPPER = new Copper(),
+                LEAD = new Lead(),
+                SILVER = new Silver(),
+                TIN = new Tin(),
+                TUNGSTEN = new Tungsten()
 
         );
     }
