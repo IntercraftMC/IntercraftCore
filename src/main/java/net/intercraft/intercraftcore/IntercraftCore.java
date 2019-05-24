@@ -1,6 +1,8 @@
 package net.intercraft.intercraftcore;
 
+import net.intercraft.intercraftcore.init.CreativeTabBase;
 import net.intercraft.intercraftcore.init.ItemRegistry;
+import net.minecraft.item.ItemGroup;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -11,10 +13,15 @@ public class IntercraftCore {
 
     public static IntercraftCore instance;
 
+    public static ItemGroup RESOURCES;
+
     public IntercraftCore() {
 
         // Save a self reference
         instance = this;
+
+        // Creative Tabs are created here
+        RESOURCES = new CreativeTabBase("resources");
 
         // Setup initial event listeners
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onCommonSetup);

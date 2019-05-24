@@ -5,5 +5,7 @@
   "item.intercraftcore.sn_ingot": "Tin Ingot",
   "item.intercraftcore.ag_ingot": "Silver Ingot",
   "item.intercraftcore.pb_ingot": "Lead Ingot",
-  "item.intercraftcore.w_ingot": "Tungsten Ingot"
+  "item.intercraftcore.w_ingot": "Tungsten Ingot",
+
+  "itemGroup.resources": "Resources"
 }
