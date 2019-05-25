@@ -1,4 +1,4 @@
-package net.intercraft.intercraftcore.init;
+package net.intercraft.intercraftcore.potion;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;

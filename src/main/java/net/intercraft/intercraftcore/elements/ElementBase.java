@@ -1,6 +1,7 @@
 package net.intercraft.intercraftcore.elements;
 
-import net.intercraft.intercraftcore.init.IntercraftCoreRegistry;
+import net.intercraft.intercraftcore.init.IntercraftItemGroups;
+import net.intercraft.intercraftcore.init.RegistrationHandler;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -16,7 +17,7 @@ public class ElementBase extends Item implements IItemColor {
     * */
 
     public ElementBase(String name, String oredict, int tint) {
-        super(new Item.Properties().group(IntercraftCoreRegistry.RESOURCES));
+        super(new Item.Properties().group(IntercraftItemGroups.RESOURCES));
 
         this.tint = tint;
         setRegistryName(name+"_ingot");
