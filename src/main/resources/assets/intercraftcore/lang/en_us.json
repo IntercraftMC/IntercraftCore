@@ -8,7 +8,7 @@
   "item.intercraftcore.w_ingot": "Tungsten Ingot",
   "item.intercraftcore.u_ingot": "Uranium Ingot",
 
-  "itemGroup.resources": "Resources",
+  "itemGroup.intercraftcore.resources": "Resources",
 
-  "effect.intercraftcore.radiation_sickness": "Radiation Poison"
+  "effect.intercraftcore.radiation_sickness": "Radiation Sickness"
 }
