@@ -11,8 +11,8 @@ import java.util.List;
 
 public class RegistrationHandler {
 
-    public static final List<Block> blocks = new LinkedList<>();
-    public static final List<Item> items = new LinkedList<>();
+    protected static final List<Block> blocks = new LinkedList<>();
+    protected static final List<Item> items = new LinkedList<>();
     protected static final List<Potion> potions = new LinkedList<>();
 
     public static void register(final RegistryEvent.Register event)

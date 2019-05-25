@@ -1,15 +1,11 @@
 package net.intercraft.intercraftcore.init;
 
-import net.intercraft.intercraftcore.elements.*;
+import net.intercraft.intercraftcore.item.elements.*;
 import net.intercraft.intercraftcore.item.ItemTest;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
 
-/**
- * All items are created and grouped here
- */
-public class IntercraftItems {
-
+public class IntercraftItems
+{
     /**
      * A test item for reference
      */
@@ -28,15 +24,14 @@ public class IntercraftItems {
     /**
      * Instantiate all items
      */
-    static
-    {
-        TEST = new ItemTest((new Item.Properties()).group(IntercraftItemGroups.RESOURCES));
-        COPPER = new Copper();
-        LEAD = new Lead();
-        SILVER = new Silver();
-        TIN = new Tin();
+    static {
+        TEST     = new ItemTest((new Item.Properties()).group(IntercraftItemGroups.RESOURCES));
+        COPPER   = new Copper();
+        LEAD     = new Lead();
+        SILVER   = new Silver();
+        TIN      = new Tin();
         TUNGSTEN = new Tungsten();
-        URANIUM = new Uranium();
+        URANIUM  = new Uranium();
     }
 
     /**

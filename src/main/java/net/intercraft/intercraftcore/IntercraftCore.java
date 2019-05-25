@@ -7,11 +7,12 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 @Mod(Reference.MODID)
-public class IntercraftCore {
-
+public class IntercraftCore
+{
     public static IntercraftCore instance;
 
-    public IntercraftCore() {
+    public IntercraftCore()
+    {
 
         // Save a self reference
         instance = this;
@@ -23,12 +24,13 @@ public class IntercraftCore {
     }
 
 
-
-    public void onCommonSetup(final FMLCommonSetupEvent event) {
+    public void onCommonSetup(final FMLCommonSetupEvent event)
+    {
         //PROXY.setup();
     }
 
-    public void onClientSetup(final FMLClientSetupEvent event) {
+    public void onClientSetup(final FMLClientSetupEvent event)
+    {
 
     }
 }
