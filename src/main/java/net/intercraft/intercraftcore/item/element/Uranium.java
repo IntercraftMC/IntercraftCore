@@ -1,4 +1,4 @@
-package net.intercraft.intercraftcore.item.elements;
+package net.intercraft.intercraftcore.item.element;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;

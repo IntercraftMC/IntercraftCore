@@ -1,4 +1,4 @@
-package net.intercraft.intercraftcore.item.elements;
+package net.intercraft.intercraftcore.item.element;
 
 import net.intercraft.intercraftcore.init.IntercraftItemGroups;
 import net.minecraft.client.renderer.color.IItemColor;

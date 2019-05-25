@@ -1,4 +1,4 @@
-package net.intercraft.intercraftcore.item.elements;
+package net.intercraft.intercraftcore.item.element;
 
 public class Lead extends ItemElement
 {
