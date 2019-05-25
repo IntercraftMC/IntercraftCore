@@ -29,17 +29,7 @@ public class ElementBase extends Item implements IItemColor {
     @Override
     public int getColor(ItemStack itemStack, int tint) {
 
-        {
-            switch (tint) {
-                case 0: {
-                    return Color.GREEN.getRGB();
-                }
-
-                default: {
-                    return Color.RED.getRGB();
-                }
-            }
-        }
+        return Color.GREEN.getRGB();
 
     }
 }
