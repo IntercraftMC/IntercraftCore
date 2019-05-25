@@ -1,4 +1,4 @@
-package net.intercraft.intercraftcore.elements;
+package net.intercraft.intercraftcore.item.elements;
 
 /*import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -7,7 +7,7 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;*/
 
-public class Copper extends ElementBase {
+public class Copper extends ElementItemBase {
     /*
     *
     * */

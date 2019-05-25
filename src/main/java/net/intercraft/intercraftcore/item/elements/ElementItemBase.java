@@ -1,4 +1,4 @@
-package net.intercraft.intercraftcore.elements;
+package net.intercraft.intercraftcore.item.elements;
 
 import net.intercraft.intercraftcore.init.IntercraftCoreRegistry;
 import net.minecraft.client.renderer.color.IItemColor;
@@ -7,15 +7,15 @@ import net.minecraft.item.ItemStack;
 
 import java.awt.*;
 
-public class ElementBase extends Item implements IItemColor {
+public class ElementItemBase extends Item implements IItemColor {
 
     protected int tint;
     /*
-    * Should register an ore (hard), dust (+ tiny), ingot (+ nugget), block, plate, frame.
+    * Should register an dust (+ tiny), ingot (+ nugget), plate.
     * Is going to be a extension of this class to make code shorter.
     * */
 
-    public ElementBase(String name, String oredict, int tint) {
+    public ElementItemBase(String name, String oredict, int tint) {
         super(new Item.Properties().group(IntercraftCoreRegistry.RESOURCES));
 
         this.tint = tint;

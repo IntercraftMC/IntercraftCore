@@ -1,6 +1,6 @@
 package net.intercraft.intercraftcore.init;
 
-import net.intercraft.intercraftcore.elements.*;
+import net.intercraft.intercraftcore.item.elements.*;
 import net.intercraft.intercraftcore.init.groups.ItemGroupResources;
 import net.intercraft.intercraftcore.item.ItemTest;
 import net.minecraft.item.Item;
