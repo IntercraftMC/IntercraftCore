@@ -1,56 +1,66 @@
 package net.intercraft.intercraftcore.potion;
 
+import net.intercraft.intercraftcore.Reference;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AbstractAttributeMap;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.ResourceLocation;
 
-public class PotionRadiationSickness extends Potion
-{
-    private static float oldMaxHealth;
-    private static boolean maxHealthCheck = false;
+public class PotionRadiationSickness extends Potion  {
 
     public static final float healthAmplifier = 4;
 
-    public PotionRadiationSickness(boolean isBadEffectIn, int liquidColorIn)
-    {
+    public PotionRadiationSickness(boolean isBadEffectIn, int liquidColorIn) {
         super(isBadEffectIn, liquidColorIn);
 
 
         setRegistryName("radiation_sickness");
+        setIconIndex(1,0);
 
     }
 
-    public void applyAttributesModifiersToEntity(EntityLivingBase entityLivingBaseIn, AbstractAttributeMap attributeMapIn, int amplifier)
-    {
+    @Override
+    public void renderInventoryEffect(PotionEffect effect, net.minecraft.client.gui.Gui gui, int x, int y, float z) {
+
+    }
+
+    @Override
+    public void renderHUDEffect(PotionEffect effect, net.minecraft.client.gui.Gui gui, int x, int y, float z, float alpha) {
+
+        //TextureAtlasSprite sprite = new TextureAtlasSprite(new ResourceLocation(Reference.MODID,""),16,16);
+
+
+        //gui.drawTexturedModalRect(x,y,"");
+    }
+
+    public void applyAttributesModifiersToEntity(EntityLivingBase entityLivingBaseIn, AbstractAttributeMap attributeMapIn, int amplifier) {
         if (entityLivingBaseIn instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) entityLivingBaseIn;
 
-            if (!maxHealthCheck) {
-                oldMaxHealth = player.getMaxHealth();
-                maxHealthCheck = true;
-            }
             IAttributeInstance health = player.getAttribute(SharedMonsterAttributes.MAX_HEALTH);
 
 
-            float maxHealth = oldMaxHealth - (amplifier * healthAmplifier + healthAmplifier);
+            float newMaxHealth = player.getMaxHealth() - (amplifier * healthAmplifier + healthAmplifier);
 
-
-            player.setHealth(maxHealth);
-            health.setBaseValue(maxHealth);
+            health.setBaseValue(newMaxHealth);
+            player.setHealth(newMaxHealth);
         }
     }
 
-    public void removeAttributesModifiersFromEntity(EntityLivingBase entityLivingBaseIn, AbstractAttributeMap attributeMapIn, int amplifier)
-    {
-        //System.out.println("Removed bad effects.");
+    public void removeAttributesModifiersFromEntity(EntityLivingBase entityLivingBaseIn, AbstractAttributeMap attributeMapIn, int amplifier) {
         if (entityLivingBaseIn instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) entityLivingBaseIn;
             IAttributeInstance health = player.getAttribute(SharedMonsterAttributes.MAX_HEALTH);
 
-            health.setBaseValue(oldMaxHealth);
+            float newMaxHealth = player.getMaxHealth() + (amplifier * healthAmplifier + healthAmplifier);
+
+            health.setBaseValue(newMaxHealth);
+
         }
 
     }
