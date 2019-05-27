@@ -1,8 +1,8 @@
-package net.intercraft.intercraftcore.init.capabilities;
+package net.intercraft.intercraftcore.init.capabilities.radiation;
 
 public class Radiation implements IRadiation {
 
-    private long exposure = 0;
+    private long exposure;
 
     private final int[] levels = {
             5000,
@@ -10,6 +10,12 @@ public class Radiation implements IRadiation {
             20000,
             40000
     };
+
+    private int minimum = 100;
+
+    public Radiation(long startValue) {
+        this.exposure = startValue;
+    }
 
 
     @Override
@@ -36,7 +42,7 @@ public class Radiation implements IRadiation {
         }*/
 
 
-        if (this.exposure >= 0) {
+        if (this.exposure >= minimum) {
             this.exposure--;
             System.out.println(this.exposure);
         }
@@ -46,6 +52,11 @@ public class Radiation implements IRadiation {
     public void increase(int value) {
         if (value > 0)
             this.exposure += value;
+    }
+
+    @Override
+    public void setExposure(long value) {
+        this.exposure = value;
     }
 
 }

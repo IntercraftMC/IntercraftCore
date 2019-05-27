@@ -1,4 +1,4 @@
-package net.intercraft.intercraftcore.init.capabilities;
+package net.intercraft.intercraftcore.init.capabilities.radiation;
 
 public interface IRadiation {
     long getExposure();
@@ -8,4 +8,6 @@ public interface IRadiation {
     void tick();
 
     void increase(int value);
+
+    void setExposure(long value);
 }
