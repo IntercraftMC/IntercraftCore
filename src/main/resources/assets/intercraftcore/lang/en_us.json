@@ -10,5 +10,7 @@
 
   "itemGroup.intercraftcore.resources": "Resources",
 
-  "effect.intercraftcore.radiation_sickness": "Radiation Sickness"
+  "effect.intercraftcore.radiation_sickness": "Radiation Sickness",
+
+  "death.attack.intercraftcore.radiation": "%1$s died from radiation poison"
 }

@@ -1,7 +1,6 @@
 package net.intercraft.intercraftcore.potion;
 
-import net.intercraft.intercraftcore.Reference;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.intercraft.intercraftcore.init.IntercraftDamageSources;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AbstractAttributeMap;
@@ -9,7 +8,6 @@ import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.ResourceLocation;
 
 public class PotionRadiationSickness extends Potion  {
 
@@ -48,7 +46,7 @@ public class PotionRadiationSickness extends Potion  {
             float newMaxHealth = player.getMaxHealth() - (amplifier * healthAmplifier + healthAmplifier);
 
             health.setBaseValue(newMaxHealth);
-            player.setHealth(newMaxHealth);
+            player.getEntity().attackEntityFrom(IntercraftDamageSources.RADIATION,(amplifier * healthAmplifier + healthAmplifier) - player.getHealth());
         }
     }
 

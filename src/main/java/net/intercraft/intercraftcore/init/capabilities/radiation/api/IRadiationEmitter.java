@@ -3,8 +3,8 @@ package net.intercraft.intercraftcore.init.capabilities.radiation.api;
 public interface IRadiationEmitter {
 
     /*
-    * If it emits radiation
+    * How much radiation the block or item emits.
     * */
 
-    int emitter(int value);
+    void emission(int value);
 }

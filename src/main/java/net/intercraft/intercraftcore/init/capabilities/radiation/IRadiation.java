@@ -7,7 +7,5 @@ public interface IRadiation {
 
     void tick();
 
-    void increase(int value);
-
     void setExposure(long value);
 }

@@ -1,8 +1,13 @@
 package net.intercraft.intercraftcore.init.capabilities.radiation;
 
-public class Radiation implements IRadiation {
+import net.intercraft.intercraftcore.init.capabilities.radiation.api.IRadiationBlocker;
+import net.intercraft.intercraftcore.init.capabilities.radiation.api.IRadiationEmitter;
+
+public class Radiation implements IRadiation, IRadiationEmitter, IRadiationBlocker {
 
     private long exposure;
+
+    private double multiplier = 1;
 
     private final int[] levels = {
             5000,
@@ -15,6 +20,17 @@ public class Radiation implements IRadiation {
 
     public Radiation(long startValue) {
         this.exposure = startValue;
+    }
+
+    @Override
+    public void emission(int value) {
+        increase(value);
+    }
+
+    @Override
+    public void multiplier(double multiplier) {
+        if (multiplier <= 1 && multiplier > 0)
+            this.multiplier = multiplier;
     }
 
 
@@ -44,14 +60,13 @@ public class Radiation implements IRadiation {
 
         if (this.exposure >= minimum) {
             this.exposure--;
-            System.out.println(this.exposure);
+            System.out.println("Current exposure value is: "+this.exposure);
         }
     }
 
-    @Override
-    public void increase(int value) {
-        if (value > 0)
-            this.exposure += value;
+    private void increase(int value) {
+        if (value*this.multiplier > 0)
+            this.exposure += value*this.multiplier;
     }
 
     @Override
