@@ -27,7 +27,7 @@ public class RadiationStorage implements Capability.IStorage<IRadiation> {
     public static class Factory implements Callable<IRadiation> {
         @Override
         public IRadiation call() throws Exception {
-            return new Radiation(100);
+            return new Radiation(null);
         }
     }
 }

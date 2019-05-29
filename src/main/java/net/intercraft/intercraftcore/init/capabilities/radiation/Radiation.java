@@ -2,12 +2,15 @@ package net.intercraft.intercraftcore.init.capabilities.radiation;
 
 import net.intercraft.intercraftcore.init.capabilities.radiation.api.IRadiationBlocker;
 import net.intercraft.intercraftcore.init.capabilities.radiation.api.IRadiationEmitter;
+import net.intercraft.intercraftcore.init.capabilities.radiation.api.IRadiationWorld;
+import net.minecraft.entity.Entity;
 
-public class Radiation implements IRadiation, IRadiationEmitter, IRadiationBlocker {
+import java.lang.ref.WeakReference;
 
-    private long exposure;
+public class Radiation implements IRadiation, IRadiationEmitter, IRadiationBlocker, IRadiationWorld {
 
-    private double multiplier = 1;
+    private double multiplier;
+    public WeakReference<Entity> entity;
 
     private final int[] levels = {
             5000,
@@ -16,21 +19,35 @@ public class Radiation implements IRadiation, IRadiationEmitter, IRadiationBlock
             40000
     };
 
-    private int minimum = 100;
+    private int minimum;
 
-    public Radiation(long startValue) {
-        this.exposure = startValue;
+    private long exposure;
+
+    public Radiation(Entity entity) {
+        this.entity = new WeakReference<>(entity);
+        this.minimum = 100;
+        this.multiplier = 1;
+
+        this.exposure = this.minimum;
     }
 
     @Override
-    public void emission(int value) {
-        increase(value);
+    public void emission(int value, float distance, Entity target) {
+        //increase(value);
+        //this.exposure += Math.round(value/distance);
+        increase(Math.round(value/distance));
     }
 
     @Override
     public void multiplier(double multiplier) {
         if (multiplier <= 1 && multiplier > 0)
             this.multiplier = multiplier;
+    }
+
+    @Override
+    public void setMinimum(int value) {
+        if (value >= 0)
+            this.minimum = value;
     }
 
 
@@ -40,9 +57,14 @@ public class Radiation implements IRadiation, IRadiationEmitter, IRadiationBlock
     }
 
     @Override
+    public void setExposure(long value) {
+        this.exposure = value;
+    }
+
+    /*@Override
     public int getLevel(int index) {
         return this.levels[index];
-    }
+    }*/
 
     @Override
     public void tick() {
@@ -58,7 +80,7 @@ public class Radiation implements IRadiation, IRadiationEmitter, IRadiationBlock
         }*/
 
 
-        if (this.exposure >= minimum) {
+        if (this.exposure >= this.minimum) {
             this.exposure--;
             System.out.println("Current exposure value is: "+this.exposure);
         }
@@ -68,10 +90,4 @@ public class Radiation implements IRadiation, IRadiationEmitter, IRadiationBlock
         if (value*this.multiplier > 0)
             this.exposure += value*this.multiplier;
     }
-
-    @Override
-    public void setExposure(long value) {
-        this.exposure = value;
-    }
-
 }

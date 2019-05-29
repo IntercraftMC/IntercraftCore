@@ -3,9 +3,7 @@ package net.intercraft.intercraftcore.init.capabilities.radiation;
 public interface IRadiation {
     long getExposure();
 
-    int getLevel(int index);
+    void setExposure(long value);
 
     void tick();
-
-    void setExposure(long value);
 }

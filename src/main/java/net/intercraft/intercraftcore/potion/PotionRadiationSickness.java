@@ -11,7 +11,9 @@ import net.minecraft.potion.PotionEffect;
 
 public class PotionRadiationSickness extends Potion  {
 
-    public static final float healthAmplifier = 4;
+    private static final float healthAmplifier = 2;
+
+    private static float oldHealth = -1;
 
     public PotionRadiationSickness(boolean isBadEffectIn, int liquidColorIn) {
         super(isBadEffectIn, liquidColorIn);
@@ -42,11 +44,16 @@ public class PotionRadiationSickness extends Potion  {
 
             IAttributeInstance health = player.getAttribute(SharedMonsterAttributes.MAX_HEALTH);
 
+            if (oldHealth == -1)
+                oldHealth = player.getMaxHealth();
 
             float newMaxHealth = player.getMaxHealth() - (amplifier * healthAmplifier + healthAmplifier);
 
             health.setBaseValue(newMaxHealth);
-            player.getEntity().attackEntityFrom(IntercraftDamageSources.RADIATION,(amplifier * healthAmplifier + healthAmplifier) - player.getHealth());
+
+
+            if (player.getHealth() - newMaxHealth > 0)
+                player.getEntity().attackEntityFrom(IntercraftDamageSources.RADIATION,player.getHealth() - newMaxHealth);
         }
     }
 
@@ -57,6 +64,13 @@ public class PotionRadiationSickness extends Potion  {
 
             float newMaxHealth = player.getMaxHealth() + (amplifier * healthAmplifier + healthAmplifier);
 
+            if (oldHealth != -1)
+                newMaxHealth = oldHealth;
+            else
+                System.out.println("Guessed how much health to give!");
+
+
+            oldHealth = -1;
             health.setBaseValue(newMaxHealth);
 
         }
