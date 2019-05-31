@@ -19,22 +19,22 @@ public class IntercraftEventHandler
         //itemColorHandlerEvent.getItemColors().getColor(new ItemStack(IntercraftItems.COPPER),1);
         itemColorHandlerEvent.getItemColors().register((a,b) ->  {
             return ((ItemElement)a.getItem()).getColor();
-        }, IntercraftItems.COPPER);
+        }, IntercraftItems.COPPER[0]);
         itemColorHandlerEvent.getItemColors().register((a,b) ->  {
             return ((ItemElement)a.getItem()).getColor();
-        }, IntercraftItems.LEAD);
+        }, IntercraftItems.LEAD[0]);
         itemColorHandlerEvent.getItemColors().register((a,b) ->  {
             return ((ItemElement)a.getItem()).getColor();
-        }, IntercraftItems.SILVER);
+        }, IntercraftItems.SILVER[0]);
         itemColorHandlerEvent.getItemColors().register((a,b) ->  {
             return ((ItemElement)a.getItem()).getColor();
-        }, IntercraftItems.TIN);
+        }, IntercraftItems.TIN[0]);
         itemColorHandlerEvent.getItemColors().register((a,b) ->  {
             return ((ItemElement)a.getItem()).getColor();
-        }, IntercraftItems.TUNGSTEN);
+        }, IntercraftItems.TUNGSTEN[0]);
         itemColorHandlerEvent.getItemColors().register((a,b) ->  {
             return ((ItemElement)a.getItem()).getColor();
-        }, IntercraftItems.URANIUM);
+        }, IntercraftItems.URANIUM[0]);
 
     }
 

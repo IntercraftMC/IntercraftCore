@@ -22,7 +22,7 @@ public class Util {
                         newItem.setRegistryName(item.getRegistryName()+"_dust");
                         break;
                     case 3:
-                        newItem.setRegistryName(item.getRegistryName()+"_tinydust");
+                        newItem.setRegistryName(item.getRegistryName()+"_dustsmall");
                         break;
                     case 4:
                         newItem.setRegistryName(item.getRegistryName()+"_plate");

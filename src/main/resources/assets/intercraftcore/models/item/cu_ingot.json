@@ -1,7 +1,1 @@
-{
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "intercraftcore:item/ingot",
-    "layer1": "intercraftcore:item/ingot_color"
-  }
-}
+{ "parent": "item/generated", "textures": { "layer0": "intercraftcore:item/ingot" } }
