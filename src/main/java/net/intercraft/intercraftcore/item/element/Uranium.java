@@ -14,7 +14,7 @@ public class Uranium extends ItemElement
      * */
     public Uranium()
     {
-        super("u", "uranium", 0x92d67d);
+        super("u", "uranium", 0x077a07);
     }
 
     @Override

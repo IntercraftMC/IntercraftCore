@@ -14,7 +14,7 @@ import java.awt.*;
  */
 public class ItemElement extends Item
 {
-    private static int tint;
+    private int tint;
 
     public ItemElement(String name, String oredict, int tint)
     {

@@ -7,7 +7,7 @@ public class Copper extends ItemElement
      * */
     public Copper()
     {
-        super("cu", "copper", 0xffb732);
+        super("cu", "copper", 0xc1810a);
         //System.out.println("Registering Copper.");
     }
 

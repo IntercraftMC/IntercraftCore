@@ -11,7 +11,7 @@ public class IntercraftPotions
      * Instantiate all potions
      */
     static {
-        RADIATION = new PotionRadiationSickness(true, 1);
+        RADIATION = new PotionRadiationSickness(true, 0x077a07);
     }
 
     /**

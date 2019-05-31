@@ -4,6 +4,6 @@ public class Lead extends ItemElement
 {
     public Lead()
     {
-        super("pb", "lead", 0xffb732);
+        super("pb", "lead", 0x534368);
     }
 }
