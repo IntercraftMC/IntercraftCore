@@ -21,7 +21,7 @@ public class ItemElement extends Item
         super(new Item.Properties().group(IntercraftItemGroups.RESOURCES));
 
         this.tint = tint;
-        setRegistryName(name + "_ingot");
+        setRegistryName(name);
     }
 
     public int getColor()

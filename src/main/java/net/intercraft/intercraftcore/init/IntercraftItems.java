@@ -14,24 +14,24 @@ public class IntercraftItems
     /**
      * Element Items
      */
-    public static final Item COPPER;
-    public static final Item LEAD;
-    public static final Item SILVER;
-    public static final Item TIN;
-    public static final Item TUNGSTEN;
-    public static final Item URANIUM;
+    public static final Item[] COPPER;
+    public static final Item[] LEAD;
+    public static final Item[] SILVER;
+    public static final Item[] TIN;
+    public static final Item[] TUNGSTEN;
+    public static final Item[] URANIUM;
 
     /**
      * Instantiate all items
      */
     static {
         TEST     = new ItemTest((new Item.Properties()).group(IntercraftItemGroups.RESOURCES));
-        COPPER   = new Copper();
-        LEAD     = new Lead();
-        SILVER   = new Silver();
-        TIN      = new Tin();
-        TUNGSTEN = new Tungsten();
-        URANIUM  = new Uranium();
+        COPPER   = Util.create(new Copper(),new boolean[] {true,true,true,true,true});
+        LEAD     = Util.create(new Lead(),new boolean[] {true,true,true,true,true});
+        SILVER   = Util.create(new Silver(),new boolean[] {true,true,true,true,true});
+        TIN      = Util.create(new Tin(),new boolean[] {true,true,true,true,true});
+        TUNGSTEN = Util.create(new Tungsten(),new boolean[] {true,true,true,true,true});
+        URANIUM  = Util.create(new Uranium(),new boolean[] {true,true,true,true,true});
     }
 
     /**
@@ -40,12 +40,12 @@ public class IntercraftItems
     public static void register()
     {
         registerItem(TEST);
-        registerItem(COPPER);
-        registerItem(LEAD);
-        registerItem(SILVER);
-        registerItem(TIN);
-        registerItem(TUNGSTEN);
-        registerItem(URANIUM);
+        registerItems(COPPER);
+        registerItems(LEAD);
+        registerItems(SILVER);
+        registerItems(TIN);
+        registerItems(TUNGSTEN);
+        registerItems(URANIUM);
     }
 
     /**
@@ -54,5 +54,9 @@ public class IntercraftItems
     protected static void registerItem(Item item)
     {
         RegistrationHandler.items.add(item);
+    }
+    protected static void registerItems(Item[] item)
+    {
+        RegistrationHandler.items.add(item[0]);
     }
 }
