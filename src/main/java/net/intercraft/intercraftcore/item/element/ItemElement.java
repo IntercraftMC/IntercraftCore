@@ -12,9 +12,9 @@ import java.awt.*;
  * Should register an dust (+ tiny), ingot (+ nugget), plate.
  * Is going to be a extension of this class to make code shorter.
  */
-public class ItemElement extends Item implements IItemColor
+public class ItemElement extends Item
 {
-    protected int tint;
+    private static int tint;
 
     public ItemElement(String name, String oredict, int tint)
     {
@@ -24,9 +24,8 @@ public class ItemElement extends Item implements IItemColor
         setRegistryName(name + "_ingot");
     }
 
-    @Override
-    public int getColor(ItemStack itemStack, int tint)
+    public int getColor()
     {
-        return Color.GREEN.getRGB();
+        return tint;
     }
 }

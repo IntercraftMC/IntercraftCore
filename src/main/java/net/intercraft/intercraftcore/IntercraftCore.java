@@ -27,7 +27,8 @@ public class IntercraftCore
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onClientSetup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(RegistrationHandler::register);
 
-        MinecraftForge.EVENT_BUS.addListener(IntercraftEventHandler::onPLayerJoin);
+        //MinecraftForge.EVENT_BUS.addListener(IntercraftEventHandler::onPLayerJoin);
+        MinecraftForge.EVENT_BUS.addListener(IntercraftEventHandler::ColorHandlerEvent);
     }
 
 

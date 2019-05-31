@@ -6,12 +6,13 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AbstractAttributeMap;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.MobEffects;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 
 public class PotionRadiationSickness extends Potion  {
 
-    private static final float healthAmplifier = 2;
+    private static final float healthAmplifier = 4;
 
     private static float oldHealth = -1;
 
@@ -22,6 +23,22 @@ public class PotionRadiationSickness extends Potion  {
         setRegistryName("radiation_sickness");
         setIconIndex(1,0);
 
+    }
+
+    @Override
+    public boolean isReady(int duration, int amplifier) {
+        int j = 200 >> amplifier;
+        if (j > 0) {
+            return duration % j == 0;
+        } else { return true; }
+
+    }
+
+    @Override
+    public void performEffect(EntityLivingBase entityLivingBaseIn, int amplifier) {
+        entityLivingBaseIn.attackEntityFrom(IntercraftDamageSources.RADIATION,1);
+
+        (entityLivingBaseIn).addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 5*20));
     }
 
     @Override
