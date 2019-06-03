@@ -1,5 +1,6 @@
-package net.intercraft.intercraftcore.item.element;
+package net.intercraft.intercraftcore.item.group;
 
+import net.intercraft.intercraftcore.element.Element;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
@@ -7,14 +8,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
-public class Uranium extends ItemElement
+public class ItemUranium extends ItemElement
 {
-    /*
-     *
-     * */
-    public Uranium()
+    public ItemUranium(Element element, String registrySuffix)
     {
-        super("u", "uranium", 0x077a07);
+        super(element, registrySuffix);
     }
 
     @Override

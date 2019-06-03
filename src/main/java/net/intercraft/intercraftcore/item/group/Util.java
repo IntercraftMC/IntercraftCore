@@ -1,31 +1,33 @@
-package net.intercraft.intercraftcore.item.element;
+package net.intercraft.intercraftcore.item.group;
 
 import net.minecraft.item.Item;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Util {
-    public static Item[] create(final Item item,final boolean[] types) {
+public class Util
+{
+    public static Item[] create(final Item item, final boolean[] types)
+    {
         List<Item> items = new ArrayList<>();
-        for (int i=0;i<types.length;i++) {
+        for (int i = 0; i < types.length; i++) {
             if (types[i]) {
                 Item newItem = item;
                 switch (i) {
                     case 0:
-                        newItem.setRegistryName(item.getRegistryName()+"_ingot");
+                        newItem.setRegistryName(item.getRegistryName() + "_ingot");
                         break;
                     case 1:
-                        newItem.setRegistryName(item.getRegistryName()+"_nugget");
+                        newItem.setRegistryName(item.getRegistryName() + "_nugget");
                         break;
                     case 2:
-                        newItem.setRegistryName(item.getRegistryName()+"_dust");
+                        newItem.setRegistryName(item.getRegistryName() + "_dust");
                         break;
                     case 3:
-                        newItem.setRegistryName(item.getRegistryName()+"_dustsmall");
+                        newItem.setRegistryName(item.getRegistryName() + "_dustsmall");
                         break;
                     case 4:
-                        newItem.setRegistryName(item.getRegistryName()+"_plate");
+                        newItem.setRegistryName(item.getRegistryName() + "_plate");
                         break;
                     default:
                         break;

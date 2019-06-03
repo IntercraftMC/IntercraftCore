@@ -14,7 +14,7 @@ public class IntercraftItemGroups
         @Override
         public ItemStack createIcon()
         {
-            return new ItemStack(IntercraftItems.COPPER[0]);
+            return new ItemStack(IntercraftItems.COPPER.INGOT);
         }
     };
 }

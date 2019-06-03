@@ -1,7 +1,8 @@
 package net.intercraft.intercraftcore.init;
 
-import net.intercraft.intercraftcore.item.element.*;
+import net.intercraft.intercraftcore.element.*;
 import net.intercraft.intercraftcore.item.ItemTest;
+import net.intercraft.intercraftcore.item.group.ItemElementGroup;
 import net.minecraft.item.Item;
 
 public class IntercraftItems
@@ -12,26 +13,26 @@ public class IntercraftItems
     public static final Item TEST;
 
     /**
-     * Element Items
+     * Item Groups
      */
-    public static final Item[] COPPER;
-    public static final Item[] LEAD;
-    public static final Item[] SILVER;
-    public static final Item[] TIN;
-    public static final Item[] TUNGSTEN;
-    public static final Item[] URANIUM;
+    public static final ItemElementGroup COPPER;
+    public static final ItemElementGroup LEAD;
+    public static final ItemElementGroup SILVER;
+    public static final ItemElementGroup TIN;
+    public static final ItemElementGroup TUNGSTEN;
+    public static final ItemElementGroup URANIUM;
 
     /**
      * Instantiate all items
      */
     static {
-        TEST     = new ItemTest((new Item.Properties()).group(IntercraftItemGroups.RESOURCES));
-        COPPER   = Util.create(new Copper(),new boolean[] {true,true,true,true,true});
-        LEAD     = Util.create(new Lead(),new boolean[] {true,true,true,true,true});
-        SILVER   = Util.create(new Silver(),new boolean[] {true,true,true,true,true});
-        TIN      = Util.create(new Tin(),new boolean[] {true,true,true,true,true});
-        TUNGSTEN = Util.create(new Tungsten(),new boolean[] {true,true,true,true,true});
-        URANIUM  = Util.create(new Uranium(),new boolean[] {true,true,true,true,true});
+        TEST = new ItemTest((new Item.Properties()).group(IntercraftItemGroups.RESOURCES));
+        COPPER = new ItemElementGroup(new Copper());
+        LEAD = new ItemElementGroup(new Lead());
+        SILVER = new ItemElementGroup(new Silver());
+        TIN = new ItemElementGroup(new Tin());
+        TUNGSTEN = new ItemElementGroup(new Tungsten());
+        URANIUM = new ItemElementGroup(new Uranium());
     }
 
     /**
@@ -40,23 +41,42 @@ public class IntercraftItems
     public static void register()
     {
         registerItem(TEST);
-        registerItems(COPPER);
-        registerItems(LEAD);
-        registerItems(SILVER);
-        registerItems(TIN);
-        registerItems(TUNGSTEN);
-        registerItems(URANIUM);
+        registerElementItems(COPPER);
+        registerElementItems(LEAD);
+        registerElementItems(SILVER);
+        registerElementItems(TIN);
+        registerElementItems(TUNGSTEN);
+        registerElementItems(URANIUM);
     }
 
     /**
      * Register an item
+     * @param item
      */
     protected static void registerItem(Item item)
     {
         RegistrationHandler.items.add(item);
     }
-    protected static void registerItems(Item[] item)
+
+    /**
+     * Register an array of items
+     * @param items
+     */
+    protected static void registerItems(Item... items)
     {
-        RegistrationHandler.items.add(item[0]);
+        for (Item item : items) {
+            if (item != null) {
+                RegistrationHandler.items.add(item);
+            }
+        }
+    }
+
+    /**
+     * Register an element group
+     * @param group
+     */
+    protected static void registerElementItems(ItemElementGroup group)
+    {
+        registerItems(group.INGOT, group.NUGGET, group.DUST, group.DUST_SMALL, group.PLATE);
     }
 }

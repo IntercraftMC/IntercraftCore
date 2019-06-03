@@ -1,6 +1,8 @@
 package net.intercraft.intercraftcore.init;
 
-import net.intercraft.intercraftcore.item.element.ItemElement;
+import net.intercraft.intercraftcore.item.group.ItemElement;
+import net.intercraft.intercraftcore.item.group.ItemElementGroup;
+import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
@@ -16,26 +18,24 @@ public class IntercraftEventHandler
     }
 
     public static void ColorHandlerEvent(ColorHandlerEvent.Item itemColorHandlerEvent) {
-        //itemColorHandlerEvent.getItemColors().getColor(new ItemStack(IntercraftItems.COPPER),1);
-        itemColorHandlerEvent.getItemColors().register((a,b) ->  {
-            return ((ItemElement)a.getItem()).getColor();
-        }, IntercraftItems.COPPER[0]);
-        itemColorHandlerEvent.getItemColors().register((a,b) ->  {
-            return ((ItemElement)a.getItem()).getColor();
-        }, IntercraftItems.LEAD[0]);
-        itemColorHandlerEvent.getItemColors().register((a,b) ->  {
-            return ((ItemElement)a.getItem()).getColor();
-        }, IntercraftItems.SILVER[0]);
-        itemColorHandlerEvent.getItemColors().register((a,b) ->  {
-            return ((ItemElement)a.getItem()).getColor();
-        }, IntercraftItems.TIN[0]);
-        itemColorHandlerEvent.getItemColors().register((a,b) ->  {
-            return ((ItemElement)a.getItem()).getColor();
-        }, IntercraftItems.TUNGSTEN[0]);
-        itemColorHandlerEvent.getItemColors().register((a,b) ->  {
-            return ((ItemElement)a.getItem()).getColor();
-        }, IntercraftItems.URANIUM[0]);
-
+        ItemElementGroup[] groups = {
+                IntercraftItems.COPPER,
+                IntercraftItems.LEAD,
+                IntercraftItems.SILVER,
+                IntercraftItems.TIN,
+                IntercraftItems.TUNGSTEN,
+                IntercraftItems.URANIUM
+        };
+        for (ItemElementGroup group : groups) {
+            Item[] items = { group.INGOT, group.NUGGET, group.DUST, group.DUST_SMALL, group.PLATE };
+            for (Item item : items) {
+                if (item != null) {
+                    itemColorHandlerEvent.getItemColors().register((a, b) -> {
+                        return group.element.tint;
+                    }, item);
+                }
+            }
+        }
     }
 
 }
