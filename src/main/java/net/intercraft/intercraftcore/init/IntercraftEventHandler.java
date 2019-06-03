@@ -1,6 +1,5 @@
 package net.intercraft.intercraftcore.init;
 
-import net.intercraft.intercraftcore.item.group.ItemElement;
 import net.intercraft.intercraftcore.item.group.ItemElementGroup;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ColorHandlerEvent;

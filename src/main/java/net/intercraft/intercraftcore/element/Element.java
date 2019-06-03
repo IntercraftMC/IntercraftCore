@@ -5,11 +5,11 @@ public class Element
     /**
      * Element Type Bit flags
      */
-    public static final byte INGOT  = 0x01;
-    public static final byte NUGGET = 0x02;
-    public static final byte DUST   = 0x04;
-    public static final byte SMALL  = 0x08;
-    public static final byte PLATE  = 0x10;
+    public static final byte INGOT      = 0x01;
+    public static final byte NUGGET     = 0x02;
+    public static final byte DUST       = 0x04;
+    public static final byte DUST_SMALL = 0x08;
+    public static final byte PLATE      = 0x10;
 
     /**
      * Element information
@@ -21,7 +21,7 @@ public class Element
     /**
      * Item forms of the group
      */
-    public byte forms = INGOT | NUGGET | DUST | SMALL | PLATE;
+    public byte forms = INGOT | NUGGET | DUST | DUST_SMALL | PLATE;
 
     /**
      * Element Constructor

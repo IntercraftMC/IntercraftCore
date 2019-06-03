@@ -1,4 +1,4 @@
-package net.intercraft.intercraftcore.item.group;
+package net.intercraft.intercraftcore.item;
 
 import net.intercraft.intercraftcore.element.Element;
 import net.minecraft.entity.Entity;
@@ -10,11 +10,23 @@ import net.minecraft.world.World;
 
 public class ItemUranium extends ItemElement
 {
-    public ItemUranium(Element element, String registrySuffix)
-    {
+    /**
+     * Create a generic Uranium element item
+     * @param element
+     * @param registrySuffix
+     */
+    public ItemUranium(Element element,String registrySuffix) {
         super(element, registrySuffix);
     }
 
+    /**
+     * Tick the inventory to add the potion effect
+     * @param stack
+     * @param worldIn
+     * @param entityIn
+     * @param itemSlot
+     * @param isSelected
+     */
     @Override
     public void inventoryTick(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
     {

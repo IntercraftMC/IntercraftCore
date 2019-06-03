@@ -3,6 +3,7 @@ package net.intercraft.intercraftcore.init;
 import net.intercraft.intercraftcore.element.*;
 import net.intercraft.intercraftcore.item.ItemTest;
 import net.intercraft.intercraftcore.item.group.ItemElementGroup;
+import net.intercraft.intercraftcore.item.group.ItemUraniumGroup;
 import net.minecraft.item.Item;
 
 public class IntercraftItems
@@ -32,7 +33,7 @@ public class IntercraftItems
         SILVER = new ItemElementGroup(new Silver());
         TIN = new ItemElementGroup(new Tin());
         TUNGSTEN = new ItemElementGroup(new Tungsten());
-        URANIUM = new ItemElementGroup(new Uranium());
+        URANIUM = new ItemUraniumGroup(new Uranium());
     }
 
     /**

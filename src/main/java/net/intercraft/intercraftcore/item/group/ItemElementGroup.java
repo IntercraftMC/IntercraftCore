@@ -1,13 +1,22 @@
 package net.intercraft.intercraftcore.item.group;
 
 import net.intercraft.intercraftcore.element.Element;
+import net.intercraft.intercraftcore.item.ItemElement;
 import net.minecraft.item.Item;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 
 public class ItemElementGroup
 {
+    /**
+     * The generic item type
+     */
+    protected final Class<ItemElement> itemElementClass;
+
+    /**
+     * Keep a reference to the element
+     */
     public final Element element;
 
     /**
@@ -27,21 +36,32 @@ public class ItemElementGroup
     public ItemElementGroup(Element element)
     {
         this.element = element;
-        INGOT = hasForm(element, Element.INGOT) ? new ItemElement(element, "ingot") : null;
-        NUGGET = hasForm(element, Element.INGOT) ? new ItemElement(element, "nugget") : null;
-        DUST = hasForm(element, Element.INGOT) ? new ItemElement(element, "dust") : null;
-        DUST_SMALL = hasForm(element, Element.INGOT) ? new ItemElement(element, "dustsmall") : null;
-        PLATE = hasForm(element, Element.INGOT) ? new ItemElement(element, "plate") : null;
+        this.itemElementClass = ItemElement.class;
+        INGOT = createItem(Element.INGOT, "ingot");
+        NUGGET = createItem(Element.NUGGET, "nugget");
+        DUST = createItem(Element.DUST, "dust");
+        DUST_SMALL = createItem(Element.DUST_SMALL, "dustsmall");
+        PLATE = createItem(Element.PLATE, "plate");
     }
 
     /**
      * Create an element item form
      *
-     * @param element
      * @param form
+     * @param suffix
      */
-    protected boolean hasForm(Element element, byte form)
+    protected Item createItem(byte form, String suffix)
     {
-        return (element.forms & form) == form;
+        if ((element.forms & form) == form) {
+            try {
+                Constructor<?> constructor = itemElementClass.getConstructor(Element.class, String.class);
+                return (Item) constructor.newInstance(new Object[] { element, suffix });
+            }
+            catch (NoSuchMethodException e) {}
+            catch (InstantiationException e) {}
+            catch (IllegalAccessException e) {}
+            catch (InvocationTargetException e) {}
+        }
+        return null;
     }
 }

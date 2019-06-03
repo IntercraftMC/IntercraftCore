@@ -1,4 +1,4 @@
-package net.intercraft.intercraftcore.item.group;
+package net.intercraft.intercraftcore.item;
 
 import net.intercraft.intercraftcore.element.Copper;
 import net.intercraft.intercraftcore.element.Element;
@@ -20,10 +20,5 @@ public class ItemElement extends Item
         super(new Item.Properties().group(IntercraftItemGroups.RESOURCES));
         this.element = element;
         setRegistryName(element.symbol + "_" + registrySuffix);
-    }
-
-    public int getColor()
-    {
-        return element.tint;
     }
 }
