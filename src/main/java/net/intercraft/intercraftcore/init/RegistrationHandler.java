@@ -2,6 +2,7 @@ package net.intercraft.intercraftcore.init;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.potion.Potion;
 import net.minecraftforge.event.RegistryEvent;
 
@@ -13,6 +14,7 @@ public class RegistrationHandler {
 
     protected static final List<Block> blocks = new LinkedList<>();
     protected static final List<Item> items = new LinkedList<>();
+    protected static final List<ItemBlock> itemBlocks = new LinkedList<>();
     protected static final List<Potion> potions = new LinkedList<>();
 
     public static void register(final RegistryEvent.Register event)
@@ -21,6 +23,7 @@ public class RegistrationHandler {
 
         if (generic == Block.class) {
             registerBlocks(event);
+            registerItemBlocks(event);
         } else if (generic == Item.class) {
             registerItems(event);
         } else if (generic == Potion.class) {
@@ -28,6 +31,12 @@ public class RegistrationHandler {
         }
 
     }
+
+    protected static void registerItemBlocks(final RegistryEvent.Register<Item> event)
+    {
+        itemBlocks.forEach(block -> event.getRegistry().register(block));
+    }
+
 
     protected static void registerBlocks(final RegistryEvent.Register<Block> event)
     {
