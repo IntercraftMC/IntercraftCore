@@ -13,8 +13,8 @@ import java.util.List;
 public class RegistrationHandler {
 
     protected static final List<Block> blocks = new LinkedList<>();
+    protected static final List<Item> itemBlocks = new LinkedList<>();
     protected static final List<Item> items = new LinkedList<>();
-    protected static final List<ItemBlock> itemBlocks = new LinkedList<>();
     protected static final List<Potion> potions = new LinkedList<>();
 
     public static void register(final RegistryEvent.Register event)
@@ -23,18 +23,13 @@ public class RegistrationHandler {
 
         if (generic == Block.class) {
             registerBlocks(event);
-            registerItemBlocks(event);
         } else if (generic == Item.class) {
             registerItems(event);
         } else if (generic == Potion.class) {
             registerPotions(event);
         }
 
-    }
 
-    protected static void registerItemBlocks(final RegistryEvent.Register<Item> event)
-    {
-        itemBlocks.forEach(block -> event.getRegistry().register(block));
     }
 
 
@@ -48,6 +43,8 @@ public class RegistrationHandler {
     {
         IntercraftItems.register();
         items.forEach(item -> event.getRegistry().register(item));
+        itemBlocks.forEach(block -> event.getRegistry().register(block));
+
     }
 
     protected static void registerPotions(final RegistryEvent.Register event)

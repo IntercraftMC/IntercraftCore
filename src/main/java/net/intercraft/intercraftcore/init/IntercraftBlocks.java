@@ -12,7 +12,7 @@ public class IntercraftBlocks
      * Instantiate all blocks
      */
 
-    public static final Block CABLECASE;
+    private static final Block CABLECASE;
 
     static {
         CABLECASE = new BlockCableCase();
@@ -23,17 +23,18 @@ public class IntercraftBlocks
      */
     public static void register()
     {
-        registerBlock(CABLECASE, IntercraftItemGroups.WIRING);
+        registerBlock(CABLECASE);
     }
 
     /**
      * Register a block
      */
-    protected static void registerBlock(Block block, ItemGroup group)
+    protected static void registerBlock(Block block)
     {
         RegistrationHandler.blocks.add(block);
-        Item.Properties properties = new Item.Properties().group(group);
-        ItemBlock itemBlock = new ItemBlock(block,properties);
-        RegistrationHandler.itemBlocks.add(itemBlock);
+        RegistrationHandler.itemBlocks.add(new ItemBlock(block, new Item.Properties()).setRegistryName(block.getRegistryName()));
+        //ItemBlock itemBlock = new ItemBlock(block,new Item.Properties());
+
+
     }
 }
