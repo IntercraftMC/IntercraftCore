@@ -1,0 +1,31 @@
+{
+    "textures": {
+        "base": "minecraft:block/stone",
+        "ore": "intercraftcore:block/ore_faces/ore_0",
+        "particle": "minecraft:block/stone"
+    },
+    "elements": [
+        {   "from": [0,0,0],
+            "to": [16,16,16],
+            "faces": {
+                "down": { "texture": "#base" },
+                "up": { "texture": "#base" },
+                "north": { "texture": "#base" },
+                "south": { "texture": "#base" },
+                "west": { "texture": "#base" },
+                "east": { "texture": "#base" }
+            }
+        },
+        {   "from": [0,0,0],
+            "to": [16,16,16],
+            "faces": {
+                "down": { "texture": "#ore" },
+                "up": { "texture": "#ore" },
+                "north": { "texture": "#ore" },
+                "south": { "texture": "#ore" },
+                "west": { "texture": "#ore" },
+                "east": { "texture": "#ore" }
+            }
+        }
+    ]
+}

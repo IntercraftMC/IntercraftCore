@@ -1,0 +1,20 @@
+{
+  "forge_marker": 1,
+  "variants": {
+    "0": {
+      "model": "minecraft:block/stone"
+    },
+    "1": {
+      "model": "intercraftcore:block/ore_faces/ore_0"
+    },
+    "2": {
+      "model": "intercraftcore:block/ore_faces/ore_1"
+    },
+    "3": {
+      "model": "intercraftcore:block/ore_faces/ore_2"
+    },
+    "4": {
+      "model": "intercraftcore:block/ore_faces/ore_3"
+    }
+  }
+}
