@@ -2,6 +2,7 @@ package net.intercraft.intercraftcore.init;
 
 import net.intercraft.intercraftcore.block.BlockCableCase;
 import net.intercraft.intercraftcore.ore.BlockOreCopper;
+import net.intercraft.intercraftcore.ore.BlockOreTin;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -15,10 +16,12 @@ public class IntercraftBlocks
 
     private static final Block CABLECASE;
     private static final Block COPPERORE;
+    private static final Block TINORE;
 
     static {
         CABLECASE = new BlockCableCase();
         COPPERORE = new BlockOreCopper();
+        TINORE = new BlockOreTin();
     }
 
     /**
@@ -28,6 +31,7 @@ public class IntercraftBlocks
     {
         registerBlock(CABLECASE, IntercraftItemGroups.WIRING);
         registerBlock(COPPERORE,IntercraftItemGroups.RESOURCES);
+        registerBlock(TINORE,IntercraftItemGroups.RESOURCES);
     }
 
     /**
