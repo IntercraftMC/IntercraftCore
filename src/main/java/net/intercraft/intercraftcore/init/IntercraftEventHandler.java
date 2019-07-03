@@ -1,6 +1,9 @@
 package net.intercraft.intercraftcore.init;
 
 import net.intercraft.intercraftcore.item.group.ItemElementGroup;
+import net.intercraft.intercraftcore.ore.BlockHardOre;
+import net.intercraft.intercraftcore.ore.BlockOreCopper;
+import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
@@ -35,6 +38,17 @@ public class IntercraftEventHandler
                 }
             }
         }
+
+        /*itemColorHandlerEvent.getItemColors().register((a,b) -> { // Doesn't work. :/
+            return ((BlockHardOre)a.getItem()).getTint();
+        }, IntercraftBlocks.COPPERORE.asItem());*/
+
+    }
+
+    public static void ColorBlockHandlerEvent(ColorHandlerEvent.Block blockColorEvent) {
+        blockColorEvent.getBlockColors().register((a,b,c,d) -> {
+            return ((BlockHardOre)a.getBlock()).getTint();
+        }, IntercraftBlocks.COPPERORE, IntercraftBlocks.TINORE);
     }
 
 }

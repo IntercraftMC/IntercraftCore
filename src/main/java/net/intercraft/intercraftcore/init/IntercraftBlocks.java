@@ -14,9 +14,9 @@ public class IntercraftBlocks
      * Instantiate all block
      */
 
-    private static final Block CABLECASE;
-    private static final Block COPPERORE;
-    private static final Block TINORE;
+    public static final Block CABLECASE;
+    public static final Block COPPERORE;
+    public static final Block TINORE;
 
     static {
         CABLECASE = new BlockCableCase();

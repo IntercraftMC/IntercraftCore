@@ -4,6 +4,7 @@ import net.intercraft.intercraftcore.init.IntercraftEventHandler;
 import net.intercraft.intercraftcore.init.RegistrationHandler;
 import net.intercraft.intercraftcore.init.capabilities.radiation.IRadiation;
 import net.intercraft.intercraftcore.init.capabilities.radiation.RadiationStorage;
+import net.minecraft.client.renderer.color.BlockColors;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.fml.common.Mod;
@@ -29,6 +30,7 @@ public class IntercraftCore
 
         //MinecraftForge.EVENT_BUS.addListener(IntercraftEventHandler::onPLayerJoin);
         MinecraftForge.EVENT_BUS.addListener(IntercraftEventHandler::ColorHandlerEvent);
+        MinecraftForge.EVENT_BUS.addListener(IntercraftEventHandler::ColorBlockHandlerEvent);
     }
 
 
