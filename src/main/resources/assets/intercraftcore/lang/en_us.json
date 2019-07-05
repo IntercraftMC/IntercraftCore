@@ -8,9 +8,18 @@
   "item.intercraftcore.w_ingot": "Tungsten Ingot",
   "item.intercraftcore.u_ingot": "Uranium Ingot",
 
+  "block.intercraftcore.cu_ore": "Copper Ore",
+  "block.intercraftcore.sn_ore": "Tin Ore",
+
+
+
   "itemGroup.intercraftcore.resources": "Resources",
 
   "effect.intercraftcore.radiation_sickness": "Radiation Sickness",
 
-  "death.attack.intercraftcore.radiation": "%1$s died from radiation poison"
+  "death.attack.intercraftcore.radiation": "%1$s died from radiation poison",
+
+
+
+  "tooltip.intercraftcore.composition": "Composition"
 }

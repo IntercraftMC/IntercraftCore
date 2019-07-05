@@ -4,7 +4,6 @@ import net.intercraft.intercraftcore.init.IntercraftEventHandler;
 import net.intercraft.intercraftcore.init.RegistrationHandler;
 import net.intercraft.intercraftcore.init.capabilities.radiation.IRadiation;
 import net.intercraft.intercraftcore.init.capabilities.radiation.RadiationStorage;
-import net.minecraft.client.renderer.color.BlockColors;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.fml.common.Mod;
@@ -16,6 +15,8 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 public class IntercraftCore
 {
     public static IntercraftCore instance;
+
+    public static int defDensity = 3;
 
     public IntercraftCore()
     {
@@ -29,8 +30,8 @@ public class IntercraftCore
         FMLJavaModLoadingContext.get().getModEventBus().addListener(RegistrationHandler::register);
 
         //MinecraftForge.EVENT_BUS.addListener(IntercraftEventHandler::onPLayerJoin);
-        MinecraftForge.EVENT_BUS.addListener(IntercraftEventHandler::ColorHandlerEvent);
-        MinecraftForge.EVENT_BUS.addListener(IntercraftEventHandler::ColorBlockHandlerEvent);
+        MinecraftForge.EVENT_BUS.addListener(IntercraftEventHandler::ItemColorHandlerEvent);
+        MinecraftForge.EVENT_BUS.addListener(IntercraftEventHandler::BlockColorHandlerEvent);
     }
 
 

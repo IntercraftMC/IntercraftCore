@@ -1,5 +1,6 @@
 package net.intercraft.intercraftcore.ore;
 
+import net.intercraft.intercraftcore.IntercraftCore;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
@@ -27,6 +28,8 @@ public class BlockHardOre extends Block implements IBlockColor, IItemColor {
     private Item drop;
     private int tint;
 
+    public final int dropMultiplier = 2;
+
 
     public BlockHardOre(final String name, final float hardness, final float resistance, Item drop, int tint) {
         super(Block.Properties.create(Material.ROCK, MaterialColor.STONE).hardnessAndResistance(hardness,resistance));
@@ -34,11 +37,6 @@ public class BlockHardOre extends Block implements IBlockColor, IItemColor {
         setRegistryName(name+"_ore");
         this.drop = drop;
         this.tint = tint;
-    }
-
-
-    public int getTint() {
-        return this.tint;
     }
 
     protected ItemStack getSilkTouchDrop(IBlockState state) {
@@ -54,8 +52,8 @@ public class BlockHardOre extends Block implements IBlockColor, IItemColor {
             int d = stack.getTag().getInt("density");
             worldIn.setBlockState(pos,state.with(BlockProperties.DENSITY,d));
         } catch (NullPointerException e) {
-            System.out.println(String.format("Default hardness placement is %d.",3));
-            worldIn.setBlockState(pos,state.with(BlockProperties.DENSITY,3));
+            System.out.println(String.format("Default hardness placement is %d.", IntercraftCore.defDensity));
+            worldIn.setBlockState(pos,state.with(BlockProperties.DENSITY,IntercraftCore.defDensity));
         }
     }
 
@@ -63,14 +61,14 @@ public class BlockHardOre extends Block implements IBlockColor, IItemColor {
         return this.drop;
     }
     public int getItemsToDropCount(IBlockState state, int fortune, World worldIn, BlockPos pos, Random random) {
-        int toRet = state.get(BlockProperties.DENSITY)+1;
+        int toRet = (state.get(BlockProperties.DENSITY)+1)*dropMultiplier;
 
-        return Math.max(toRet,1);
+        return Math.max(toRet,dropMultiplier);
 
     }
 
     public void onExplosionDestroy(World worldIn, BlockPos pos, Explosion explosionIn) {
-        new EntityItem(worldIn,pos.getX(),pos.getY(),pos.getZ(), new ItemStack(this.drop));
+        new EntityItem(worldIn,pos.getX(),pos.getY(),pos.getZ(), new ItemStack(this.drop,dropMultiplier));
     }
 
 
@@ -84,7 +82,12 @@ public class BlockHardOre extends Block implements IBlockColor, IItemColor {
         return BlockRenderLayer.CUTOUT;
     }
 
-    public int getColor(IBlockState p_getColor_1, IWorldReaderBase p_getColor_2, BlockPos p_getColor_3_, int p_getColor_4_) {
+    /*@Override
+    public String getTranslationKey() {
+
+    }*/
+
+    public int getColor(IBlockState state, IWorldReaderBase world, BlockPos pos, int tintIndex) {
         return this.tint;
     }
 
