@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 
 NAME="w"
 

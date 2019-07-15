@@ -1,10 +1,21 @@
 modLoader="javafml"
 loaderVersion="[25,)"
 issueTrackerURL="https://github.com/IntercraftMC/IntercraftCore/issues"
+logoFile="intercraftcore.png"
 
 [[mods]]
     modId="intercraftcore"
     version="${file.jarVersion}"
     displayName="Intercraft Core"
-    authors="Coding by: Simon, SirDavidLudwig. Art by Bluefier42"
-    description="Core mod for Intercraft 1.13.2 modpack."
+    authors="Coding by simon_kungen, SirDavidLudwig. Art by Bluefier42"
+    description='''
+    Core mod for Intercraft 1.13.2 modpack.
+
+    Should work like the "solder" to weld mods togheter.
+    Doesn't give the best experience if played
+    standalone/won't work without other mods.
+    '''
+[[dependencies.intercraftcore]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.13,1.13.2]"

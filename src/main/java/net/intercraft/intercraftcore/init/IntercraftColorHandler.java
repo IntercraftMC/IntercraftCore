@@ -14,7 +14,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorldReaderBase;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -22,16 +21,37 @@ import net.minecraftforge.fml.common.Mod;
 import java.util.ArrayList;
 import java.util.List;
 
-@Mod.EventBusSubscriber
+@Mod.EventBusSubscriber(Dist.CLIENT)
 public class IntercraftColorHandler
 {
-    @OnlyIn(Dist.CLIENT)
+
+
+    /**
+     * Pre-determined items to be coloured.
+    * */
+
+    private static List<Item> items = new ArrayList<Item>(){{
+        add(IntercraftItems.COPPERCHUNK);
+        add(IntercraftItems.TINCHUNK);
+    }};
+
+    /**
+     * Pre-determined blocks to be coloured.
+     * */
+
+    private static List<Block> blocks = new ArrayList<Block>(){{
+            add(IntercraftBlocks.COPPERORE);
+            add(IntercraftBlocks.TINORE);
+        }};
+
+
     @SubscribeEvent
     public static void ItemColorHandlerEvent(ColorHandlerEvent.Item event)
-    {   System.out.println("Registering the item colours ..");
+    {   System.out.println("Registering item colours ..");
+
 
         /**
-         * Groups which are supposed to be coloured.
+         * Groups of items to be coloured.
         * */
 
         ItemElementGroup[] groups = {
@@ -44,21 +64,6 @@ public class IntercraftColorHandler
         };
 
 
-        /**
-         * Pre-determined items to be coloured.
-        * */
-
-        List<Item> items = new ArrayList<>();
-        items.add(IntercraftItems.COPPERCHUNK);
-        items.add(IntercraftItems.TINCHUNK);
-
-        /**
-         * Pre-determined items to be coloured.
-        * */
-
-        List<Block> blocks = new ArrayList<>();
-        blocks.add(IntercraftBlocks.COPPERORE);
-        blocks.add(IntercraftBlocks.TINORE);
 
         /**
          * Filter out- and placing the group's content into the @items variable.
@@ -90,19 +95,9 @@ public class IntercraftColorHandler
         System.out.println("[Item Colours] Done.");
     }
 
-    @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
     public static void BlockColorHandlerEvent(ColorHandlerEvent.Block event)
-    {   System.out.println("Registering the block colours ..");
-
-
-        /**
-         * Pre-determined blocks to be coloured.
-        * */
-
-        List<Block> blocks = new ArrayList<>();
-        blocks.add(IntercraftBlocks.COPPERORE);
-        blocks.add(IntercraftBlocks.TINORE);
+    {   System.out.println("Registering block colours ..");
 
 
         /**
@@ -158,7 +153,4 @@ public class IntercraftColorHandler
             return this.tint;
         }
     }
-
-
-
 }
