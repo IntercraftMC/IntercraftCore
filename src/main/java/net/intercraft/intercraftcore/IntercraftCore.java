@@ -1,10 +1,8 @@
 package net.intercraft.intercraftcore;
 
-import net.intercraft.intercraftcore.init.IntercraftEventHandler;
 import net.intercraft.intercraftcore.init.RegistrationHandler;
 import net.intercraft.intercraftcore.init.capabilities.radiation.IRadiation;
 import net.intercraft.intercraftcore.init.capabilities.radiation.RadiationStorage;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -29,9 +27,7 @@ public class IntercraftCore
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onClientSetup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(RegistrationHandler::register);
 
-        //MinecraftForge.EVENT_BUS.addListener(IntercraftEventHandler::onPLayerJoin);
-        MinecraftForge.EVENT_BUS.addListener(IntercraftEventHandler::ItemColorHandlerEvent);
-        MinecraftForge.EVENT_BUS.addListener(IntercraftEventHandler::BlockColorHandlerEvent);
+
     }
 
 

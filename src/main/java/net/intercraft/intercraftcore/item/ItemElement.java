@@ -2,12 +2,10 @@ package net.intercraft.intercraftcore.item;
 
 import net.intercraft.intercraftcore.element.Element;
 import net.intercraft.intercraftcore.init.IntercraftItemGroups;
-import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 
 
-public class ItemElement extends Item implements IItemColor
+public class ItemElement extends Item
 {
     protected Element element;
 
@@ -22,8 +20,7 @@ public class ItemElement extends Item implements IItemColor
         setRegistryName(element.symbol + "_" + registrySuffix);
     }
 
-
-    public int getColor(ItemStack stack, int tint) {
+    public int getTint() {
         return element.tint;
     }
 }

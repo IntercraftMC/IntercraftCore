@@ -5,8 +5,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.color.IBlockColor;
-import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.Item;
@@ -17,13 +15,12 @@ import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
-import net.minecraft.world.IWorldReaderBase;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class BlockHardOre extends Block implements IBlockColor, IItemColor {
+public class BlockHardOre extends Block {
 
     private Item drop;
     private int tint;
@@ -87,11 +84,7 @@ public class BlockHardOre extends Block implements IBlockColor, IItemColor {
 
     }*/
 
-    public int getColor(IBlockState state, IWorldReaderBase world, BlockPos pos, int tintIndex) {
-        return this.tint;
-    }
-
-    public int getColor(ItemStack stack, int tint) {
+    public int getTint() {
         return this.tint;
     }
 

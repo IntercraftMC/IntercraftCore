@@ -1,13 +1,10 @@
 package net.intercraft.intercraftcore.ore;
 
-import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentBase;
 import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -15,7 +12,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ItemHardChunk extends Item implements IItemColor {
+public class ItemHardChunk extends Item
+{
 
 
     private int tint;
@@ -55,12 +53,7 @@ public class ItemHardChunk extends Item implements IItemColor {
 
     }
 
-
-    public int getColor(ItemStack stack, int tint) {
-
-        if (tint == 0)
-            return 0xFFFFFF;
-        else
-            return this.tint;
+    public int getTint() {
+        return this.tint;
     }
 }
