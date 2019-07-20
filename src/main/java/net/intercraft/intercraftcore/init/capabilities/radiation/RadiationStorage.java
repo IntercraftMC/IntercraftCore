@@ -8,23 +8,29 @@ import net.minecraftforge.common.capabilities.Capability;
 
 import java.util.concurrent.Callable;
 
-public class RadiationStorage implements Capability.IStorage<IRadiation> {
+public class RadiationStorage implements Capability.IStorage<IRadiation>
+{
     @Override
-    public INBTBase writeNBT(Capability<IRadiation> capability, IRadiation instance, EnumFacing side) {
+    public INBTBase writeNBT(Capability<IRadiation> capability, IRadiation instance, EnumFacing side)
+    {
         NBTTagCompound tag = new NBTTagCompound();
         tag.setLong(Reference.MODID+":radiationexposure",instance.getExposure());
+        tag.setLong(Reference.MODID+":radiationabsorbed",instance.getAbsorbed());
         return tag;
     }
 
     @Override
-    public void readNBT(Capability<IRadiation> capability, IRadiation instance, EnumFacing side, INBTBase nbt) {
+    public void readNBT(Capability<IRadiation> capability, IRadiation instance, EnumFacing side, INBTBase nbt)
+    {
         if (nbt instanceof NBTTagCompound) {
             NBTTagCompound tag = (NBTTagCompound)nbt;
             instance.setExposure(tag.getLong(Reference.MODID+":radiationexposure"));
+            instance.setAbsorbed(tag.getLong(Reference.MODID+":radiationabsorbed"));
         }
     }
 
-    public static class Factory implements Callable<IRadiation> {
+    public static class Factory implements Callable<IRadiation>
+    {
         @Override
         public IRadiation call() throws Exception {
             return new Radiation(null);

@@ -3,6 +3,7 @@ package net.intercraft.intercraftcore.init.capabilities.radiation;
 import net.minecraft.nbt.INBTBase;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.common.util.LazyOptional;
 
@@ -10,7 +11,8 @@ import net.minecraftforge.common.util.LazyOptional;
 public class RadiationProvider implements ICapabilitySerializable<INBTBase> {
 
 
-    public static final Capability<IRadiation> RAD_CAP = null;
+    @CapabilityInject(IRadiation.class)
+    public static Capability<IRadiation> RAD_CAP = null;
 
     private IRadiation instance = RAD_CAP.getDefaultInstance();
 

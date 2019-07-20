@@ -40,3 +40,14 @@ Core mod for InterCraft 1.13.2 modpack.
     
     *Custom energy unit ("ICU"?) also losely modeled after real life (not completely as to not eat too much TPS).*
 
+    ### Custom Additions
+    - [ ] Sky Block
+    
+    *A block that renders the current skybox of that dimension. Pretty much a copy of [OpenBlocks](https://minecraft.curseforge.com/projects/openblocks)' Sky Block, because they are cool. Can be crafted with Six (6) Sky Panels and one (1) Stone to make one Sky Block. Sky Panels can be found on the ground when the simulation is starting to crack.*
+    - [ ] Glitchium
+    
+    *A super rare ore, only found one (1) at a time. Can be hooked into a OC Computer as a component. It has a single function `refine()`, when doing so will destroy the ore block and leave a ingot stack. Doing so has a chance of corrupting the computer, so doing it on a isolated network is a recommendation.*
+    
+    - [ ] Strong Anvil
+    
+    *Works just like a regular Anvil except for lasting a bit longer than a regular Anvil. But has the special ability to allow Enchanting of tools beyond thirty six (36) levels. Crafted from "Glitchium" Blocks and Ingots like a regular Anvil. Possibly allowing incompatible Enchants to be combined.*

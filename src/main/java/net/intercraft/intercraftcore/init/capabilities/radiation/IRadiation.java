@@ -5,5 +5,9 @@ public interface IRadiation {
 
     void setExposure(long value);
 
+    long getAbsorbed();
+
+    void setAbsorbed(long value);
+
     void tick();
 }

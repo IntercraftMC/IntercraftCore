@@ -9,9 +9,11 @@ import java.lang.ref.WeakReference;
 
 public class Radiation implements IRadiation, IRadiationEmitter, IRadiationBlocker, IRadiationWorld {
 
-    private double multiplier;
+    private double multiplier = 1;
     public WeakReference<Entity> entity;
 
+
+    private final int AbsDropRate = 4, ExpDropRate = 1;
     private final int[] levels = {
             5000,
             10000,
@@ -19,46 +21,64 @@ public class Radiation implements IRadiation, IRadiationEmitter, IRadiationBlock
             40000
     };
 
-    private int minimum;
+    private int minimum = 100;
 
-    private long exposure;
 
-    public Radiation(Entity entity) {
+    private long EXPOSURE;
+    private long ABSORBED;
+
+    public Radiation(Entity entity)
+    {
         this.entity = new WeakReference<>(entity);
-        this.minimum = 100;
-        this.multiplier = 1;
 
-        this.exposure = this.minimum;
+        this.EXPOSURE = this.minimum;
     }
 
     @Override
-    public void emission(int value, float distance, Entity target) {
+    public void emission(int value, float distance, Entity target)
+    {
         //increase(value);
-        //this.exposure += Math.round(value/distance);
+        //this.EXPOSURE += Math.round(value/distance);
         increase(Math.round(value/distance));
     }
 
     @Override
-    public void multiplier(double multiplier) {
+    public void multiplier(double multiplier)
+    {
         if (multiplier <= 1 && multiplier > 0)
             this.multiplier = multiplier;
     }
 
     @Override
-    public void setMinimum(int value) {
+    public void setMinimum(int value)
+    {
         if (value >= 0)
             this.minimum = value;
     }
 
 
     @Override
-    public long getExposure() {
-        return this.exposure;
+    public long getExposure()
+    {
+        return this.EXPOSURE;
     }
 
     @Override
-    public void setExposure(long value) {
-        this.exposure = value;
+    public void setExposure(long value)
+    {
+        this.EXPOSURE = value;
+    }
+
+    @Override
+    public long getAbsorbed()
+    {
+        return this.ABSORBED;
+    }
+
+    @Override
+    public void setAbsorbed(long value)
+    {
+        this.ABSORBED = value;
     }
 
     /*@Override
@@ -67,27 +87,36 @@ public class Radiation implements IRadiation, IRadiationEmitter, IRadiationBlock
     }*/
 
     @Override
-    public void tick() {
+    public void tick()
+    {
 
-        /*if (this.exposure >= this.levels[0]) {
+        /*if (this.ABSORBED >= this.levels[0]) {
             // Start showing Radiation poison symptoms.
-        } else if (this.exposure >= this.levels[1]) {
+        } else if (this.ABSORBED >= this.levels[1]) {
             // Not feeling very good, nausea, random damage.
-        } else if (this.exposure >= this.levels[2]) {
+        } else if (this.ABSORBED >= this.levels[2]) {
             // Same as level 2 but more.
-        } else if (this.exposure >= this.levels[3]) {
+        } else if (this.ABSORBED >= this.levels[3]) {
             // Most likely going to die. You've absorbed too much radiation and won't wear off in time.
         }*/
 
 
-        if (this.exposure >= this.minimum) {
-            this.exposure--;
-            System.out.println("Current exposure value is: "+this.exposure);
+        if (this.ABSORBED >= this.minimum) {
+            this.ABSORBED -= this.AbsDropRate;
+            //System.out.println("Current EXPOSURE value is: "+this.EXPOSURE);
         }
+
+        if (this.EXPOSURE > this.ExpDropRate) {
+            this.ABSORBED += this.ExpDropRate;
+            this.EXPOSURE -= this.ExpDropRate;
+        }
+
+
     }
 
-    private void increase(int value) {
+    private void increase(int value)
+    {
         if (value*this.multiplier > 0)
-            this.exposure += value*this.multiplier;
+            this.EXPOSURE += value*this.multiplier;
     }
 }
