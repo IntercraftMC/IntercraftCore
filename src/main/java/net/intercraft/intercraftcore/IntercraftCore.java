@@ -1,8 +1,13 @@
 package net.intercraft.intercraftcore;
 
+import net.intercraft.intercraftcore.init.IntercraftEventHandler;
 import net.intercraft.intercraftcore.init.RegistrationHandler;
+import net.intercraft.intercraftcore.init.capabilities.radiation.CapabilityRadiation;
 import net.intercraft.intercraftcore.init.capabilities.radiation.IRadiation;
+import net.intercraft.intercraftcore.init.capabilities.radiation.Radiation;
 import net.intercraft.intercraftcore.init.capabilities.radiation.RadiationStorage;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -13,6 +18,8 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 public class IntercraftCore
 {
     public static IntercraftCore instance;
+    //public static CapabilityRadiation radiation;
+    public static final ResourceLocation RAD_ID = new ResourceLocation(Reference.MODID,"radiation");
 
     public static int defDensity = 3;
 
@@ -33,8 +40,15 @@ public class IntercraftCore
 
     public void onCommonSetup(final FMLCommonSetupEvent event)
     {
+        CapabilityManager.INSTANCE.register(IRadiation.class, new RadiationStorage(), Radiation::new);
+        MinecraftForge.EVENT_BUS.addListener(IntercraftEventHandler::attachCapability);
+
         //PROXY.setup();
-        CapabilityManager.INSTANCE.register(IRadiation.class, new RadiationStorage(), new RadiationStorage.Factory());
+        //CapabilityManager.INSTANCE.register(IRadiation.class, new RadiationStorage(), new RadiationStorage.Factory());
+
+        //radiation = new CapabilityRadiation();
+        //radiation.register();
+
     }
 
     public void onClientSetup(final FMLClientSetupEvent event)

@@ -10,7 +10,6 @@ import java.lang.ref.WeakReference;
 public class Radiation implements IRadiation, IRadiationEmitter, IRadiationBlocker, IRadiationWorld {
 
     private double multiplier = 1;
-    public WeakReference<Entity> entity;
 
 
     private final int AbsDropRate = 4, ExpDropRate = 1;
@@ -27,9 +26,8 @@ public class Radiation implements IRadiation, IRadiationEmitter, IRadiationBlock
     private long EXPOSURE;
     private long ABSORBED;
 
-    public Radiation(Entity entity)
+    public Radiation()
     {
-        this.entity = new WeakReference<>(entity);
 
         this.EXPOSURE = this.minimum;
     }

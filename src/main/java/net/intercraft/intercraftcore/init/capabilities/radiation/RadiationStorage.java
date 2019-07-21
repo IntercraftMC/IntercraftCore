@@ -29,11 +29,11 @@ public class RadiationStorage implements Capability.IStorage<IRadiation>
         }
     }
 
-    public static class Factory implements Callable<IRadiation>
+    /*public static class Factory implements Callable<IRadiation>
     {
         @Override
         public IRadiation call() throws Exception {
-            return new Radiation(null);
+            return new Radiation();
         }
-    }
+    }*/
 }
