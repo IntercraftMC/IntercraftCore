@@ -7,13 +7,15 @@ import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.common.util.LazyOptional;
 
+import javax.annotation.Nonnull;
+
 
 public class RadiationProvider implements ICapabilitySerializable<INBTBase>
 {
 
 
     @CapabilityInject(IRadiation.class)
-    public static final Capability<IRadiation> RAD_CAP = null;
+    public static Capability<IRadiation> RAD_CAP = null;
 
     private IRadiation instance = RAD_CAP.getDefaultInstance();
 
@@ -24,24 +26,22 @@ public class RadiationProvider implements ICapabilitySerializable<INBTBase>
 
     @SuppressWarnings("unchecked")
     @Override
-    public <T> LazyOptional<T> getCapability(Capability<T> capability, EnumFacing facing)
+    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, EnumFacing side)
     {
-        return (LazyOptional<T>) LazyOptional.of(() -> {
-            return new Radiation();
-        });
+        return (LazyOptional<T>) LazyOptional.of(() -> instance);
     }
 
 
     @Override
     public INBTBase serializeNBT()
     {
-        return RAD_CAP.getStorage().writeNBT(RAD_CAP, this.instance, null);
+        return RAD_CAP.getStorage().writeNBT(RAD_CAP, instance, null);
     }
 
     @Override
     public void deserializeNBT(INBTBase nbt)
     {
-        RAD_CAP.getStorage().readNBT(RAD_CAP, this.instance, null, nbt);
+        RAD_CAP.getStorage().readNBT(RAD_CAP, instance, null, nbt);
     }
 
 

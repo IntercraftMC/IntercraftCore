@@ -2,7 +2,6 @@ package net.intercraft.intercraftcore;
 
 import net.intercraft.intercraftcore.init.IntercraftEventHandler;
 import net.intercraft.intercraftcore.init.RegistrationHandler;
-import net.intercraft.intercraftcore.init.capabilities.radiation.CapabilityRadiation;
 import net.intercraft.intercraftcore.init.capabilities.radiation.IRadiation;
 import net.intercraft.intercraftcore.init.capabilities.radiation.Radiation;
 import net.intercraft.intercraftcore.init.capabilities.radiation.RadiationStorage;
@@ -40,7 +39,7 @@ public class IntercraftCore
 
     public void onCommonSetup(final FMLCommonSetupEvent event)
     {
-        CapabilityManager.INSTANCE.register(IRadiation.class, new RadiationStorage(), Radiation::new);
+        CapabilityManager.INSTANCE.register(IRadiation.class, new RadiationStorage(), new RadiationStorage.Factory());
         MinecraftForge.EVENT_BUS.addListener(IntercraftEventHandler::attachCapability);
 
         //PROXY.setup();

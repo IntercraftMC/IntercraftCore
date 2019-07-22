@@ -12,12 +12,12 @@ public class Radiation implements IRadiation, IRadiationEmitter, IRadiationBlock
     private double multiplier = 1;
 
 
-    private final int AbsDropRate = 4, ExpDropRate = 1;
+    private final int AbsDropRate = 1, ExpDropRate = 4;
     private final int[] levels = {
-            5000,
-            10000,
-            20000,
-            40000
+            50000,
+            100000,
+            200000,
+            400000
     };
 
     private int minimum = 100;
@@ -29,7 +29,7 @@ public class Radiation implements IRadiation, IRadiationEmitter, IRadiationBlock
     public Radiation()
     {
 
-        this.EXPOSURE = this.minimum;
+        this.ABSORBED = this.minimum;
     }
 
     @Override
@@ -112,7 +112,8 @@ public class Radiation implements IRadiation, IRadiationEmitter, IRadiationBlock
 
     }
 
-    private void increase(int value)
+    @Override
+    public void increase(int value)
     {
         if (value*this.multiplier > 0)
             this.EXPOSURE += value*this.multiplier;
