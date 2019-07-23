@@ -1,5 +1,7 @@
 package net.intercraft.intercraftcore.init.capabilities.radiation;
 
+import net.minecraft.entity.Entity;
+
 public interface IRadiation {
     long getExposure();
 
@@ -11,5 +13,5 @@ public interface IRadiation {
 
     void increase(int value);
 
-    void tick();
+    void tick(Entity entity);
 }

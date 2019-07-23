@@ -3,7 +3,6 @@ package net.intercraft.intercraftcore;
 import net.intercraft.intercraftcore.init.IntercraftEventHandler;
 import net.intercraft.intercraftcore.init.RegistrationHandler;
 import net.intercraft.intercraftcore.init.capabilities.radiation.IRadiation;
-import net.intercraft.intercraftcore.init.capabilities.radiation.Radiation;
 import net.intercraft.intercraftcore.init.capabilities.radiation.RadiationStorage;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;

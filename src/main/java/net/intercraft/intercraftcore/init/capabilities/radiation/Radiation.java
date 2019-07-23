@@ -1,9 +1,12 @@
 package net.intercraft.intercraftcore.init.capabilities.radiation;
 
+import net.intercraft.intercraftcore.init.IntercraftPotions;
 import net.intercraft.intercraftcore.init.capabilities.radiation.api.IRadiationBlocker;
 import net.intercraft.intercraftcore.init.capabilities.radiation.api.IRadiationEmitter;
 import net.intercraft.intercraftcore.init.capabilities.radiation.api.IRadiationWorld;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.potion.PotionEffect;
 
 import java.lang.ref.WeakReference;
 
@@ -12,12 +15,12 @@ public class Radiation implements IRadiation, IRadiationEmitter, IRadiationBlock
     private double multiplier = 1;
 
 
-    private final int AbsDropRate = 1, ExpDropRate = 4;
+    private final int AbsDropRate = 1, ExpDropRate = 3;
     private final int[] levels = {
-            50000,
-            100000,
-            200000,
-            400000
+            5000,
+            10000,
+            20000,
+            40000
     };
 
     private int minimum = 100;
@@ -85,18 +88,29 @@ public class Radiation implements IRadiation, IRadiationEmitter, IRadiationBlock
     }*/
 
     @Override
-    public void tick()
+    public void tick(Entity entity)
     {
 
         /*if (this.ABSORBED >= this.levels[0]) {
             // Start showing Radiation poison symptoms.
+            ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(IntercraftPotions.RADIATION,60,0));
         } else if (this.ABSORBED >= this.levels[1]) {
             // Not feeling very good, nausea, random damage.
+            ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(IntercraftPotions.RADIATION,60,1));
         } else if (this.ABSORBED >= this.levels[2]) {
+            ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(IntercraftPotions.RADIATION,60,2));
             // Same as level 2 but more.
         } else if (this.ABSORBED >= this.levels[3]) {
+            ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(IntercraftPotions.RADIATION,60,3));
             // Most likely going to die. You've absorbed too much radiation and won't wear off in time.
         }*/
+
+        for (int i=this.levels.length-1;i>=0;i--) {
+            if (this.ABSORBED >= this.levels[i]) {
+                ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(IntercraftPotions.RADIATION, 60, i));
+                break;
+            }
+        }
 
 
         if (this.ABSORBED >= this.minimum) {
