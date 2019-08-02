@@ -11,7 +11,5 @@ public interface IRadiation {
 
     void setAbsorbed(long value);
 
-    void increase(int value);
-
     void tick(Entity entity);
 }

@@ -3,17 +3,12 @@ package net.intercraft.intercraftcore.init.capabilities.radiation;
 import net.intercraft.intercraftcore.init.IntercraftPotions;
 import net.intercraft.intercraftcore.init.capabilities.radiation.api.IRadiationBlocker;
 import net.intercraft.intercraftcore.init.capabilities.radiation.api.IRadiationEmitter;
-import net.intercraft.intercraftcore.init.capabilities.radiation.api.IRadiationWorld;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.potion.PotionEffect;
 
-import java.lang.ref.WeakReference;
-
-public class Radiation implements IRadiation, IRadiationEmitter, IRadiationBlocker, IRadiationWorld {
-
-    private double multiplier = 1;
-
+public class Radiation implements IRadiation, IRadiationEmitter, IRadiationBlocker
+{
 
     private final int AbsDropRate = 1, ExpDropRate = 3;
     private final int[] levels = {
@@ -35,27 +30,8 @@ public class Radiation implements IRadiation, IRadiationEmitter, IRadiationBlock
         this.ABSORBED = this.minimum;
     }
 
-    @Override
-    public void emission(int value, float distance, Entity target)
-    {
-        //increase(value);
-        //this.EXPOSURE += Math.round(value/distance);
-        increase(Math.round(value/distance));
-    }
 
-    @Override
-    public void multiplier(double multiplier)
-    {
-        if (multiplier <= 1 && multiplier > 0)
-            this.multiplier = multiplier;
-    }
 
-    @Override
-    public void setMinimum(int value)
-    {
-        if (value >= 0)
-            this.minimum = value;
-    }
 
 
     @Override
@@ -65,15 +41,15 @@ public class Radiation implements IRadiation, IRadiationEmitter, IRadiationBlock
     }
 
     @Override
-    public void setExposure(long value)
-    {
-        this.EXPOSURE = value;
-    }
-
-    @Override
     public long getAbsorbed()
     {
         return this.ABSORBED;
+    }
+
+    @Override
+    public void setExposure(long value)
+    {
+        this.EXPOSURE = value;
     }
 
     @Override
@@ -81,6 +57,9 @@ public class Radiation implements IRadiation, IRadiationEmitter, IRadiationBlock
     {
         this.ABSORBED = value;
     }
+
+
+
 
     /*@Override
     public int getLevel(int index) {
@@ -105,9 +84,19 @@ public class Radiation implements IRadiation, IRadiationEmitter, IRadiationBlock
             // Most likely going to die. You've absorbed too much radiation and won't wear off in time.
         }*/
 
+        // TODO Not have each level give a certain amplifier of Radiation Poison but give special render shader for different levels and only give RP at the most severe levels and is most likely lethal.
         for (int i=this.levels.length-1;i>=0;i--) {
             if (this.ABSORBED >= this.levels[i]) {
-                ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(IntercraftPotions.RADIATION, 60, i));
+
+
+                PotionEffect effect = ((EntityLivingBase) entity).getActivePotionEffect(IntercraftPotions.RADIATION);
+
+                if (effect != null) {
+                    if (effect.getDuration() == 20)
+                        applyRad(entity,500,i);
+                } else {
+                    applyRad(entity, 500, i);
+                }
                 break;
             }
         }
@@ -115,7 +104,6 @@ public class Radiation implements IRadiation, IRadiationEmitter, IRadiationBlock
 
         if (this.ABSORBED >= this.minimum) {
             this.ABSORBED -= this.AbsDropRate;
-            //System.out.println("Current EXPOSURE value is: "+this.EXPOSURE);
         }
 
         if (this.EXPOSURE > this.ExpDropRate) {
@@ -124,12 +112,44 @@ public class Radiation implements IRadiation, IRadiationEmitter, IRadiationBlock
         }
 
 
+        increaseExposure(entity, emitting(entity));
+
+
+
     }
 
     @Override
-    public void increase(int value)
+    public long emitting(Entity entityTarget)
     {
-        if (value*this.multiplier > 0)
-            this.EXPOSURE += value*this.multiplier;
+        return 0;
+    }
+
+    @Override
+    public double blocking()
+    {
+        return 1;
+    }
+
+
+    private void increaseExposure(Entity entity, long value)
+    {
+        /**
+         * TODO Create an algorithm to decide how much goes to @ABSORBED and @EXPOSURE and how much to convert to fire damage.
+         *
+         * Ex (pseudo code).
+         * @param value = 300 * blocking();
+         * EXPOSURE += 250;
+         * ABSORBED += 50;
+         * @param value = 1200 * blocking();
+         * EXPOSURE += 1000;
+         * ABSORBED += 150;
+         * fireDamage(50);
+         */
+    }
+
+
+    private void applyRad(Entity entity, int duration, int level)
+    {
+        ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(IntercraftPotions.RADIATION, duration, level));
     }
 }

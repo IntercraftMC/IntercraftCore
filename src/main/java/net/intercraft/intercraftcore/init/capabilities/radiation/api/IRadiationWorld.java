@@ -1,8 +1,9 @@
 package net.intercraft.intercraftcore.init.capabilities.radiation.api;
 
-public interface IRadiationWorld {
+public interface IRadiationWorld
+{
 
-    /*
+    /**
     * How much radiation that world has.
     * */
 

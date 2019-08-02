@@ -17,7 +17,7 @@ public class RadiationDebugCommand
 
     public static void register(CommandDispatcher<CommandSource> dispatcher)
     {
-        System.out.println("Registering Radiation Debug command.");
+        //System.out.println("Registering Radiation Debug command.");
         dispatcher.register(Commands.literal("radiation").requires((cmd) -> {
             return cmd.hasPermissionLevel(2);
         }).then(Commands.literal("get").then(Commands.argument("entity", EntityArgument.singleEntity()).executes((cmd) -> {
@@ -42,7 +42,7 @@ public class RadiationDebugCommand
 
                 IRadiation cap = entity.getCapability(RadiationProvider.RAD_CAP).orElse(RadiationProvider.RAD_CAP.getDefaultInstance());
 
-                source.sendFeedback(new TextComponentTranslation("commands.radiation.get", cap.getExposure(), cap.getAbsorbed()), true);
+                source.sendFeedback(new TextComponentTranslation("commands.radiation.get", cap.getExposure(), cap.getAbsorbed(), entity.getDisplayName()), false);
 
                 } else {
                     source.sendErrorMessage(new TextComponentTranslation("commands.radiation.error.invalid",entity.getDisplayName()));
@@ -67,12 +67,12 @@ public class RadiationDebugCommand
 
                     case "exposure": {
                         cap.setExposure(value);
-                        source.sendFeedback(new TextComponentTranslation("commands.radiation.set", type, value), true);
+                        source.sendFeedback(new TextComponentTranslation("commands.radiation.set", typeL, value, entity.getDisplayName()), true);
                         break;
                     }
                     case "absorbed": {
                         cap.setAbsorbed(value);
-                        source.sendFeedback(new TextComponentTranslation("commands.radiation.set", type, value), true);
+                        source.sendFeedback(new TextComponentTranslation("commands.radiation.set", typeL, value, entity.getDisplayName()), true);
                         break;
                     }
                     default:
