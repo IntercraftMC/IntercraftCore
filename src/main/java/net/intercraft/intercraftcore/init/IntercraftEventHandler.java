@@ -5,12 +5,7 @@ import net.intercraft.intercraftcore.command.RadiationDebugCommand;
 import net.intercraft.intercraftcore.init.capabilities.radiation.IRadiation;
 import net.intercraft.intercraftcore.init.capabilities.radiation.RadiationProvider;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.monster.EntityCreeper;
-import net.minecraft.entity.monster.EntityEnderman;
-import net.minecraft.entity.monster.EntityEndermite;
-import net.minecraft.entity.monster.EntitySpider;
-import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -33,7 +28,7 @@ public class IntercraftEventHandler
     @SubscribeEvent
     public static void onEntityTick(TickEvent.WorldTickEvent event)
     {
-        for (Entity entity : event.world.loadedEntityList) {
+        for (TileEntity entity : event.world.loadedTileEntityList) {
             if (entity.getCapability(RadiationProvider.RAD_CAP).isPresent()) {
                 IRadiation cap = entity.getCapability(RadiationProvider.RAD_CAP).orElse(RadiationProvider.RAD_CAP.getDefaultInstance());
                 cap.tick(entity);

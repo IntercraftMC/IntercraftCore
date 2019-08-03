@@ -4,8 +4,9 @@ import net.intercraft.intercraftcore.init.IntercraftPotions;
 import net.intercraft.intercraftcore.init.capabilities.radiation.api.IRadiationBlocker;
 import net.intercraft.intercraftcore.init.capabilities.radiation.api.IRadiationEmitter;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.potion.PotionEffect;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.potion.Potion;
+import net.minecraft.tileentity.TileEntity;
 
 public class Radiation implements IRadiation, IRadiationEmitter, IRadiationBlocker
 {
@@ -67,7 +68,7 @@ public class Radiation implements IRadiation, IRadiationEmitter, IRadiationBlock
     }*/
 
     @Override
-    public void tick(Entity entity)
+    public void tick(TileEntity entity)
     {
 
         /*if (this.ABSORBED >= this.levels[0]) {
@@ -89,7 +90,7 @@ public class Radiation implements IRadiation, IRadiationEmitter, IRadiationBlock
             if (this.ABSORBED >= this.levels[i]) {
 
 
-                PotionEffect effect = ((EntityLivingBase) entity).getActivePotionEffect(IntercraftPotions.RADIATION);
+                Potion effect = ((LivingEntity) entity).getActivePotionEffect(IntercraftPotions.RADIATION);
 
                 if (effect != null) {
                     if (effect.getDuration() == 20)

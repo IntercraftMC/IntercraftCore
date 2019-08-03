@@ -9,7 +9,7 @@ logoFile="intercraftcore.png"
     displayName="Intercraft Core"
     authors="Coding by simon_kungen, SirDavidLudwig. Art by Bluefier42"
     description='''
-    Core mod for Intercraft 1.13.2 modpack.
+    Core mod for Intercraft 1.14.2 modpack.
 
     Should work like the "solder" to weld mods togheter.
     Doesn't give the best experience if played
@@ -18,4 +18,4 @@ logoFile="intercraftcore.png"
 [[dependencies.intercraftcore]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.13,1.13.2]"
+    versionRange="[1.14,1.14.2]"

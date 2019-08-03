@@ -8,7 +8,7 @@ import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
 import net.minecraft.command.arguments.EntityArgument;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TranslationTextComponent;
 
 import java.util.Collection;
 
@@ -20,11 +20,11 @@ public class RadiationDebugCommand
         //System.out.println("Registering Radiation Debug command.");
         dispatcher.register(Commands.literal("radiation").requires((cmd) -> {
             return cmd.hasPermissionLevel(2);
-        }).then(Commands.literal("get").then(Commands.argument("entity", EntityArgument.singleEntity()).executes((cmd) -> {
+        }).then(Commands.literal("get").then(Commands.argument("entity", EntityArgument.entity()).executes((cmd) -> {
             return get(cmd.getSource(),EntityArgument.getEntities(cmd, "entity"));
-        }))).then(Commands.literal("set").then(Commands.literal("exposure").then(Commands.argument("value",IntegerArgumentType.integer(0,1000000)).then(Commands.argument("entity",EntityArgument.singleEntity()).executes((cmd) -> {
+        }))).then(Commands.literal("set").then(Commands.literal("exposure").then(Commands.argument("value",IntegerArgumentType.integer(0,1000000)).then(Commands.argument("entity",EntityArgument.entity()).executes((cmd) -> {
             return set(cmd.getSource(),EntityArgument.getEntities(cmd, "entity"),"exposure",IntegerArgumentType.getInteger(cmd,"value"));
-        })))).then(Commands.literal("absorbed").then(Commands.argument("value",IntegerArgumentType.integer(0,1000000)).then(Commands.argument("entity",EntityArgument.singleEntity()).executes((cmd) -> {
+        })))).then(Commands.literal("absorbed").then(Commands.argument("value",IntegerArgumentType.integer(0,1000000)).then(Commands.argument("entity",EntityArgument.entity()).executes((cmd) -> {
             return set(cmd.getSource(),EntityArgument.getEntities(cmd, "entity"),"absorbed",IntegerArgumentType.getInteger(cmd,"value"));
         }))))));
 
@@ -42,10 +42,10 @@ public class RadiationDebugCommand
 
                 IRadiation cap = entity.getCapability(RadiationProvider.RAD_CAP).orElse(RadiationProvider.RAD_CAP.getDefaultInstance());
 
-                source.sendFeedback(new TextComponentTranslation("commands.radiation.get", cap.getExposure(), cap.getAbsorbed(), entity.getDisplayName()), false);
+                source.sendFeedback(new TranslationTextComponent("commands.radiation.get", cap.getExposure(), cap.getAbsorbed(), entity.getDisplayName()), false);
 
                 } else {
-                    source.sendErrorMessage(new TextComponentTranslation("commands.radiation.error.invalid",entity.getDisplayName()));
+                    source.sendErrorMessage(new TranslationTextComponent("commands.radiation.error.invalid",entity.getDisplayName()));
                     break;
                 }
         }
@@ -67,19 +67,19 @@ public class RadiationDebugCommand
 
                     case "exposure": {
                         cap.setExposure(value);
-                        source.sendFeedback(new TextComponentTranslation("commands.radiation.set", typeL, value, entity.getDisplayName()), true);
+                        source.sendFeedback(new TranslationTextComponent("commands.radiation.set", typeL, value, entity.getDisplayName()), true);
                         break;
                     }
                     case "absorbed": {
                         cap.setAbsorbed(value);
-                        source.sendFeedback(new TextComponentTranslation("commands.radiation.set", typeL, value, entity.getDisplayName()), true);
+                        source.sendFeedback(new TranslationTextComponent("commands.radiation.set", typeL, value, entity.getDisplayName()), true);
                         break;
                     }
                     default:
-                        source.sendErrorMessage(new TextComponentTranslation("commands.radiation.error.typo", type));
+                        source.sendErrorMessage(new TranslationTextComponent("commands.radiation.error.typo", type));
                 }
             } else {
-                source.sendErrorMessage(new TextComponentTranslation("commands.radiation.error.invalid",entity.getDisplayName()));
+                source.sendErrorMessage(new TranslationTextComponent("commands.radiation.error.invalid",entity.getDisplayName()));
                 break;
             }
         }

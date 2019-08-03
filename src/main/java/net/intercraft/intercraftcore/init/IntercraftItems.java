@@ -6,6 +6,9 @@ import net.intercraft.intercraftcore.item.group.ItemElementGroup;
 import net.intercraft.intercraftcore.item.group.ItemUraniumGroup;
 import net.intercraft.intercraftcore.ore.ElementComposition;
 import net.intercraft.intercraftcore.ore.ItemHardChunk;
+import net.intercraft.intercraftcore.ore.elements.ItemHardChunkCopper;
+import net.intercraft.intercraftcore.ore.elements.ItemHardChunkLead;
+import net.intercraft.intercraftcore.ore.elements.ItemHardChunkTin;
 import net.minecraft.item.Item;
 
 public class IntercraftItems
@@ -32,6 +35,7 @@ public class IntercraftItems
 
     public static final ItemHardChunk COPPERCHUNK;
     public static final ItemHardChunk TINCHUNK;
+    public static final ItemHardChunk LEADCHUNK;
 
     /**
      * Instantiate all items
@@ -46,13 +50,9 @@ public class IntercraftItems
         URANIUM = new ItemUraniumGroup(new Uranium());
 
 
-        COPPERCHUNK = new ItemHardChunk(new Item.Properties().group(IntercraftItemGroups.RESOURCES),"cu",0x57b988,new ElementComposition[] {
-                new ElementComposition("cu",0.95),
-                new ElementComposition("au",0.05)
-        });
-        TINCHUNK = new ItemHardChunk(new Item.Properties().group(IntercraftItemGroups.RESOURCES),"sn",0xb8b8b8,new ElementComposition[] {
-                new ElementComposition("sn",1)
-        });
+        COPPERCHUNK = new ItemHardChunkCopper();
+        TINCHUNK = new ItemHardChunkTin();
+        LEADCHUNK = new ItemHardChunkLead();
     }
 
     /**
@@ -68,8 +68,7 @@ public class IntercraftItems
         registerElementItems(TUNGSTEN);
         registerElementItems(URANIUM);
 
-        registerItem(COPPERCHUNK);
-        registerItem(TINCHUNK);
+        registerItems(COPPERCHUNK,TINCHUNK,LEADCHUNK);
     }
 
     /**

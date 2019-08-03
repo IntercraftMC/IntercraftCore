@@ -1,14 +1,5 @@
 package net.intercraft.intercraftcore.init.capabilities;
 
-import net.intercraft.intercraftcore.Reference;
-import net.intercraft.intercraftcore.init.capabilities.radiation.RadiationProvider;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.event.AttachCapabilitiesEvent;
-
 public class CapabilityHandler {
 
     /*public static final ResourceLocation RAD_CAP = new ResourceLocation(Reference.MODID, "radiation");

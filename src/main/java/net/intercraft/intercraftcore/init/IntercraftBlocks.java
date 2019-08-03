@@ -2,9 +2,12 @@ package net.intercraft.intercraftcore.init;
 
 import net.intercraft.intercraftcore.block.BlockCableCase;
 import net.intercraft.intercraftcore.ore.*;
+import net.intercraft.intercraftcore.ore.elements.BlockOreCopper;
+import net.intercraft.intercraftcore.ore.elements.BlockOreLead;
+import net.intercraft.intercraftcore.ore.elements.BlockOreTin;
 import net.minecraft.block.Block;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemGroup;
 
 public class IntercraftBlocks
@@ -25,14 +28,14 @@ public class IntercraftBlocks
 
     public static final Block COPPERORE;
     public static final Block TINORE;
+    public static final Block LEADORE;
 
     static {
         CABLECASE = new BlockCableCase();
+
         COPPERORE = new BlockOreCopper();
         TINORE = new BlockOreTin();
-        /*COPPERORE = new Copper();
-        TINORE = new Copper();*/
-
+        LEADORE = new BlockOreLead();
 
 
     }
@@ -46,8 +49,7 @@ public class IntercraftBlocks
 
         //registerOre(COPPERORE);
 
-        registerOreBlock(COPPERORE);
-        registerOreBlock(TINORE);
+        registerOreBlocks(COPPERORE,TINORE,LEADORE);
     }
 
     /**
@@ -56,13 +58,22 @@ public class IntercraftBlocks
     protected static void registerBlock(Block block, ItemGroup group)
     {
         RegistrationHandler.blocks.add(block);
-        RegistrationHandler.itemBlocks.add(new ItemBlock(block, new Item.Properties().group(group)).setRegistryName(block.getRegistryName()));
+        RegistrationHandler.itemBlocks.add(new BlockItem(block, new Item.Properties().group(group)).setRegistryName(block.getRegistryName()));
         //ItemBlock itemBlock = new ItemBlock(block,new Item.Properties());
     }
 
-    protected static void registerOreBlock(Block block) {
+    /*protected static void registerOreBlock(Block block)
+    {
         RegistrationHandler.blocks.add(block);
         RegistrationHandler.itemBlocks.add(new ItemBlockHardOre(block, new Item.Properties().group(IntercraftItemGroups.RESOURCES)).setRegistryName(block.getRegistryName()));
+    }*/
+    protected static void registerOreBlocks(Block...blocks)
+    {
+
+        for (Block block : blocks) {
+            RegistrationHandler.blocks.add(block);
+            RegistrationHandler.itemBlocks.add(new BlockItem(block, new Item.Properties().group(IntercraftItemGroups.RESOURCES)).setRegistryName(block.getRegistryName()));
+        }
     }
 
 
