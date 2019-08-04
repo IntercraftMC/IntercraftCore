@@ -36,13 +36,13 @@ public class BlockHardOre extends Block {
         this.tint = tint;
     }
 
-    protected ItemStack getSilkTouchDrop(BlockState state) {
+    /*protected ItemStack getSilkTouchDrop(BlockState state) {
         CompoundNBT nbt = new CompoundNBT();
         nbt.putInt("density",state.get(BlockProperties.DENSITY));
         ItemStack stack = new ItemStack(this);
         stack.setTag(nbt);
         return stack;
-    }
+    }*/
 
     public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
         try {
@@ -54,7 +54,7 @@ public class BlockHardOre extends Block {
         }
     }
 
-    public IItemProvider getItemDropped(BlockState state, World worldIn, BlockPos pos, int fortune) {
+    /*public IItemProvider getItemDropped(BlockState state, World worldIn, BlockPos pos, int fortune) {
         return this.drop;
     }
     public int getItemsToDropCount(BlockState state, int fortune, World worldIn, BlockPos pos, Random random) {
@@ -62,7 +62,7 @@ public class BlockHardOre extends Block {
 
         return Math.max(toRet,dropMultiplier);
 
-    }
+    }*/
 
     public void onExplosionDestroy(World worldIn, BlockPos pos, Explosion explosionIn) {
         new ItemEntity(worldIn,pos.getX(),pos.getY(),pos.getZ(), new ItemStack(this.drop,dropMultiplier));

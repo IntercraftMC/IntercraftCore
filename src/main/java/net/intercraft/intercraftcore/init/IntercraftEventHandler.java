@@ -5,6 +5,7 @@ import net.intercraft.intercraftcore.command.RadiationDebugCommand;
 import net.intercraft.intercraftcore.init.capabilities.radiation.IRadiation;
 import net.intercraft.intercraftcore.init.capabilities.radiation.RadiationProvider;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.merchant.villager.VillagerEntity;
 import net.minecraft.entity.monster.CreeperEntity;
 import net.minecraft.entity.monster.EndermanEntity;
 import net.minecraft.entity.monster.EndermiteEntity;
@@ -64,7 +65,8 @@ public class IntercraftEventHandler
 
         if (event.getObject() instanceof PlayerEntity || event.getObject() instanceof AnimalEntity ||
             event.getObject() instanceof CreeperEntity || event.getObject() instanceof SpiderEntity ||
-            event.getObject() instanceof EndermanEntity || event.getObject() instanceof EndermiteEntity) {
+            event.getObject() instanceof EndermanEntity || event.getObject() instanceof EndermiteEntity ||
+            event.getObject() instanceof VillagerEntity) {
             event.addCapability(IntercraftCore.RAD_ID, new RadiationProvider());
         }
     }
