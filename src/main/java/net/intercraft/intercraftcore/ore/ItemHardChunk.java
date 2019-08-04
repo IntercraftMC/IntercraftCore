@@ -4,7 +4,7 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -47,7 +47,7 @@ public class ItemHardChunk extends Item
         if (flagIn.isAdvanced()) {
             //tooltip.add(new TextComponentString("Composition"));
             for (ElementComposition element : this.composition)
-                tooltip.add(new TextComponentString(element.toString()));
+                tooltip.add(new StringTextComponent(element.toString()));
         }
 
 

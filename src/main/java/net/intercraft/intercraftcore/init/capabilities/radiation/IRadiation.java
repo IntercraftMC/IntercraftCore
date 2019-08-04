@@ -1,6 +1,6 @@
 package net.intercraft.intercraftcore.init.capabilities.radiation;
 
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.entity.Entity;
 
 public interface IRadiation {
     long getExposure();
@@ -11,5 +11,5 @@ public interface IRadiation {
 
     void setAbsorbed(long value);
 
-    void tick(TileEntity entity);
+    void tick(Entity entity);
 }

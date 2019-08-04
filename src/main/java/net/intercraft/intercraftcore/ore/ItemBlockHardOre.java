@@ -3,9 +3,9 @@ package net.intercraft.intercraftcore.ore;
 import net.intercraft.intercraftcore.init.IntercraftItemGroups;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.item.BlockItem;
 
-public class ItemBlockHardOre extends ItemBlock {
+public class ItemBlockHardOre extends BlockItem {
     public ItemBlockHardOre(Block block, Item.Properties properties) {
         super(block,properties.group(IntercraftItemGroups.RESOURCES));
 

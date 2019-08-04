@@ -1,27 +1,29 @@
 package net.intercraft.intercraftcore.potion;
 
 import net.intercraft.intercraftcore.init.IntercraftDamageSources;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AbstractAttributeMap;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.MobEffects;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.potion.Effect;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.EffectType;
+import net.minecraft.potion.Effects;
 
-public class PotionRadiationSickness extends Potion  {
+public class PotionRadiationSickness extends Effect
+{
 
     private static final float healthAmplifier = 4;
 
     private static float oldHealth = -1;
 
-    public PotionRadiationSickness(boolean isBadEffectIn, int liquidColorIn) {
-        super(isBadEffectIn, liquidColorIn);
+    public PotionRadiationSickness() {
+        super(EffectType.HARMFUL,0x077a07);
 
 
         setRegistryName("radiation_sickness");
-        setIconIndex(1,0);
+        //setIconIndex(1,0);
 
     }
 
@@ -35,29 +37,19 @@ public class PotionRadiationSickness extends Potion  {
     }
 
     @Override
-    public void performEffect(EntityLivingBase entityLivingBaseIn, int amplifier) {
+    public void performEffect(LivingEntity entityLivingBaseIn, int amplifier)
+    {
         entityLivingBaseIn.attackEntityFrom(IntercraftDamageSources.RADIATION,1);
 
-        (entityLivingBaseIn).addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 5*20));
+        (entityLivingBaseIn).addPotionEffect(new EffectInstance(Effects.NAUSEA, 5*20));
     }
 
-    @Override
-    public void renderInventoryEffect(PotionEffect effect, net.minecraft.client.gui.Gui gui, int x, int y, float z) {
-
-    }
-
-    @Override
-    public void renderHUDEffect(PotionEffect effect, net.minecraft.client.gui.Gui gui, int x, int y, float z, float alpha) {
-
-        //TextureAtlasSprite sprite = new TextureAtlasSprite(new ResourceLocation(Reference.MODID,""),16,16);
 
 
-        //gui.drawTexturedModalRect(x,y,"");
-    }
-
-    public void applyAttributesModifiersToEntity(EntityLivingBase entityLivingBaseIn, AbstractAttributeMap attributeMapIn, int amplifier) {
-        if (entityLivingBaseIn instanceof EntityPlayer) {
-            EntityPlayer player = (EntityPlayer) entityLivingBaseIn;
+    public void applyAttributesModifiersToEntity(LivingEntity entityLivingBaseIn, AbstractAttributeMap attributeMapIn, int amplifier)
+    {
+        if (entityLivingBaseIn instanceof PlayerEntity) {
+            PlayerEntity player = (PlayerEntity) entityLivingBaseIn;
 
             IAttributeInstance health = player.getAttribute(SharedMonsterAttributes.MAX_HEALTH);
 
@@ -74,9 +66,10 @@ public class PotionRadiationSickness extends Potion  {
         }
     }
 
-    public void removeAttributesModifiersFromEntity(EntityLivingBase entityLivingBaseIn, AbstractAttributeMap attributeMapIn, int amplifier) {
-        if (entityLivingBaseIn instanceof EntityPlayer) {
-            EntityPlayer player = (EntityPlayer) entityLivingBaseIn;
+    public void removeAttributesModifiersFromEntity(LivingEntity entityLivingBaseIn, AbstractAttributeMap attributeMapIn, int amplifier)
+    {
+        if (entityLivingBaseIn instanceof PlayerEntity) {
+            PlayerEntity player = (PlayerEntity) entityLivingBaseIn;
             IAttributeInstance health = player.getAttribute(SharedMonsterAttributes.MAX_HEALTH);
 
             float newMaxHealth = player.getMaxHealth() + (amplifier * healthAmplifier + healthAmplifier);

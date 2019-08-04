@@ -1,9 +1,9 @@
 package net.intercraft.intercraftcore.init.capabilities.radiation;
 
 import net.intercraft.intercraftcore.Reference;
-import net.minecraft.nbt.INBTBase;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.INBT;
+import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
 
 import java.util.concurrent.Callable;
@@ -11,19 +11,19 @@ import java.util.concurrent.Callable;
 public class RadiationStorage implements Capability.IStorage<IRadiation>
 {
     @Override
-    public INBTBase writeNBT(Capability<IRadiation> capability, IRadiation instance, EnumFacing side)
+    public INBT writeNBT(Capability<IRadiation> capability, IRadiation instance, Direction side)
     {
-        NBTTagCompound tag = new NBTTagCompound();
-        tag.setLong(Reference.MODID+":radiationexposure",instance.getExposure());
-        tag.setLong(Reference.MODID+":radiationabsorbed",instance.getAbsorbed());
+        CompoundNBT tag = new CompoundNBT();
+        tag.putLong(Reference.MODID+":radiationexposure",instance.getExposure());
+        tag.putLong(Reference.MODID+":radiationabsorbed",instance.getAbsorbed());
         return tag;
     }
 
     @Override
-    public void readNBT(Capability<IRadiation> capability, IRadiation instance, EnumFacing side, INBTBase nbt)
+    public void readNBT(Capability<IRadiation> capability, IRadiation instance, Direction side, INBT nbt)
     {
-        if (nbt instanceof NBTTagCompound) {
-            NBTTagCompound tag = (NBTTagCompound)nbt;
+        if (nbt instanceof CompoundNBT) {
+            CompoundNBT tag = (CompoundNBT)nbt;
             instance.setExposure(tag.getLong(Reference.MODID+":radiationexposure"));
             instance.setAbsorbed(tag.getLong(Reference.MODID+":radiationabsorbed"));
         }

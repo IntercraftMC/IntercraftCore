@@ -1,7 +1,7 @@
 package net.intercraft.intercraftcore.init.capabilities.radiation;
 
-import net.minecraft.nbt.INBTBase;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.nbt.INBT;
+import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
@@ -10,7 +10,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import javax.annotation.Nonnull;
 
 
-public class RadiationProvider implements ICapabilitySerializable<INBTBase>
+public class RadiationProvider implements ICapabilitySerializable<INBT>
 {
 
 
@@ -26,20 +26,20 @@ public class RadiationProvider implements ICapabilitySerializable<INBTBase>
 
     @SuppressWarnings("unchecked")
     @Override
-    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, EnumFacing side)
+    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, Direction side)
     {
         return (LazyOptional<T>) LazyOptional.of(() -> instance);
     }
 
 
     @Override
-    public INBTBase serializeNBT()
+    public INBT serializeNBT()
     {
         return RAD_CAP.getStorage().writeNBT(RAD_CAP, instance, null);
     }
 
     @Override
-    public void deserializeNBT(INBTBase nbt)
+    public void deserializeNBT(INBT nbt)
     {
         RAD_CAP.getStorage().readNBT(RAD_CAP, instance, null, nbt);
     }

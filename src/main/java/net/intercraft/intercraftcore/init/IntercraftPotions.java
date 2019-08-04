@@ -1,21 +1,21 @@
 package net.intercraft.intercraftcore.init;
 
 import net.intercraft.intercraftcore.potion.PotionRadiationSickness;
-import net.minecraft.potion.Potion;
+import net.minecraft.potion.Effect;
 
 public class IntercraftPotions
 {
-    public static final Potion RADIATION;
+    public static final Effect RADIATION;
 
     /**
-     * Instantiate all potions
+     * Instantiate all effects
      */
     static {
-        RADIATION = new PotionRadiationSickness(true, 0x077a07);
+        RADIATION = new PotionRadiationSickness();
     }
 
     /**
-     * Register all potions
+     * Register all effects
      */
     public static void register()
     {
@@ -25,8 +25,8 @@ public class IntercraftPotions
     /**
      * Register a potion
      */
-    protected static void registerPotion(Potion potion)
+    protected static void registerPotion(Effect effect)
     {
-        RegistrationHandler.potions.add(potion);
+        RegistrationHandler.effects.add(effect);
     }
 }

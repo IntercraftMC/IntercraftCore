@@ -5,6 +5,12 @@ import net.intercraft.intercraftcore.command.RadiationDebugCommand;
 import net.intercraft.intercraftcore.init.capabilities.radiation.IRadiation;
 import net.intercraft.intercraftcore.init.capabilities.radiation.RadiationProvider;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.monster.CreeperEntity;
+import net.minecraft.entity.monster.EndermanEntity;
+import net.minecraft.entity.monster.EndermiteEntity;
+import net.minecraft.entity.monster.SpiderEntity;
+import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -31,7 +37,7 @@ public class IntercraftEventHandler
         for (TileEntity entity : event.world.loadedTileEntityList) {
             if (entity.getCapability(RadiationProvider.RAD_CAP).isPresent()) {
                 IRadiation cap = entity.getCapability(RadiationProvider.RAD_CAP).orElse(RadiationProvider.RAD_CAP.getDefaultInstance());
-                cap.tick(entity);
+                //cap.tick(((Entity) entity));
             }
 
         }
@@ -56,9 +62,9 @@ public class IntercraftEventHandler
 
         //TODO do it on all living entities except mobs from the blacklist (ex. Undead).
 
-        if (event.getObject() instanceof EntityPlayer || event.getObject() instanceof EntityAnimal ||
-            event.getObject() instanceof EntityCreeper || event.getObject() instanceof EntitySpider ||
-            event.getObject() instanceof EntityEnderman || event.getObject() instanceof EntityEndermite) {
+        if (event.getObject() instanceof PlayerEntity || event.getObject() instanceof AnimalEntity ||
+            event.getObject() instanceof CreeperEntity || event.getObject() instanceof SpiderEntity ||
+            event.getObject() instanceof EndermanEntity || event.getObject() instanceof EndermiteEntity) {
             event.addCapability(IntercraftCore.RAD_ID, new RadiationProvider());
         }
     }

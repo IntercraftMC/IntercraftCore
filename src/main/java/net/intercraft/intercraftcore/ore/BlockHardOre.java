@@ -2,14 +2,14 @@ package net.intercraft.intercraftcore.ore;
 
 import net.intercraft.intercraftcore.IntercraftCore;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.state.StateContainer;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.IItemProvider;
@@ -36,15 +36,15 @@ public class BlockHardOre extends Block {
         this.tint = tint;
     }
 
-    protected ItemStack getSilkTouchDrop(IBlockState state) {
-        NBTTagCompound nbt = new NBTTagCompound();
-        nbt.setInt("density",state.get(BlockProperties.DENSITY));
+    protected ItemStack getSilkTouchDrop(BlockState state) {
+        CompoundNBT nbt = new CompoundNBT();
+        nbt.putInt("density",state.get(BlockProperties.DENSITY));
         ItemStack stack = new ItemStack(this);
         stack.setTag(nbt);
         return stack;
     }
 
-    public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, @Nullable EntityLivingBase placer, ItemStack stack) {
+    public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
         try {
             int d = stack.getTag().getInt("density");
             worldIn.setBlockState(pos,state.with(BlockProperties.DENSITY,d));
@@ -54,10 +54,10 @@ public class BlockHardOre extends Block {
         }
     }
 
-    public IItemProvider getItemDropped(IBlockState state, World worldIn, BlockPos pos, int fortune) {
+    public IItemProvider getItemDropped(BlockState state, World worldIn, BlockPos pos, int fortune) {
         return this.drop;
     }
-    public int getItemsToDropCount(IBlockState state, int fortune, World worldIn, BlockPos pos, Random random) {
+    public int getItemsToDropCount(BlockState state, int fortune, World worldIn, BlockPos pos, Random random) {
         int toRet = (state.get(BlockProperties.DENSITY)+1)*dropMultiplier;
 
         return Math.max(toRet,dropMultiplier);
@@ -65,11 +65,11 @@ public class BlockHardOre extends Block {
     }
 
     public void onExplosionDestroy(World worldIn, BlockPos pos, Explosion explosionIn) {
-        new EntityItem(worldIn,pos.getX(),pos.getY(),pos.getZ(), new ItemStack(this.drop,dropMultiplier));
+        new ItemEntity(worldIn,pos.getX(),pos.getY(),pos.getZ(), new ItemStack(this.drop,dropMultiplier));
     }
 
 
-    protected void fillStateContainer(StateContainer.Builder<Block, IBlockState> builder) {
+    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
         builder.add(BlockProperties.DENSITY);
     }
 

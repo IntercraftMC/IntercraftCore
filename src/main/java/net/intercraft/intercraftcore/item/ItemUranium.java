@@ -2,10 +2,10 @@ package net.intercraft.intercraftcore.item;
 
 import net.intercraft.intercraftcore.element.Element;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.MobEffects;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
 public class ItemUranium extends ItemElement
@@ -35,8 +35,8 @@ public class ItemUranium extends ItemElement
         if (isSelected)
             amp = 1;
 
-        PotionEffect effect = new PotionEffect(MobEffects.POISON, 60, amp);
-        if (entityIn instanceof EntityPlayer)
-            ((EntityPlayer) entityIn).addPotionEffect(effect);
+        EffectInstance effect = new EffectInstance(Effects.POISON, 60, amp);
+        if (entityIn instanceof PlayerEntity)
+            ((PlayerEntity) entityIn).addPotionEffect(effect);
     }
 }
