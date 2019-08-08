@@ -5,6 +5,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
+import net.minecraft.data.LootTableProvider;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.Item;
@@ -16,6 +17,10 @@ import net.minecraft.util.IItemProvider;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
+import net.minecraft.world.storage.loot.LootTable;
+import net.minecraft.world.storage.loot.LootTableManager;
+import net.minecraft.world.storage.loot.LootTables;
+import net.minecraftforge.event.LootTableLoadEvent;
 
 import javax.annotation.Nullable;
 import java.util.Random;
@@ -34,6 +39,9 @@ public class BlockHardOre extends Block {
         setRegistryName(name+"_ore");
         this.drop = drop;
         this.tint = tint;
+
+
+
     }
 
     /*protected ItemStack getSilkTouchDrop(BlockState state) {

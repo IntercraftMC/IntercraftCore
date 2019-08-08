@@ -15,8 +15,10 @@ public class Radiation implements IRadiation, IRadiationEmitter, IRadiationBlock
     private final int[] levels = {
             5000,
             10000,
+            15000,
             20000,
-            40000
+            25000,
+            30000
     };
 
     private int minimum = 100;

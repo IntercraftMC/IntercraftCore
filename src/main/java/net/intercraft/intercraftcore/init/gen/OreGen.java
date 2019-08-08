@@ -34,12 +34,12 @@ public class OreGen
 
             switch (biome.getCategory()) {
 
-                case NETHER: { // Nether ores.
+                case NETHER: { // Nether biome.
 
                     break;
                 }
 
-                case THEEND: { // End ores.
+                case THEEND: { // End biome.
 
                     break;
                 }
@@ -57,7 +57,7 @@ public class OreGen
                 case SAVANNA:
                 case MUSHROOM:
                 case EXTREME_HILLS:
-                case MESA: { // Overworld and other dimensions.
+                case MESA: { // Overworld biomes.
                     biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Biome.createDecoratedFeature(Feature.ORE, new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE,
                             IntercraftBlocks.COPPERORE.getDefaultState().with(BlockProperties.DENSITY, 3), copper_ore_veinsize), Placement.COUNT_RANGE, copper_ore_placement));
 
