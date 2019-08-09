@@ -1,10 +1,10 @@
 # Intercraft Core
-Core mod for InterCraft 1.13.2 modpack.
+Core mod for InterCraft 1.14.2 modpack.
 
 
 ### Ideas
 - Missing pieces
-    - [ ] Metals (ex. copper, tin) :heavy_check_mark:
+    - [x] Metals (ex. copper, tin) :heavy_check_mark:
     - [ ] Minerals (ex. saltpeter, salt) :heavy_check_mark:
     - [ ] Rubber
 - Machines
@@ -15,7 +15,7 @@ Core mod for InterCraft 1.13.2 modpack.
     
     *Can be configurated however you want to make 1x1 logic gates (AND NAND OR XOR, etc). Can be used in crafting ex. [OpenComputers](https://minecraft.curseforge.com/projects/opencomputers).*
 - Gen.
-    - [ ] Ores ([hard](https://minecraft.curseforge.com/projects/harder-ores)) :heavy_check_mark:
+    - [x] Ores ([hard](https://minecraft.curseforge.com/projects/harder-ores)) :heavy_check_mark:
     
     *Ores which depending on the concentration of metal inside it will vary the break time of the block and amount of ore chunks dropped.*
     - [ ] Oil

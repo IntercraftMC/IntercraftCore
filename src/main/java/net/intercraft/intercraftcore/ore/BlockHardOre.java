@@ -16,10 +16,12 @@ import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.loot.LootTable;
 import net.minecraft.world.storage.loot.LootTableManager;
 import net.minecraft.world.storage.loot.LootTables;
+import net.minecraftforge.common.ToolType;
 import net.minecraftforge.event.LootTableLoadEvent;
 
 import javax.annotation.Nullable;
@@ -39,7 +41,6 @@ public class BlockHardOre extends Block {
         setRegistryName(name+"_ore");
         this.drop = drop;
         this.tint = tint;
-
 
 
     }
@@ -84,6 +85,19 @@ public class BlockHardOre extends Block {
     }
 
 
+    @Override
+    public net.minecraftforge.common.ToolType getHarvestTool(BlockState state)
+    {
+        return ToolType.PICKAXE;
+    }
+
+    @Override
+    public float getBlockHardness(BlockState blockState, IBlockReader worldIn, BlockPos pos)
+    {
+        int density = blockState.get(BlockProperties.DENSITY);
+
+        return (density + 0.9F) * this.blockHardness;
+    }
 
 
     @Override
