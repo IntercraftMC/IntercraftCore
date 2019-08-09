@@ -72,18 +72,23 @@ public class BlockHardOre extends Block {
 
     }*/
 
-    public void onExplosionDestroy(World worldIn, BlockPos pos, Explosion explosionIn) {
+    public void onExplosionDestroy(World worldIn, BlockPos pos, Explosion explosionIn)
+    {
         new ItemEntity(worldIn,pos.getX(),pos.getY(),pos.getZ(), new ItemStack(this.drop,dropMultiplier));
     }
 
 
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
+    {
         builder.add(BlockProperties.DENSITY);
     }
 
 
+
+
     @Override
-    public BlockRenderLayer getRenderLayer() {
+    public BlockRenderLayer getRenderLayer()
+    {
         return BlockRenderLayer.CUTOUT;
     }
 
@@ -92,7 +97,8 @@ public class BlockHardOre extends Block {
 
     }*/
 
-    public int getTint() {
+    public int getTint()
+    {
         return this.tint;
     }
 

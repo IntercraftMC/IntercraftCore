@@ -23,6 +23,8 @@ public class PotionRadiationSickness extends Effect
 
 
         setRegistryName("radiation_sickness");
+
+
         //setIconIndex(1,0);
 
     }
@@ -43,7 +45,6 @@ public class PotionRadiationSickness extends Effect
 
         (entityLivingBaseIn).addPotionEffect(new EffectInstance(Effects.NAUSEA, 5*20));
     }
-
 
 
     public void applyAttributesModifiersToEntity(LivingEntity entityLivingBaseIn, AbstractAttributeMap attributeMapIn, int amplifier)

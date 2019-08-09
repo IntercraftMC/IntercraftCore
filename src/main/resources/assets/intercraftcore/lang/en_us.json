@@ -24,10 +24,10 @@
   "tooltip.intercraftcore.composition": "Composition",
 
 
-  "commands.radiation.get": "Exposure is %s and absorbed is %s of entity %s",
-  "commands.radiation.set": "Set value %s to %s of entity %s",
-  "commands.radiation.error.typo": "\"%s\" does not exist",
-  "commands.radiation.error.invalid": "Entity %s does not have Capability Radiation"
+  "commands.intercraftcore.radiation.get": "Exposure is %s and absorbed is %s of entity %s",
+  "commands.intercraftcore.radiation.exposure.set": "Set value exposure to %s of entity %s",
+  "commands.intercraftcore.radiation.absorbed.set": "Set value absorbed to %s of entity %s",
+  "commands.intercraftcore.radiation.error.invalid": "Entity %s does not have Capability Radiation"
 
 
 }

@@ -42,10 +42,10 @@ public class RadiationDebugCommand
 
                 IRadiation cap = entity.getCapability(RadiationProvider.RAD_CAP).orElse(RadiationProvider.RAD_CAP.getDefaultInstance());
 
-                source.sendFeedback(new TranslationTextComponent("commands.radiation.get", cap.getExposure(), cap.getAbsorbed(), entity.getDisplayName()), false);
+                source.sendFeedback(new TranslationTextComponent("commands.intercraftcore.radiation.get", cap.getExposure(), cap.getAbsorbed(), entity.getDisplayName()), false);
 
                 } else {
-                    source.sendErrorMessage(new TranslationTextComponent("commands.radiation.error.invalid",entity.getDisplayName()));
+                    source.sendErrorMessage(new TranslationTextComponent("commands.intercraftcore.radiation.error.invalid",entity.getDisplayName()));
                     break;
                 }
         }
@@ -67,19 +67,19 @@ public class RadiationDebugCommand
 
                     case "exposure": {
                         cap.setExposure(value);
-                        source.sendFeedback(new TranslationTextComponent("commands.radiation.set", typeL, value, entity.getDisplayName()), true);
+                        source.sendFeedback(new TranslationTextComponent("commands.intercraftcore.radiation.exposure.set", value, entity.getDisplayName()), true);
                         break;
                     }
                     case "absorbed": {
                         cap.setAbsorbed(value);
-                        source.sendFeedback(new TranslationTextComponent("commands.radiation.set", typeL, value, entity.getDisplayName()), true);
+                        source.sendFeedback(new TranslationTextComponent("commands.intercraftcore.radiation.absorbed.set", value, entity.getDisplayName()), true);
                         break;
                     }
                     default:
-                        source.sendErrorMessage(new TranslationTextComponent("commands.radiation.error.typo", type));
+                        source.sendErrorMessage(new TranslationTextComponent("commands.intercraftcore.radiation.error.typo", type));
                 }
             } else {
-                source.sendErrorMessage(new TranslationTextComponent("commands.radiation.error.invalid",entity.getDisplayName()));
+                source.sendErrorMessage(new TranslationTextComponent("commands.intercraftcore.radiation.error.invalid",entity.getDisplayName()));
                 break;
             }
         }
