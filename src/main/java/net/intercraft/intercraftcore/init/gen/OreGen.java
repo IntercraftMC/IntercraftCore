@@ -1,9 +1,8 @@
 package net.intercraft.intercraftcore.init.gen;
 
 import net.intercraft.intercraftcore.init.IntercraftBlocks;
-import net.intercraft.intercraftcore.ore.BlockProperties;
+import net.intercraft.intercraftcore.api.BlockProperties;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.feature.Feature;
@@ -11,9 +10,6 @@ import net.minecraft.world.gen.feature.OreFeatureConfig;
 import net.minecraft.world.gen.placement.CountRangeConfig;
 import net.minecraft.world.gen.placement.Placement;
 import net.minecraftforge.registries.ForgeRegistries;
-
-import java.util.Random;
-import java.util.function.Predicate;
 
 public class OreGen
 {

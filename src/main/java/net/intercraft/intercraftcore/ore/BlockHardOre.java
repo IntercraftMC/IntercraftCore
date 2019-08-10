@@ -1,31 +1,24 @@
 package net.intercraft.intercraftcore.ore;
 
 import net.intercraft.intercraftcore.IntercraftCore;
+import net.intercraft.intercraftcore.api.BlockProperties;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
-import net.minecraft.data.LootTableProvider;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.state.StateContainer;
 import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.IItemProvider;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
-import net.minecraft.world.storage.loot.LootTable;
-import net.minecraft.world.storage.loot.LootTableManager;
-import net.minecraft.world.storage.loot.LootTables;
 import net.minecraftforge.common.ToolType;
-import net.minecraftforge.event.LootTableLoadEvent;
 
 import javax.annotation.Nullable;
-import java.util.Random;
 
 public class BlockHardOre extends Block {
 
@@ -35,7 +28,8 @@ public class BlockHardOre extends Block {
     public final int dropMultiplier = 2;
 
 
-    public BlockHardOre(final String name, final float hardness, final float resistance, Item drop, int tint) {
+    public BlockHardOre(final String name, final float hardness, final float resistance, Item drop, int tint)
+    {
         super(Block.Properties.create(Material.ROCK, MaterialColor.STONE).hardnessAndResistance(hardness,resistance));
 
         setRegistryName(name+"_ore");

@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "intercraftcore:block/treetap/treetap" },
+    "facing=south": { "model": "intercraftcore:block/treetap/treetap", "y": 180 },
+    "facing=west":  { "model": "intercraftcore:block/treetap/treetap", "y": 270 },
+    "facing=east":  { "model": "intercraftcore:block/treetap/treetap", "y": 90 }
+  }
+}

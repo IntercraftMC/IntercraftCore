@@ -1,6 +1,7 @@
 package net.intercraft.intercraftcore.init;
 
 import net.intercraft.intercraftcore.block.BlockCableCase;
+import net.intercraft.intercraftcore.block.TreeTap;
 import net.intercraft.intercraftcore.ore.*;
 import net.intercraft.intercraftcore.ore.elements.BlockOreCopper;
 import net.intercraft.intercraftcore.ore.elements.BlockOreLead;
@@ -17,6 +18,7 @@ public class IntercraftBlocks
      */
 
     public static final Block CABLECASE;
+    public static final Block TREETAP;
 
     /**
     * Ore Blocks with their drop
@@ -32,6 +34,7 @@ public class IntercraftBlocks
 
     static {
         CABLECASE = new BlockCableCase();
+        TREETAP = new TreeTap();
 
         COPPERORE = new BlockOreCopper();
         TINORE = new BlockOreTin();
@@ -46,6 +49,7 @@ public class IntercraftBlocks
     public static void register()
     {
         registerBlock(CABLECASE, IntercraftItemGroups.WIRING);
+        registerBlock(TREETAP, ItemGroup.TOOLS);
 
         //registerOre(COPPERORE);
 
