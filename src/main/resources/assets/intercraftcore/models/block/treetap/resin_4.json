@@ -1,8 +1,8 @@
 {
     "__comment": "Model generated using MrCrayfish's Model Creator (https://mrcrayfish.com/tools?id=mc)",
     "textures": {
-        "particle": "intercraftcore:block/water_still",
-        "water_still": "intercraftcore:block/water_still"
+        "particle": "intercraftcore:block/resin_still",
+        "water_still": "intercraftcore:block/resin_still"
     },
     "display": {
         "gui": {

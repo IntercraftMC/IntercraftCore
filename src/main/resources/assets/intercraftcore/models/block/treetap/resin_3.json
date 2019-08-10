@@ -1,8 +1,8 @@
 {
     "__comment": "Model generated using MrCrayfish's Model Creator (https://mrcrayfish.com/tools?id=mc)",
     "textures": {
-        "particle": "intercraftcore:block/water_still",
-        "water_still": "intercraftcore:block/water_still"
+        "particle": "intercraftcore:block/resin_still",
+        "water_still": "intercraftcore:block/resin_still"
     },
     "display": {
         "gui": {
@@ -40,7 +40,7 @@
         {
             "name": "Cube",
             "from": [ 6, 2, 11 ], 
-            "to": [ 10, 6, 15 ], 
+            "to": [ 10, 5, 15 ], 
             "faces": {
                 "up": { "texture": "#water_still", "uv": [ 0, 0, 4, 4 ] }
             }
