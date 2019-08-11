@@ -4,6 +4,7 @@ import net.minecraft.util.IStringSerializable;
 
 public enum FluidType implements IStringSerializable
 {
+    NONE("none"),
     WATER("water"),
     RESIN("resin");
 

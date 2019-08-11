@@ -5,7 +5,6 @@ import net.intercraft.intercraftcore.api.BucketType;
 import net.intercraft.intercraftcore.api.FluidType;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
@@ -37,7 +36,7 @@ public class TreeTap extends Block
         super(Block.Properties.create(Material.ANVIL).hardnessAndResistance(3.0f, 3.0f));//.doesNotBlockMovement()
 
         setRegistryName("treetap");
-        setDefaultState(getDefaultState().with(BlockProperties.VOLUME, 0).with(FACING, Direction.NORTH).with(BlockProperties.BUCKET, BucketType.NONE).with(BlockProperties.FLUIDTYPE, FluidType.WATER));
+        setDefaultState(getDefaultState().with(BlockProperties.VOLUME, 0).with(FACING, Direction.NORTH).with(BlockProperties.BUCKET, BucketType.NONE).with(BlockProperties.FLUIDTYPE, FluidType.NONE));
     }
 
 
