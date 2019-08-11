@@ -1,6 +1,7 @@
 package net.intercraft.intercraftcore.init;
 
 import net.intercraft.intercraftcore.element.*;
+import net.intercraft.intercraftcore.item.ItemBucketResin;
 import net.intercraft.intercraftcore.item.ItemTest;
 import net.intercraft.intercraftcore.item.group.ItemElementGroup;
 import net.intercraft.intercraftcore.item.group.ItemUraniumGroup;
@@ -17,6 +18,7 @@ public class IntercraftItems
      * A test item for reference
      */
     public static final Item TEST;
+    public static final Item BUCKETRESIN;
 
     /**
      * Item Groups
@@ -42,6 +44,8 @@ public class IntercraftItems
      */
     static {
         TEST = new ItemTest((new Item.Properties()).group(IntercraftItemGroups.RESOURCES));
+        BUCKETRESIN = new ItemBucketResin();
+
         COPPER = new ItemElementGroup(new Copper());
         LEAD = new ItemElementGroup(new Lead());
         SILVER = new ItemElementGroup(new Silver());
@@ -61,6 +65,9 @@ public class IntercraftItems
     public static void register()
     {
         registerItem(TEST);
+
+        registerItems(BUCKETRESIN);
+
         registerElementItems(COPPER);
         registerElementItems(LEAD);
         registerElementItems(SILVER);

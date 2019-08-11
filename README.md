@@ -6,7 +6,7 @@ Core mod for InterCraft 1.14.2 modpack.
 - Missing pieces
     - [x] Metals (ex. copper, tin) :heavy_check_mark:
     - [ ] Minerals (ex. saltpeter, salt) :heavy_check_mark:
-    - [ ] Rubber
+    - [x] Rubber
 - Machines
     - [ ] PCB Work Table (PCB crafting tree step 1)
     - [ ] Soldering Station (PCB crafting tree step 2)

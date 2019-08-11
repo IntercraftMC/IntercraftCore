@@ -3,6 +3,7 @@ package net.intercraft.intercraftcore.block;
 import net.intercraft.intercraftcore.api.BlockProperties;
 import net.intercraft.intercraftcore.api.BucketType;
 import net.intercraft.intercraftcore.api.FluidType;
+import net.intercraft.intercraftcore.init.IntercraftItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
@@ -84,26 +85,40 @@ public class TreeTap extends Block
                  if (!player.isCreative())
                     stack.shrink(1);
                  return true;
+             } else if (stack.getItem() == IntercraftItems.BUCKETRESIN) {
+
+                 if (state.get(BlockProperties.BUCKET) != BucketType.NONE) return false;
+
+                 worldIn.setBlockState(pos,state.with(BlockProperties.BUCKET,BucketType.METALIRON).with(BlockProperties.FLUIDTYPE,FluidType.RESIN).with(BlockProperties.VOLUME, 4));
+
+                 if (!player.isCreative())
+                    stack.shrink(1);
+                 return true;
              } else {// if (stack.isEmpty())
                  int v = state.get(BlockProperties.VOLUME);
-                 boolean needForce = false;
 
-                 if (v < 4)
-                     needForce = true;
-
-                 if (needForce) {
+                 if (v < 4) {
                      if (player.isSneaking()) {
                          worldIn.setBlockState(pos, state.with(BlockProperties.BUCKET, BucketType.NONE).with(BlockProperties.VOLUME,0));
+
                          spawnAsEntity(worldIn,pos,new ItemStack(Items.BUCKET,1));
+                         return true;
                      }
+                     return false;
                  } else {
                      worldIn.setBlockState(pos, state.with(BlockProperties.BUCKET, BucketType.NONE).with(BlockProperties.VOLUME,0));
-                     spawnAsEntity(worldIn,pos,new ItemStack(Items.WATER_BUCKET,1));
+
+                     if (state.get(BlockProperties.FLUIDTYPE) == FluidType.WATER) {
+                         spawnAsEntity(worldIn, pos, new ItemStack(Items.WATER_BUCKET, 1));
+                         return true;
+                     }
+                     if (state.get(BlockProperties.FLUIDTYPE) == FluidType.RESIN) {
+                         spawnAsEntity(worldIn, pos, new ItemStack(IntercraftItems.BUCKETRESIN, 1));
+                         return true;
+                     }
+                     return false;
 
                  }
-
-
-                 return true;
              }
 
          } else return true;
