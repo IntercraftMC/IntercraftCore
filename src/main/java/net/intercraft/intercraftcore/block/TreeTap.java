@@ -6,13 +6,14 @@ import net.intercraft.intercraftcore.api.FluidType;
 import net.intercraft.intercraftcore.init.IntercraftItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.state.StateContainer;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
@@ -21,9 +22,13 @@ import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
+import net.minecraft.world.IWorld;
+import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 
-import static net.minecraft.state.properties.BlockStateProperties.FACING;
+import javax.annotation.Nullable;
+
+import static net.minecraft.state.properties.BlockStateProperties.HORIZONTAL_FACING;
 
 public class TreeTap extends Block
 {
@@ -40,23 +45,20 @@ public class TreeTap extends Block
         super(Block.Properties.create(Material.ANVIL).hardnessAndResistance(0.0f, 6.0f));//.doesNotBlockMovement()
 
         setRegistryName("treetap");
-        setDefaultState(getDefaultState().with(BlockProperties.VOLUME, 0).with(FACING, Direction.NORTH).with(BlockProperties.BUCKET, BucketType.NONE).with(BlockProperties.FLUIDTYPE, FluidType.NONE));
+        setDefaultState(getDefaultState().with(BlockProperties.VOLUME, 0).with(HORIZONTAL_FACING, Direction.NORTH).with(BlockProperties.BUCKET, BucketType.NONE).with(BlockProperties.FLUIDTYPE, FluidType.NONE));
     }
 
 
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
     {
-        builder.add(FACING);
+        builder.add(HORIZONTAL_FACING);
         builder.add(BlockProperties.VOLUME);
         builder.add(BlockProperties.FLUIDTYPE);
         builder.add(BlockProperties.BUCKET);
 
     }
 
-    public BlockState getStateForPlacement(BlockItemUseContext context)
-    {
-        return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite());
-    }
+
 
 
     @Override
@@ -125,6 +127,37 @@ public class TreeTap extends Block
 
     }
 
+
+    @Nullable
+    public BlockState getStateForPlacement(BlockItemUseContext context)
+    {
+        BlockState blockstate = this.getDefaultState();
+        IWorldReader iworldreader = context.getWorld();
+        BlockPos blockpos = context.getPos();
+
+        for(Direction direction : context.getNearestLookingDirections()) {
+            if (direction.getAxis().isHorizontal()) {
+                blockstate = blockstate.with(HORIZONTAL_FACING, direction.getOpposite());
+                if (blockstate.isValidPosition(iworldreader, blockpos)) {
+                    return blockstate;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos)
+    {
+        Block block = worldIn.getBlockState(pos.offset(state.get(HORIZONTAL_FACING).getOpposite())).getBlock();
+        return block.isIn(BlockTags.LOGS);
+    }
+
+    public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos)
+    {
+        return facing == stateIn.get(HORIZONTAL_FACING).getOpposite() && !stateIn.isValidPosition(worldIn, currentPos) ? Blocks.AIR.getDefaultState() : super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
+    }
+
     /*@Override
     public boolean isValidPosition(BlockState state, IWorldReader worldReader, BlockPos pos)
     {
@@ -140,7 +173,7 @@ public class TreeTap extends Block
     @Override
     public VoxelShape getShape(BlockState state, IBlockReader blockReader, BlockPos pos, ISelectionContext selectionContext)
     {
-        switch (state.get(FACING)) {
+        switch (state.get(HORIZONTAL_FACING)) {
             case WEST:
                 return SHAPE_WEST;
 
