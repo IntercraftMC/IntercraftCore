@@ -1,6 +1,7 @@
 {
     "__comment": "Model generated using MrCrayfish's Model Creator (https://mrcrayfish.com/tools?id=mc)",
     "textures": {
+        "particle": "minecraft:block/oak_planks",
         "oak_planks": "minecraft:block/oak_planks",
         "spruce_planks": "minecraft:block/spruce_planks",
         "spruce_log": "minecraft:block/spruce_log"
