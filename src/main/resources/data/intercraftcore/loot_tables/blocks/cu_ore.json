@@ -1,9 +1,10 @@
+
 {
   "type": "minecraft:block",
   "pools": [
     {
-      "name": "intercraftcore:cu_ore",
       "rolls": 1,
+      "name": "intercraftcore:cu_ore",
       "entries": [
         {
           "type": "minecraft:alternatives",
@@ -25,14 +26,19 @@
                   }
                 }
               ],
+              "functions": [
+                {
+                  "function": "intercraftcore:blockitem"
+                }
+              ],
               "name": "intercraftcore:cu_ore"
             },
             {
               "type": "minecraft:item",
               "functions": [
                 {
-                  "function": "minecraft:set_count",
-                  "count": 4
+                  "function": "intercraftcore:set_count",
+                  "multiplier" : 1.0
                 },
                 {
                   "function": "minecraft:explosion_decay"

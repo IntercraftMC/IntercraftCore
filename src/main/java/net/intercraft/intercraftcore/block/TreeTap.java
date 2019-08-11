@@ -6,8 +6,11 @@ import net.intercraft.intercraftcore.api.FluidType;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.state.StateContainer;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.Direction;
@@ -25,15 +28,15 @@ public class TreeTap extends Block
 {
 
     //                                                                    double x1,       double y1,       double z1,        double x2,        double y2,         double z2
-    protected static final VoxelShape SHAPE_WEST = Block.makeCuboidShape(10.0D, 1.0D, 5.0D, 16.0D, 10.0D, 11.0D);
-    protected static final VoxelShape SHAPE_EAST = Block.makeCuboidShape(0.0D, 1.0D, 5.0D, 6.0D, 10.0D, 11.0D);
-    protected static final VoxelShape SHAPE_NORTH = Block.makeCuboidShape(5.0D, 1.0D, 10.0D, 11.0D, 10.0D, 16.0D);
-    protected static final VoxelShape SHAPE_SOUTH = Block.makeCuboidShape(5.0D, 1.0D, 0.0D, 11.0D, 10.0D, 6.0D);
+    protected static final VoxelShape SHAPE_WEST = Block.makeCuboidShape(10.0D, 1.0D, 5.0D, 16.0D, 11.0D, 11.0D);
+    protected static final VoxelShape SHAPE_EAST = Block.makeCuboidShape(0.0D, 1.0D, 5.0D, 6.0D, 11.0D, 11.0D);
+    protected static final VoxelShape SHAPE_NORTH = Block.makeCuboidShape(5.0D, 1.0D, 10.0D, 11.0D, 11.0D, 16.0D);
+    protected static final VoxelShape SHAPE_SOUTH = Block.makeCuboidShape(5.0D, 1.0D, 0.0D, 11.0D, 11.0D, 6.0D);
 
 
     public TreeTap()
     {
-        super(Block.Properties.create(Material.ANVIL).hardnessAndResistance(3.0f, 3.0f));//.doesNotBlockMovement()
+        super(Block.Properties.create(Material.ANVIL).hardnessAndResistance(0.0f, 6.0f));//.doesNotBlockMovement()
 
         setRegistryName("treetap");
         setDefaultState(getDefaultState().with(BlockProperties.VOLUME, 0).with(FACING, Direction.NORTH).with(BlockProperties.BUCKET, BucketType.NONE).with(BlockProperties.FLUIDTYPE, FluidType.NONE));
@@ -58,14 +61,53 @@ public class TreeTap extends Block
     @Override
     public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit)
     {
-        if (worldIn.isRemote()) {
-            if (player.isSneaking()) {
+         ItemStack stack = player.getHeldItem(handIn);
+
+         if (!worldIn.isRemote) {
+
+             if (stack.getItem() == Items.BUCKET) {
+
+                 if (state.get(BlockProperties.BUCKET) != BucketType.NONE) return false;
+
+                 worldIn.setBlockState(pos,state.with(BlockProperties.BUCKET,BucketType.METALIRON));
+
+                 if (!player.isCreative())
+                    stack.shrink(1);
+                 return true;
+
+             } else if (stack.getItem() == Items.WATER_BUCKET) {
+
+                 if (state.get(BlockProperties.BUCKET) != BucketType.NONE) return false;
+
+                 worldIn.setBlockState(pos,state.with(BlockProperties.BUCKET,BucketType.METALIRON).with(BlockProperties.FLUIDTYPE,FluidType.WATER).with(BlockProperties.VOLUME, 4));
+
+                 if (!player.isCreative())
+                    stack.shrink(1);
+                 return true;
+             } else {// if (stack.isEmpty())
+                 int v = state.get(BlockProperties.VOLUME);
+                 boolean needForce = false;
+
+                 if (v < 4)
+                     needForce = true;
+
+                 if (needForce) {
+                     if (player.isSneaking()) {
+                         worldIn.setBlockState(pos, state.with(BlockProperties.BUCKET, BucketType.NONE).with(BlockProperties.VOLUME,0));
+                         spawnAsEntity(worldIn,pos,new ItemStack(Items.BUCKET,1));
+                     }
+                 } else {
+                     worldIn.setBlockState(pos, state.with(BlockProperties.BUCKET, BucketType.NONE).with(BlockProperties.VOLUME,0));
+                     spawnAsEntity(worldIn,pos,new ItemStack(Items.WATER_BUCKET,1));
+
+                 }
 
 
-                return true;
-            } else return false;
-        } else
-            return true;
+                 return true;
+             }
+
+         } else return true;
+
     }
 
     /*@Override

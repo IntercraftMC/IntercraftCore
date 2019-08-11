@@ -49,7 +49,7 @@ public class BlockHardOre extends Block {
 
     public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
         try {
-            int d = stack.getTag().getInt("density");
+            int d = stack.getTag().getInt("intercraftcore:density");
             worldIn.setBlockState(pos,state.with(BlockProperties.DENSITY,d));
         } catch (NullPointerException e) {
             System.out.println(String.format("Default hardness placement is %d.", IntercraftCore.defDensity));

@@ -4,7 +4,7 @@
   "pools": [
     {
       "rolls": 1,
-      "name": "intercraftcore:sn_ore",
+      "name": "intercraftcore:pb_ore",
       "entries": [
         {
           "type": "minecraft:alternatives",
@@ -31,7 +31,7 @@
                   "function": "intercraftcore:blockitem"
                 }
               ],
-              "name": "intercraftcore:sn_ore"
+              "name": "intercraftcore:pb_ore"
             },
             {
               "type": "minecraft:item",
@@ -44,7 +44,7 @@
                   "function": "minecraft:explosion_decay"
                 }
               ],
-              "name": "intercraftcore:sn_chunk"
+              "name": "intercraftcore:pb_chunk"
             }
           ]
         }
