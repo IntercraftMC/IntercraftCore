@@ -4,6 +4,7 @@ import net.intercraft.intercraftcore.api.BlockProperties;
 import net.intercraft.intercraftcore.api.BucketType;
 import net.intercraft.intercraftcore.api.FluidType;
 import net.intercraft.intercraftcore.init.IntercraftItems;
+import net.intercraft.intercraftcore.tileentity.TreeTapTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -14,6 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
@@ -65,6 +67,13 @@ public class TreeTap extends Block
     public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit)
     {
          ItemStack stack = player.getHeldItem(handIn);
+
+        //TreeTapTileEntity tile = state.getBlock().hasTileEntity(state) ? (TreeTapTileEntity) worldIn.getTileEntity(pos) : null;
+
+        TreeTapTileEntity tile = (TreeTapTileEntity) worldIn.getTileEntity(pos);
+        System.out.println(tile.getVolume());
+
+        //System.out.println(tile.getVolume());
 
          if (!worldIn.isRemote) {
 
@@ -191,9 +200,23 @@ public class TreeTap extends Block
     @Override
     public BlockRenderLayer getRenderLayer()
     {
-        return BlockRenderLayer.TRANSLUCENT;
+    return BlockRenderLayer.TRANSLUCENT;
     }
 
+
+    @Override
+    public boolean hasTileEntity(BlockState state)
+    {
+        return true;
+    }
+
+
+
+    @Override
+    public TileEntity createTileEntity(BlockState state, IBlockReader world)
+    {
+        return new TreeTapTileEntity();
+    }
 
     /*@Override
     public net.minecraftforge.common.ToolType getHarvestTool(BlockState state)
