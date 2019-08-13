@@ -4,8 +4,12 @@ package net.intercraft.intercraftcore.tileentity;
 import net.intercraft.intercraftcore.api.FluidType;
 import net.intercraft.intercraftcore.init.IntercraftTileEntities;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
+
+import javax.annotation.Nullable;
 
 public class TreeTapTileEntity extends TileEntity implements ITickableTileEntity
 {
@@ -34,6 +38,49 @@ public class TreeTapTileEntity extends TileEntity implements ITickableTileEntity
             }
         }
     }
+
+
+    @Override
+    public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt)
+    {
+        CompoundNBT compound = pkt.getNbtCompound();
+        volume = compound.getInt("volume");
+        canFill = compound.getBoolean("can_fill");
+        fluidType = FluidType.valueOf(compound.getString("fluid_type").toUpperCase());
+        world.notifyBlockUpdate(pos,world.getBlockState(pos),world.getBlockState(pos),2);
+    }
+
+    @Nullable
+    @Override
+    public SUpdateTileEntityPacket getUpdatePacket()
+    {
+        CompoundNBT compound = super.getUpdateTag();
+        compound.putInt("volume", volume);
+        compound.putBoolean("can_fill",canFill);
+        compound.putString("fluid_type",fluidType.getName());
+
+        return new SUpdateTileEntityPacket(pos, 1, compound);
+    }
+
+    @Override
+    public CompoundNBT getUpdateTag()
+    {
+        CompoundNBT compound = super.getUpdateTag();
+        compound.putInt("volume", volume);
+        compound.putBoolean("can_fill",canFill);
+        compound.putString("fluid_type",fluidType.getName());
+        return compound;
+    }
+
+    @Override
+    public void handleUpdateTag(CompoundNBT compound)
+    {
+        volume = compound.getInt("volume");
+        canFill = compound.getBoolean("can_fill");
+        fluidType = FluidType.valueOf(compound.getString("fluid_type").toUpperCase());
+        super.handleUpdateTag(compound);
+    }
+
 
 
     @Override

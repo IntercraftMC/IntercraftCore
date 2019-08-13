@@ -7,11 +7,14 @@ import net.intercraft.intercraftcore.init.capabilities.radiation.RadiationStorag
 import net.intercraft.intercraftcore.init.gen.OreGen;
 import net.intercraft.intercraftcore.init.loot.functions.BlockItemFunction;
 import net.intercraft.intercraftcore.init.loot.functions.HarderSetCount;
+import net.intercraft.intercraftcore.tileentity.TreeTapTileEntity;
+import net.intercraft.intercraftcore.tileentity.TreeTapTileEntityRenderer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.storage.loot.LootFunction;
 import net.minecraft.world.storage.loot.functions.LootFunctionManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -36,6 +39,8 @@ public class IntercraftCore
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onCommonSetup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onClientSetup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(RegistrationHandler::register);
+
+        ClientRegistry.bindTileEntitySpecialRenderer(TreeTapTileEntity.class, new TreeTapTileEntityRenderer());
 
 
     }
