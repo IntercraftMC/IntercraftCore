@@ -24,6 +24,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
@@ -33,7 +34,7 @@ import javax.annotation.Nullable;
 
 import static net.minecraft.state.properties.BlockStateProperties.HORIZONTAL_FACING;
 
-public class TreeTap extends Block
+public class BlockTreeTap extends Block
 {
 
     //                                                                    double x1,       double y1,       double z1,        double x2,        double y2,         double z2
@@ -43,12 +44,11 @@ public class TreeTap extends Block
     protected static final VoxelShape SHAPE_SOUTH = Block.makeCuboidShape(5.0D, 1.0D, 0.0D, 11.0D, 11.0D, 6.0D);
 
 
-    public TreeTap()
+    public BlockTreeTap()
     {
-        super(Block.Properties.create(Material.ANVIL).hardnessAndResistance(0.0f, 6.0f));//.doesNotBlockMovement()
+        super(Block.Properties.create(Material.ANVIL).hardnessAndResistance(0.0f, 6.0f));
 
         setRegistryName("treetap");
-        //setDefaultState(getDefaultState().with(BlockProperties.VOLUME, 0).with(HORIZONTAL_FACING, Direction.NORTH).with(BlockProperties.BUCKET, BucketType.NONE).with(BlockProperties.FLUIDTYPE, FluidType.NONE));
         setDefaultState(getDefaultState().with(HORIZONTAL_FACING, Direction.NORTH).with(BlockProperties.BUCKET, BucketType.NONE));
     }
 
@@ -56,8 +56,6 @@ public class TreeTap extends Block
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
     {
         builder.add(HORIZONTAL_FACING);
-        //builder.add(BlockProperties.VOLUME);
-        //builder.add(BlockProperties.FLUIDTYPE);
         builder.add(BlockProperties.BUCKET);
 
     }
@@ -73,16 +71,13 @@ public class TreeTap extends Block
 
          ItemStack stack = player.getHeldItem(handIn);
 
-        //TreeTapTileEntity tile = state.getBlock().hasTileEntity(state) ? (TreeTapTileEntity) worldIn.getTileEntity(pos) : null;
-
-
-
-
-        //System.out.println(String.format("Can fill: %s has volume: %s and is type: %s",tile.getCanFill(), tile.getVolume(), tile.getFluidType().toString()));
-
-
-
          if (!worldIn.isRemote) {
+
+             if (player.isCreative())
+                if (stack.getItem() == Items.STICK)
+                    player.sendMessage(new StringTextComponent(String.format("Can fill: %s has volume: %s is type: %s and viscosity: %s.",tile.getCanFill(), tile.getVolume(), tile.getFluidType().getName(), tile.getFluidType().getViscosity())));
+                else if (stack.getItem() == Items.BONE)
+                    tile.setCanFill(!tile.getCanFill());
 
 
              if (stack.getItem() == Items.BUCKET) {
@@ -127,7 +122,6 @@ public class TreeTap extends Block
                  boolean force = tile.getVolume() >= 1000;
 
                  if (force || player.isSneaking()) {
-                     worldIn.setBlockState(pos,state.with(BlockProperties.BUCKET, BucketType.NONE));
 
                      Item item;
 
@@ -142,6 +136,7 @@ public class TreeTap extends Block
                             item = Items.BUCKET;
                      }
 
+                     worldIn.setBlockState(pos,state.with(BlockProperties.BUCKET, BucketType.NONE));
                      spawnAsEntity(worldIn, pos, new ItemStack(item));
 
                      tile.setVolume(0);

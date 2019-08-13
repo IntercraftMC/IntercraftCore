@@ -25,8 +25,12 @@ public class TreeTapTileEntity extends TileEntity implements ITickableTileEntity
     {
         if (canFill) {
             if (volume < 1000) {
-                volume++;
-                markDirty();
+                setVolume(volume+1);
+
+
+                //addParticle(IParticleData particleData, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed)
+                //playSound(@Nullable PlayerEntity player, BlockPos pos, SoundEvent soundIn, SoundCategory category, float volume, float pitch)
+
             }
         }
     }
@@ -37,7 +41,7 @@ public class TreeTapTileEntity extends TileEntity implements ITickableTileEntity
     {
         compound.putInt("volume", volume);
         compound.putBoolean("can_fill",canFill);
-        compound.putString("fluid_type",fluidType.toString());
+        compound.putString("fluid_type",fluidType.getName());
 
         return super.write(compound);
     }
