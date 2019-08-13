@@ -20,6 +20,7 @@ public enum FluidType implements IStringSerializable
         return this.name;
     }
 
+    @Override
     public String getName() {
         return this.name;
     }

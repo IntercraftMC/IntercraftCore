@@ -1,1 +1,80 @@
-{"multipart":[{"when":{"facing":"north"},"apply":{"model":"intercraftcore:block/treetap/treetap"}},{"when":{"facing":"south"},"apply":{"model":"intercraftcore:block/treetap/treetap","y":180}},{"when":{"facing":"west"},"apply":{"model":"intercraftcore:block/treetap/treetap","y":270}},{"when":{"facing":"east"},"apply":{"model":"intercraftcore:block/treetap/treetap","y":90}},{"when":{"facing":"north","bucket":"wood_oak"},"apply":{"model":"intercraftcore:block/treetap/wood_oak_bucket"}},{"when":{"facing":"south","bucket":"wood_oak"},"apply":{"model":"intercraftcore:block/treetap/wood_oak_bucket","y":180}},{"when":{"facing":"west","bucket":"wood_oak"},"apply":{"model":"intercraftcore:block/treetap/wood_oak_bucket","y":270}},{"when":{"facing":"east","bucket":"wood_oak"},"apply":{"model":"intercraftcore:block/treetap/wood_oak_bucket","y":90}},{"when":{"facing":"north","bucket":"metal_iron"},"apply":{"model":"intercraftcore:block/treetap/metal_iron_bucket"}},{"when":{"facing":"south","bucket":"metal_iron"},"apply":{"model":"intercraftcore:block/treetap/metal_iron_bucket","y":180}},{"when":{"facing":"west","bucket":"metal_iron"},"apply":{"model":"intercraftcore:block/treetap/metal_iron_bucket","y":270}},{"when":{"facing":"east","bucket":"metal_iron"},"apply":{"model":"intercraftcore:block/treetap/metal_iron_bucket","y":90}},{"when":{"facing":"north","bucket":"wood_oak","volume":"1","fluid_type":"water"},"apply":{"model":"intercraftcore:block/treetap/water_1"}},{"when":{"facing":"south","bucket":"wood_oak","volume":"1","fluid_type":"water"},"apply":{"model":"intercraftcore:block/treetap/water_1","y":180}},{"when":{"facing":"west","bucket":"wood_oak","volume":"1","fluid_type":"water"},"apply":{"model":"intercraftcore:block/treetap/water_1","y":270}},{"when":{"facing":"east","bucket":"wood_oak","volume":"1","fluid_type":"water"},"apply":{"model":"intercraftcore:block/treetap/water_1","y":90}},{"when":{"facing":"north","bucket":"wood_oak","volume":"1","fluid_type":"resin"},"apply":{"model":"intercraftcore:block/treetap/resin_1"}},{"when":{"facing":"south","bucket":"wood_oak","volume":"1","fluid_type":"resin"},"apply":{"model":"intercraftcore:block/treetap/resin_1","y":180}},{"when":{"facing":"west","bucket":"wood_oak","volume":"1","fluid_type":"resin"},"apply":{"model":"intercraftcore:block/treetap/resin_1","y":270}},{"when":{"facing":"east","bucket":"wood_oak","volume":"1","fluid_type":"resin"},"apply":{"model":"intercraftcore:block/treetap/resin_1","y":90}},{"when":{"facing":"north","bucket":"metal_iron","volume":"1","fluid_type":"resin"},"apply":{"model":"intercraftcore:block/treetap/resin_1"}},{"when":{"facing":"south","bucket":"metal_iron","volume":"1","fluid_type":"resin"},"apply":{"model":"intercraftcore:block/treetap/resin_1","y":180}},{"when":{"facing":"west","bucket":"metal_iron","volume":"1","fluid_type":"resin"},"apply":{"model":"intercraftcore:block/treetap/resin_1","y":270}},{"when":{"facing":"east","bucket":"metal_iron","volume":"1","fluid_type":"resin"},"apply":{"model":"intercraftcore:block/treetap/resin_1","y":90}},{"when":{"facing":"north","bucket":"metal_iron","volume":"1","fluid_type":"water"},"apply":{"model":"intercraftcore:block/treetap/water_1"}},{"when":{"facing":"south","bucket":"metal_iron","volume":"1","fluid_type":"water"},"apply":{"model":"intercraftcore:block/treetap/water_1","y":180}},{"when":{"facing":"west","bucket":"metal_iron","volume":"1","fluid_type":"water"},"apply":{"model":"intercraftcore:block/treetap/water_1","y":270}},{"when":{"facing":"east","bucket":"metal_iron","volume":"1","fluid_type":"water"},"apply":{"model":"intercraftcore:block/treetap/water_1","y":90}},{"when":{"facing":"north","bucket":"wood_oak","volume":"2","fluid_type":"water"},"apply":{"model":"intercraftcore:block/treetap/water_2"}},{"when":{"facing":"south","bucket":"wood_oak","volume":"2","fluid_type":"water"},"apply":{"model":"intercraftcore:block/treetap/water_2","y":180}},{"when":{"facing":"west","bucket":"wood_oak","volume":"2","fluid_type":"water"},"apply":{"model":"intercraftcore:block/treetap/water_2","y":270}},{"when":{"facing":"east","bucket":"wood_oak","volume":"2","fluid_type":"water"},"apply":{"model":"intercraftcore:block/treetap/water_2","y":90}},{"when":{"facing":"north","bucket":"wood_oak","volume":"2","fluid_type":"resin"},"apply":{"model":"intercraftcore:block/treetap/resin_2"}},{"when":{"facing":"south","bucket":"wood_oak","volume":"2","fluid_type":"resin"},"apply":{"model":"intercraftcore:block/treetap/resin_2","y":180}},{"when":{"facing":"west","bucket":"wood_oak","volume":"2","fluid_type":"resin"},"apply":{"model":"intercraftcore:block/treetap/resin_2","y":270}},{"when":{"facing":"east","bucket":"wood_oak","volume":"2","fluid_type":"resin"},"apply":{"model":"intercraftcore:block/treetap/resin_2","y":90}},{"when":{"facing":"north","bucket":"metal_iron","volume":"2","fluid_type":"resin"},"apply":{"model":"intercraftcore:block/treetap/resin_2"}},{"when":{"facing":"south","bucket":"metal_iron","volume":"2","fluid_type":"resin"},"apply":{"model":"intercraftcore:block/treetap/resin_2","y":180}},{"when":{"facing":"west","bucket":"metal_iron","volume":"2","fluid_type":"resin"},"apply":{"model":"intercraftcore:block/treetap/resin_2","y":270}},{"when":{"facing":"east","bucket":"metal_iron","volume":"2","fluid_type":"resin"},"apply":{"model":"intercraftcore:block/treetap/resin_2","y":90}},{"when":{"facing":"north","bucket":"metal_iron","volume":"2","fluid_type":"water"},"apply":{"model":"intercraftcore:block/treetap/water_2"}},{"when":{"facing":"south","bucket":"metal_iron","volume":"2","fluid_type":"water"},"apply":{"model":"intercraftcore:block/treetap/water_2","y":180}},{"when":{"facing":"west","bucket":"metal_iron","volume":"2","fluid_type":"water"},"apply":{"model":"intercraftcore:block/treetap/water_2","y":270}},{"when":{"facing":"east","bucket":"metal_iron","volume":"2","fluid_type":"water"},"apply":{"model":"intercraftcore:block/treetap/water_2","y":90}},{"when":{"facing":"north","bucket":"wood_oak","volume":"3","fluid_type":"water"},"apply":{"model":"intercraftcore:block/treetap/water_3"}},{"when":{"facing":"south","bucket":"wood_oak","volume":"3","fluid_type":"water"},"apply":{"model":"intercraftcore:block/treetap/water_3","y":180}},{"when":{"facing":"west","bucket":"wood_oak","volume":"3","fluid_type":"water"},"apply":{"model":"intercraftcore:block/treetap/water_3","y":270}},{"when":{"facing":"east","bucket":"wood_oak","volume":"3","fluid_type":"water"},"apply":{"model":"intercraftcore:block/treetap/water_3","y":90}},{"when":{"facing":"north","bucket":"wood_oak","volume":"3","fluid_type":"resin"},"apply":{"model":"intercraftcore:block/treetap/resin_3"}},{"when":{"facing":"south","bucket":"wood_oak","volume":"3","fluid_type":"resin"},"apply":{"model":"intercraftcore:block/treetap/resin_3","y":180}},{"when":{"facing":"west","bucket":"wood_oak","volume":"3","fluid_type":"resin"},"apply":{"model":"intercraftcore:block/treetap/resin_3","y":270}},{"when":{"facing":"east","bucket":"wood_oak","volume":"3","fluid_type":"resin"},"apply":{"model":"intercraftcore:block/treetap/resin_3","y":90}},{"when":{"facing":"north","bucket":"metal_iron","volume":"3","fluid_type":"resin"},"apply":{"model":"intercraftcore:block/treetap/resin_3"}},{"when":{"facing":"south","bucket":"metal_iron","volume":"3","fluid_type":"resin"},"apply":{"model":"intercraftcore:block/treetap/resin_3","y":180}},{"when":{"facing":"west","bucket":"metal_iron","volume":"3","fluid_type":"resin"},"apply":{"model":"intercraftcore:block/treetap/resin_3","y":270}},{"when":{"facing":"east","bucket":"metal_iron","volume":"3","fluid_type":"resin"},"apply":{"model":"intercraftcore:block/treetap/resin_3","y":90}},{"when":{"facing":"north","bucket":"metal_iron","volume":"3","fluid_type":"water"},"apply":{"model":"intercraftcore:block/treetap/water_3"}},{"when":{"facing":"south","bucket":"metal_iron","volume":"3","fluid_type":"water"},"apply":{"model":"intercraftcore:block/treetap/water_3","y":180}},{"when":{"facing":"west","bucket":"metal_iron","volume":"3","fluid_type":"water"},"apply":{"model":"intercraftcore:block/treetap/water_3","y":270}},{"when":{"facing":"east","bucket":"metal_iron","volume":"3","fluid_type":"water"},"apply":{"model":"intercraftcore:block/treetap/water_3","y":90}},{"when":{"facing":"north","bucket":"wood_oak","volume":"4","fluid_type":"water"},"apply":{"model":"intercraftcore:block/treetap/water_4"}},{"when":{"facing":"south","bucket":"wood_oak","volume":"4","fluid_type":"water"},"apply":{"model":"intercraftcore:block/treetap/water_4","y":180}},{"when":{"facing":"west","bucket":"wood_oak","volume":"4","fluid_type":"water"},"apply":{"model":"intercraftcore:block/treetap/water_4","y":270}},{"when":{"facing":"east","bucket":"wood_oak","volume":"4","fluid_type":"water"},"apply":{"model":"intercraftcore:block/treetap/water_4","y":90}},{"when":{"facing":"north","bucket":"wood_oak","volume":"4","fluid_type":"resin"},"apply":{"model":"intercraftcore:block/treetap/resin_4"}},{"when":{"facing":"south","bucket":"wood_oak","volume":"4","fluid_type":"resin"},"apply":{"model":"intercraftcore:block/treetap/resin_4","y":180}},{"when":{"facing":"west","bucket":"wood_oak","volume":"4","fluid_type":"resin"},"apply":{"model":"intercraftcore:block/treetap/resin_4","y":270}},{"when":{"facing":"east","bucket":"wood_oak","volume":"4","fluid_type":"resin"},"apply":{"model":"intercraftcore:block/treetap/resin_4","y":90}},{"when":{"facing":"north","bucket":"metal_iron","volume":"4","fluid_type":"resin"},"apply":{"model":"intercraftcore:block/treetap/resin_4"}},{"when":{"facing":"south","bucket":"metal_iron","volume":"4","fluid_type":"resin"},"apply":{"model":"intercraftcore:block/treetap/resin_4","y":180}},{"when":{"facing":"west","bucket":"metal_iron","volume":"4","fluid_type":"resin"},"apply":{"model":"intercraftcore:block/treetap/resin_4","y":270}},{"when":{"facing":"east","bucket":"metal_iron","volume":"4","fluid_type":"resin"},"apply":{"model":"intercraftcore:block/treetap/resin_4","y":90}},{"when":{"facing":"north","bucket":"metal_iron","volume":"4","fluid_type":"water"},"apply":{"model":"intercraftcore:block/treetap/water_4"}},{"when":{"facing":"south","bucket":"metal_iron","volume":"4","fluid_type":"water"},"apply":{"model":"intercraftcore:block/treetap/water_4","y":180}},{"when":{"facing":"west","bucket":"metal_iron","volume":"4","fluid_type":"water"},"apply":{"model":"intercraftcore:block/treetap/water_4","y":270}},{"when":{"facing":"east","bucket":"metal_iron","volume":"4","fluid_type":"water"},"apply":{"model":"intercraftcore:block/treetap/water_4","y":90}}]}
+{
+  "multipart": [
+    {
+      "when": {
+        "facing": "north"
+      },
+      "apply": { "model": "intercraftcore:block/treetap/treetap" }
+    },
+    {
+      "when": {
+        "facing": "south"
+      },
+      "apply": { "model": "intercraftcore:block/treetap/treetap", "y": 180 }
+    },
+    {
+      "when": {
+        "facing": "west"
+      },
+      "apply": { "model": "intercraftcore:block/treetap/treetap", "y": 270 }
+    },
+    {
+      "when": {
+        "facing": "east"
+      },
+      "apply": { "model": "intercraftcore:block/treetap/treetap", "y": 90 }
+    },
+
+
+    {
+      "when": {
+        "facing": "north", "bucket": "wood_oak"
+      },
+      "apply": { "model": "intercraftcore:block/treetap/wood_oak_bucket" }
+    },
+    {
+      "when": {
+        "facing": "south", "bucket": "wood_oak"
+      },
+      "apply": { "model": "intercraftcore:block/treetap/wood_oak_bucket", "y": 180 }
+    },
+    {
+      "when": {
+        "facing": "west", "bucket": "wood_oak"
+      },
+      "apply": { "model": "intercraftcore:block/treetap/wood_oak_bucket", "y": 270 }
+    },
+    {
+      "when": {
+        "facing": "east", "bucket": "wood_oak"
+      },
+      "apply": { "model": "intercraftcore:block/treetap/wood_oak_bucket", "y": 90 }
+    },
+
+
+    {
+      "when": {
+        "facing": "north", "bucket": "metal_iron"
+      },
+      "apply": { "model": "intercraftcore:block/treetap/metal_iron_bucket" }
+    },
+    {
+      "when": {
+        "facing": "south", "bucket": "metal_iron"
+      },
+      "apply": { "model": "intercraftcore:block/treetap/metal_iron_bucket", "y": 180 }
+    },
+    {
+      "when": {
+        "facing": "west", "bucket": "metal_iron"
+      },
+      "apply": { "model": "intercraftcore:block/treetap/metal_iron_bucket", "y": 270 }
+    },
+    {
+      "when": {
+        "facing": "east", "bucket": "metal_iron"
+      },
+      "apply": { "model": "intercraftcore:block/treetap/metal_iron_bucket", "y": 90 }
+    }
+  ]
+}

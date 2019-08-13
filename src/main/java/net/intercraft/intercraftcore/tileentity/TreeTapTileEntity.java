@@ -1,6 +1,7 @@
 package net.intercraft.intercraftcore.tileentity;
 
 
+import net.intercraft.intercraftcore.api.FluidType;
 import net.intercraft.intercraftcore.init.IntercraftTileEntities;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.ITickableTileEntity;
@@ -11,6 +12,7 @@ public class TreeTapTileEntity extends TileEntity implements ITickableTileEntity
 
     private int volume = 0;
     private boolean canFill = false;
+    private FluidType fluidType = FluidType.NONE;
 
     public TreeTapTileEntity()
     {
@@ -22,8 +24,10 @@ public class TreeTapTileEntity extends TileEntity implements ITickableTileEntity
     public void tick()
     {
         if (canFill) {
-            volume++;
-            markDirty();
+            if (volume < 1000) {
+                volume++;
+                markDirty();
+            }
         }
     }
 
@@ -33,6 +37,7 @@ public class TreeTapTileEntity extends TileEntity implements ITickableTileEntity
     {
         compound.putInt("volume", volume);
         compound.putBoolean("can_fill",canFill);
+        compound.putString("fluid_type",fluidType.toString());
 
         return super.write(compound);
     }
@@ -43,6 +48,8 @@ public class TreeTapTileEntity extends TileEntity implements ITickableTileEntity
         super.read(compound);
         volume = compound.getInt("volume");
         canFill = compound.getBoolean("can_fill");
+        fluidType = FluidType.valueOf(compound.getString("fluid_type").toUpperCase());
+
     }
 
 
@@ -56,13 +63,26 @@ public class TreeTapTileEntity extends TileEntity implements ITickableTileEntity
         return canFill;
     }
 
+    public FluidType getFluidType()
+    {
+        return this.fluidType;
+    }
+
     public void setVolume(int value)
     {
         volume = value;
+        markDirty();
     }
 
     public void setCanFill(boolean bool)
     {
         canFill = bool;
+        markDirty();
+    }
+
+    public void setFluidType(FluidType type)
+    {
+        fluidType = type;
+        markDirty();
     }
 }

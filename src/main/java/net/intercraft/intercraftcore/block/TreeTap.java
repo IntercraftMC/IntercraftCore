@@ -11,6 +11,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.state.StateContainer;
@@ -47,15 +48,16 @@ public class TreeTap extends Block
         super(Block.Properties.create(Material.ANVIL).hardnessAndResistance(0.0f, 6.0f));//.doesNotBlockMovement()
 
         setRegistryName("treetap");
-        setDefaultState(getDefaultState().with(BlockProperties.VOLUME, 0).with(HORIZONTAL_FACING, Direction.NORTH).with(BlockProperties.BUCKET, BucketType.NONE).with(BlockProperties.FLUIDTYPE, FluidType.NONE));
+        //setDefaultState(getDefaultState().with(BlockProperties.VOLUME, 0).with(HORIZONTAL_FACING, Direction.NORTH).with(BlockProperties.BUCKET, BucketType.NONE).with(BlockProperties.FLUIDTYPE, FluidType.NONE));
+        setDefaultState(getDefaultState().with(HORIZONTAL_FACING, Direction.NORTH).with(BlockProperties.BUCKET, BucketType.NONE));
     }
 
 
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
     {
         builder.add(HORIZONTAL_FACING);
-        builder.add(BlockProperties.VOLUME);
-        builder.add(BlockProperties.FLUIDTYPE);
+        //builder.add(BlockProperties.VOLUME);
+        //builder.add(BlockProperties.FLUIDTYPE);
         builder.add(BlockProperties.BUCKET);
 
     }
@@ -66,72 +68,90 @@ public class TreeTap extends Block
     @Override
     public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit)
     {
+        TreeTapTileEntity tile = state.getBlock().hasTileEntity(state) ? (TreeTapTileEntity) worldIn.getTileEntity(pos) : null;
+        if (tile == null) return false;
+
          ItemStack stack = player.getHeldItem(handIn);
 
         //TreeTapTileEntity tile = state.getBlock().hasTileEntity(state) ? (TreeTapTileEntity) worldIn.getTileEntity(pos) : null;
 
-        TreeTapTileEntity tile = (TreeTapTileEntity) worldIn.getTileEntity(pos);
-        System.out.println(tile.getVolume());
 
-        //System.out.println(tile.getVolume());
+
+
+        //System.out.println(String.format("Can fill: %s has volume: %s and is type: %s",tile.getCanFill(), tile.getVolume(), tile.getFluidType().toString()));
+
+
 
          if (!worldIn.isRemote) {
+
 
              if (stack.getItem() == Items.BUCKET) {
 
                  if (state.get(BlockProperties.BUCKET) != BucketType.NONE) return false;
 
+
                  worldIn.setBlockState(pos,state.with(BlockProperties.BUCKET,BucketType.METALIRON));
+                 tile.setFluidType(FluidType.NONE);
+                 tile.setVolume(0);
 
                  if (!player.isCreative())
-                    stack.shrink(1);
+                     stack.shrink(1);
                  return true;
 
-             } else if (stack.getItem() == Items.WATER_BUCKET) {
+             }  else if (stack.getItem() == Items.WATER_BUCKET) {
 
                  if (state.get(BlockProperties.BUCKET) != BucketType.NONE) return false;
 
-                 worldIn.setBlockState(pos,state.with(BlockProperties.BUCKET,BucketType.METALIRON).with(BlockProperties.FLUIDTYPE,FluidType.WATER).with(BlockProperties.VOLUME, 4));
-
+                 worldIn.setBlockState(pos,state.with(BlockProperties.BUCKET, BucketType.METALIRON));
+                 tile.setFluidType(FluidType.WATER);
+                 tile.setVolume(1000);
                  if (!player.isCreative())
-                    stack.shrink(1);
+                     stack.shrink(1);
                  return true;
+
+
              } else if (stack.getItem() == IntercraftItems.BUCKETRESIN) {
 
                  if (state.get(BlockProperties.BUCKET) != BucketType.NONE) return false;
 
-                 worldIn.setBlockState(pos,state.with(BlockProperties.BUCKET,BucketType.METALIRON).with(BlockProperties.FLUIDTYPE,FluidType.RESIN).with(BlockProperties.VOLUME, 4));
-
+                 worldIn.setBlockState(pos,state.with(BlockProperties.BUCKET, BucketType.METALIRON));
+                 tile.setFluidType(FluidType.RESIN);
+                 tile.setVolume(1000);
                  if (!player.isCreative())
-                    stack.shrink(1);
+                     stack.shrink(1);
+
                  return true;
-             } else {// if (stack.isEmpty())
-                 int v = state.get(BlockProperties.VOLUME);
 
-                 if (v < 4) {
-                     if (player.isSneaking()) {
-                         worldIn.setBlockState(pos, state.with(BlockProperties.BUCKET, BucketType.NONE).with(BlockProperties.VOLUME,0));
+             }  else if (stack.isEmpty()) {
 
-                         spawnAsEntity(worldIn,pos,new ItemStack(Items.BUCKET,1));
-                         return true;
+                 boolean force = tile.getVolume() >= 1000;
+
+                 if (force || player.isSneaking()) {
+                     worldIn.setBlockState(pos,state.with(BlockProperties.BUCKET, BucketType.NONE));
+
+                     Item item;
+
+                     switch (tile.getFluidType()) {
+                         case RESIN:
+                             item = IntercraftItems.BUCKETRESIN;
+                             break;
+                         case WATER:
+                             item = Items.WATER_BUCKET;
+                             break;
+                        default:
+                            item = Items.BUCKET;
                      }
-                     return false;
-                 } else {
-                     worldIn.setBlockState(pos, state.with(BlockProperties.BUCKET, BucketType.NONE).with(BlockProperties.VOLUME,0));
 
-                     if (state.get(BlockProperties.FLUIDTYPE) == FluidType.WATER) {
-                         spawnAsEntity(worldIn, pos, new ItemStack(Items.WATER_BUCKET, 1));
-                         return true;
-                     }
-                     if (state.get(BlockProperties.FLUIDTYPE) == FluidType.RESIN) {
-                         spawnAsEntity(worldIn, pos, new ItemStack(IntercraftItems.BUCKETRESIN, 1));
-                         return true;
-                     }
-                     return false;
+                     spawnAsEntity(worldIn, pos, new ItemStack(item));
 
+                     tile.setVolume(0);
+                     tile.setFluidType(FluidType.NONE);
+
+                     return true;
                  }
-             }
 
+             }
+                return false;
          } else return true;
 
     }
