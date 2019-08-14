@@ -1,18 +1,25 @@
 package net.intercraft.intercraftcore.api;
 
+import net.minecraft.particles.BasicParticleType;
+import net.minecraft.particles.ParticleTypes;
+
 public enum FluidType
 {
-    NONE("none",0),
-    WATER("water",1),
-    RESIN("resin",2.5);
+    NONE("none",0,0,null),
+    WATER("water",2,0.4, ParticleTypes.DRIPPING_WATER),
+    RESIN("resin",3,1, ParticleTypes.DRIPPING_WATER);
 
     private final String name;
-    private double viscosity;
+    private final double viscosity;
+    private final double alpha;
+    private final BasicParticleType basicParticleType;
 
-    FluidType(String name, double viscosity)
+    FluidType(String name, double viscosity, double alpha, BasicParticleType particleType)
     {
         this.name = name;
         this.viscosity = viscosity;
+        this.alpha = alpha;
+        this.basicParticleType = particleType;
     }
 
     public String toString()
@@ -28,5 +35,14 @@ public enum FluidType
     public double getViscosity()
     {
         return this.viscosity;
+    }
+    public double getAlpha()
+    {
+        return this.alpha;
+    }
+
+    public BasicParticleType getResourceLocation()
+    {
+        return this.basicParticleType;
     }
 }

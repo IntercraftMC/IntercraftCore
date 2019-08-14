@@ -4,8 +4,7 @@ package net.intercraft.intercraftcore.tileentity;
 import net.intercraft.intercraftcore.api.FluidType;
 import net.intercraft.intercraftcore.init.IntercraftTileEntities;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SUpdateTileEntityPacket;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
@@ -18,6 +17,8 @@ public class TreeTapTileEntity extends TileEntity implements ITickableTileEntity
     private boolean canFill = false;
     private FluidType fluidType = FluidType.NONE;
 
+    public static final int maxVolume = 1000;
+
     public TreeTapTileEntity()
     {
         super(IntercraftTileEntities.TREETAP);
@@ -27,20 +28,26 @@ public class TreeTapTileEntity extends TileEntity implements ITickableTileEntity
     @Override
     public void tick()
     {
+        if (fluidType == FluidType.NONE) return;
         if (canFill) {
-            if (volume < 1000) {
-                setVolume(volume+1);
+            if (volume < maxVolume) {
 
 
-                //addParticle(IParticleData particleData, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed)
-                //playSound(@Nullable PlayerEntity player, BlockPos pos, SoundEvent soundIn, SoundCategory category, float volume, float pitch)
+                if (getWorld().getGameTime() % fluidType.getViscosity() == 0) {
+                    setVolume(volume + 1);
+
+                    //world.addParticle(ParticleTypes.DRIPPING_WATER,pos.getX(),pos.getY()+0.5,pos.getZ(),0,-1,0);
+
+                    //addParticle(IParticleData particleData, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed)
+                    //playSound(@Nullable PlayerEntity player, BlockPos pos, SoundEvent soundIn, SoundCategory category, float volume, float pitch)
+                }
 
             }
         }
     }
 
 
-    @Override
+    /*@Override
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt)
     {
         CompoundNBT compound = pkt.getNbtCompound();
@@ -60,7 +67,7 @@ public class TreeTapTileEntity extends TileEntity implements ITickableTileEntity
         compound.putString("fluid_type",fluidType.getName());
 
         return new SUpdateTileEntityPacket(pos, 1, compound);
-    }
+    }*/
 
     @Override
     public CompoundNBT getUpdateTag()

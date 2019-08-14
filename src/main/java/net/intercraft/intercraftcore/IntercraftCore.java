@@ -10,7 +10,6 @@ import net.intercraft.intercraftcore.init.loot.functions.HarderSetCount;
 import net.intercraft.intercraftcore.tileentity.TreeTapTileEntity;
 import net.intercraft.intercraftcore.tileentity.TreeTapTileEntityRenderer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.storage.loot.LootFunction;
 import net.minecraft.world.storage.loot.functions.LootFunctionManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
@@ -40,7 +39,7 @@ public class IntercraftCore
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onClientSetup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(RegistrationHandler::register);
 
-        ClientRegistry.bindTileEntitySpecialRenderer(TreeTapTileEntity.class, new TreeTapTileEntityRenderer());
+
 
 
     }
@@ -67,6 +66,6 @@ public class IntercraftCore
 
     public void onClientSetup(final FMLClientSetupEvent event)
     {
-
+        ClientRegistry.bindTileEntitySpecialRenderer(TreeTapTileEntity.class, new TreeTapTileEntityRenderer());
     }
 }
