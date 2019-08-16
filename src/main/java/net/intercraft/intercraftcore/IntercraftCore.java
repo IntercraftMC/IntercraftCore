@@ -7,6 +7,7 @@ import net.intercraft.intercraftcore.init.capabilities.radiation.RadiationStorag
 import net.intercraft.intercraftcore.init.gen.OreGen;
 import net.intercraft.intercraftcore.init.loot.functions.BlockItemFunction;
 import net.intercraft.intercraftcore.init.loot.functions.HarderSetCount;
+import net.intercraft.intercraftcore.networking.IntercraftPacketHandler;
 import net.intercraft.intercraftcore.tileentity.TreeTapTileEntity;
 import net.intercraft.intercraftcore.tileentity.TreeTapTileEntityRenderer;
 import net.minecraft.util.ResourceLocation;
@@ -51,6 +52,10 @@ public class IntercraftCore
 
         LootFunctionManager.registerFunction(new BlockItemFunction.Serializer());
         LootFunctionManager.registerFunction(new HarderSetCount.Serializer());
+
+
+
+
 
         CapabilityManager.INSTANCE.register(IRadiation.class, new RadiationStorage(), new RadiationStorage.Factory());
         MinecraftForge.EVENT_BUS.addListener(IntercraftEventHandler::attachCapability);

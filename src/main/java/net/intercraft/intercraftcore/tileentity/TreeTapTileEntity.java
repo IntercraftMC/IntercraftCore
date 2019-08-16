@@ -3,10 +3,13 @@ package net.intercraft.intercraftcore.tileentity;
 
 import net.intercraft.intercraftcore.api.FluidType;
 import net.intercraft.intercraftcore.init.IntercraftTileEntities;
+import net.intercraft.intercraftcore.networking.IntercraftPacketHandler;
+import net.intercraft.intercraftcore.networking.MessageTreeTap;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.fml.network.PacketDistributor;
 
 import javax.annotation.Nullable;
 
@@ -129,6 +132,7 @@ public class TreeTapTileEntity extends TileEntity implements ITickableTileEntity
     public void setVolume(int value)
     {
         volume = value;
+        //IntercraftPacketHandler.INSTANCE.sendTo(PacketDistributor.ALL.noArg(), new MessageTreeTap(volume));
         markDirty();
     }
 

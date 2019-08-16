@@ -73,7 +73,7 @@ public class BlockTreeTap extends Block
 
          ItemStack stack = player.getHeldItem(handIn);
 
-        //player.sendMessage(new StringTextComponent(String.format("Can fill: %s has volume: %s is type: %s and viscosity: %s.",tile.getCanFill(), tile.getVolume(), tile.getFluidType().getName(), tile.getFluidType().getViscosity())));
+        player.sendMessage(new StringTextComponent(String.format("Can fill: %s has volume: %s is type: %s and viscosity: %s.",tile.getCanFill(), tile.getVolume(), tile.getFluidType().getName(), tile.getFluidType().getViscosity())));
 
          if (!worldIn.isRemote) {
 
