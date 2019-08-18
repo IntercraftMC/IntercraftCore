@@ -95,7 +95,7 @@ public class TreeTapTileEntityRenderer<T extends TreeTapTileEntity> extends Tile
     }
 
 
-    private AxisAlignedBB getRenderBounds(T te, AxisAlignedBB tankBounds)
+    /*private AxisAlignedBB getRenderBounds(T te, AxisAlignedBB tankBounds)
     {
         float percent = (float) te.getVolume() / TreeTapTileEntity.maxVolume;
 
@@ -108,6 +108,7 @@ public class TreeTapTileEntityRenderer<T extends TreeTapTileEntity> extends Tile
 
 
     class TankRenderInfo {
+
         final IFluidTank tank;
         final AxisAlignedBB bounds;
         final BitSet faces = new BitSet(6);
@@ -132,6 +133,6 @@ public class TreeTapTileEntityRenderer<T extends TreeTapTileEntity> extends Tile
         boolean shouldRender(Direction face) {
             return faces.get(face.getIndex());
         }
-    }
+    }*/
 
 }

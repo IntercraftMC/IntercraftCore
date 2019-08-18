@@ -1,4 +1,4 @@
-package net.intercraft.intercraftcore.init.capabilities.radiation;
+package net.intercraft.intercraftcore.init.capabilities.ore_veins;
 
 import net.minecraft.nbt.INBT;
 import net.minecraft.util.Direction;
@@ -9,22 +9,20 @@ import net.minecraftforge.common.util.LazyOptional;
 
 import javax.annotation.Nonnull;
 
-
-public class RadiationProvider implements ICapabilitySerializable<INBT>
+public class OreVeinProvider implements ICapabilitySerializable<INBT>
 {
 
 
-    @CapabilityInject(IRadiation.class)
-    public static Capability<IRadiation> RAD_CAP = null;
+    @CapabilityInject(IOreVeins.class)
+    public static Capability<IOreVeins> VEIN_CAP = null;
 
-    private IRadiation instance = RAD_CAP.getDefaultInstance();
-
+    private IOreVeins instance = VEIN_CAP.getDefaultInstance();
 
     @SuppressWarnings("unchecked")
     @Override
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, Direction side)
     {
-        if (cap == RAD_CAP)
+        if (cap == VEIN_CAP)
             return (LazyOptional<T>) LazyOptional.of(() -> instance);
         return (LazyOptional<T>) LazyOptional.empty();
     }
@@ -33,12 +31,12 @@ public class RadiationProvider implements ICapabilitySerializable<INBT>
     @Override
     public INBT serializeNBT()
     {
-        return RAD_CAP.getStorage().writeNBT(RAD_CAP, instance, null);
+        return VEIN_CAP.getStorage().writeNBT(VEIN_CAP, instance, null);
     }
 
     @Override
     public void deserializeNBT(INBT nbt)
     {
-        RAD_CAP.getStorage().readNBT(RAD_CAP, instance, null, nbt);
+        VEIN_CAP.getStorage().readNBT(VEIN_CAP, instance, null, nbt);
     }
 }

@@ -2,7 +2,8 @@ package net.intercraft.intercraftcore.init.capabilities.radiation;
 
 import net.minecraft.entity.Entity;
 
-public interface IRadiation {
+public interface IRadiation
+{
     long getExposure();
 
     void setExposure(long value);

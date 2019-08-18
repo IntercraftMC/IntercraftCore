@@ -11,6 +11,8 @@ import net.minecraft.world.gen.placement.CountRangeConfig;
 import net.minecraft.world.gen.placement.Placement;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import java.util.Random;
+
 public class OreGen
 {
 
@@ -19,9 +21,11 @@ public class OreGen
     private static final Predicate<BlockState> IS_ENDSTONE = state -> state.getBlock() == Blocks.END_STONE;*/
 
 
+    private static Random random = new Random();
+
     // Vein/Chunk Count, MinHeight, MaxHeightBase, MaxHeight
-    private static final CountRangeConfig copper_ore_placement = new CountRangeConfig(7,20,20,100);
-    private static final int copper_ore_veinsize = 8;
+    private static final int copper_ore_veinsize = 10;
+    private static final CountRangeConfig copper_ore_placement = new CountRangeConfig(77/copper_ore_veinsize,1,31,63);
 
     public static void setupOreGen()
     {
@@ -55,7 +59,7 @@ public class OreGen
                 case EXTREME_HILLS:
                 case MESA: { // Overworld biomes.
                     biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Biome.createDecoratedFeature(Feature.ORE, new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE,
-                            IntercraftBlocks.COPPERORE.getDefaultState().with(BlockProperties.DENSITY, 3), copper_ore_veinsize), Placement.COUNT_RANGE, copper_ore_placement));
+                            IntercraftBlocks.COPPERORE.getDefaultState().with(BlockProperties.DENSITY, random.nextInt(4)), copper_ore_veinsize), Placement.COUNT_RANGE, copper_ore_placement));
 
                     break;
                 }

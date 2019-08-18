@@ -20,20 +20,22 @@ import net.minecraftforge.common.ToolType;
 
 import javax.annotation.Nullable;
 
-public class BlockHardOre extends Block {
+public class BlockHardOre extends Block
+{
 
-    private Item drop;
     private int tint;
 
     public final int dropMultiplier = 2;
 
 
-    public BlockHardOre(final String name, final float hardness, final float resistance, Item drop, int tint)
+    public BlockHardOre(final String name, final float hardness, final float resistance, int tint)
     {
         super(Block.Properties.create(Material.ROCK, MaterialColor.STONE).hardnessAndResistance(hardness,resistance));
 
         setRegistryName(name+"_ore");
-        this.drop = drop;
+
+        setDefaultState(getDefaultState().with(BlockProperties.DENSITY,IntercraftCore.defDensity));
+
         this.tint = tint;
 
 
@@ -52,8 +54,8 @@ public class BlockHardOre extends Block {
             int d = stack.getTag().getInt("intercraftcore:density");
             worldIn.setBlockState(pos,state.with(BlockProperties.DENSITY,d));
         } catch (NullPointerException e) {
-            System.out.println(String.format("Default hardness placement is %d.", IntercraftCore.defDensity));
-            worldIn.setBlockState(pos,state.with(BlockProperties.DENSITY,IntercraftCore.defDensity));
+            //System.out.println(String.format("Default hardness placement is %d.", IntercraftCore.defDensity));
+            //worldIn.setBlockState(pos,state.with(BlockProperties.DENSITY,IntercraftCore.defDensity));
         }
     }
 
@@ -67,10 +69,10 @@ public class BlockHardOre extends Block {
 
     }*/
 
-    public void onExplosionDestroy(World worldIn, BlockPos pos, Explosion explosionIn)
+    /*public void onExplosionDestroy(World worldIn, BlockPos pos, Explosion explosionIn)
     {
         new ItemEntity(worldIn,pos.getX(),pos.getY(),pos.getZ(), new ItemStack(this.drop,dropMultiplier));
-    }
+    }*/
 
 
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
