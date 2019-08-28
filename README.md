@@ -51,3 +51,20 @@ Core mod for InterCraft 1.14.2 modpack.
     - [ ] Strong Anvil
     
     *Works just like a regular Anvil except for lasting a bit longer than a regular Anvil. But has the special ability to allow Enchanting of tools beyond thirty six (36) levels. Crafted from "Glitchium" Blocks and Ingots like a regular Anvil. Possibly allowing incompatible Enchants to be combined.*
+    
+    - [ ] Chunkloading
+        - [ ] Chunkloader
+        
+        *A plain old Chunkloader which loads the chunk at all time.*
+        
+        - [ ] Chunkloader (Redstone)
+        
+        *Same as Chunkloader, but is only active if it has a Redstone signal.*
+        
+        - [ ] Chunkloader (Timed)
+        
+        *Same as Chunkloader, but has a gui where you can specify a countdown and is only active while running or above 0.*
+        
+        - [ ] Chunkloader (Point)
+        
+        *Needs two of them. When linked by facing two of them and sharing one X or Z chunk coordinate will when given a Redstone pulse load all chunks in a straight line between the two points for a specified time (min 2 tick, max 100 tick). Needs to re-charge after each use (600 ticks).*

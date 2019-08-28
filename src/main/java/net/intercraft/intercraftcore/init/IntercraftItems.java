@@ -5,11 +5,12 @@ import net.intercraft.intercraftcore.item.ItemBucketResin;
 import net.intercraft.intercraftcore.item.ItemTest;
 import net.intercraft.intercraftcore.item.group.ItemElementGroup;
 import net.intercraft.intercraftcore.item.group.ItemUraniumGroup;
-import net.intercraft.intercraftcore.ore.ElementComposition;
 import net.intercraft.intercraftcore.ore.ItemHardChunk;
 import net.intercraft.intercraftcore.ore.elements.ItemHardChunkCopper;
 import net.intercraft.intercraftcore.ore.elements.ItemHardChunkLead;
 import net.intercraft.intercraftcore.ore.elements.ItemHardChunkTin;
+import net.minecraft.block.Block;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 
 public class IntercraftItems
@@ -100,6 +101,16 @@ public class IntercraftItems
         }
     }
 
+    /*protected static void registerBlocks(Block... blocks)
+    {
+        for (Block block : blocks) {
+            if (block != null) {
+                RegistrationHandler.blocks.add(block);
+                RegistrationHandler.itemBlocks.add(new BlockItem(block, new Item.Properties().group(IntercraftItemGroups.RESOURCES)).setRegistryName(block.getRegistryName()));
+            }
+        }
+    }*/
+
     /**
      * Register an element group
      * @param group
@@ -107,6 +118,7 @@ public class IntercraftItems
     protected static void registerElementItems(ItemElementGroup group)
     {
         registerItems(group.INGOT, group.NUGGET, group.DUST, group.DUST_SMALL, group.PLATE);
+        //registerBlocks(group.BLOCK_SOLID);
     }
 
 }
