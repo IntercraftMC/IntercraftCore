@@ -1,9 +1,11 @@
 package net.intercraft.intercraftcore.element;
 
+import net.intercraft.intercraftcore.ElementDictionary;
+
 public class Uranium extends Element
 {
     public Uranium()
     {
-        super("uranium", "u", 0x077a07);
+        super("uranium", ElementDictionary.URANIUM.getSymbol(), ElementDictionary.URANIUM.getColorPrimary());
     }
 }

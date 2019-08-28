@@ -7,13 +7,10 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.StateContainer;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
@@ -24,9 +21,6 @@ public class BlockHardOre extends Block
 {
 
     private int tint;
-
-    public final int dropMultiplier = 2;
-
 
     public BlockHardOre(final String name, final float hardness, final float resistance, int tint)
     {
@@ -102,10 +96,6 @@ public class BlockHardOre extends Block
         return BlockRenderLayer.CUTOUT;
     }
 
-    /*@Override
-    public String getTranslationKey() {
-
-    }*/
 
     public int getTint()
     {

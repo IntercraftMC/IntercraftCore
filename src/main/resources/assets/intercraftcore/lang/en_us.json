@@ -2,30 +2,75 @@
   "item.intercraftcore.test_item": "Test",
   "item.intercraftcore.resin_bucket": "Resin Bucket",
 
-
   "item.intercraftcore.cu_ingot": "Copper Ingot",
   "item.intercraftcore.sn_ingot": "Tin Ingot",
   "item.intercraftcore.ag_ingot": "Silver Ingot",
   "item.intercraftcore.pb_ingot": "Lead Ingot",
   "item.intercraftcore.w_ingot": "Tungsten Ingot",
   "item.intercraftcore.u_ingot": "Uranium Ingot",
+  "item.intercraftcore.cu_nugget": "Copper Nugget",
+  "item.intercraftcore.sn_nugget": "Tin Nugget",
+  "item.intercraftcore.ag_nugget": "Silver Nugget",
+  "item.intercraftcore.pb_nugget": "Lead Nugget",
+  "item.intercraftcore.w_nugget": "Tungsten Nugget",
+  "item.intercraftcore.u_nugget": "Uranium Nugget",
+  "item.intercraftcore.cu_dust": "Copper Dust",
+  "item.intercraftcore.sn_dust": "Tin Dust",
+  "item.intercraftcore.ag_dust": "Silver Dust",
+  "item.intercraftcore.pb_dust": "Lead Dust",
+  "item.intercraftcore.w_dust": "Tungsten Dust",
+  "item.intercraftcore.u_dust": "Uranium Dust",
+  "item.intercraftcore.cu_dustsmall": "Tiny Pile of Copper",
+  "item.intercraftcore.sn_dustsmall": "Tiny Pile of Tin",
+  "item.intercraftcore.ag_dustsmall": "Tiny Pile of Silver",
+  "item.intercraftcore.pb_dustsmall": "Tiny Pile of Lead",
+  "item.intercraftcore.w_dustsmall": "Tiny Pile of Tungsten",
+  "item.intercraftcore.u_dustsmall": "Tiny Pile of Uranium",
+  "item.intercraftcore.cu_plate": "Copper Plate",
+  "item.intercraftcore.sn_plate": "Tin Plate",
+  "item.intercraftcore.ag_plate": "Silver Plate",
+  "item.intercraftcore.pb_plate": "Lead Plate",
+  "item.intercraftcore.w_plate": "Tungsten Plate",
+  "item.intercraftcore.u_plate": "Uranium Plate",
+
+  "item.intercraftcore.cu_chunk": "Copper Chunk",
+  "item.intercraftcore.sn_chunk": "Tin Chunk",
+  "item.intercraftcore.ag_chunk": "Silver Chunk",
+  "item.intercraftcore.pb_chunk": "Lead Chunk",
+  "item.intercraftcore.w_chunk": "Tungsten Chunk",
+  "item.intercraftcore.u_chunk": "Uranium Chunk",
+
 
   "block.intercraftcore.cu_ore": "Copper Ore",
+  "block.intercraftcore.cu_ore.0": "Poor Copper Ore",
+  "block.intercraftcore.cu_ore.1": "Low Copper Ore",
+  "block.intercraftcore.cu_ore.2": "Medium Copper Ore",
+  "block.intercraftcore.cu_ore.3": "Rich Copper Ore",
   "block.intercraftcore.sn_ore": "Tin Ore",
+  "block.intercraftcore.sn_ore.0": "Poor Tin Ore",
+  "block.intercraftcore.sn_ore.1": "Low Tin Ore",
+  "block.intercraftcore.sn_ore.2": "Medium Tin Ore",
+  "block.intercraftcore.sn_ore.3": "Rich Tin Ore",
+  "block.intercraftcore.pb_ore": "Lead Ore",
+  "block.intercraftcore.pb_ore.0": "Poor Lead Ore",
+  "block.intercraftcore.pb_ore.1": "Low Lead Ore",
+  "block.intercraftcore.pb_ore.2": "Medium Lead Ore",
+  "block.intercraftcore.pb_ore.3": "Rich Lead Ore",
 
   "block.intercraftcore.treetap": "Tree Tap",
 
 
-
   "itemGroup.intercraftcore.resources": "Resources",
+  "itemGroup.intercraftcore.wiring": "Wiring",
+
 
   "effect.intercraftcore.radiation_sickness": "Radiation Sickness",
+
 
   "death.attack.intercraftcore.radiation": "%1$s died from radiation poison",
 
 
-
-  "tooltip.intercraftcore.composition": "Composition",
+  "tooltip.intercraftcore.composition": "%s: %s%%",
 
 
   "commands.intercraftcore.radiation.get": "Exposure is %s and absorbed is %s of entity %s",

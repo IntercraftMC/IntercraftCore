@@ -2,8 +2,8 @@ package net.intercraft.intercraftcore.init.capabilities.ore_veins;
 
 public enum VeinTypes
 {
-    COPPER("copper",0.1,5),
-    TIN("tin",0.1,6);
+    COPPER("copper",0.1,3),
+    TIN("tin",0.1,3);
 
 
 
@@ -11,7 +11,7 @@ public enum VeinTypes
     private final double min;
     private final double max;
 
-    private double weight = 1;
+    private double weight = 2;
 
     VeinTypes(String name, double min, double max)
    {

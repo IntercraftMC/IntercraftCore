@@ -82,7 +82,7 @@ public class MessageTreeTap
         if (volume != -1)
             buf.writeInt(volume);
         if (type != null)
-            buf.writeString(type.getName());
+            buf.writeString(type.getSymbol());
     }
 
     @Override

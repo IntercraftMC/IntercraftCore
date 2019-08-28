@@ -1,11 +1,12 @@
 package net.intercraft.intercraftcore.ore.elements;
 
+import net.intercraft.intercraftcore.ElementDictionary;
 import net.intercraft.intercraftcore.ore.BlockHardOre;
 
 public class BlockOreTin extends BlockHardOre
 {
     public BlockOreTin()
     {
-        super("sn",1.5F,6.0F,0xb8b8b8);
+        super(ElementDictionary.TIN.getSymbol(),1.5F,6.0F,ElementDictionary.TIN.getColorSecondary());
     }
 }

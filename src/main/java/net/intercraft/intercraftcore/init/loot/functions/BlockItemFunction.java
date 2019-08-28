@@ -3,9 +3,11 @@ package net.intercraft.intercraftcore.init.loot.functions;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 
+import net.intercraft.intercraftcore.Reference;
 import net.intercraft.intercraftcore.api.BlockProperties;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.storage.loot.LootContext;
 import net.minecraft.world.storage.loot.LootFunction;
@@ -32,7 +34,11 @@ public class BlockItemFunction extends LootFunction
         if(state.has(BlockProperties.DENSITY)) {
             int density = state.get(BlockProperties.DENSITY);
             ItemStack it = new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(state.getBlock().getRegistryName().getNamespace(),state.getBlock().getRegistryName().getPath())));
-            it.getOrCreateTag().putInt("intercraftcore:density", Math.max(0, density));
+
+            CompoundNBT nbt = new CompoundNBT();
+            nbt.putInt(Reference.MODID+":density",Math.max(0, density));
+
+            it.setTag(nbt);
             return it;
         }
         return stack;
@@ -42,11 +48,12 @@ public class BlockItemFunction extends LootFunction
     {
 
         public Serializer() {
-            super(new ResourceLocation("intercraftcore:blockitem"), BlockItemFunction.class);
+            super(new ResourceLocation(Reference.MODID+":blockitem"), BlockItemFunction.class);
         }
 
         @Override
-        public BlockItemFunction deserialize(JsonObject object, JsonDeserializationContext deserializationContext, ILootCondition[] conditionsIn) {
+        public BlockItemFunction deserialize(JsonObject object, JsonDeserializationContext deserializationContext, ILootCondition[] conditionsIn)
+        {
             return new BlockItemFunction(conditionsIn);
         }
     }

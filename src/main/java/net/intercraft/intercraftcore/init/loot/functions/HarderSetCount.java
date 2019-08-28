@@ -4,6 +4,7 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 
+import net.intercraft.intercraftcore.Reference;
 import net.intercraft.intercraftcore.api.BlockProperties;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
@@ -47,7 +48,7 @@ public class HarderSetCount extends LootFunction
 
     public static class Serializer extends LootFunction.Serializer<HarderSetCount> {
         public Serializer() {
-            super(new ResourceLocation("intercraftcore:set_count"), HarderSetCount.class);
+            super(new ResourceLocation(Reference.MODID+":set_count"), HarderSetCount.class);
         }
 
         public void serialize(JsonObject object, HarderSetCount functionClazz, JsonSerializationContext serializationContext) {

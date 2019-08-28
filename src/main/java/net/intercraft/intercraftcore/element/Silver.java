@@ -1,9 +1,11 @@
 package net.intercraft.intercraftcore.element;
 
+import net.intercraft.intercraftcore.ElementDictionary;
+
 public class Silver extends Element
 {
     public Silver()
     {
-        super("silver", "ag", 0xffffff);
+        super("silver", ElementDictionary.SILVER.getSymbol(), ElementDictionary.SILVER.getColorPrimary());
     }
 }

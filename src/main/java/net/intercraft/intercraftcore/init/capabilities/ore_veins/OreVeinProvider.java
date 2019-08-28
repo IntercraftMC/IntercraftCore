@@ -2,6 +2,7 @@ package net.intercraft.intercraftcore.init.capabilities.ore_veins;
 
 import net.minecraft.nbt.INBT;
 import net.minecraft.util.Direction;
+import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
@@ -11,6 +12,11 @@ import javax.annotation.Nonnull;
 
 public class OreVeinProvider implements ICapabilitySerializable<INBT>
 {
+
+    /*public OreVeinProvider(Chunk chunk)
+    {
+        chunk.markDirty();
+    }*/
 
 
     @CapabilityInject(IOreVeins.class)

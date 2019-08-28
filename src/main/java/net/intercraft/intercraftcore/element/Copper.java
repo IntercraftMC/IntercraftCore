@@ -1,9 +1,11 @@
 package net.intercraft.intercraftcore.element;
 
+import net.intercraft.intercraftcore.ElementDictionary;
+
 public class Copper extends Element
 {
     public Copper()
     {
-        super("copper", "cu", 0xc1810a);
+        super("copper", ElementDictionary.COPPER.getSymbol(), ElementDictionary.COPPER.getColorPrimary());
     }
 }

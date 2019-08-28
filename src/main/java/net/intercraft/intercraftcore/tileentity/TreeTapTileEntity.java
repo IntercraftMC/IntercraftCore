@@ -29,6 +29,12 @@ public class TreeTapTileEntity extends TileEntity implements ITickableTileEntity
 
 
     @Override
+    public boolean hasFastRenderer()
+    {
+        return true;
+    }
+
+    @Override
     public void tick()
     {
         if (fluidType == FluidType.NONE) return;
@@ -67,7 +73,7 @@ public class TreeTapTileEntity extends TileEntity implements ITickableTileEntity
         CompoundNBT compound = super.getUpdateTag();
         compound.putInt("volume", volume);
         compound.putBoolean("can_fill",canFill);
-        compound.putString("fluid_type",fluidType.getName());
+        compound.putString("fluid_type",fluidType.getSymbol());
 
         return new SUpdateTileEntityPacket(pos, 1, compound);
     }*/

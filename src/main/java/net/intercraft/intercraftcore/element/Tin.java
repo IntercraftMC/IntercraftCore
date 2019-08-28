@@ -1,9 +1,11 @@
 package net.intercraft.intercraftcore.element;
 
+import net.intercraft.intercraftcore.ElementDictionary;
+
 public class Tin extends Element
 {
     public Tin()
     {
-        super("Tin", "sn", 0x9daaae);
+        super("Tin", ElementDictionary.TIN.getSymbol(), ElementDictionary.TIN.getColorPrimary());
     }
 }

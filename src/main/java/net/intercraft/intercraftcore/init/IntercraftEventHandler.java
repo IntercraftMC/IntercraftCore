@@ -41,8 +41,7 @@ public class IntercraftEventHandler
 
             ((ServerWorld) event.world).getEntities().forEach(entity -> {
 
-                if (entity.isLiving())
-                    entity.getCapability(RadiationProvider.RAD_CAP).ifPresent(cap -> cap.tick(entity));
+                entity.getCapability(RadiationProvider.RAD_CAP).ifPresent(cap -> cap.tick(entity));
             });
         }
     }
@@ -63,6 +62,7 @@ public class IntercraftEventHandler
 
     public static void attachCapabilityChunk(AttachCapabilitiesEvent<Chunk> event)
     {
+
         event.addCapability(IntercraftCore.VEIN_ID, new OreVeinProvider());
     }
 }
