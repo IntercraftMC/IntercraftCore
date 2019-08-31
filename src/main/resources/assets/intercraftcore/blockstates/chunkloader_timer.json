@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "active=false": { "model": "intercraftcore:block/chunkloaders/chunkloader_timer_inactive" },
+    "active=true": { "model": "intercraftcore:block/chunkloaders/chunkloader_timer_active" }
+  }
+}

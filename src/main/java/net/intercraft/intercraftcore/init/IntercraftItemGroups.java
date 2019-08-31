@@ -18,7 +18,7 @@ public class IntercraftItemGroups
             return new ItemStack(IntercraftItems.COPPER.INGOT);
         }
     };
-    /*
+    /**
     * Wiring tab
     * */
     public static final ItemGroup WIRING = new ItemGroup(Reference.MODID + ".wiring")
@@ -27,6 +27,19 @@ public class IntercraftItemGroups
         public ItemStack createIcon()
         {
             return new ItemStack(Items.BEEF);
+        }
+    };
+
+    /**
+    * Machine Tab
+    * */
+
+    public static final ItemGroup MACHINE = new ItemGroup(Reference.MODID + ".machine")
+    {
+        @Override
+        public ItemStack createIcon()
+        {
+            return new ItemStack(IntercraftBlocks.CHUNKLOADER);
         }
     };
 }

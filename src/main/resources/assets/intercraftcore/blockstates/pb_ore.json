@@ -3,16 +3,16 @@
   "variants": {
     "density": {
       "0": {
-        "model": "intercraftcore:ore_faces/ore_0"
+        "model": "intercraftcore:block/ore_faces/ore_0"
       },
       "1": {
-        "model": "intercraftcore:ore_faces/ore_1"
+        "model": "intercraftcore:block/ore_faces/ore_1"
       },
       "2": {
-        "model": "intercraftcore:ore_faces/ore_2"
+        "model": "intercraftcore:block/ore_faces/ore_2"
       },
       "3": {
-        "model": "intercraftcore:ore_faces/ore_3"
+        "model": "intercraftcore:block/ore_faces/ore_3"
       }
     }
   }

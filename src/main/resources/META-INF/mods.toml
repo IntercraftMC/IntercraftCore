@@ -18,4 +18,4 @@ logoFile="intercraftcore.png"
 [[dependencies.intercraftcore]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.14,1.14.2]"
+    versionRange="[1.14.3,1.14.4]"

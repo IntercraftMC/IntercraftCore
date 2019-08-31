@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "active=false": { "model": "intercraftcore:block/chunkloaders/chunkloader_redstone_inactive" },
+    "active=true": { "model": "intercraftcore:block/chunkloaders/chunkloader_redstone_active" }
+  }
+}

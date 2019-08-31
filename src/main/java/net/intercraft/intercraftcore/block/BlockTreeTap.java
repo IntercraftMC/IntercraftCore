@@ -215,7 +215,7 @@ public class BlockTreeTap extends Block
     @Override
     public BlockRenderLayer getRenderLayer()
     {
-    return BlockRenderLayer.TRANSLUCENT;
+    return BlockRenderLayer.CUTOUT;
     }
 
 

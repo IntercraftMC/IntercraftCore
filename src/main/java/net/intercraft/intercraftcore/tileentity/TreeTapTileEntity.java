@@ -1,6 +1,5 @@
 package net.intercraft.intercraftcore.tileentity;
 
-
 import net.intercraft.intercraftcore.api.FluidType;
 import net.intercraft.intercraftcore.init.IntercraftTileEntities;
 import net.intercraft.intercraftcore.networking.IntercraftPacketHandler;
@@ -37,6 +36,9 @@ public class TreeTapTileEntity extends TileEntity implements ITickableTileEntity
     @Override
     public void tick()
     {
+
+        if (getWorld().isRemote) return;
+
         if (fluidType == FluidType.NONE) return;
         if (canFill) {
             if (volume < maxVolume) {

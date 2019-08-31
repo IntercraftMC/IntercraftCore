@@ -1,7 +1,6 @@
 package net.intercraft.intercraftcore.init;
 
-import net.intercraft.intercraftcore.block.BlockCableCase;
-import net.intercraft.intercraftcore.block.BlockTreeTap;
+import net.intercraft.intercraftcore.block.*;
 import net.intercraft.intercraftcore.ore.ItemBlockHardOre;
 import net.intercraft.intercraftcore.ore.elements.BlockOreCopper;
 import net.intercraft.intercraftcore.ore.elements.BlockOreLead;
@@ -20,13 +19,13 @@ public class IntercraftBlocks
     public static final Block CABLECASE;
     public static final Block TREETAP;
 
+    public static final Block CHUNKLOADER;
+    public static final Block CHUNKLOADER_REDSTONE;
+    public static final Block CHUNKLOADER_TIMER;
+
     /**
-    * Ore Blocks with their drop
+    * Ore Blocks
     * */
-
-    /*public static final HardOre COPPERORE;
-    public static final HardOre TINORE;*/
-
 
     public static final Block COPPERORE;
     public static final Block TINORE;
@@ -35,6 +34,10 @@ public class IntercraftBlocks
     static {
         CABLECASE = new BlockCableCase();
         TREETAP = new BlockTreeTap();
+
+        CHUNKLOADER = new BlockChunkloader("chunkloader");
+        CHUNKLOADER_REDSTONE = new BlockChunkloaderRedstone();
+        CHUNKLOADER_TIMER = new BlockChunkloaderTimer();
 
         COPPERORE = new BlockOreCopper();
         TINORE = new BlockOreTin();
@@ -50,6 +53,7 @@ public class IntercraftBlocks
     {
         registerBlocks(IntercraftItemGroups.WIRING,true,CABLECASE);
         registerBlocks(ItemGroup.TOOLS,true,TREETAP);
+        registerBlocks(IntercraftItemGroups.MACHINE,true,CHUNKLOADER,CHUNKLOADER_REDSTONE,CHUNKLOADER_TIMER);
 
         //registerOre(COPPERORE);
 

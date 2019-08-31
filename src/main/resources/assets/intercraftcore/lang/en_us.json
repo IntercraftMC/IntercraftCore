@@ -61,9 +61,15 @@
 
   "block.intercraftcore.treetap": "Tree Tap",
 
+  "block.intercraftcore.chunkloader": "Chunkloader",
+  "block.intercraftcore.chunkloader_redstone": "Chunkloader (Redstone)",
+  "block.intercraftcore.chunkloader_timer": "Chunkloader (Timer)",
+  "block.intercraftcore.chunkloader_array": "Chunkloader (Array)",
+
 
   "itemGroup.intercraftcore.resources": "Resources",
   "itemGroup.intercraftcore.wiring": "Wiring",
+  "itemGroup.intercraftcore.machine": "Machines",
 
 
   "effect.intercraftcore.radiation_sickness": "Radiation Sickness",
@@ -80,7 +86,10 @@
   "commands.intercraftcore.radiation.absorbed.set": "Set value absorbed to %s of entity %s",
   "commands.intercraftcore.radiation.error.invalid": "Entity %s does not have Capability Radiation",
 
-  "commands.intercraftcore.orevein.get": "Weight of %s is %s at chunk [%s %s]"
+  "commands.intercraftcore.orevein.get": "Weight of %s is %s at chunk [%s %s]",
+
+
+  "chunkloading.intercraftcore.dublicate": "There is already a Chunkloader at %s %s %s"
 
 
 }
