@@ -60,6 +60,8 @@
   "block.intercraftcore.cu_block": "Block of Copper",
 
   "block.intercraftcore.treetap": "Tree Tap",
+  "block.intercraftcore.redstone_beacon": "Redstone Beacon",
+
 
   "block.intercraftcore.chunkloader": "Chunkloader",
   "block.intercraftcore.chunkloader_redstone": "Chunkloader (Redstone)",

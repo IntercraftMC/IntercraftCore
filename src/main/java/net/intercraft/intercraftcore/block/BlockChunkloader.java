@@ -8,6 +8,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
@@ -19,6 +20,8 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BlockChunkloader extends Block
 {
@@ -35,27 +38,85 @@ public class BlockChunkloader extends Block
     }
 
 
+    public boolean autoActivate()
+    {
+        return true;
+    }
+
+
+    @Override
+    public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player)
+    {
+        if (!worldIn.isRemote) {
+
+            BlockPos[] blockPos = scanForLoaders(worldIn,pos);
+
+
+            if (blockPos.length-1 < 2 && blockPos.length-1 > 0) {
+                System.out.println("There is one left in this chunk!!!");
+
+                TileEntity tile = worldIn.getTileEntity(blockPos[0]);
+
+                for (int i=0;i<blockPos.length;i++) {
+                    if (!(pos.getX() == blockPos[i].getX() &&pos.getY() == blockPos[i].getY() &&pos.getZ() == blockPos[i].getZ())) {
+                        tile = worldIn.getTileEntity(blockPos[i]);
+                        break;
+                    }
+                }
+
+                if (tile instanceof ChunkLoaderBaseTileEntity) {
+                    ((ChunkLoaderBaseTileEntity)tile).setCanLoad(true);
+                    if (autoActivate())
+                        worldIn.setBlockState(pos,state.with(BlockProperties.ACTIVE,true));
+                    System.out.println("It's a Base type.");
+                } else if (tile instanceof ChunkLoaderTimerTileEntity) {
+                    ((ChunkLoaderTimerTileEntity)tile).setCanLoad(true);
+                    if (autoActivate())
+                        worldIn.setBlockState(pos,state.with(BlockProperties.ACTIVE,true));
+                    System.out.println("It's a Timer type.");
+                }
+
+
+                worldIn.notifyBlockUpdate(pos,state,state,1);
+
+            }
+
+        }
+
+        super.onBlockHarvested(worldIn,pos,state,player);
+
+    }
+
     @Override
     public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack)
     {
 
         if (!worldIn.isRemote) {
 
-            for (BlockPos tePos : worldIn.getChunk(pos).getTileEntitiesPos()) {
 
-                if (pos.getX() == tePos.getX() && pos.getY() == tePos.getY() && pos.getZ() == tePos.getZ()) continue;
+            BlockPos dub = getDuplicate(worldIn,pos);
 
-                TileEntity tile = worldIn.getTileEntity(tePos);
-                if (tile == null) continue;
-                if (tile instanceof ChunkLoaderBaseTileEntity || tile instanceof ChunkLoaderTimerTileEntity) {
-                    worldIn.setBlockState(pos, state.with(BlockProperties.ACTIVE, false));
-                    placer.sendMessage(new TranslationTextComponent("chunkloading.intercraftcore.dublicate", tePos.getX(), tePos.getY(), tePos.getZ()));
-                    return;
+            if (dub != null) {
+                placer.sendMessage(new TranslationTextComponent("chunkloading.intercraftcore.dublicate",dub.getX(),dub.getY(),dub.getZ()));
+                worldIn.setBlockState(pos,state.with(BlockProperties.ACTIVE,false));
+
+                TileEntity tile = worldIn.getTileEntity(pos);
+
+                if (tile instanceof ChunkLoaderBaseTileEntity) {
+                    ((ChunkLoaderBaseTileEntity)tile).setCanLoad(false);
+                } else if (tile instanceof ChunkLoaderTimerTileEntity) {
+                    ((ChunkLoaderTimerTileEntity)tile).setCanLoad(false);
                 }
+
+
             }
         }
 
+        super.onBlockPlacedBy(worldIn,pos,state,placer,stack);
+
     }
+
+
 
     @Override
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
@@ -80,6 +141,37 @@ public class BlockChunkloader extends Block
     public VoxelShape getShape(BlockState state, IBlockReader blockReader, BlockPos pos, ISelectionContext selectionContext)
     {
         return Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 12.0D, 16.0D);
+    }
+
+
+    public static BlockPos[] scanForLoaders(World worldIn, BlockPos pos)
+    {
+        List<BlockPos> positions = new ArrayList<>();
+
+        for (BlockPos tePos : worldIn.getChunk(pos).getTileEntitiesPos()) {
+            TileEntity tile = worldIn.getTileEntity(pos);
+            if (tile instanceof ChunkLoaderBaseTileEntity || tile instanceof ChunkLoaderTimerTileEntity)
+                positions.add(tePos);
+        }
+
+        return positions.toArray(new BlockPos[positions.size()]);
+
+    }
+
+
+
+    public static BlockPos getDuplicate(World worldIn, BlockPos pos)
+    {
+        for (BlockPos tePos : scanForLoaders(worldIn,pos)) {
+
+            if (pos.getX() == tePos.getX() && pos.getY() == tePos.getY() && pos.getZ() == tePos.getZ()) continue;
+
+            TileEntity tile = worldIn.getTileEntity(tePos);
+            if (tile == null) continue;
+            //worldIn.setBlockState(pos, state.with(BlockProperties.ACTIVE, false));
+            return tePos;
+        }
+        return null;
     }
 
 

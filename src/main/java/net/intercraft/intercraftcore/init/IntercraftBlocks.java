@@ -18,6 +18,7 @@ public class IntercraftBlocks
 
     public static final Block CABLECASE;
     public static final Block TREETAP;
+    public static final Block REDSTONEBEACON;
 
     public static final Block CHUNKLOADER;
     public static final Block CHUNKLOADER_REDSTONE;
@@ -34,6 +35,7 @@ public class IntercraftBlocks
     static {
         CABLECASE = new BlockCableCase();
         TREETAP = new BlockTreeTap();
+        REDSTONEBEACON = new BlockRedstoneBeacon();
 
         CHUNKLOADER = new BlockChunkloader("chunkloader");
         CHUNKLOADER_REDSTONE = new BlockChunkloaderRedstone();
@@ -54,6 +56,7 @@ public class IntercraftBlocks
         registerBlocks(IntercraftItemGroups.WIRING,true,CABLECASE);
         registerBlocks(ItemGroup.TOOLS,true,TREETAP);
         registerBlocks(IntercraftItemGroups.MACHINE,true,CHUNKLOADER,CHUNKLOADER_REDSTONE,CHUNKLOADER_TIMER);
+        registerBlocks(ItemGroup.REDSTONE,true,REDSTONEBEACON);
 
         //registerOre(COPPERORE);
 

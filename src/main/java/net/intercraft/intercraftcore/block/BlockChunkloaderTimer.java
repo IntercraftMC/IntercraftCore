@@ -28,10 +28,21 @@ public class BlockChunkloaderTimer extends BlockChunkloader
 
     }
 
+    @Override
+    public boolean autoActivate()
+    {
+        return false;
+    }
+
 
     @Override
     public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit)
     {
+
+        /*if (worldIn.isRemote)
+        player.sendMessage(new StringTextComponent(((ChunkLoaderTimerTileEntity) worldIn.getTileEntity(pos)).getCanLoad()+""));*/
+
+
         if (!worldIn.isRemote) {
 
             // Open Gui.
