@@ -16,7 +16,7 @@ import net.minecraft.item.Item;
 public class IntercraftItems
 {
     /**
-     * A test item for reference
+     * Miscellaneous Items
      */
     public static final Item TEST;
     public static final Item BUCKETRESIN;

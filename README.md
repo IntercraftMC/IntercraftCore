@@ -79,6 +79,6 @@ Core mod for InterCraft 1.14.4 modpack.
         - [ ] Clay
         
         *Mixing Gravel, Dirt and Water (presumably submerging 3/4 Dirt and 1/4 Gravel in a 4x4) will convert it to Clay over a span of (ex.) 30 minutes.*
-        - [ ] Sponge
+        - [x] Sponge
         
         *When a regular Guardian is struck by lightning it will convert it to an Elder Guardian which can be farmed.*
