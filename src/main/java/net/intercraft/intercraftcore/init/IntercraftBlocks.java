@@ -6,6 +6,10 @@ import net.intercraft.intercraftcore.ore.elements.BlockOreCopper;
 import net.intercraft.intercraftcore.ore.elements.BlockOreLead;
 import net.intercraft.intercraftcore.ore.elements.BlockOreTin;
 import net.minecraft.block.Block;
+import net.minecraft.block.GravelBlock;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.material.MaterialColor;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -19,6 +23,9 @@ public class IntercraftBlocks
     public static final Block CABLECASE;
     public static final Block TREETAP;
     public static final Block REDSTONEBEACON;
+
+    public static final Block GRAVELSUBSTITUTE;
+    public static final Block SANDSUBSTITUTE;
 
     public static final Block CHUNKLOADER;
     public static final Block CHUNKLOADER_REDSTONE;
@@ -36,6 +43,9 @@ public class IntercraftBlocks
         CABLECASE = new BlockCableCase();
         TREETAP = new BlockTreeTap();
         REDSTONEBEACON = new BlockRedstoneBeacon();
+
+        GRAVELSUBSTITUTE = new GravelBlock(Block.Properties.create(Material.SAND, MaterialColor.STONE).hardnessAndResistance(0.6F).sound(SoundType.GROUND)).setRegistryName("gravel");
+        SANDSUBSTITUTE = new GravelBlock(Block.Properties.create(Material.SAND, MaterialColor.STONE).hardnessAndResistance(0.6F).sound(SoundType.GROUND)).setRegistryName("sand");
 
         CHUNKLOADER = new BlockChunkloader("chunkloader");
         CHUNKLOADER_REDSTONE = new BlockChunkloaderRedstone();
@@ -57,6 +67,8 @@ public class IntercraftBlocks
         registerBlocks(ItemGroup.TOOLS,true,TREETAP);
         registerBlocks(IntercraftItemGroups.MACHINE,true,CHUNKLOADER,CHUNKLOADER_REDSTONE,CHUNKLOADER_TIMER);
         registerBlocks(ItemGroup.REDSTONE,true,REDSTONEBEACON);
+        registerBlocks(null,false, GRAVELSUBSTITUTE,SANDSUBSTITUTE);
+
 
         //registerOre(COPPERORE);
 

@@ -73,7 +73,7 @@ Core mod for InterCraft 1.14.4 modpack.
         *Needs two of them. When linked by facing two of them and sharing one X or Z chunk coordinate will when given a Redstone pulse load all chunks in a straight line between the two points for a specified time (min 2 tick, max 100 tick). If two or more Chunkloaders fills up that criteria it will chose the closest one. Needs to re-charge after each use (600 ticks).*
 
     - Renewable resources Features
-        - [ ] Gravel + Sand
+        - [x] Gravel + Sand
         
         *Blowing up Cobblestone has a chance of converting some of it to Gravel, and blowing up Gravel has a chance of converting to Sand.*
         - [ ] Clay

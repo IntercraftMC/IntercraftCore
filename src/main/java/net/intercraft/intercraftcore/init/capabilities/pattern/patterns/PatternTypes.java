@@ -2,21 +2,8 @@ package net.intercraft.intercraftcore.init.capabilities.pattern.patterns;
 
 import net.intercraft.intercraftcore.init.capabilities.pattern.PatternCreator;
 
-public enum PatternTypes
+public class PatternTypes
 {
-    CLAY(Patterns.CLAY);
+    public static final PatternCreator CLAY = new Clay();
 
-    private final PatternCreator pattern;
-
-    PatternTypes(PatternCreator pattern)
-    {
-
-        this.pattern = pattern;
-    }
-
-
-    public PatternCreator getPattern()
-    {
-        return pattern;
-    }
 }

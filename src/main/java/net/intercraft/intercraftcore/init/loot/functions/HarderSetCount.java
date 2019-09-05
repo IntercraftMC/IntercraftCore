@@ -47,16 +47,19 @@ public class HarderSetCount extends LootFunction
     }
 
     public static class Serializer extends LootFunction.Serializer<HarderSetCount> {
-        public Serializer() {
+        public Serializer()
+        {
             super(new ResourceLocation(Reference.MODID+":set_count"), HarderSetCount.class);
         }
 
-        public void serialize(JsonObject object, HarderSetCount functionClazz, JsonSerializationContext serializationContext) {
+        public void serialize(JsonObject object, HarderSetCount functionClazz, JsonSerializationContext serializationContext)
+        {
             super.serialize(object, functionClazz, serializationContext);
             object.addProperty("multiplier", functionClazz.multiplier);
         }
 
-        public HarderSetCount deserialize(JsonObject object, JsonDeserializationContext deserializationContext, ILootCondition[] conditionsIn) {
+        public HarderSetCount deserialize(JsonObject object, JsonDeserializationContext deserializationContext, ILootCondition[] conditionsIn)
+        {
             float mod = object.get("multiplier").getAsFloat();
             return new HarderSetCount(conditionsIn, mod);
         }

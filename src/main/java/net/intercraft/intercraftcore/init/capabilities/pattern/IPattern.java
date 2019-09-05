@@ -4,8 +4,10 @@ import net.minecraft.world.chunk.Chunk;
 
 public interface IPattern
 {
-    void checkFor(PatternCreator patternCreator);
+    //void checkFor(PatternTypes type);
 
-    PatternCreator[] getPatterns();
+    void tick(Chunk chunk);
+
+    PatternTracker[] getPatterns();
 
 }
