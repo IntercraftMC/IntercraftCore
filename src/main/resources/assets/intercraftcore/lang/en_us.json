@@ -1,6 +1,8 @@
 {
   "item.intercraftcore.test_item": "Test",
   "item.intercraftcore.resin_bucket": "Resin Bucket",
+  "item.intercraftcore.devil_mask": "Devil Mask",
+  "item.intercraftcore.sun_glasses": "Sunglasses",
 
   "item.intercraftcore.cu_ingot": "Copper Ingot",
   "item.intercraftcore.sn_ingot": "Tin Ingot",
@@ -72,6 +74,7 @@
   "itemGroup.intercraftcore.resources": "Resources",
   "itemGroup.intercraftcore.wiring": "Wiring",
   "itemGroup.intercraftcore.machine": "Machines",
+  "itemGroup.intercraftcore.vanity": "Vanity Items",
 
 
   "effect.intercraftcore.radiation_sickness": "Radiation Sickness",
@@ -91,7 +94,12 @@
   "commands.intercraftcore.orevein.get": "Weight of %s is %s at chunk [%s %s]",
 
 
-  "chunkloading.intercraftcore.dublicate": "There is already a Chunkloader at %s %s %s"
+  "chunkloading.intercraftcore.dublicate": "There is already a Chunkloader at %s %s %s",
+
+
+  "curios.identifier.pocket": "Pocket",
+  "curios.identifier.wrist": "Wrist",
+  "curios.identifier.mask": "Mask"
 
 
 }

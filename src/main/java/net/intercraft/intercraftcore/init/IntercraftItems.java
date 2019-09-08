@@ -1,17 +1,19 @@
 package net.intercraft.intercraftcore.init;
 
+import net.intercraft.intercraftcore.Reference;
 import net.intercraft.intercraftcore.element.*;
 import net.intercraft.intercraftcore.item.ItemBucketResin;
 import net.intercraft.intercraftcore.item.ItemTest;
 import net.intercraft.intercraftcore.item.group.ItemElementGroup;
 import net.intercraft.intercraftcore.item.group.ItemUraniumGroup;
+import net.intercraft.intercraftcore.item.masks.ItemGlasses;
+import net.intercraft.intercraftcore.item.masks.ItemMask;
 import net.intercraft.intercraftcore.ore.ItemHardChunk;
 import net.intercraft.intercraftcore.ore.elements.ItemHardChunkCopper;
 import net.intercraft.intercraftcore.ore.elements.ItemHardChunkLead;
 import net.intercraft.intercraftcore.ore.elements.ItemHardChunkTin;
-import net.minecraft.block.Block;
-import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
 
 public class IntercraftItems
 {
@@ -20,6 +22,16 @@ public class IntercraftItems
      */
     public static final Item TEST;
     public static final Item BUCKETRESIN;
+
+
+    /**
+    * Face masks
+    * */
+
+    public static final ItemMask DEVILMASK;
+
+    public static final ItemGlasses SUNGLASSES;
+
 
     /**
      * Item Groups
@@ -47,6 +59,10 @@ public class IntercraftItems
         TEST = new ItemTest((new Item.Properties()).group(IntercraftItemGroups.RESOURCES));
         BUCKETRESIN = new ItemBucketResin();
 
+        DEVILMASK = new ItemMask("devil_mask",new ResourceLocation(Reference.MODID,"textures/masks/devil_mask.png"), true);
+
+        SUNGLASSES = new ItemGlasses("sun_glasses", new ResourceLocation(Reference.MODID,"textures/masks/sun_glasses.png"));
+
         COPPER = new ItemElementGroup(new Copper());
         LEAD = new ItemElementGroup(new Lead());
         SILVER = new ItemElementGroup(new Silver());
@@ -68,6 +84,8 @@ public class IntercraftItems
         registerItem(TEST);
 
         registerItems(BUCKETRESIN);
+
+        registerItems(DEVILMASK,SUNGLASSES);
 
         registerElementItems(COPPER);
         registerElementItems(LEAD);

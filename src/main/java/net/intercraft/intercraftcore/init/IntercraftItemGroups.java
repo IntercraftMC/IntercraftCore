@@ -42,4 +42,17 @@ public class IntercraftItemGroups
             return new ItemStack(IntercraftBlocks.CHUNKLOADER);
         }
     };
+
+    /**
+    * Vanity Tab
+    * */
+
+    public static final ItemGroup VANITY = new ItemGroup(Reference.MODID + ".vanity")
+    {
+        @Override
+        public ItemStack createIcon()
+        {
+            return new ItemStack(IntercraftItems.DEVILMASK);
+        }
+    };
 }

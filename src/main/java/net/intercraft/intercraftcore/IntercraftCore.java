@@ -13,14 +13,20 @@ import net.intercraft.intercraftcore.init.loot.conditions.DestroyedBy;
 import net.intercraft.intercraftcore.init.loot.functions.BlockItemFunction;
 import net.intercraft.intercraftcore.init.loot.functions.HarderSetCount;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.Tuple;
 import net.minecraft.world.storage.loot.conditions.LootConditionManager;
 import net.minecraft.world.storage.loot.functions.LootFunctionManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
+import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import top.theillusivec4.curios.api.CuriosAPI;
+import top.theillusivec4.curios.api.capability.ICurio;
+import top.theillusivec4.curios.api.imc.CurioIMCMessage;
 
 @Mod(Reference.MODID)
 public class IntercraftCore
@@ -40,6 +46,7 @@ public class IntercraftCore
 
         // Setup initial event listeners
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onCommonSetup);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueue);
         //FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onClientSetup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(RegistrationHandler::register);
 
@@ -48,6 +55,31 @@ public class IntercraftCore
 
     }
 
+    public void enqueue(final InterModEnqueueEvent event)
+    {
+
+        final String[] slots = new String[] {
+                "mask",
+                "wrist",
+                "pocket"
+        };
+
+
+
+        for (String slot : slots) {
+            InterModComms.sendTo(CuriosAPI.MODID, CuriosAPI.IMC.REGISTER_TYPE,
+                    () -> new CurioIMCMessage(slot));
+        }
+
+        InterModComms.sendTo(CuriosAPI.MODID, CuriosAPI.IMC.REGISTER_ICON,
+                () -> new Tuple<>("pocket", new ResourceLocation(Reference.MODID,"textures/item/empty_pocket_slot.png")));
+        InterModComms.sendTo(CuriosAPI.MODID, CuriosAPI.IMC.REGISTER_ICON,
+                () -> new Tuple<>("wrist", new ResourceLocation(Reference.MODID,"textures/item/empty_wrist_slot.png")));
+        InterModComms.sendTo(CuriosAPI.MODID, CuriosAPI.IMC.REGISTER_ICON,
+                () -> new Tuple<>("mask", new ResourceLocation(Reference.MODID,"textures/item/empty_mask_slot.png")));
+
+
+    }
 
 
     public void onCommonSetup(final FMLCommonSetupEvent event)
@@ -55,7 +87,7 @@ public class IntercraftCore
 
         LootFunctionManager.registerFunction(new BlockItemFunction.Serializer());
         LootFunctionManager.registerFunction(new HarderSetCount.Serializer());
-        LootConditionManager.registerCondition(new DestroyedBy.Serializer());
+        //LootConditionManager.registerCondition(new DestroyedBy.Serializer());
 
 
 

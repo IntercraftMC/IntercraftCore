@@ -7,7 +7,7 @@ logoFile="intercraftcore.png"
     modId="intercraftcore"
     version="${file.jarVersion}"
     displayName="Intercraft Core"
-    authors="Coding by simon_kungen, SirDavidLudwig. Art by Bluefier42"
+    authors="Coding by simon_kungen & SirDavidLudwig. Art by Bluefier42"
     description='''
     Core mod for Intercraft 1.14.2 modpack.
 
@@ -19,3 +19,8 @@ logoFile="intercraftcore.png"
     modId="minecraft"
     mandatory=true
     versionRange="[1.14.3,1.14.4]"
+
+[[dependencies.intercraftcore]]
+    modId="curios"
+    mandatory=true
+    versionRange="[FORGE-1.14.4-0.24,]"

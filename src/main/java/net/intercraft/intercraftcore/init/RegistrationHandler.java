@@ -3,7 +3,6 @@ package net.intercraft.intercraftcore.init;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.potion.Effect;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.event.RegistryEvent;
 
@@ -11,7 +10,8 @@ import java.lang.reflect.Type;
 import java.util.LinkedList;
 import java.util.List;
 
-public class RegistrationHandler {
+public class RegistrationHandler
+{
 
     protected static final List<Block> blocks = new LinkedList<>();
     protected static final List<Item> itemBlocks = new LinkedList<>();
@@ -42,6 +42,7 @@ public class RegistrationHandler {
     {
         IntercraftBlocks.register();
         blocks.forEach(block -> event.getRegistry().register(block));
+        System.out.println("Block registration done.");
     }
 
     protected static void registerItems(final RegistryEvent.Register<Item> event)
@@ -49,13 +50,14 @@ public class RegistrationHandler {
         IntercraftItems.register();
         items.forEach(item -> event.getRegistry().register(item));
         itemBlocks.forEach(block -> event.getRegistry().register(block)); //The heck? Feels like it should run into a null exception sometimes.
-
+        System.out.println("Item registration done.");
     }
 
     protected static void registerPotions(final RegistryEvent.Register<Effect> event)
     {
         IntercraftPotions.register();
         effects.forEach(potion -> event.getRegistry().register(potion));
+        System.out.println("Potion registration done.");
     }
 
     protected static void registerTileEntities(final RegistryEvent.Register<TileEntityType<?>> event)
