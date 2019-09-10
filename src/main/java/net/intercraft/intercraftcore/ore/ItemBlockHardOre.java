@@ -1,10 +1,12 @@
 package net.intercraft.intercraftcore.ore;
 
+import net.intercraft.intercraftcore.IntercraftCore;
 import net.intercraft.intercraftcore.init.IntercraftItemGroups;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 
 public class ItemBlockHardOre extends BlockItem
 {
@@ -12,7 +14,14 @@ public class ItemBlockHardOre extends BlockItem
     {
         super(block,properties.group(IntercraftItemGroups.RESOURCES));
 
+        addPropertyOverride(new ResourceLocation("intercraftcore:density"),(itemStack, worldIn, entityLivingBase) -> {
 
+            try {
+                return itemStack.getTag().getInt("intercraftcore:density");
+            } catch (NullPointerException e) {
+                return IntercraftCore.defDensity;
+            }
+        });
     }
 
 

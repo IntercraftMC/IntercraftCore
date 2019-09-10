@@ -6,6 +6,7 @@ import net.intercraft.intercraftcore.ore.elements.BlockOreCopper;
 import net.intercraft.intercraftcore.ore.elements.BlockOreLead;
 import net.intercraft.intercraftcore.ore.elements.BlockOreTin;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.GravelBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -17,23 +18,29 @@ import net.minecraft.item.ItemGroup;
 public class IntercraftBlocks
 {
     /**
-     * Instantiate all block
+     * Instantiate all blocks
      */
 
     public static final Block CABLECASE;
     public static final Block TREETAP;
     public static final Block REDSTONEBEACON;
 
-    public static final Block GRAVELSUBSTITUTE;
-    public static final Block SANDSUBSTITUTE;
 
     public static final Block CHUNKLOADER;
     public static final Block CHUNKLOADER_REDSTONE;
     public static final Block CHUNKLOADER_TIMER;
 
     /**
+    * Vanilla feature blocks
+    */
+
+    public static final Block GRAVELSUBSTITUTE;
+    public static final Block SANDSUBSTITUTE;
+    public static final Block VANILLAPRESSUREPLATE;
+
+    /**
     * Ore Blocks
-    * */
+    */
 
     public static final Block COPPERORE;
     public static final Block TINORE;
@@ -46,6 +53,7 @@ public class IntercraftBlocks
 
         GRAVELSUBSTITUTE = new GravelBlock(Block.Properties.create(Material.SAND, MaterialColor.STONE).hardnessAndResistance(0.6F).sound(SoundType.GROUND)).setRegistryName("gravel");
         SANDSUBSTITUTE = new GravelBlock(Block.Properties.create(Material.SAND, MaterialColor.STONE).hardnessAndResistance(0.6F).sound(SoundType.GROUND)).setRegistryName("sand");
+        VANILLAPRESSUREPLATE = new BlockPressurePlate();
 
         CHUNKLOADER = new BlockChunkloader("chunkloader");
         CHUNKLOADER_REDSTONE = new BlockChunkloaderRedstone();
@@ -55,12 +63,12 @@ public class IntercraftBlocks
         TINORE = new BlockOreTin();
         LEADORE = new BlockOreLead();
 
-
     }
 
     /**
-     * Register all block
+     * Register all blocks
      */
+
     public static void register()
     {
         registerBlocks(IntercraftItemGroups.WIRING,true,CABLECASE);
@@ -68,7 +76,7 @@ public class IntercraftBlocks
         registerBlocks(IntercraftItemGroups.MACHINE,true,CHUNKLOADER,CHUNKLOADER_REDSTONE,CHUNKLOADER_TIMER);
         registerBlocks(ItemGroup.REDSTONE,true,REDSTONEBEACON);
         registerBlocks(null,false, GRAVELSUBSTITUTE,SANDSUBSTITUTE);
-
+        registerBlocks(ItemGroup.REDSTONE, Blocks.STONE_PRESSURE_PLATE,VANILLAPRESSUREPLATE);
 
         //registerOre(COPPERORE);
 
@@ -82,10 +90,21 @@ public class IntercraftBlocks
     {
 
         for (Block block : blocks) {
-
             RegistrationHandler.blocks.add(block);
             if (item)
                 RegistrationHandler.itemBlocks.add(new BlockItem(block, new Item.Properties().group(group)).setRegistryName(block.getRegistryName()));
+        }
+    }
+
+    protected static void registerBlocks(ItemGroup group, final Block blockR, Block...blocks)
+    {
+
+        // TODO Replace the block at that index with supplied one.
+
+        for (Block block : blocks) {
+
+            RegistrationHandler.blocks.add(block);
+            RegistrationHandler.itemBlocks.add(new BlockItem(block, new Item.Properties().group(group)).setRegistryName(block.getRegistryName()));
         }
     }
 
@@ -94,7 +113,6 @@ public class IntercraftBlocks
 
         for (Block block : blocks) {
             RegistrationHandler.blocks.add(block);
-            //RegistrationHandler.itemBlocks.add(new BlockItem(block, new Item.Properties().group(IntercraftItemGroups.RESOURCES)).setRegistryName(block.getRegistryName()));
             RegistrationHandler.itemBlocks.add(new ItemBlockHardOre(block, new Item.Properties()).setRegistryName(block.getRegistryName()));
         }
     }
