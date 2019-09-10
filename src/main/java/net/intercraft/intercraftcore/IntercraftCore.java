@@ -59,9 +59,9 @@ public class IntercraftCore
     {
 
         final String[] slots = new String[] {
-                "mask",
+                "pocket",
                 "wrist",
-                "pocket"
+                "mask"
         };
 
 
@@ -99,6 +99,7 @@ public class IntercraftCore
 
         MinecraftForge.EVENT_BUS.addListener(IntercraftEventHandler::attachCapabilityEntity);
         MinecraftForge.EVENT_BUS.addListener(IntercraftEventHandler::attachCapabilityChunk);
+        MinecraftForge.EVENT_BUS.addListener(IntercraftEventHandler::attachCapabilityItem);
 
         OreGen.setupOreGen();
 

@@ -29,9 +29,7 @@ public class IntercraftItems
     * */
 
     public static final ItemMask DEVILMASK;
-
     public static final ItemGlasses SUNGLASSES;
-
 
     /**
      * Item Groups
@@ -60,7 +58,6 @@ public class IntercraftItems
         BUCKETRESIN = new ItemBucketResin();
 
         DEVILMASK = new ItemMask("devil_mask",new ResourceLocation(Reference.MODID,"textures/masks/devil_mask.png"), true);
-
         SUNGLASSES = new ItemGlasses("sun_glasses", new ResourceLocation(Reference.MODID,"textures/masks/sun_glasses.png"));
 
         COPPER = new ItemElementGroup(new Copper());

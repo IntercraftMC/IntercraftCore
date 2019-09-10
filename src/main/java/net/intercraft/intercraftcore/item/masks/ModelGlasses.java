@@ -18,7 +18,7 @@ public class ModelGlasses extends EntityModel
 
         this.mask = new RendererModel(this,0,0);
         this.mask.setRotationPoint(0,0,0);
-        this.mask.addBox(-4.0F, -8.0F, -4.2F, 8, 8, 8, 0.0F);
+        this.mask.addBox(-4.0F, -8.0F, -4.2F, 8, 8, 8, 0.01F);
 
     }
 

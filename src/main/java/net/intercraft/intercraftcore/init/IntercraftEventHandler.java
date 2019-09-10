@@ -1,23 +1,31 @@
 package net.intercraft.intercraftcore.init;
 
 import net.intercraft.intercraftcore.IntercraftCore;
+import net.intercraft.intercraftcore.Reference;
 import net.intercraft.intercraftcore.command.OreVeinDebugCommand;
 import net.intercraft.intercraftcore.command.RadiationDebugCommand;
 import net.intercraft.intercraftcore.init.capabilities.ore_veins.OreVeinProvider;
 import net.intercraft.intercraftcore.init.capabilities.radiation.RadiationProvider;
+import net.intercraft.intercraftcore.item.masks.ModelBand;
 import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.monster.ElderGuardianEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityStruckByLightningEvent;
@@ -25,7 +33,11 @@ import net.minecraftforge.event.world.ExplosionEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
+import top.theillusivec4.curios.api.capability.CuriosCapability;
+import top.theillusivec4.curios.api.capability.ICurio;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.Random;
 
 @Mod.EventBusSubscriber
@@ -111,6 +123,56 @@ public class IntercraftEventHandler
     }
 
 
+
+    public static void attachCapabilityItem(AttachCapabilitiesEvent<ItemStack> event)
+    {
+
+        if (!(event.getObject() instanceof ItemStack)) return;
+
+        if (event.getObject().getItem() != Items.CLOCK) return;
+
+
+
+        ResourceLocation texture = new ResourceLocation(Reference.MODID,"textures/masks/clock.png");
+
+
+        ICurio curio = new ICurio() {
+            @Override
+            public boolean hasRender(String identifier, LivingEntity entityLivingBase)
+            {
+                return true;
+            }
+
+            @Override
+            public void doRender(String identifier, LivingEntity entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale)
+            {
+
+                Minecraft.getInstance().getTextureManager().bindTexture(texture);
+
+                net.intercraft.intercraftcore.api.RenderHelper.followLeftArmTransformation(entitylivingbaseIn, ModelBand.modelClock.wrist);
+                ModelBand.modelClock.render(entitylivingbaseIn,limbSwing,limbSwingAmount,ageInTicks,netHeadYaw,headPitch,scale);
+
+
+            }
+        };
+
+        ICapabilityProvider provider = new ICapabilityProvider() {
+            private final LazyOptional<ICurio> curioOpt =
+                    LazyOptional.of(() -> curio);
+
+            @Nonnull
+            @Override
+            public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap,
+                                                     @Nullable Direction side) {
+
+                return CuriosCapability.ITEM.orEmpty(cap, curioOpt);
+            }
+        };
+
+        event.addCapability(CuriosCapability.ID_ITEM, provider);
+
+
+    }
 
 
     public static void attachCapabilityEntity(AttachCapabilitiesEvent<Entity> event)
