@@ -14,6 +14,7 @@ import net.minecraft.block.material.MaterialColor;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.util.ResourceLocation;
 
 public class IntercraftBlocks
 {
@@ -36,7 +37,7 @@ public class IntercraftBlocks
 
     public static final Block GRAVELSUBSTITUTE;
     public static final Block SANDSUBSTITUTE;
-    public static final Block VANILLAPRESSUREPLATE;
+    public static final Block VANILLASTONEPRESSUREPLATE;
 
     /**
     * Ore Blocks
@@ -53,7 +54,7 @@ public class IntercraftBlocks
 
         GRAVELSUBSTITUTE = new GravelBlock(Block.Properties.create(Material.SAND, MaterialColor.STONE).hardnessAndResistance(0.6F).sound(SoundType.GROUND)).setRegistryName("gravel");
         SANDSUBSTITUTE = new GravelBlock(Block.Properties.create(Material.SAND, MaterialColor.STONE).hardnessAndResistance(0.6F).sound(SoundType.GROUND)).setRegistryName("sand");
-        VANILLAPRESSUREPLATE = new BlockPressurePlate();
+        VANILLASTONEPRESSUREPLATE = new BlockPressurePlate();
 
         CHUNKLOADER = new BlockChunkloader("chunkloader");
         CHUNKLOADER_REDSTONE = new BlockChunkloaderRedstone();
@@ -76,7 +77,7 @@ public class IntercraftBlocks
         registerBlocks(IntercraftItemGroups.MACHINE,true,CHUNKLOADER,CHUNKLOADER_REDSTONE,CHUNKLOADER_TIMER);
         registerBlocks(ItemGroup.REDSTONE,true,REDSTONEBEACON);
         registerBlocks(null,false, GRAVELSUBSTITUTE,SANDSUBSTITUTE);
-        registerBlocks(ItemGroup.REDSTONE, Blocks.STONE_PRESSURE_PLATE,VANILLAPRESSUREPLATE);
+        registerReplaceBlockItem(Blocks.STONE_PRESSURE_PLATE, VANILLASTONEPRESSUREPLATE);
 
         //registerOre(COPPERORE);
 
@@ -96,16 +97,14 @@ public class IntercraftBlocks
         }
     }
 
-    protected static void registerBlocks(ItemGroup group, final Block blockR, Block...blocks)
+    protected static void registerReplaceBlockItem(Block blockR, Block block)
     {
 
-        // TODO Replace the block at that index with supplied one.
+        RegistrationHandler.blocks.add(block);
 
-        for (Block block : blocks) {
+        Item blockItem = new BlockItem(block, new Item.Properties().group(blockR.asItem().getGroup())).setRegistryName(new ResourceLocation(blockR.getRegistryName().getNamespace(),block.getRegistryName().getPath()));
 
-            RegistrationHandler.blocks.add(block);
-            RegistrationHandler.itemBlocks.add(new BlockItem(block, new Item.Properties().group(group)).setRegistryName(block.getRegistryName()));
-        }
+        RegistrationHandler.itemBlocks.add(blockItem);
     }
 
     protected static void registerOreBlocks(Block...blocks)
