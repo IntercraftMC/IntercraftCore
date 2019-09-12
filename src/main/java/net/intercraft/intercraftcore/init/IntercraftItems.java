@@ -20,6 +20,7 @@ public class IntercraftItems
     /**
      * Miscellaneous Items
      */
+
     public static final Item TEST;
     public static final Item BUCKETRESIN;
 
@@ -34,12 +35,24 @@ public class IntercraftItems
     /**
      * Item Groups
      */
+
+    public static final ItemElementGroup ALUMINIUM;
     public static final ItemElementGroup COPPER;
+    public static final ItemElementGroup GOLD;
+    public static final ItemElementGroup IRIDIUM;
+    public static final ItemElementGroup IRON;
     public static final ItemElementGroup LEAD;
     public static final ItemElementGroup SILVER;
+    public static final ItemElementGroup THORIUM;
     public static final ItemElementGroup TIN;
+    public static final ItemElementGroup TITANIUM;
     public static final ItemElementGroup TUNGSTEN;
     public static final ItemElementGroup URANIUM;
+    public static final ItemElementGroup ZINC;
+
+    public static final ItemElementGroup BRASS;
+    public static final ItemElementGroup BRONZE;
+    public static final ItemElementGroup STEEL;
 
 
     /**
@@ -53,6 +66,7 @@ public class IntercraftItems
     /**
      * Instantiate all items
      */
+
     static {
         TEST = new ItemTest((new Item.Properties()).group(IntercraftItemGroups.RESOURCES));
         BUCKETRESIN = new ItemBucketResin();
@@ -60,12 +74,24 @@ public class IntercraftItems
         DEVILMASK = new ItemMask("devil_mask",new ResourceLocation(Reference.MODID,"textures/masks/devil_mask.png"), true);
         SUNGLASSES = new ItemGlasses("sun_glasses", new ResourceLocation(Reference.MODID,"textures/masks/sun_glasses.png"));
 
+
+        ALUMINIUM = new ItemElementGroup(new Aluminium());
         COPPER = new ItemElementGroup(new Copper());
+        GOLD = new ItemElementGroup(new Gold());
+        IRIDIUM = new ItemElementGroup(new Iridium());
+        IRON = new ItemElementGroup(new Iron());
         LEAD = new ItemElementGroup(new Lead());
         SILVER = new ItemElementGroup(new Silver());
+        THORIUM = new ItemElementGroup(new Thorium());
         TIN = new ItemElementGroup(new Tin());
+        TITANIUM = new ItemElementGroup(new Titanium());
         TUNGSTEN = new ItemElementGroup(new Tungsten());
         URANIUM = new ItemUraniumGroup(new Uranium());
+        ZINC = new ItemUraniumGroup(new Zinc());
+
+        BRASS = new ItemElementGroup(new Brass());
+        BRONZE = new ItemElementGroup(new Bronze());
+        STEEL = new ItemElementGroup(new Steel());
 
 
         COPPERCHUNK = new ItemHardChunkCopper();
@@ -84,12 +110,25 @@ public class IntercraftItems
 
         registerItems(DEVILMASK,SUNGLASSES);
 
+        registerElementItems(ALUMINIUM);
         registerElementItems(COPPER);
+        registerElementItems(GOLD);
+        registerElementItems(IRIDIUM);
+        registerElementItems(IRON);
         registerElementItems(LEAD);
         registerElementItems(SILVER);
+        registerElementItems(THORIUM);
         registerElementItems(TIN);
+        registerElementItems(TITANIUM);
         registerElementItems(TUNGSTEN);
         registerElementItems(URANIUM);
+        registerElementItems(ZINC);
+
+        registerElementItems(BRASS);
+        registerElementItems(BRONZE);
+        registerElementItems(STEEL);
+
+
 
         registerItems(COPPERCHUNK,TINCHUNK,LEADCHUNK);
     }

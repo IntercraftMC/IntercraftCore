@@ -5,10 +5,7 @@ import net.intercraft.intercraftcore.ore.ItemBlockHardOre;
 import net.intercraft.intercraftcore.ore.elements.BlockOreCopper;
 import net.intercraft.intercraftcore.ore.elements.BlockOreLead;
 import net.intercraft.intercraftcore.ore.elements.BlockOreTin;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.GravelBlock;
-import net.minecraft.block.SoundType;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
 import net.minecraft.item.BlockItem;
@@ -37,7 +34,14 @@ public class IntercraftBlocks
 
     public static final Block GRAVELSUBSTITUTE;
     public static final Block SANDSUBSTITUTE;
-    public static final Block VANILLASTONEPRESSUREPLATE;
+
+    public static final Block VANILLA_STONE_PRESSUREPLATE;
+    public static final Block VANILLA_OAK_PRESSUREPLATE;
+    public static final Block VANILLA_SPRUCE_PRESSUREPLATE;
+    public static final Block VANILLA_BIRCH_PRESSUREPLATE;
+    public static final Block VANILLA_JUNGLE_PRESSUREPLATE;
+    public static final Block VANILLA_ACACIA_PRESSUREPLATE;
+    public static final Block VANILLA_DARKOAK_PRESSUREPLATE;
 
     /**
     * Ore Blocks
@@ -54,7 +58,14 @@ public class IntercraftBlocks
 
         GRAVELSUBSTITUTE = new GravelBlock(Block.Properties.create(Material.SAND, MaterialColor.STONE).hardnessAndResistance(0.6F).sound(SoundType.GROUND)).setRegistryName("gravel");
         SANDSUBSTITUTE = new GravelBlock(Block.Properties.create(Material.SAND, MaterialColor.STONE).hardnessAndResistance(0.6F).sound(SoundType.GROUND)).setRegistryName("sand");
-        VANILLASTONEPRESSUREPLATE = new BlockPressurePlate();
+
+        VANILLA_STONE_PRESSUREPLATE = new BlockPressurePlate("stone_pressure_plate", PressurePlateBlock.Sensitivity.MOBS, Block.Properties.create(Material.ROCK).doesNotBlockMovement().hardnessAndResistance(0.5F));
+        VANILLA_OAK_PRESSUREPLATE = new BlockPressurePlate("oak_pressure_plate", PressurePlateBlock.Sensitivity.EVERYTHING, Block.Properties.create(Material.WOOD).doesNotBlockMovement().hardnessAndResistance(0.5F).sound(SoundType.WOOD));
+        VANILLA_SPRUCE_PRESSUREPLATE = new BlockPressurePlate("spruce_pressure_plate", PressurePlateBlock.Sensitivity.EVERYTHING, Block.Properties.create(Material.WOOD).doesNotBlockMovement().hardnessAndResistance(0.5F).sound(SoundType.WOOD));
+        VANILLA_BIRCH_PRESSUREPLATE = new BlockPressurePlate("birch_pressure_plate", PressurePlateBlock.Sensitivity.EVERYTHING, Block.Properties.create(Material.WOOD).doesNotBlockMovement().hardnessAndResistance(0.5F).sound(SoundType.WOOD));
+        VANILLA_JUNGLE_PRESSUREPLATE = new BlockPressurePlate("jungle_pressure_plate", PressurePlateBlock.Sensitivity.EVERYTHING, Block.Properties.create(Material.WOOD).doesNotBlockMovement().hardnessAndResistance(0.5F).sound(SoundType.WOOD));
+        VANILLA_ACACIA_PRESSUREPLATE = new BlockPressurePlate("acacia_pressure_plate", PressurePlateBlock.Sensitivity.EVERYTHING, Block.Properties.create(Material.WOOD).doesNotBlockMovement().hardnessAndResistance(0.5F).sound(SoundType.WOOD));
+        VANILLA_DARKOAK_PRESSUREPLATE = new BlockPressurePlate("dark_oak_pressure_plate", PressurePlateBlock.Sensitivity.EVERYTHING, Block.Properties.create(Material.WOOD).doesNotBlockMovement().hardnessAndResistance(0.5F).sound(SoundType.WOOD));
 
         CHUNKLOADER = new BlockChunkloader("chunkloader");
         CHUNKLOADER_REDSTONE = new BlockChunkloaderRedstone();
@@ -77,7 +88,14 @@ public class IntercraftBlocks
         registerBlocks(IntercraftItemGroups.MACHINE,true,CHUNKLOADER,CHUNKLOADER_REDSTONE,CHUNKLOADER_TIMER);
         registerBlocks(ItemGroup.REDSTONE,true,REDSTONEBEACON);
         registerBlocks(null,false, GRAVELSUBSTITUTE,SANDSUBSTITUTE);
-        registerReplaceBlockItem(Blocks.STONE_PRESSURE_PLATE, VANILLASTONEPRESSUREPLATE);
+
+        registerReplaceBlockItem(Blocks.STONE_PRESSURE_PLATE, VANILLA_STONE_PRESSUREPLATE);
+        registerReplaceBlockItem(Blocks.OAK_PRESSURE_PLATE, VANILLA_OAK_PRESSUREPLATE);
+        registerReplaceBlockItem(Blocks.SPRUCE_PRESSURE_PLATE, VANILLA_SPRUCE_PRESSUREPLATE);
+        registerReplaceBlockItem(Blocks.BIRCH_PRESSURE_PLATE, VANILLA_BIRCH_PRESSUREPLATE);
+        registerReplaceBlockItem(Blocks.JUNGLE_PRESSURE_PLATE, VANILLA_JUNGLE_PRESSUREPLATE);
+        registerReplaceBlockItem(Blocks.ACACIA_PRESSURE_PLATE, VANILLA_ACACIA_PRESSUREPLATE);
+        registerReplaceBlockItem(Blocks.DARK_OAK_PRESSURE_PLATE, VANILLA_DARKOAK_PRESSUREPLATE);
 
         //registerOre(COPPERORE);
 

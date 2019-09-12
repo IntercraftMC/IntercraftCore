@@ -4,7 +4,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.IWaterLoggable;
 import net.minecraft.block.PressurePlateBlock;
-import net.minecraft.block.material.Material;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.fluid.IFluidState;
@@ -22,12 +21,13 @@ import static net.minecraft.state.properties.BlockStateProperties.WATERLOGGED;
 
 public class BlockPressurePlate extends PressurePlateBlock implements IWaterLoggable
 {
-    public BlockPressurePlate()
+    public BlockPressurePlate(String name ,PressurePlateBlock.Sensitivity sensitivity, Block.Properties properties)
     {
-        super(PressurePlateBlock.Sensitivity.MOBS, Block.Properties.create(Material.ROCK).doesNotBlockMovement().hardnessAndResistance(0.5F));
+        //super(PressurePlateBlock.Sensitivity.MOBS, Block.Properties.create(Material.ROCK).doesNotBlockMovement().hardnessAndResistance(0.5F));
+        super(sensitivity,properties);
 
         //setRegistryName(new ResourceLocation("minecraft","stone_pressure_plate"));
-        setRegistryName("stone_pressure_plate");
+        setRegistryName(name);
     }
 
 
@@ -75,7 +75,7 @@ public class BlockPressurePlate extends PressurePlateBlock implements IWaterLogg
     @Override
     public String getTranslationKey()
     {
-        return "block.minecraft.stone_pressure_plate";
+        return "block.minecraft." + getRegistryName().getPath();
     }
 
     @Override

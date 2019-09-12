@@ -29,7 +29,7 @@ public class IntercraftColorHandler
 
     /**
      * Pre-determined items to be coloured.
-    * */
+     */
 
     private static List<Item> items = new ArrayList<Item>(){{
         add(IntercraftItems.COPPERCHUNK);
@@ -39,7 +39,7 @@ public class IntercraftColorHandler
 
     /**
      * Pre-determined blocks to be coloured.
-     * */
+     */
 
     private static List<Block> blocks = new ArrayList<Block>(){{
             add(IntercraftBlocks.COPPERORE);
@@ -55,22 +55,33 @@ public class IntercraftColorHandler
 
         /**
          * Groups of items to be coloured.
-        * */
+         */
 
         ItemElementGroup[] groups = {
+                IntercraftItems.ALUMINIUM,
                 IntercraftItems.COPPER,
+                IntercraftItems.GOLD,
+                IntercraftItems.IRIDIUM,
+                IntercraftItems.IRON,
                 IntercraftItems.LEAD,
                 IntercraftItems.SILVER,
+                IntercraftItems.THORIUM,
                 IntercraftItems.TIN,
+                IntercraftItems.TITANIUM,
                 IntercraftItems.TUNGSTEN,
-                IntercraftItems.URANIUM
+                IntercraftItems.URANIUM,
+                IntercraftItems.ZINC,
+
+                IntercraftItems.BRASS,
+                IntercraftItems.BRONZE,
+                IntercraftItems.STEEL
         };
 
 
 
         /**
          * Filter out- and placing the group's content into the @items variable.
-        * */
+         */
 
         for (ItemElementGroup group: groups) {
             Item[] i = { group.INGOT, group.NUGGET, group.DUST, group.DUST_SMALL, group.PLATE };
@@ -82,7 +93,7 @@ public class IntercraftColorHandler
 
         /**
          * Registering Item colours.
-        * */
+         */
 
         for (Item item : items) {
 
@@ -105,7 +116,7 @@ public class IntercraftColorHandler
 
         /**
          * Registering Block colours.
-        * */
+         */
 
         for (Block block : blocks) {
             event.getBlockColors().register(new BlockColorHandler(((BlockHardOre) block).getTint()),block);

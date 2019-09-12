@@ -43,11 +43,16 @@ public class Element
      * @param tint         Element tint color
      * @param excludeForms Bit flags for group item forms to exclude
      */
-    public Element(String name, String symbol, int tint, byte excludeForms)
+    public Element(String name, String symbol, int tint, byte...excludeForms)
     {
         this.name = name;
         this.symbol = symbol;
         this.tint = tint;
-        this.forms &= ~excludeForms;
+
+        for (byte excludeForm : excludeForms) {
+            this.forms &= ~excludeForm;
+        }
+
+        //this.forms &= ~excludeForms;
     }
 }
