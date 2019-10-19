@@ -13,6 +13,7 @@ import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.item.FallingBlockEntity;
 import net.minecraft.entity.monster.ElderGuardianEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -28,6 +29,7 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.entity.EntityStruckByLightningEvent;
 import net.minecraftforge.event.world.ExplosionEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -46,6 +48,8 @@ public class IntercraftEventHandler
 
     private static final ResourceLocation cobblestoneID = new ResourceLocation("forge","cobblestone");
     private static final ResourceLocation gravelID = new ResourceLocation("forge","gravel");
+    private static final ResourceLocation anvilID = new ResourceLocation("minecraft","anvil");
+    private static final ResourceLocation smashableBlocksID = new ResourceLocation(Reference.MODID,"smashable_blocks");
 
     @SubscribeEvent
     public static void onServerStarting(final FMLServerStartingEvent event)
@@ -54,9 +58,17 @@ public class IntercraftEventHandler
         OreVeinDebugCommand.register(event.getCommandDispatcher());
     }
 
+    //@SubscribeEvent
+    public static void onBlockFall(final EntityEvent.EntityConstructing event)
+    {
+
+        //if (!(event.getEntity() instanceof PlayerEntity))
+        if (event.getEntity() instanceof FallingBlockEntity)
+            System.out.println(event.getEntity().getDisplayName().getString());
+    }
 
     @SubscribeEvent
-    public static void onExplosion(final ExplosionEvent event)
+    public static void onExplosion(final ExplosionEvent.Detonate event)
     {
         Random random = new Random();
 
@@ -84,7 +96,6 @@ public class IntercraftEventHandler
                 }
             }
         }
-
     }
 
 
@@ -116,6 +127,23 @@ public class IntercraftEventHandler
 
 
             ((ServerWorld) event.world).getEntities().forEach(entity -> {
+
+                if (entity instanceof FallingBlockEntity) {
+
+                    if (!(BlockTags.getCollection().getOrCreate(anvilID).contains(((FallingBlockEntity) entity).getBlockState().getBlock()))) return;
+
+                    BlockPos pos = entity.getPosition();
+                    BlockPos blockPos = new BlockPos(pos.getX(),pos.getY()-0.1d,pos.getZ());
+
+
+
+                    if (BlockTags.getCollection().getOrCreate(smashableBlocksID).contains(event.world.getBlockState(blockPos).getBlock())) {
+                        entity.addVelocity(0,0.1d,0);
+
+                        event.world.destroyBlock(blockPos,true);
+                    }
+
+                }
 
                 entity.getCapability(RadiationProvider.RAD_CAP).ifPresent(cap -> cap.tick(entity));
             });

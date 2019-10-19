@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:minecraft:gravel"
+  ],
+  "replaces" : "minecraft:sand"
+}

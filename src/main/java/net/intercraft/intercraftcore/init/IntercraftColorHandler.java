@@ -1,6 +1,5 @@
 package net.intercraft.intercraftcore.init;
 
-
 import net.intercraft.intercraftcore.item.ItemElement;
 import net.intercraft.intercraftcore.item.group.ItemElementGroup;
 import net.intercraft.intercraftcore.ore.BlockHardOre;
@@ -28,7 +27,7 @@ public class IntercraftColorHandler
 
 
     /**
-     * Pre-determined items to be coloured.
+     * Pre-determined items to be coloured
      */
 
     private static List<Item> items = new ArrayList<Item>(){{
@@ -38,7 +37,7 @@ public class IntercraftColorHandler
     }};
 
     /**
-     * Pre-determined blocks to be coloured.
+     * Pre-determined blocks to be coloured
      */
 
     private static List<Block> blocks = new ArrayList<Block>(){{
@@ -54,7 +53,7 @@ public class IntercraftColorHandler
 
 
         /**
-         * Groups of items to be coloured.
+         * Groups of items to be coloured
          */
 
         ItemElementGroup[] groups = {
@@ -80,7 +79,7 @@ public class IntercraftColorHandler
 
 
         /**
-         * Filter out- and placing the group's content into the @items variable.
+         * Filter out- and placing the group's content into the @items variable
          */
 
         for (ItemElementGroup group: groups) {
@@ -92,7 +91,7 @@ public class IntercraftColorHandler
         }
 
         /**
-         * Registering Item colours.
+         * Registering Item colours
          */
 
         for (Item item : items) {
@@ -115,7 +114,7 @@ public class IntercraftColorHandler
 
 
         /**
-         * Registering Block colours.
+         * Registering Block colours
          */
 
         for (Block block : blocks) {
@@ -134,39 +133,45 @@ public class IntercraftColorHandler
         private int tint;
         private boolean layer;
 
-        public ItemColorHandler(int tint, boolean layer) {
+        public ItemColorHandler(int tint, boolean layer)
+        {
             this.tint = tint;
             this.layer = layer;
         }
 
-
-        public int getColor(ItemStack stack, int tint) {
+        public int getColor(ItemStack stack, int tint)
+        {
 
             if (this.layer)
                 if (tint == 0)
                     return 0xFFFFFF;
                 else
                     return this.tint;
-            else
-                return this.tint;
+
+            return this.tint;
+
+
         }
     }
     private static class BlockColorHandler implements IBlockColor, IItemColor
     {
         private int tint;
 
-        public BlockColorHandler(int tint) {
+        public BlockColorHandler(int tint)
+        {
             this.tint = tint;
         }
 
 
 
-        public int getColor(ItemStack stack, int tint) {
+        public int getColor(ItemStack stack, int tint)
+        {
             return this.tint;
         }
 
         @Override
-        public int getColor(BlockState blockState, @Nullable IEnviromentBlockReader iEnviromentBlockReader, @Nullable BlockPos blockPos, int i) {
+        public int getColor(BlockState blockState, @Nullable IEnviromentBlockReader iEnviromentBlockReader, @Nullable BlockPos blockPos, int i)
+        {
             return this.tint;
         }
     }
