@@ -3,6 +3,7 @@
 NAME="w"
 
 MATCHERS=("ingot" "nugget" "dust" "dustsmall" "plate")
+#MATCHERS=("al" "cu" "au" "ir" "fe" "pb" "li" "hg" "ag" "th" "sn" "ti" "w" "u" "zn" "cuzn" "cusn" "fec")
 
 for VAR in ${MATCHERS[*]}
 do

@@ -1,5 +1,7 @@
 package net.intercraft.intercraftcore;
 
+//import net.intercraft.intercraftcore.element.*;
+
 public enum ElementDictionary
 {
 
@@ -66,4 +68,28 @@ public enum ElementDictionary
     {
         return this.colorSecondary;
     }
+    
+    /*class Elements
+    {
+        public final Element ALUMINIUM = new Aluminium();
+        public final Element COPPER    = new Copper();
+        public final Element GOLD      = new Gold();
+        public final Element IRIDIUM   = new Iridium();
+        public final Element IRON      = new Iron();
+        public final Element LEAD      = new Lead();
+        public final Element LITHIUM   = new Lithium();
+        public final Element MERCURY   = new Mercury();
+        public final Element SILVER    = new Silver();
+        public final Element THORIUM   = new Thorium();
+        public final Element TIN       = new Tin();
+        public final Element TITANIUM  = new Titanium();
+        public final Element TUNGSTEN  = new Tungsten();
+        public final Element URANIUM   = new Uranium();
+        public final Element ZINC      = new Zinc();
+        //public final Element CARBON;
+        //public final Element SILICON;
+        public final Element BRASS     = new Brass();
+        public final Element BRONZE    = new Bronze();
+        public final Element STEEL     = new Steel();
+    }*/
 }

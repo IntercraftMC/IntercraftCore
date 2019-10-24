@@ -20,7 +20,7 @@ public class IntercraftItemGroups
     };
     /**
     * Wiring tab
-    * */
+    */
     public static final ItemGroup WIRING = new ItemGroup(Reference.MODID + ".wiring")
     {
         @Override
@@ -31,8 +31,8 @@ public class IntercraftItemGroups
     };
 
     /**
-    * Machine Tab
-    * */
+    * Machines Tab
+    */
 
     public static final ItemGroup MACHINE = new ItemGroup(Reference.MODID + ".machine")
     {
@@ -45,7 +45,7 @@ public class IntercraftItemGroups
 
     /**
     * Vanity Tab
-    * */
+    */
 
     public static final ItemGroup VANITY = new ItemGroup(Reference.MODID + ".vanity")
     {

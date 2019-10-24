@@ -1,6 +1,8 @@
 package net.intercraft.intercraftcore.init;
 
 import net.intercraft.intercraftcore.block.*;
+import net.intercraft.intercraftcore.block.group.BlockElementGroup;
+import net.intercraft.intercraftcore.element.*;
 import net.intercraft.intercraftcore.ore.ItemBlockHardOre;
 import net.intercraft.intercraftcore.ore.elements.BlockOreCopper;
 import net.intercraft.intercraftcore.ore.elements.BlockOreLead;
@@ -44,6 +46,28 @@ public class IntercraftBlocks
     public static final Block VANILLA_DARKOAK_PRESSUREPLATE;
 
     /**
+    * Block Groups
+    * */
+
+    public static final BlockElementGroup ALUMINIUM;
+    public static final BlockElementGroup COPPER;
+    public static final BlockElementGroup GOLD;
+    public static final BlockElementGroup IRIDIUM;
+    public static final BlockElementGroup IRON;
+    public static final BlockElementGroup LEAD;
+    public static final BlockElementGroup SILVER;
+    public static final BlockElementGroup THORIUM;
+    public static final BlockElementGroup TIN;
+    public static final BlockElementGroup TITANIUM;
+    public static final BlockElementGroup TUNGSTEN;
+    public static final BlockElementGroup URANIUM;
+    public static final BlockElementGroup ZINC;
+
+    public static final BlockElementGroup BRASS;
+    public static final BlockElementGroup BRONZE;
+    public static final BlockElementGroup STEEL;
+
+    /**
     * Ore Blocks
     */
 
@@ -70,6 +94,42 @@ public class IntercraftBlocks
         CHUNKLOADER = new BlockChunkloader("chunkloader");
         CHUNKLOADER_REDSTONE = new BlockChunkloaderRedstone();
         CHUNKLOADER_TIMER = new BlockChunkloaderTimer();
+
+        /*ALUMINIUM = new BlockElementGroup(Elements.ALUMINIUM);
+        COPPER = new BlockElementGroup(Elements.COPPER);
+        GOLD = new BlockElementGroup(Elements.GOLD);
+        IRIDIUM = new BlockElementGroup(Elements.IRIDIUM);
+        IRON = new BlockElementGroup(Elements.IRON);
+        LEAD = new BlockElementGroup(Elements.LEAD);
+        SILVER = new BlockElementGroup(Elements.SILVER);
+        THORIUM = new BlockElementGroup(Elements.THORIUM);
+        TIN = new BlockElementGroup(Elements.TIN);
+        TITANIUM = new BlockElementGroup(Elements.TITANIUM);
+        TUNGSTEN = new BlockElementGroup(Elements.TUNGSTEN);
+        URANIUM = new BlockElementGroup(Elements.URANIUM);
+        ZINC = new BlockElementGroup(Elements.ZINC);
+
+        BRASS = new BlockElementGroup(Elements.BRASS);
+        BRONZE = new BlockElementGroup(Elements.BRONZE);
+        STEEL = new BlockElementGroup(Elements.STEEL);*/
+
+        ALUMINIUM = new BlockElementGroup(new Aluminium());
+        COPPER = new BlockElementGroup(new Copper());
+        GOLD = new BlockElementGroup(new Gold());
+        IRIDIUM = new BlockElementGroup(new Iridium());
+        IRON = new BlockElementGroup(new Iron());
+        LEAD = new BlockElementGroup(new Lead());
+        SILVER = new BlockElementGroup(new Silver());
+        THORIUM = new BlockElementGroup(new Thorium());
+        TIN = new BlockElementGroup(new Tin());
+        TITANIUM = new BlockElementGroup(new Titanium());
+        TUNGSTEN = new BlockElementGroup(new Tungsten());
+        URANIUM = new BlockElementGroup(new Uranium());
+        ZINC = new BlockElementGroup(new Zinc());
+
+        BRASS = new BlockElementGroup(new Brass());
+        BRONZE = new BlockElementGroup(new Bronze());
+        STEEL = new BlockElementGroup(new Steel());
 
         COPPERORE = new BlockOreCopper();
         TINORE = new BlockOreTin();
@@ -99,6 +159,24 @@ public class IntercraftBlocks
 
         //registerOre(COPPERORE);
 
+        registerElementBlocks(ALUMINIUM);
+        registerElementBlocks(COPPER);
+        registerElementBlocks(GOLD);
+        registerElementBlocks(IRIDIUM);
+        registerElementBlocks(IRON);
+        registerElementBlocks(LEAD);
+        registerElementBlocks(SILVER);
+        registerElementBlocks(THORIUM);
+        registerElementBlocks(TIN);
+        registerElementBlocks(TITANIUM);
+        registerElementBlocks(TUNGSTEN);
+        registerElementBlocks(URANIUM);
+        registerElementBlocks(ZINC);
+
+        registerElementBlocks(BRASS);
+        registerElementBlocks(BRONZE);
+        registerElementBlocks(STEEL);
+
         registerOreBlocks(COPPERORE,TINORE,LEADORE);
     }
 
@@ -109,9 +187,11 @@ public class IntercraftBlocks
     {
 
         for (Block block : blocks) {
-            RegistrationHandler.blocks.add(block);
-            if (item)
-                RegistrationHandler.itemBlocks.add(new BlockItem(block, new Item.Properties().group(group)).setRegistryName(block.getRegistryName()));
+            if (block != null) {
+                RegistrationHandler.blocks.add(block);
+                if (item)
+                    RegistrationHandler.itemBlocks.add(new BlockItem(block, new Item.Properties().group(group)).setRegistryName(block.getRegistryName()));
+            }
         }
     }
 
@@ -133,4 +213,10 @@ public class IntercraftBlocks
             RegistrationHandler.itemBlocks.add(new ItemBlockHardOre(block, new Item.Properties()).setRegistryName(block.getRegistryName()));
         }
     }
+
+    protected static void registerElementBlocks(BlockElementGroup group)
+    {
+        registerBlocks(IntercraftItemGroups.RESOURCES,true,group.BLOCK,group.FRAME);
+    }
+
 }

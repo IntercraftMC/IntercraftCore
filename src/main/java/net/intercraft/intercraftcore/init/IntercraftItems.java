@@ -75,6 +75,24 @@ public class IntercraftItems
         SUNGLASSES = new ItemGlasses("sun_glasses", new ResourceLocation(Reference.MODID,"textures/masks/sun_glasses.png"));
 
 
+        /*ALUMINIUM = new ItemElementGroup(Elements.ALUMINIUM);
+        COPPER = new ItemElementGroup(Elements.COPPER);
+        GOLD = new ItemElementGroup(Elements.GOLD);
+        IRIDIUM = new ItemElementGroup(Elements.IRIDIUM);
+        IRON = new ItemElementGroup(Elements.IRON);
+        LEAD = new ItemElementGroup(Elements.LEAD);
+        SILVER = new ItemElementGroup(Elements.SILVER);
+        THORIUM = new ItemElementGroup(Elements.THORIUM);
+        TIN = new ItemElementGroup(Elements.TIN);
+        TITANIUM = new ItemElementGroup(Elements.TITANIUM);
+        TUNGSTEN = new ItemElementGroup(Elements.TUNGSTEN);
+        URANIUM = new ItemUraniumGroup(Elements.URANIUM);
+        ZINC = new ItemElementGroup(Elements.ZINC);
+
+        BRASS = new ItemElementGroup(Elements.BRASS);
+        BRONZE = new ItemElementGroup(Elements.BRONZE);
+        STEEL = new ItemElementGroup(Elements.STEEL);*/
+
         ALUMINIUM = new ItemElementGroup(new Aluminium());
         COPPER = new ItemElementGroup(new Copper());
         GOLD = new ItemElementGroup(new Gold());
@@ -87,7 +105,7 @@ public class IntercraftItems
         TITANIUM = new ItemElementGroup(new Titanium());
         TUNGSTEN = new ItemElementGroup(new Tungsten());
         URANIUM = new ItemUraniumGroup(new Uranium());
-        ZINC = new ItemUraniumGroup(new Zinc());
+        ZINC = new ItemElementGroup(new Zinc());
 
         BRASS = new ItemElementGroup(new Brass());
         BRONZE = new ItemElementGroup(new Bronze());

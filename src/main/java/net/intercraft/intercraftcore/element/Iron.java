@@ -6,6 +6,6 @@ public class Iron extends Element
 {
     public Iron()
     {
-        super("iron", ElementDictionary.IRON.getSymbol(), ElementDictionary.IRON.getColorPrimary(),INGOT, NUGGET);
+        super("iron", ElementDictionary.IRON.getSymbol(), ElementDictionary.IRON.getColorPrimary(),INGOT, NUGGET, BLOCK);
     }
 }

@@ -9,7 +9,10 @@ public class Element
     public static final byte NUGGET     = 0x02;
     public static final byte DUST       = 0x04;
     public static final byte DUST_SMALL = 0x08;
-    public static final byte PLATE      = 0x10;
+    public static final byte PLATE      = 0x16;
+
+    public static final byte BLOCK      = 0x32;
+    public static final byte FRAME      = 0x64;
 
     /**
      * Element information
@@ -19,9 +22,9 @@ public class Element
     public final int    tint;
 
     /**
-     * Item forms of the group
+     * Byte forms of the group
      */
-    public byte forms = INGOT | NUGGET | DUST | DUST_SMALL | PLATE;
+    public byte forms = INGOT | NUGGET | DUST | DUST_SMALL | PLATE | BLOCK | FRAME;
 
     /**
      * Element Constructor
@@ -41,7 +44,7 @@ public class Element
      *
      * @param name         Element name
      * @param tint         Element tint color
-     * @param excludeForms Bit flags for group item forms to exclude
+     * @param excludeForms Bit flags for group item/block forms to exclude
      */
     public Element(String name, String symbol, int tint, byte...excludeForms)
     {

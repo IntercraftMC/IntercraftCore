@@ -1,5 +1,8 @@
 package net.intercraft.intercraftcore.init;
 
+import net.intercraft.intercraftcore.block.BlockElement;
+import net.intercraft.intercraftcore.block.BlockFrame;
+import net.intercraft.intercraftcore.block.group.BlockElementGroup;
 import net.intercraft.intercraftcore.item.ItemElement;
 import net.intercraft.intercraftcore.item.group.ItemElementGroup;
 import net.intercraft.intercraftcore.ore.BlockHardOre;
@@ -102,7 +105,12 @@ public class IntercraftColorHandler
                 event.getItemColors().register(new ItemColorHandler(((ItemElement)item).getTint(), false),item);
         }
         for (Block block : blocks) {
-            event.getItemColors().register(new BlockColorHandler(((BlockHardOre) block).getTint()),block);
+            if (block instanceof BlockHardOre)
+                event.getItemColors().register(new BlockColorHandler(((BlockHardOre) block).getTint()),block);
+            else if (block instanceof BlockElement)
+                event.getItemColors().register(new BlockColorHandler(((BlockElement) block).getTint()),block);
+            else if (block instanceof BlockFrame)
+                event.getItemColors().register(new BlockColorHandler(((BlockFrame) block).getTint()),block);
         }
 
         System.out.println("[Item Colours] Done.");
@@ -114,11 +122,54 @@ public class IntercraftColorHandler
 
 
         /**
+         * Groups of items to be coloured
+         */
+
+        BlockElementGroup[] groups = {
+                IntercraftBlocks.ALUMINIUM,
+                IntercraftBlocks.COPPER,
+                IntercraftBlocks.GOLD,
+                IntercraftBlocks.IRIDIUM,
+                IntercraftBlocks.IRON,
+                IntercraftBlocks.LEAD,
+                IntercraftBlocks.SILVER,
+                IntercraftBlocks.THORIUM,
+                IntercraftBlocks.TIN,
+                IntercraftBlocks.TITANIUM,
+                IntercraftBlocks.TUNGSTEN,
+                IntercraftBlocks.URANIUM,
+                IntercraftBlocks.ZINC,
+
+                IntercraftBlocks.BRASS,
+                IntercraftBlocks.BRONZE,
+                IntercraftBlocks.STEEL
+        };
+
+        /**
+         * Filter out- and placing the group's content into the @blocks variable
+         */
+
+        for (BlockElementGroup group: groups) {
+            Block[] i = { group.BLOCK, group.FRAME };
+            for (Block block: i)
+                if ( block != null)
+                    blocks.add(block);
+
+        }
+
+        /**
          * Registering Block colours
          */
 
         for (Block block : blocks) {
-            event.getBlockColors().register(new BlockColorHandler(((BlockHardOre) block).getTint()),block);
+
+            if (block instanceof BlockHardOre)
+                event.getBlockColors().register(new BlockColorHandler(((BlockHardOre) block).getTint()),block);
+            else if (block instanceof BlockElement)
+                event.getBlockColors().register(new BlockColorHandler(((BlockElement) block).getTint()),block);
+            else if (block instanceof BlockFrame)
+                event.getBlockColors().register(new BlockColorHandler(((BlockFrame) block).getTint()),block);
+
 
         }
 
@@ -145,9 +196,6 @@ public class IntercraftColorHandler
             if (this.layer)
                 if (tint == 0)
                     return 0xFFFFFF;
-                else
-                    return this.tint;
-
             return this.tint;
 
 
