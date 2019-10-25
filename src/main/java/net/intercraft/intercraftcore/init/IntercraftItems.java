@@ -8,10 +8,6 @@ import net.intercraft.intercraftcore.item.group.ItemElementGroup;
 import net.intercraft.intercraftcore.item.group.ItemUraniumGroup;
 import net.intercraft.intercraftcore.item.masks.ItemGlasses;
 import net.intercraft.intercraftcore.item.masks.ItemMask;
-import net.intercraft.intercraftcore.ore.ItemHardChunk;
-import net.intercraft.intercraftcore.ore.elements.ItemHardChunkCopper;
-import net.intercraft.intercraftcore.ore.elements.ItemHardChunkLead;
-import net.intercraft.intercraftcore.ore.elements.ItemHardChunkTin;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 
@@ -50,6 +46,9 @@ public class IntercraftItems
     public static final ItemElementGroup URANIUM;
     public static final ItemElementGroup ZINC;
 
+    public static final ItemElementGroup CARBON;
+    public static final ItemElementGroup SILICON;
+
     public static final ItemElementGroup BRASS;
     public static final ItemElementGroup BRONZE;
     public static final ItemElementGroup STEEL;
@@ -59,9 +58,9 @@ public class IntercraftItems
      * Ore Chunks
      * */
 
-    public static final ItemHardChunk COPPERCHUNK;
+    /*public static final ItemHardChunk COPPERCHUNK;
     public static final ItemHardChunk TINCHUNK;
-    public static final ItemHardChunk LEADCHUNK;
+    public static final ItemHardChunk LEADCHUNK;*/
 
     /**
      * Instantiate all items
@@ -107,14 +106,17 @@ public class IntercraftItems
         URANIUM = new ItemUraniumGroup(new Uranium());
         ZINC = new ItemElementGroup(new Zinc());
 
+        CARBON = new ItemElementGroup(new Carbon());
+        SILICON = new ItemElementGroup(new Silicon());
+
         BRASS = new ItemElementGroup(new Brass());
         BRONZE = new ItemElementGroup(new Bronze());
         STEEL = new ItemElementGroup(new Steel());
 
 
-        COPPERCHUNK = new ItemHardChunkCopper();
+        /*COPPERCHUNK = new ItemHardChunkCopper();
         TINCHUNK = new ItemHardChunkTin();
-        LEADCHUNK = new ItemHardChunkLead();
+        LEADCHUNK = new ItemHardChunkLead();*/
     }
 
     /**
@@ -142,13 +144,16 @@ public class IntercraftItems
         registerElementItems(URANIUM);
         registerElementItems(ZINC);
 
+        registerElementItems(CARBON);
+        registerElementItems(SILICON);
+
         registerElementItems(BRASS);
         registerElementItems(BRONZE);
         registerElementItems(STEEL);
 
 
 
-        registerItems(COPPERCHUNK,TINCHUNK,LEADCHUNK);
+        //registerItems(COPPERCHUNK,TINCHUNK,LEADCHUNK);
     }
 
     /**
@@ -189,7 +194,7 @@ public class IntercraftItems
      */
     protected static void registerElementItems(ItemElementGroup group)
     {
-        registerItems(group.INGOT, group.NUGGET, group.DUST, group.DUST_SMALL, group.PLATE);
+        registerItems(group.INGOT, group.NUGGET, group.DUST, group.DUST_SMALL, group.PLATE, group.GEAR, group.ROD, group.CHUNK);
         //registerBlocks(group.BLOCK_SOLID);
     }
 

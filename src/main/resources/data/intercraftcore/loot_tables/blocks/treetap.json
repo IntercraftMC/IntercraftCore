@@ -1,0 +1,46 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "name": "intercraftcore:bucket",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:alternatives",
+          "children": [
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "intercraftcore:treetap",
+                  "properties": {
+                    "bucket": "metal_iron"
+                  }
+                }
+              ],
+              "name": "minecraft:bucket"
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "name": "intercraftcore:treetap",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "intercraftcore:treetap"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ]
+    }
+
+  ]
+}

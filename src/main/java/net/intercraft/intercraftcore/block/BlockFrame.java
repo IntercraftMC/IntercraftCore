@@ -26,6 +26,6 @@ public class BlockFrame extends Block
     }
 
     public int getTint() {
-        return element.tint;
+        return element.tintPrim;
     }
 }

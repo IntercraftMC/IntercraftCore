@@ -1,0 +1,54 @@
+
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1,
+      "name": "intercraftcore:fe_ore",
+      "entries": [
+        {
+          "type": "minecraft:alternatives",
+          "children": [
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "minecraft:match_tool",
+                  "predicate": {
+                    "enchantments": [
+                      {
+                        "enchantment": "minecraft:silk_touch",
+                        "levels": {
+                          "min": 1
+                        }
+                      }
+                    ]
+                  }
+                }
+              ],
+              "functions": [
+                {
+                  "function": "intercraftcore:blockitem"
+                }
+              ],
+              "name": "intercraftcore:fe_ore"
+            },
+            {
+              "type": "minecraft:item",
+              "functions": [
+                {
+                  "function": "intercraftcore:set_count",
+                  "multiplier" : 1.0
+                },
+                {
+                  "function": "minecraft:explosion_decay"
+                }
+              ],
+              "name": "intercraftcore:fe_chunk"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

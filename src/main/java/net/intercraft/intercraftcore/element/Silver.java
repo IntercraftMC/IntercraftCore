@@ -6,6 +6,6 @@ public class Silver extends Element
 {
     public Silver()
     {
-        super("silver", ElementDictionary.SILVER.getSymbol(), ElementDictionary.SILVER.getColorPrimary());
+        super("silver", ElementDictionary.SILVER);
     }
 }

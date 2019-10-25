@@ -6,6 +6,6 @@ public class Aluminium extends Element
 {
     public Aluminium()
     {
-        super("aluminium", ElementDictionary.ALUMINIUM.getSymbol(), ElementDictionary.ALUMINIUM.getColorPrimary());
+        super("aluminium", ElementDictionary.ALUMINIUM);
     }
 }

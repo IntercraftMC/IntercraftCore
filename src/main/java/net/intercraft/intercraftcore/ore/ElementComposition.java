@@ -5,26 +5,26 @@ import net.intercraft.intercraftcore.ElementDictionary;
 public class ElementComposition
 {
 
-    private ElementDictionary element;
+    private String symbol;
     private double percentage;
 
-    public ElementComposition(ElementDictionary element, double percentage)
+    public ElementComposition(String symbol, double percentage)
     {
-        this.element = element;
+        this.symbol = symbol;
         this.percentage = percentage;
     }
 
-    public ElementDictionary getElement()
+    /*public ElementDictionary getElement()
     {
         return this.element;
-    }
+    }*/
 
     public String getSymbol(boolean formatted)
     {
         if (formatted)
-            return format(this.element.getSymbol());
+            return format(this.symbol);
         else
-            return this.element.getSymbol();
+            return this.symbol;
     }
 
     public double getPercentage()
@@ -34,7 +34,7 @@ public class ElementComposition
 
     public String toString()
     {
-        return format(this.element.getSymbol())+":"+this.percentage*100+"%";
+        return format(this.symbol)+":"+(int)this.percentage*100+"%";
     }
 
 

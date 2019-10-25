@@ -6,6 +6,6 @@ public class Zinc extends Element
 {
     public Zinc()
     {
-        super("zinc", ElementDictionary.ZINC.getSymbol(), ElementDictionary.ZINC.getColorPrimary());
+        super("zinc", ElementDictionary.ZINC, GEAR);
     }
 }

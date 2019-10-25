@@ -6,6 +6,6 @@ public class Thorium extends Element
 {
     public Thorium()
     {
-        super("thorium", ElementDictionary.THORIUM.getSymbol(), ElementDictionary.THORIUM.getColorPrimary());
+        super("thorium", ElementDictionary.THORIUM, GEAR);
     }
 }

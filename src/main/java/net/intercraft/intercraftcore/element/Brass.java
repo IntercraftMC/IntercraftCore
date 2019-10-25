@@ -6,6 +6,6 @@ public class Brass extends Element
 {
     public Brass()
     {
-        super("brass", ElementDictionary.BRASS.getSymbol(), ElementDictionary.BRASS.getColorPrimary());
+        super("brass", ElementDictionary.BRASS, CHUNK | ORE);
     }
 }

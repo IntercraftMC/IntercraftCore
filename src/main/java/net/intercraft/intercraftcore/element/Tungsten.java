@@ -6,6 +6,6 @@ public class Tungsten extends Element
 {
     public Tungsten()
     {
-        super("tungsten", ElementDictionary.TUNGSTEN.getSymbol(), ElementDictionary.TUNGSTEN.getColorPrimary());
+        super("tungsten", ElementDictionary.TUNGSTEN, GEAR);
     }
 }

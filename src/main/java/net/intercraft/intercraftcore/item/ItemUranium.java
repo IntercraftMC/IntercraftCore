@@ -15,7 +15,8 @@ public class ItemUranium extends ItemElement
      * @param element
      * @param registrySuffix
      */
-    public ItemUranium(Element element,String registrySuffix) {
+    public ItemUranium(Element element,String registrySuffix)
+    {
         super(element, registrySuffix);
     }
 

@@ -5,7 +5,7 @@ import net.intercraft.intercraftcore.ore.ElementComposition;
 import net.intercraft.intercraftcore.ElementDictionary;
 import net.intercraft.intercraftcore.ore.ItemHardChunk;
 
-public class ItemHardChunkLead extends ItemHardChunk
+/*public class ItemHardChunkLead extends ItemHardChunk
 {
     public ItemHardChunkLead()
     {
@@ -14,4 +14,4 @@ public class ItemHardChunkLead extends ItemHardChunk
                 new ElementComposition(ElementDictionary.SILVER,0.15)
         });
     }
-}
+}*/

@@ -6,6 +6,6 @@ public class Tin extends Element
 {
     public Tin()
     {
-        super("Tin", ElementDictionary.TIN.getSymbol(), ElementDictionary.TIN.getColorPrimary());
+        super("Tin", ElementDictionary.TIN, GEAR);
     }
 }

@@ -16,7 +16,7 @@ public class BlockElementGroup
      */
     protected final Class<BlockElement> blockElementClass;
     protected final Class<BlockHardOre> blockHardOreClass;
-    protected final Class<BlockFrame> blockFrame;
+    protected final Class<BlockFrame> blockFrameClass;
 
     /**
      * Keep a reference to the element
@@ -28,6 +28,7 @@ public class BlockElementGroup
      */
     public final Block BLOCK;
     public final Block FRAME;
+    public final Block ORE;
 
     /**
      * Create an block group for the given element
@@ -38,11 +39,13 @@ public class BlockElementGroup
     {
         this.element = element;
         this.blockElementClass = BlockElement.class;
+        this.blockFrameClass   = BlockFrame.class;
         this.blockHardOreClass = BlockHardOre.class;
-        this.blockFrame = BlockFrame.class;
+
 
         BLOCK = createBlock(Element.BLOCK, "block");
         FRAME = createBlock(Element.FRAME, "frame");
+        ORE   = createBlock(Element.ORE,   "ore");
     }
 
     /**
@@ -51,7 +54,7 @@ public class BlockElementGroup
      * @param form
      * @param suffix
      */
-    protected Block createBlock(byte form, String suffix)
+    protected Block createBlock(int form, String suffix)
     {
         if ((element.forms & form) == form) {
             try {
@@ -59,7 +62,11 @@ public class BlockElementGroup
 
                 switch (form) {
                     case Element.FRAME:
-                        constructor = blockFrame.getConstructor(Element.class, String.class);
+                        constructor = blockFrameClass.getConstructor(Element.class, String.class);
+                        break;
+
+                    case Element.ORE:
+                        constructor = blockHardOreClass.getConstructor(Element.class, String.class);
                         break;
 
                     default:

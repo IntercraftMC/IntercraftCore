@@ -4,9 +4,6 @@ import net.intercraft.intercraftcore.block.*;
 import net.intercraft.intercraftcore.block.group.BlockElementGroup;
 import net.intercraft.intercraftcore.element.*;
 import net.intercraft.intercraftcore.ore.ItemBlockHardOre;
-import net.intercraft.intercraftcore.ore.elements.BlockOreCopper;
-import net.intercraft.intercraftcore.ore.elements.BlockOreLead;
-import net.intercraft.intercraftcore.ore.elements.BlockOreTin;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
@@ -71,9 +68,9 @@ public class IntercraftBlocks
     * Ore Blocks
     */
 
-    public static final Block COPPERORE;
+    /*public static final Block COPPERORE;
     public static final Block TINORE;
-    public static final Block LEADORE;
+    public static final Block LEADORE;*/
 
     static {
         CABLECASE = new BlockCableCase();
@@ -131,9 +128,9 @@ public class IntercraftBlocks
         BRONZE = new BlockElementGroup(new Bronze());
         STEEL = new BlockElementGroup(new Steel());
 
-        COPPERORE = new BlockOreCopper();
+        /*COPPERORE = new BlockOreCopper();
         TINORE = new BlockOreTin();
-        LEADORE = new BlockOreLead();
+        LEADORE = new BlockOreLead();*/
 
     }
 
@@ -177,7 +174,7 @@ public class IntercraftBlocks
         registerElementBlocks(BRONZE);
         registerElementBlocks(STEEL);
 
-        registerOreBlocks(COPPERORE,TINORE,LEADORE);
+        //registerOreBlocks(COPPERORE,TINORE,LEADORE);
     }
 
     /**
@@ -209,14 +206,18 @@ public class IntercraftBlocks
     {
 
         for (Block block : blocks) {
-            RegistrationHandler.blocks.add(block);
-            RegistrationHandler.itemBlocks.add(new ItemBlockHardOre(block, new Item.Properties()).setRegistryName(block.getRegistryName()));
+
+            if (block != null) {
+                RegistrationHandler.blocks.add(block);
+                RegistrationHandler.itemBlocks.add(new ItemBlockHardOre(block, new Item.Properties()).setRegistryName(block.getRegistryName()));
+            }
         }
     }
 
     protected static void registerElementBlocks(BlockElementGroup group)
     {
         registerBlocks(IntercraftItemGroups.RESOURCES,true,group.BLOCK,group.FRAME);
+        registerOreBlocks(group.ORE);
     }
 
 }

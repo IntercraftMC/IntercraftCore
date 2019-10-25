@@ -6,6 +6,6 @@ public class Titanium extends Element
 {
     public Titanium()
     {
-        super("titanium", ElementDictionary.TITANIUM.getSymbol(), ElementDictionary.TITANIUM.getColorPrimary());
+        super("titanium", ElementDictionary.TITANIUM, CHUNK | ORE);
     }
 }

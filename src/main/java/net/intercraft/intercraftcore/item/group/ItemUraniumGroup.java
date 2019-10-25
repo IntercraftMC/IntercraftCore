@@ -12,7 +12,7 @@ public class ItemUraniumGroup extends ItemElementGroup
     }
 
     @Override
-    protected Item createItem(byte form, String suffix)
+    protected Item createItem(int form, String suffix)
     {
         return new ItemUranium(element, suffix);
     }

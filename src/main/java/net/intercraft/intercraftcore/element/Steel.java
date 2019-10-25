@@ -6,6 +6,6 @@ public class Steel extends Element
 {
     public Steel()
     {
-        super("steel", ElementDictionary.STEEL.getSymbol(), ElementDictionary.STEEL.getColorPrimary());
+        super("steel", ElementDictionary.STEEL, CHUNK | ORE);
     }
 }

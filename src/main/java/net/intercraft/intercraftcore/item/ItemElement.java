@@ -21,6 +21,6 @@ public class ItemElement extends Item
     }
 
     public int getTint() {
-        return element.tint;
+        return element.tintPrim;
     }
 }

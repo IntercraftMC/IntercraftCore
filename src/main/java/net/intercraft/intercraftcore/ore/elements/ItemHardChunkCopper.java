@@ -1,6 +1,6 @@
 package net.intercraft.intercraftcore.ore.elements;
 
-import net.intercraft.intercraftcore.init.IntercraftItemGroups;
+/*import net.intercraft.intercraftcore.init.IntercraftItemGroups;
 import net.intercraft.intercraftcore.ore.ElementComposition;
 import net.intercraft.intercraftcore.ElementDictionary;
 import net.intercraft.intercraftcore.ore.ItemHardChunk;
@@ -15,4 +15,4 @@ public class ItemHardChunkCopper extends ItemHardChunk
                 new ElementComposition(ElementDictionary.GOLD,0.05)
         });
     }
-}
+}*/

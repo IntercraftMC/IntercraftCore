@@ -1,1 +1,1 @@
-{ "parent": "item/generated", "textures": { "layer0": "intercraftcore:item/dust" } }
+{ "parent": "item/generated", "textures": { "layer0": "intercraftcore:item/resources/dust" } }

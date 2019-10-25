@@ -59,7 +59,7 @@ public class OreGen
                 case EXTREME_HILLS:
                 case MESA: { // Overworld biomes.
                     biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Biome.createDecoratedFeature(Feature.ORE, new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE,
-                            IntercraftBlocks.COPPERORE.getDefaultState().with(BlockProperties.DENSITY, random.nextInt(4)), copper_ore_veinsize), Placement.COUNT_RANGE, copper_ore_placement));
+                            IntercraftBlocks.COPPER.ORE.getDefaultState().with(BlockProperties.DENSITY, random.nextInt(4)), copper_ore_veinsize), Placement.COUNT_RANGE, copper_ore_placement));
 
                     break;
                 }

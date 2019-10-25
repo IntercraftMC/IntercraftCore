@@ -1,5 +1,7 @@
 package net.intercraft.intercraftcore.ore;
 
+import net.intercraft.intercraftcore.element.Element;
+import net.intercraft.intercraftcore.init.IntercraftItemGroups;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -19,14 +21,14 @@ public class ItemHardChunk extends Item
     private int tint;
     private ElementComposition[] composition;
 
-    public ItemHardChunk(Item.Properties builder, final String name, int tint, final ElementComposition[] composition)
+    public ItemHardChunk(Element element, String suffix)
     {
-        super(builder);
+        super(new Item.Properties().group(IntercraftItemGroups.RESOURCES));
 
-        this.tint = tint;
-        this.composition = composition;
+        this.tint = element.tintSec;
+        this.composition = element.composition;
 
-        setRegistryName(name+"_chunk");
+        setRegistryName(element.symbol+"_chunk");
 
 
     }

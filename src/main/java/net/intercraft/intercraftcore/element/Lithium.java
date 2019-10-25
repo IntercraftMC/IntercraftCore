@@ -6,6 +6,6 @@ public class Lithium extends Element
 {
     public Lithium()
     {
-        super("lithium", ElementDictionary.LITHIUM.getSymbol(), ElementDictionary.LITHIUM.getColorPrimary());
+        super("lithium", ElementDictionary.LITHIUM, GEAR | ROD | FRAME);
     }
 }

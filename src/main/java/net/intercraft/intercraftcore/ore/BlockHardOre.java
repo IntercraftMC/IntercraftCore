@@ -2,6 +2,7 @@ package net.intercraft.intercraftcore.ore;
 
 import net.intercraft.intercraftcore.IntercraftCore;
 import net.intercraft.intercraftcore.api.BlockProperties;
+import net.intercraft.intercraftcore.element.Element;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
@@ -22,15 +23,15 @@ public class BlockHardOre extends Block
 
     private int tint;
 
-    public BlockHardOre(final String name, final float hardness, final float resistance, int tint)
+    public BlockHardOre(Element element, String suffix)
     {
-        super(Block.Properties.create(Material.ROCK, MaterialColor.STONE).hardnessAndResistance(hardness,resistance));
+        super(Block.Properties.create(Material.ROCK, MaterialColor.STONE).hardnessAndResistance(1.5F,6.0F));
 
-        setRegistryName(name+"_ore");
+        setRegistryName(element.symbol+"_ore");
 
         setDefaultState(getDefaultState().with(BlockProperties.DENSITY,IntercraftCore.defDensity));
 
-        this.tint = tint;
+        this.tint = element.tintSec;
 
 
     }

@@ -6,6 +6,6 @@ public class Bronze extends Element
 {
     public Bronze()
     {
-        super("bronze", ElementDictionary.BRONZE.getSymbol(), ElementDictionary.BRONZE.getColorPrimary());
+        super("bronze", ElementDictionary.BRONZE, CHUNK | ORE);
     }
 }

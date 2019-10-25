@@ -6,6 +6,6 @@ public class Uranium extends Element
 {
     public Uranium()
     {
-        super("uranium", ElementDictionary.URANIUM.getSymbol(), ElementDictionary.URANIUM.getColorPrimary());
+        super("uranium", ElementDictionary.URANIUM, GEAR);
     }
 }

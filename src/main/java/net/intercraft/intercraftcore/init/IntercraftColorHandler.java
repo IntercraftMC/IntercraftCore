@@ -34,9 +34,9 @@ public class IntercraftColorHandler
      */
 
     private static List<Item> items = new ArrayList<Item>(){{
-        add(IntercraftItems.COPPERCHUNK);
-        add(IntercraftItems.TINCHUNK);
-        add(IntercraftItems.LEADCHUNK);
+        /*add(IntercraftItems.COPPER.CHUNK);
+        add(IntercraftItems.TIN.CHUNK);
+        add(IntercraftItems.LEAD.CHUNK);*/
     }};
 
     /**
@@ -44,9 +44,9 @@ public class IntercraftColorHandler
      */
 
     private static List<Block> blocks = new ArrayList<Block>(){{
-            add(IntercraftBlocks.COPPERORE);
+            /*add(IntercraftBlocks.COPPERORE);
             add(IntercraftBlocks.TINORE);
-            add(IntercraftBlocks.LEADORE);
+            add(IntercraftBlocks.LEADORE);*/
         }};
 
 
@@ -74,6 +74,9 @@ public class IntercraftColorHandler
                 IntercraftItems.URANIUM,
                 IntercraftItems.ZINC,
 
+                IntercraftItems.CARBON,
+                IntercraftItems.SILICON,
+
                 IntercraftItems.BRASS,
                 IntercraftItems.BRONZE,
                 IntercraftItems.STEEL
@@ -86,7 +89,7 @@ public class IntercraftColorHandler
          */
 
         for (ItemElementGroup group: groups) {
-            Item[] i = { group.INGOT, group.NUGGET, group.DUST, group.DUST_SMALL, group.PLATE };
+            Item[] i = { group.INGOT, group.NUGGET, group.DUST, group.DUST_SMALL, group.PLATE, group.GEAR, group.ROD, group.CHUNK };
             for (Item item: i)
                 if ( item != null)
                     items.add(item);
@@ -150,7 +153,7 @@ public class IntercraftColorHandler
          */
 
         for (BlockElementGroup group: groups) {
-            Block[] i = { group.BLOCK, group.FRAME };
+            Block[] i = { group.BLOCK, group.FRAME, group.ORE };
             for (Block block: i)
                 if ( block != null)
                     blocks.add(block);

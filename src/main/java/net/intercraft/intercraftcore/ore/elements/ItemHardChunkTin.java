@@ -6,7 +6,7 @@ import net.intercraft.intercraftcore.ElementDictionary;
 import net.intercraft.intercraftcore.ore.ItemHardChunk;
 import net.minecraft.item.Item;
 
-public class ItemHardChunkTin extends ItemHardChunk
+/*public class ItemHardChunkTin extends ItemHardChunk
 {
     public ItemHardChunkTin()
     {
@@ -14,4 +14,4 @@ public class ItemHardChunkTin extends ItemHardChunk
                 new ElementComposition(ElementDictionary.TIN,1)
         });
     }
-}
+}*/

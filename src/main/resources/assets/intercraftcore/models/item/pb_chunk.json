@@ -1,7 +1,1 @@
-{
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "intercraftcore:item/ore_chunks/base_type1",
-    "layer1": "intercraftcore:item/ore_chunks/pieces_type1_1"
-  }
-}
+{ "parent": "item/generated", "textures": { "layer0": "intercraftcore:item/ore_chunks/base_type1", "layer1": "intercraftcore:item/ore_chunks/pieces_type1_1" } }

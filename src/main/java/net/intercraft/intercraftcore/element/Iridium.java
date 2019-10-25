@@ -6,6 +6,6 @@ public class Iridium extends Element
 {
     public Iridium()
     {
-        super("iridium", ElementDictionary.IRIDIUM.getSymbol(), ElementDictionary.IRIDIUM.getColorPrimary());
+        super("iridium", ElementDictionary.IRIDIUM);
     }
 }

@@ -6,6 +6,6 @@ public class Gold extends Element
 {
     public Gold()
     {
-        super("gold", ElementDictionary.GOLD.getSymbol(), ElementDictionary.GOLD.getColorPrimary(),INGOT, NUGGET, BLOCK);
+        super("gold", ElementDictionary.GOLD, INGOT | NUGGET | BLOCK);
     }
 }

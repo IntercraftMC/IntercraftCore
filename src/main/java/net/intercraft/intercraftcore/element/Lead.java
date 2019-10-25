@@ -6,6 +6,6 @@ public class Lead extends Element
 {
     public Lead()
     {
-        super("lead", ElementDictionary.LEAD.getSymbol(), ElementDictionary.LEAD.getColorPrimary());
+        super("lead", ElementDictionary.LEAD, GEAR);
     }
 }

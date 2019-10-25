@@ -6,6 +6,6 @@ public class Copper extends Element
 {
     public Copper()
     {
-        super("copper", ElementDictionary.COPPER.getSymbol(), ElementDictionary.COPPER.getColorPrimary());
+        super("copper", ElementDictionary.COPPER);
     }
 }
