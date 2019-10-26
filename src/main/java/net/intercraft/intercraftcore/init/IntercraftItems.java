@@ -1,7 +1,12 @@
 package net.intercraft.intercraftcore.init;
 
 import net.intercraft.intercraftcore.Reference;
-import net.intercraft.intercraftcore.element.*;
+import net.intercraft.intercraftcore.element.alloys.Brass;
+import net.intercraft.intercraftcore.element.alloys.Bronze;
+import net.intercraft.intercraftcore.element.alloys.Steel;
+import net.intercraft.intercraftcore.element.metals.*;
+import net.intercraft.intercraftcore.element.nonmetals.Carbon;
+import net.intercraft.intercraftcore.element.nonmetals.Silicon;
 import net.intercraft.intercraftcore.item.ItemBucketResin;
 import net.intercraft.intercraftcore.item.ItemTest;
 import net.intercraft.intercraftcore.item.group.ItemElementGroup;
@@ -9,6 +14,7 @@ import net.intercraft.intercraftcore.item.group.ItemUraniumGroup;
 import net.intercraft.intercraftcore.item.masks.ItemGlasses;
 import net.intercraft.intercraftcore.item.masks.ItemMask;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.util.ResourceLocation;
 
 public class IntercraftItems
@@ -54,43 +60,18 @@ public class IntercraftItems
     public static final ItemElementGroup STEEL;
 
 
-    /**
-     * Ore Chunks
-     * */
-
-    /*public static final ItemHardChunk COPPERCHUNK;
-    public static final ItemHardChunk TINCHUNK;
-    public static final ItemHardChunk LEADCHUNK;*/
 
     /**
      * Instantiate all items
      */
 
     static {
-        TEST = new ItemTest((new Item.Properties()).group(IntercraftItemGroups.RESOURCES));
+        TEST = new ItemTest((new Item.Properties()).group(ItemGroup.MISC));
         BUCKETRESIN = new ItemBucketResin();
 
         DEVILMASK = new ItemMask("devil_mask",new ResourceLocation(Reference.MODID,"textures/masks/devil_mask.png"), true);
         SUNGLASSES = new ItemGlasses("sun_glasses", new ResourceLocation(Reference.MODID,"textures/masks/sun_glasses.png"));
 
-
-        /*ALUMINIUM = new ItemElementGroup(Elements.ALUMINIUM);
-        COPPER = new ItemElementGroup(Elements.COPPER);
-        GOLD = new ItemElementGroup(Elements.GOLD);
-        IRIDIUM = new ItemElementGroup(Elements.IRIDIUM);
-        IRON = new ItemElementGroup(Elements.IRON);
-        LEAD = new ItemElementGroup(Elements.LEAD);
-        SILVER = new ItemElementGroup(Elements.SILVER);
-        THORIUM = new ItemElementGroup(Elements.THORIUM);
-        TIN = new ItemElementGroup(Elements.TIN);
-        TITANIUM = new ItemElementGroup(Elements.TITANIUM);
-        TUNGSTEN = new ItemElementGroup(Elements.TUNGSTEN);
-        URANIUM = new ItemUraniumGroup(Elements.URANIUM);
-        ZINC = new ItemElementGroup(Elements.ZINC);
-
-        BRASS = new ItemElementGroup(Elements.BRASS);
-        BRONZE = new ItemElementGroup(Elements.BRONZE);
-        STEEL = new ItemElementGroup(Elements.STEEL);*/
 
         ALUMINIUM = new ItemElementGroup(new Aluminium());
         COPPER = new ItemElementGroup(new Copper());
@@ -112,11 +93,6 @@ public class IntercraftItems
         BRASS = new ItemElementGroup(new Brass());
         BRONZE = new ItemElementGroup(new Bronze());
         STEEL = new ItemElementGroup(new Steel());
-
-
-        /*COPPERCHUNK = new ItemHardChunkCopper();
-        TINCHUNK = new ItemHardChunkTin();
-        LEADCHUNK = new ItemHardChunkLead();*/
     }
 
     /**
@@ -150,10 +126,6 @@ public class IntercraftItems
         registerElementItems(BRASS);
         registerElementItems(BRONZE);
         registerElementItems(STEEL);
-
-
-
-        //registerItems(COPPERCHUNK,TINCHUNK,LEADCHUNK);
     }
 
     /**
@@ -178,15 +150,6 @@ public class IntercraftItems
         }
     }
 
-    /*protected static void registerBlocks(Block... blocks)
-    {
-        for (Block block : blocks) {
-            if (block != null) {
-                RegistrationHandler.blocks.add(block);
-                RegistrationHandler.itemBlocks.add(new BlockItem(block, new Item.Properties().group(IntercraftItemGroups.RESOURCES)).setRegistryName(block.getRegistryName()));
-            }
-        }
-    }*/
 
     /**
      * Register an element group

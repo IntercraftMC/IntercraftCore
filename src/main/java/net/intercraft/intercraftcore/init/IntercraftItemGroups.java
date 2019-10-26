@@ -1,7 +1,7 @@
 package net.intercraft.intercraftcore.init;
 
 import net.intercraft.intercraftcore.Reference;
-import net.intercraft.intercraftcore.api.ItemGroupResources;
+import net.intercraft.intercraftcore.item.itemgroups.ItemGroupResources;
 import net.minecraft.item.Items;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;

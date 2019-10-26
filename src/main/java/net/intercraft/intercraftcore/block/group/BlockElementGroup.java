@@ -3,7 +3,7 @@ package net.intercraft.intercraftcore.block.group;
 import net.intercraft.intercraftcore.block.BlockElement;
 import net.intercraft.intercraftcore.block.BlockFrame;
 import net.intercraft.intercraftcore.element.Element;
-import net.intercraft.intercraftcore.ore.BlockHardOre;
+import net.intercraft.intercraftcore.block.BlockHardOre;
 import net.minecraft.block.Block;
 
 import java.lang.reflect.Constructor;

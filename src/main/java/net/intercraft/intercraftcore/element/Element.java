@@ -1,7 +1,7 @@
 package net.intercraft.intercraftcore.element;
 
 import net.intercraft.intercraftcore.ElementDictionary;
-import net.intercraft.intercraftcore.ore.ElementComposition;
+import net.intercraft.intercraftcore.api.ElementComposition;
 
 public class Element
 {

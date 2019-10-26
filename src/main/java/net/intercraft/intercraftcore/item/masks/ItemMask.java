@@ -1,8 +1,10 @@
 package net.intercraft.intercraftcore.item.masks;
 
+import net.intercraft.intercraftcore.Reference;
 import net.intercraft.intercraftcore.init.IntercraftItemGroups;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -10,6 +12,8 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.LazyOptional;
@@ -38,12 +42,25 @@ public class ItemMask extends Item
 
     public void onEquipped(String identifier, LivingEntity entityLivingBase)
     {
+        if (hidesIdentity()) {
+            if (entityLivingBase instanceof PlayerEntity) {
+                entityLivingBase.sendMessage(new TranslationTextComponent("info."+ Reference.MODID+".identity.hidden"));
 
+                //((PlayerEntity) entityLivingBase).addStat();
+
+            }
+        }
     }
 
     public void onUnequipped(String identifier, LivingEntity entityLivingBase)
     {
+        if (hidesIdentity()) {
+            if (entityLivingBase instanceof PlayerEntity) {
+                entityLivingBase.sendMessage(new TranslationTextComponent("info."+ Reference.MODID+".identity.shown"));
+                //((PlayerEntity) entityLivingBase).addStat();
 
+            }
+        }
     }
 
     public void onCurioTick(String identifier, int index, LivingEntity entityLivingBase)

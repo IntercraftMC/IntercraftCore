@@ -24,6 +24,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.LazyOptional;
@@ -65,6 +68,18 @@ public class IntercraftEventHandler
         //if (!(event.getEntity() instanceof PlayerEntity))
         if (event.getEntity() instanceof FallingBlockEntity)
             System.out.println(event.getEntity().getDisplayName().getString());
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    @SubscribeEvent
+    public static void onRenderPlayer(RenderLivingEvent.Specials.Pre event)
+    {
+        if (event.getEntity() instanceof PlayerEntity) {
+            if (event.isCancelable()) {
+
+                //event.setCanceled(true);
+            }
+        }
     }
 
     @SubscribeEvent

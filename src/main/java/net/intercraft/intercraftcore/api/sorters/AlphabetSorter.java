@@ -13,9 +13,6 @@ public class AlphabetSorter implements Comparator
         String stack1 = ((ItemStack) o1).getTranslationKey();
         String stack2 = ((ItemStack) o2).getTranslationKey();
 
-
-
-
-        return stack2.compareTo(stack1);
+        return stack1.compareTo(stack2);
     }
 }

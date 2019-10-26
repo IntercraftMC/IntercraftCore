@@ -2,8 +2,11 @@ package net.intercraft.intercraftcore.init;
 
 import net.intercraft.intercraftcore.block.*;
 import net.intercraft.intercraftcore.block.group.BlockElementGroup;
-import net.intercraft.intercraftcore.element.*;
-import net.intercraft.intercraftcore.ore.ItemBlockHardOre;
+import net.intercraft.intercraftcore.element.alloys.Brass;
+import net.intercraft.intercraftcore.element.alloys.Bronze;
+import net.intercraft.intercraftcore.element.alloys.Steel;
+import net.intercraft.intercraftcore.element.metals.*;
+import net.intercraft.intercraftcore.item.ItemBlockHardOre;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;

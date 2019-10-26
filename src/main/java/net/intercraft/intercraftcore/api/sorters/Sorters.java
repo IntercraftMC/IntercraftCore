@@ -7,4 +7,5 @@ import java.util.Comparator;
 public class Sorters
 {
     public static Comparator<ItemStack> alphabetSorter = new AlphabetSorter();
+    public static Comparator<ItemStack> typeSorter = new TypeSorter();
 }

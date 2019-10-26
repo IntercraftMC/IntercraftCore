@@ -31,7 +31,7 @@ public class IntercraftTileEntities
 
     protected static void registerTileEntities(TileEntityType...tileEntityTypes)
     {
-            RegistrationHandler.tileentities.addAll(Arrays.asList(tileEntityTypes));
+        RegistrationHandler.tileentities.addAll(Arrays.asList(tileEntityTypes));
     }
 
     private static TileEntityType buildTE(String registryName, TileEntityType.Builder builder)

@@ -275,6 +275,10 @@
   "tooltip.intercraftcore.composition": "%s: %s%%",
 
 
+  "info.intercraftcore.identity.hidden": "Your name is now hidden",
+  "info.intercraftcore.identity.shown": "Your name is now visible",
+
+
   "commands.intercraftcore.radiation.get": "Exposure is %s and absorbed is %s of entity %s",
   "commands.intercraftcore.radiation.exposure.set": "Set value exposure to %s of entity %s",
   "commands.intercraftcore.radiation.absorbed.set": "Set value absorbed to %s of entity %s",
