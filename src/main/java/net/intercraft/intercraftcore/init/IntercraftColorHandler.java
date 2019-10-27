@@ -4,6 +4,7 @@ import net.intercraft.intercraftcore.block.BlockElement;
 import net.intercraft.intercraftcore.block.BlockFrame;
 import net.intercraft.intercraftcore.block.group.BlockElementGroup;
 import net.intercraft.intercraftcore.item.ItemElement;
+import net.intercraft.intercraftcore.item.ItemWireCoil;
 import net.intercraft.intercraftcore.item.group.ItemElementGroup;
 import net.intercraft.intercraftcore.block.BlockHardOre;
 import net.intercraft.intercraftcore.item.ItemHardChunk;
@@ -37,6 +38,7 @@ public class IntercraftColorHandler
         /*add(IntercraftItems.COPPER.CHUNK);
         add(IntercraftItems.TIN.CHUNK);
         add(IntercraftItems.LEAD.CHUNK);*/
+        add(IntercraftItems.COPPERCOIL);
     }};
 
     /**
@@ -106,6 +108,8 @@ public class IntercraftColorHandler
                 event.getItemColors().register(new ItemColorHandler(((ItemHardChunk)item).getTint(), true),item);
             else if (item instanceof ItemElement)
                 event.getItemColors().register(new ItemColorHandler(((ItemElement)item).getTint(), false),item);
+            else if (item instanceof ItemWireCoil)
+                event.getItemColors().register(new ItemColorHandler(((ItemWireCoil)item).getTint(), true),item);
         }
         for (Block block : blocks) {
             if (block instanceof BlockHardOre)

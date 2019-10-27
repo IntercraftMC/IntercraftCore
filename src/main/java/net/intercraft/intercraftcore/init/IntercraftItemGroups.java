@@ -20,7 +20,7 @@ public class IntercraftItemGroups
         @Override
         public ItemStack createIcon()
         {
-            return new ItemStack(Items.BEEF);
+            return new ItemStack(IntercraftItems.COPPERCOIL);
         }
     };
 

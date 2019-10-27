@@ -1,5 +1,6 @@
 package net.intercraft.intercraftcore.init;
 
+import net.intercraft.intercraftcore.ElementDictionary;
 import net.intercraft.intercraftcore.Reference;
 import net.intercraft.intercraftcore.element.alloys.Brass;
 import net.intercraft.intercraftcore.element.alloys.Bronze;
@@ -10,6 +11,7 @@ import net.intercraft.intercraftcore.element.nonmetals.Silicon;
 import net.intercraft.intercraftcore.item.ItemBucketResin;
 import net.intercraft.intercraftcore.item.ItemBucketWood;
 import net.intercraft.intercraftcore.item.ItemTest;
+import net.intercraft.intercraftcore.item.ItemWireCoil;
 import net.intercraft.intercraftcore.item.group.ItemElementGroup;
 import net.intercraft.intercraftcore.item.group.ItemUraniumGroup;
 import net.intercraft.intercraftcore.item.masks.ItemGlasses;
@@ -65,6 +67,12 @@ public class IntercraftItems
     public static final Item RESIN_BUCKET;
 
     //public static final Item OILBUCKET;
+
+    /**
+     * Coils
+     */
+
+    public static final Item COPPERCOIL;
 
 
     /**
@@ -130,7 +138,7 @@ public class IntercraftItems
         RESIN_BUCKET = new ItemBucketResin();
 
 
-
+        COPPERCOIL = new ItemWireCoil("cu",0.2,1024,50, false, ElementDictionary.COPPER.getColorPrimary());
 
 
 
@@ -171,6 +179,7 @@ public class IntercraftItems
         registerItems(RESIN_BUCKET_OAK,RESIN_BUCKET_SPRUCE,RESIN_BUCKET_BIRCH,RESIN_BUCKET_JUNGLE,RESIN_BUCKET_ACACIA,RESIN_BUCKET_DARK_OAK);
         registerItems(RESIN_BUCKET);
 
+        registerItem(COPPERCOIL);
 
 
         registerElementItems(ALUMINIUM);
