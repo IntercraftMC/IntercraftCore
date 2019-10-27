@@ -1,6 +1,7 @@
 package net.intercraft.intercraftcore.init;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.item.Item;
 import net.minecraft.potion.Effect;
 import net.minecraft.stats.StatType;
@@ -14,12 +15,13 @@ import java.util.List;
 public class RegistrationHandler
 {
 
-    protected static final List<Block> blocks = new LinkedList<>();
-    protected static final List<Item> itemBlocks = new LinkedList<>();
-    protected static final List<Item> items = new LinkedList<>();
-    protected static final List<Effect> effects = new LinkedList<>();
+    protected static final List<Block>          blocks = new LinkedList<>();
+    protected static final List<Block>          fluidBlocks = new LinkedList<>();
+    protected static final List<Item>           itemBlocks = new LinkedList<>();
+    protected static final List<Item>           items = new LinkedList<>();
+    protected static final List<Effect>         effects = new LinkedList<>();
     protected static final List<TileEntityType> tileentities = new LinkedList<>();
-    protected static final List<StatType<?>> stats = new LinkedList<>();
+    protected static final List<StatType<?>>    stats = new LinkedList<>();
 
 
     public static void register(final RegistryEvent.Register event)
@@ -47,6 +49,8 @@ public class RegistrationHandler
         IntercraftBlocks.register();
         blocks.forEach(block -> event.getRegistry().register(block));
         System.out.println("Block registration done.");
+        fluidBlocks.forEach(fluidBlock -> event.getRegistry().register(fluidBlock));
+        System.out.println("Fluid registration done.");
     }
 
     protected static void registerItems(final RegistryEvent.Register<Item> event)

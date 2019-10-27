@@ -1,0 +1,1 @@
+{ "parent": "item/generated", "textures": { "layer0": "intercraftcore:item/buckets/spruce_bucket", "layer1": "intercraftcore:item/buckets/fluid_resin" } }

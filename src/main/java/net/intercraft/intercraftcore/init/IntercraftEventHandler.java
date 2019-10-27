@@ -78,6 +78,9 @@ public class IntercraftEventHandler
             if (event.isCancelable()) {
 
                 //event.setCanceled(true);
+                //if (event.getEntity().getTags().contains(Reference.MODID+":name_hidden"))
+                    //event.setCanceled(true);
+                //event.getEntity().getTags().forEach(tag -> System.out.println(tag));
             }
         }
     }

@@ -22,7 +22,7 @@ public class BlockFrame extends Block
     @Override
     public BlockRenderLayer getRenderLayer()
     {
-        return BlockRenderLayer.CUTOUT;
+        return BlockRenderLayer.TRANSLUCENT;
     }
 
     public int getTint() {

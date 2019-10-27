@@ -15,6 +15,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.ResourceLocation;
 
+import java.util.Arrays;
+
 public class IntercraftBlocks
 {
     /**
@@ -29,6 +31,13 @@ public class IntercraftBlocks
     public static final Block CHUNKLOADER;
     public static final Block CHUNKLOADER_REDSTONE;
     public static final Block CHUNKLOADER_TIMER;
+
+
+
+    /**
+    * Fluids
+    */
+
 
     /**
     * Vanilla feature blocks
@@ -79,6 +88,7 @@ public class IntercraftBlocks
         CABLECASE = new BlockCableCase();
         TREETAP = new BlockTreeTap();
         REDSTONEBEACON = new BlockRedstoneBeacon();
+
 
         GRAVELSUBSTITUTE = new GravelBlock(Block.Properties.create(Material.SAND, MaterialColor.STONE).hardnessAndResistance(0.6F).sound(SoundType.GROUND)).setRegistryName("gravel");
         SANDSUBSTITUTE = new GravelBlock(Block.Properties.create(Material.SAND, MaterialColor.STONE).hardnessAndResistance(0.6F).sound(SoundType.GROUND)).setRegistryName("sand");
@@ -215,6 +225,13 @@ public class IntercraftBlocks
                 RegistrationHandler.itemBlocks.add(new ItemBlockHardOre(block, new Item.Properties()).setRegistryName(block.getRegistryName()));
             }
         }
+    }
+
+    protected static void registerFluidBlocks(Block...fluids)
+    {
+        for (Block fluid : fluids)
+            if (fluid != null)
+                RegistrationHandler.fluidBlocks.add(fluid);
     }
 
     protected static void registerElementBlocks(BlockElementGroup group)

@@ -1,6 +1,1 @@
-{
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "intercraftcore:item/resin_bucket"
-  }
-}
+{ "parent": "item/generated", "textures": { "layer0": "minecraft:item/bucket", "layer1": "intercraftcore:item/buckets/fluid_resin" } }

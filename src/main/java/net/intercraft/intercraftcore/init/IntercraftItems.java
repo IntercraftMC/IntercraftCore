@@ -8,11 +8,13 @@ import net.intercraft.intercraftcore.element.metals.*;
 import net.intercraft.intercraftcore.element.nonmetals.Carbon;
 import net.intercraft.intercraftcore.element.nonmetals.Silicon;
 import net.intercraft.intercraftcore.item.ItemBucketResin;
+import net.intercraft.intercraftcore.item.ItemBucketWood;
 import net.intercraft.intercraftcore.item.ItemTest;
 import net.intercraft.intercraftcore.item.group.ItemElementGroup;
 import net.intercraft.intercraftcore.item.group.ItemUraniumGroup;
 import net.intercraft.intercraftcore.item.masks.ItemGlasses;
 import net.intercraft.intercraftcore.item.masks.ItemMask;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.ResourceLocation;
@@ -24,15 +26,46 @@ public class IntercraftItems
      */
 
     public static final Item TEST;
-    public static final Item BUCKETRESIN;
-
 
     /**
-    * Face masks
-    * */
+     * Face masks
+     */
 
     public static final ItemMask DEVILMASK;
     public static final ItemGlasses SUNGLASSES;
+
+
+
+    /**
+    * Fluid Buckets
+    */
+
+    public static final Item BUCKET_OAK;
+    public static final Item BUCKET_SPRUCE;
+    public static final Item BUCKET_BIRCH;
+    public static final Item BUCKET_JUNGLE;
+    public static final Item BUCKET_ACACIA;
+    public static final Item BUCKET_DARK_OAK;
+
+    public static final Item WATER_BUCKET_OAK;
+    public static final Item WATER_BUCKET_SPRUCE;
+    public static final Item WATER_BUCKET_BIRCH;
+    public static final Item WATER_BUCKET_JUNGLE;
+    public static final Item WATER_BUCKET_ACACIA;
+    public static final Item WATER_BUCKET_DARK_OAK;
+
+    public static final Item RESIN_BUCKET_OAK;
+    public static final Item RESIN_BUCKET_SPRUCE;
+    public static final Item RESIN_BUCKET_BIRCH;
+    public static final Item RESIN_BUCKET_JUNGLE;
+    public static final Item RESIN_BUCKET_ACACIA;
+    public static final Item RESIN_BUCKET_DARK_OAK;
+
+
+    public static final Item RESIN_BUCKET;
+
+    //public static final Item OILBUCKET;
+
 
     /**
      * Item Groups
@@ -67,10 +100,38 @@ public class IntercraftItems
 
     static {
         TEST = new ItemTest((new Item.Properties()).group(ItemGroup.MISC));
-        BUCKETRESIN = new ItemBucketResin();
 
-        DEVILMASK = new ItemMask("devil_mask",new ResourceLocation(Reference.MODID,"textures/masks/devil_mask.png"), true);
+
+        DEVILMASK = new ItemMask("devil_mask",new ResourceLocation(Reference.MODID,"textures/masks/devil_mask.png"));
         SUNGLASSES = new ItemGlasses("sun_glasses", new ResourceLocation(Reference.MODID,"textures/masks/sun_glasses.png"));
+
+
+        BUCKET_OAK = new ItemBucketWood("oak");
+        BUCKET_SPRUCE = new ItemBucketWood("spruce");
+        BUCKET_BIRCH = new ItemBucketWood("birch");
+        BUCKET_JUNGLE = new ItemBucketWood("jungle");
+        BUCKET_ACACIA = new ItemBucketWood("acacia");
+        BUCKET_DARK_OAK = new ItemBucketWood("dark_oak");
+
+        WATER_BUCKET_OAK = new ItemBucketWood(Fluids.WATER,"oak",BUCKET_OAK);
+        WATER_BUCKET_SPRUCE = new ItemBucketWood(Fluids.WATER,"spruce",BUCKET_SPRUCE);
+        WATER_BUCKET_BIRCH = new ItemBucketWood(Fluids.WATER,"birch",BUCKET_BIRCH);
+        WATER_BUCKET_JUNGLE = new ItemBucketWood(Fluids.WATER,"jungle",BUCKET_JUNGLE);
+        WATER_BUCKET_ACACIA = new ItemBucketWood(Fluids.WATER,"acacia",BUCKET_ACACIA);
+        WATER_BUCKET_DARK_OAK = new ItemBucketWood(Fluids.WATER,"dark_oak",BUCKET_DARK_OAK);
+
+        RESIN_BUCKET_OAK = new ItemBucketResin("oak");
+        RESIN_BUCKET_SPRUCE = new ItemBucketResin("spruce");
+        RESIN_BUCKET_BIRCH = new ItemBucketResin("birch");
+        RESIN_BUCKET_JUNGLE = new ItemBucketResin("jungle");
+        RESIN_BUCKET_ACACIA = new ItemBucketResin("acacia");
+        RESIN_BUCKET_DARK_OAK = new ItemBucketResin("dark_oak");
+
+        RESIN_BUCKET = new ItemBucketResin();
+
+
+
+
 
 
         ALUMINIUM = new ItemElementGroup(new Aluminium());
@@ -102,9 +163,15 @@ public class IntercraftItems
     {
         registerItem(TEST);
 
-        registerItems(BUCKETRESIN);
-
         registerItems(DEVILMASK,SUNGLASSES);
+
+
+        registerItems(BUCKET_OAK,      BUCKET_SPRUCE,      BUCKET_BIRCH,      BUCKET_JUNGLE,      BUCKET_ACACIA,      BUCKET_DARK_OAK);
+        registerItems(WATER_BUCKET_OAK,WATER_BUCKET_SPRUCE,WATER_BUCKET_BIRCH,WATER_BUCKET_JUNGLE,WATER_BUCKET_ACACIA,WATER_BUCKET_DARK_OAK);
+        registerItems(RESIN_BUCKET_OAK,RESIN_BUCKET_SPRUCE,RESIN_BUCKET_BIRCH,RESIN_BUCKET_JUNGLE,RESIN_BUCKET_ACACIA,RESIN_BUCKET_DARK_OAK);
+        registerItems(RESIN_BUCKET);
+
+
 
         registerElementItems(ALUMINIUM);
         registerElementItems(COPPER);

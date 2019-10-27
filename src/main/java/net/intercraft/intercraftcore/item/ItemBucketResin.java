@@ -11,4 +11,11 @@ public class ItemBucketResin extends Item
 
         setRegistryName("resin_bucket");
     }
+
+    public ItemBucketResin(String type)
+    {
+        super(new Item.Properties().group(ItemGroup.MISC).maxStackSize(1));
+
+        setRegistryName("resin_"+type+"_bucket");
+    }
 }

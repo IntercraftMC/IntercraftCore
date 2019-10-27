@@ -84,7 +84,7 @@ public class BlockTreeTap extends Block
                     tile.setCanFill(!tile.getCanFill());
                     if (player.getHeldItemOffhand().getItem() == Items.WATER_BUCKET)
                         tile.setFluidType(FluidType.WATER);
-                    else if (player.getHeldItemOffhand().getItem() == IntercraftItems.BUCKETRESIN)
+                    else if (player.getHeldItemOffhand().getItem() == IntercraftItems.RESIN_BUCKET)
                         tile.setFluidType(FluidType.RESIN);
                 }
 
@@ -114,7 +114,7 @@ public class BlockTreeTap extends Block
                  return true;
 
 
-             } else if (stack.getItem() == IntercraftItems.BUCKETRESIN) {
+             } else if (stack.getItem() == IntercraftItems.RESIN_BUCKET) {
 
                  if (state.get(BlockProperties.BUCKET) != BucketType.NONE) return false;
 
@@ -138,7 +138,7 @@ public class BlockTreeTap extends Block
 
                      switch (tile.getFluidType()) {
                          case RESIN:
-                             item = IntercraftItems.BUCKETRESIN;
+                             item = IntercraftItems.RESIN_BUCKET;
                              break;
                          case WATER:
                              item = Items.WATER_BUCKET;

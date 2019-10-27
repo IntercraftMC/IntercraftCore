@@ -1,8 +1,33 @@
 {
   "item.intercraftcore.test_item": "Test",
-  "item.intercraftcore.resin_bucket": "Resin Bucket",
   "item.intercraftcore.devil_mask": "Devil Mask",
   "item.intercraftcore.sun_glasses": "Sunglasses",
+
+  "item.intercraftcore.oak_bucket": "Oak Bucket",
+  "item.intercraftcore.spruce_bucket": "Spruce Bucket",
+  "item.intercraftcore.birch_bucket": "Birch Bucket",
+  "item.intercraftcore.jungle_bucket": "Jungle Bucket",
+  "item.intercraftcore.acacia_bucket": "Acacia Bucket",
+  "item.intercraftcore.dark_oak_bucket": "Dark Oak Bucket",
+  
+  "item.intercraftcore.resin_oak_bucket": "Resin Oak Bucket",
+  "item.intercraftcore.resin_spruce_bucket": "Resin Spruce Bucket",
+  "item.intercraftcore.resin_birch_bucket": "Resin Birch Bucket",
+  "item.intercraftcore.resin_jungle_bucket": "Resin Jungle Bucket",
+  "item.intercraftcore.resin_acacia_bucket": "Resin Acacia Bucket",
+  "item.intercraftcore.resin_dark_oak_bucket": "Resin Dark Oak Bucket",
+  
+  "item.intercraftcore.water_oak_bucket": "Water Oak Bucket",
+  "item.intercraftcore.water_spruce_bucket": "Water Spruce Bucket",
+  "item.intercraftcore.water_birch_bucket": "Water Birch Bucket",
+  "item.intercraftcore.water_jungle_bucket": "Water Jungle Bucket",
+  "item.intercraftcore.water_acacia_bucket": "Water Acacia Bucket",
+  "item.intercraftcore.water_dark_oak_bucket": "Water Dark Oak Bucket",
+
+  "item.intercraftcore.resin_bucket": "Resin Bucket",
+  "item.intercraftcore.oil_bucket": "Oil Bucket",
+
+
 
   "item.intercraftcore.al_ingot": "Aluminium Ingot",
   "item.intercraftcore.al_nugget": "Aluminium Nugget",

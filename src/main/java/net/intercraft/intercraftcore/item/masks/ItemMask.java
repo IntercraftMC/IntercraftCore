@@ -28,39 +28,24 @@ public class ItemMask extends Item
 {
 
     private final ResourceLocation texture;
-    private final boolean hideName;
 
-    public ItemMask(String name, ResourceLocation texture, boolean hideName)
+    public ItemMask(String name, ResourceLocation texture)
     {
         super(new Item.Properties().group(IntercraftItemGroups.VANITY).maxStackSize(1));
 
         this.texture = texture;
-        this.hideName = hideName;
         setRegistryName(name);
     }
 
 
     public void onEquipped(String identifier, LivingEntity entityLivingBase)
     {
-        if (hidesIdentity()) {
-            if (entityLivingBase instanceof PlayerEntity) {
-                entityLivingBase.sendMessage(new TranslationTextComponent("info."+ Reference.MODID+".identity.hidden"));
 
-                //((PlayerEntity) entityLivingBase).addStat();
-
-            }
-        }
     }
 
     public void onUnequipped(String identifier, LivingEntity entityLivingBase)
     {
-        if (hidesIdentity()) {
-            if (entityLivingBase instanceof PlayerEntity) {
-                entityLivingBase.sendMessage(new TranslationTextComponent("info."+ Reference.MODID+".identity.shown"));
-                //((PlayerEntity) entityLivingBase).addStat();
 
-            }
-        }
     }
 
     public void onCurioTick(String identifier, int index, LivingEntity entityLivingBase)
@@ -72,7 +57,7 @@ public class ItemMask extends Item
 
     public boolean hidesIdentity()
     {
-        return hideName;
+        return true;
     }
 
     @Nullable
@@ -93,12 +78,31 @@ public class ItemMask extends Item
             {
                 ItemMask.this.onEquipped(identifier, entityLivingBase);
                 playEquipSound(entityLivingBase);
+
+                if (hidesIdentity()) {
+                    if (entityLivingBase instanceof PlayerEntity) {
+                        entityLivingBase.sendMessage(new TranslationTextComponent("info."+Reference.MODID+".identity.hidden"));
+
+                        //((PlayerEntity) entityLivingBase).addStat();
+                        entityLivingBase.addTag(Reference.MODID+":name_hidden");
+
+                    }
+                }
             }
 
             @Override
             public void onUnequipped(String identifier, LivingEntity entityLivingBase)
             {
                 ItemMask.this.onUnequipped(identifier,entityLivingBase);
+
+                if (hidesIdentity()) {
+                    if (entityLivingBase instanceof PlayerEntity) {
+                        entityLivingBase.sendMessage(new TranslationTextComponent("info."+Reference.MODID+".identity.shown"));
+                        //((PlayerEntity) entityLivingBase).addStat();
+                        entityLivingBase.removeTag(Reference.MODID+":name_hidden");
+
+                    }
+                }
             }
 
             @Override
