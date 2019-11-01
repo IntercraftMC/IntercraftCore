@@ -73,6 +73,7 @@ public class IntercraftItems
      */
 
     public static final Item COPPERCOIL;
+    public static final Item INSULATEDCOPPERCOIL;
 
 
     /**
@@ -138,7 +139,8 @@ public class IntercraftItems
         RESIN_BUCKET = new ItemBucketResin();
 
 
-        COPPERCOIL = new ItemWireCoil("cu",0.2,1024,50, false, ElementDictionary.COPPER.getColorPrimary());
+        COPPERCOIL = new ItemWireCoil("cu",0.2,1024,50, ElementDictionary.COPPER.getColorPrimary());
+        INSULATEDCOPPERCOIL = new ItemWireCoil("cu",0.2,1024,50,true, ElementDictionary.COPPER.getColorPrimary());
 
 
 
@@ -179,7 +181,7 @@ public class IntercraftItems
         registerItems(RESIN_BUCKET_OAK,RESIN_BUCKET_SPRUCE,RESIN_BUCKET_BIRCH,RESIN_BUCKET_JUNGLE,RESIN_BUCKET_ACACIA,RESIN_BUCKET_DARK_OAK);
         registerItems(RESIN_BUCKET);
 
-        registerItem(COPPERCOIL);
+        registerItems(COPPERCOIL,INSULATEDCOPPERCOIL);
 
 
         registerElementItems(ALUMINIUM);

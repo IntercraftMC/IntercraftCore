@@ -29,6 +29,12 @@
 
 
 
+  "item.intercraftcore.cu_wire_coil": "Copper Wire Coil",
+  "item.intercraftcore.insulated_cu_wire_coil": "Insulated Copper Wire Coil",
+  "item.intercraftcore.empty_wire_coil": "Wire Coil",
+
+
+
   "item.intercraftcore.al_ingot": "Aluminium Ingot",
   "item.intercraftcore.al_nugget": "Aluminium Nugget",
   "item.intercraftcore.al_dust": "Aluminium Dust",
@@ -307,12 +313,21 @@
   "info.intercraftcore.identity.shown": "Your name is now visible",
 
   "info.intercraftcore.wiring.cleared": "Last point cleared",
+  "info.intercraftcore.wiring.empty": "Empty Coil",
 
 
   "commands.intercraftcore.radiation.get": "Exposure is %s and absorbed is %s of entity %s",
   "commands.intercraftcore.radiation.exposure.set": "Set value exposure to %s of entity %s",
   "commands.intercraftcore.radiation.absorbed.set": "Set value absorbed to %s of entity %s",
   "commands.intercraftcore.radiation.error.invalid": "Entity %s does not have Capability Radiation",
+
+  "commands.intercraftcore.identity.hidden": "Player %s name is hidden",
+  "commands.intercraftcore.identity.visible": "Player %s name is visible",
+  "commands.intercraftcore.identity.set.hidden": "Player %s name is now hidden",
+  "commands.intercraftcore.identity.set.visible": "Player %s name is now visible",
+  "commands.intercraftcore.identity.get.visible": "Your name is visible",
+  "commands.intercraftcore.identity.get.hidden": "Your name is hidden",
+
 
   "commands.intercraftcore.orevein.get": "Weight of %s is %s at chunk [%s %s]",
 

@@ -1,5 +1,5 @@
 package net.intercraft.intercraftcore.networking;
-
+/*
 public class MessageRegistrationHandler
 {
     private int id = 0;
@@ -30,4 +30,4 @@ public class MessageRegistrationHandler
 
 
 
-}
+}*/

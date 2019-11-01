@@ -38,8 +38,8 @@ public class Element
     /**
      * Element Constructor
      *
-     * @param name Element name
-     * @param dictionary   Element dictionary entry
+     * @param name       Element name
+     * @param dictionary Element dictionary entry
      */
     public Element(String name, ElementDictionary dictionary)
     {
@@ -57,7 +57,6 @@ public class Element
      * @param dictionary   Element dictionary entry
      * @param excludeForms Bit flags for group item/block forms to exclude
      */
-    //public Element(String name, String symbol, int tintPrim, ElementComposition[] composition, int excludeForms)
     public Element(String name, ElementDictionary dictionary, int excludeForms)
     {
         this.name = name;

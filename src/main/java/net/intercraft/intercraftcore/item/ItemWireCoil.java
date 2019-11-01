@@ -14,8 +14,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.util.text.*;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -40,12 +39,18 @@ public class ItemWireCoil extends Item
         this.insulated = insulated;
         this.tint = tint;
 
+        addPropertyOverride(new ResourceLocation("empty"),(stack, worldIn, entityLivingBase) -> getSize(stack) <= 0 ? 1 : 0);
 
-        addPropertyOverride(new ResourceLocation(Reference.MODID+":insulated"),(itemStack, worldIn, entityLivingBase) -> insulated ? 1 : 0);
 
+        if (insulated)
+            setRegistryName("insulated_"+name+"_wire_coil");
+        else
+            setRegistryName(name+"_wire_coil");
+    }
 
-        setRegistryName(name+"_wire_coil");
-
+    public ItemWireCoil(String name, double resistance, int maxSize, int maxLength, int tint)
+    {
+        this(name,resistance,maxSize,maxLength,false,tint);
     }
 
     public double getResistance()
@@ -53,14 +58,24 @@ public class ItemWireCoil extends Item
         return resistance;
     }
 
+    public boolean isInsulated()
+    {
+        return insulated;
+    }
+
     public double getMaxLength()
     {
         return maxLength;
     }
 
-    public boolean isInsulated()
+    public int getMaxSize()
     {
-        return insulated;
+        return maxSize;
+    }
+
+    public int getSize(ItemStack stack)
+    {
+        return maxSize+1-stack.getDamage();
     }
 
     public int getTint()
@@ -68,10 +83,24 @@ public class ItemWireCoil extends Item
         return tint;
     }
 
+    private ITextComponent colorText(String str, TextFormatting color)
+    {
+        return new StringTextComponent(str).setStyle(new Style().setColor(color));
+    }
+
+    private ITextComponent colorDurability(double dur, double percent)
+    {
+        if (percent > 0.66666666) {
+            return colorText((int)dur+"",TextFormatting.GREEN);
+        } else if (percent > 0.33333333) {
+            return colorText((int)dur+"",TextFormatting.YELLOW);
+        }   return colorText((int)dur+"",TextFormatting.RED);
+    }
+
     @Override
     public Multimap<String, AttributeModifier> getAttributeModifiers(EquipmentSlotType slot, ItemStack stack)
     {
-        stack.setDamage(1);
+        //stack.setDamage(1);
         return super.getAttributeModifiers(slot,stack);
     }
 
@@ -82,12 +111,18 @@ public class ItemWireCoil extends Item
     }
 
     @Override
+    public String getTranslationKey(ItemStack stack)
+    {
+        return getSize(stack) <= 0 ? "item."+Reference.MODID+".empty_wire_coil" : super.getTranslationKey(stack);
+    }
+
+    @Override
     public ActionResultType onItemUse(ItemUseContext context)
     {
 
         System.out.println(context.getPos());
 
-        // If it is a attachable block, save location to NBT, then draw line between that and next position.
+        // If it is a attachable block, save location to NBT, then draw line between that and next position. Abort if the distance > size or maxLength
 
 
 
@@ -117,8 +152,11 @@ public class ItemWireCoil extends Item
     {
         super.addInformation(stack, worldIn, tooltip, flagIn);
 
-        tooltip.add(new TranslationTextComponent("tooltip.intercraftcore.length.size",maxSize+1-stack.getDamage(), maxSize));
-        tooltip.add(new TranslationTextComponent("tooltip.intercraftcore.length.max",maxLength));
-        tooltip.add(new TranslationTextComponent("tooltip.intercraftcore.resistance",resistance));
+        double size = getSize(stack);
+        ITextComponent sizeS = colorDurability(size,size/maxSize);
+
+        tooltip.add(new TranslationTextComponent("tooltip."+Reference.MODID+".length.size",sizeS,maxSize));
+        tooltip.add(new TranslationTextComponent("tooltip."+Reference.MODID+".length.max",maxLength));
+        tooltip.add(new TranslationTextComponent("tooltip."+Reference.MODID+".resistance",resistance));
     }
 }

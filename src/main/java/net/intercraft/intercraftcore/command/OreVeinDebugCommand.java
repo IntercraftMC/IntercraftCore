@@ -1,6 +1,7 @@
 package net.intercraft.intercraftcore.command;
 
 import com.mojang.brigadier.CommandDispatcher;
+import net.intercraft.intercraftcore.Reference;
 import net.intercraft.intercraftcore.init.capabilities.ore_veins.IOreVeins;
 import net.intercraft.intercraftcore.init.capabilities.ore_veins.OreVeinProvider;
 import net.intercraft.intercraftcore.init.capabilities.ore_veins.VeinTypes;
@@ -18,6 +19,8 @@ public class OreVeinDebugCommand
 
     public static void register(CommandDispatcher<CommandSource> dispatcher)
     {
+        System.out.println("Registering Ore Vein Debug command.");
+
         dispatcher.register(Commands.literal("ores").requires((cmd) -> {
             return cmd.hasPermissionLevel(2);
         }).then(Commands.literal("all").executes((cmd) -> {
@@ -35,7 +38,7 @@ public class OreVeinDebugCommand
 
         Arrays.asList(VeinTypes.values()).forEach((vein) -> {
 
-            source.sendFeedback(new TranslationTextComponent("commands.intercraftcore.orevein.get",cap.getName(vein),cap.getWeight(vein),source.getEntity().chunkCoordX,source.getEntity().chunkCoordZ), false);
+            source.sendFeedback(new TranslationTextComponent("commands."+Reference.MODID+".orevein.get",cap.getName(vein),cap.getWeight(vein),source.getEntity().chunkCoordX,source.getEntity().chunkCoordZ), false);
         });
 
         return 2;

@@ -2,19 +2,18 @@ package net.intercraft.intercraftcore;
 
 import net.intercraft.intercraftcore.init.IntercraftEventHandler;
 import net.intercraft.intercraftcore.init.RegistrationHandler;
+import net.intercraft.intercraftcore.init.capabilities.identity_hidden.IIdentityHidden;
+import net.intercraft.intercraftcore.init.capabilities.identity_hidden.IdentityHiddenStorage;
 import net.intercraft.intercraftcore.init.capabilities.ore_veins.IOreVeins;
 import net.intercraft.intercraftcore.init.capabilities.ore_veins.OreVeinStorage;
-import net.intercraft.intercraftcore.init.capabilities.pattern.IPattern;
-import net.intercraft.intercraftcore.init.capabilities.pattern.PatternStorage;
 import net.intercraft.intercraftcore.init.capabilities.radiation.IRadiation;
 import net.intercraft.intercraftcore.init.capabilities.radiation.RadiationStorage;
 import net.intercraft.intercraftcore.init.gen.OreGen;
-import net.intercraft.intercraftcore.init.loot.conditions.DestroyedBy;
 import net.intercraft.intercraftcore.init.loot.functions.BlockItemFunction;
 import net.intercraft.intercraftcore.init.loot.functions.HarderSetCount;
+import net.intercraft.intercraftcore.networking.IntercraftPacketHandler;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Tuple;
-import net.minecraft.world.storage.loot.conditions.LootConditionManager;
 import net.minecraft.world.storage.loot.functions.LootFunctionManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
@@ -24,8 +23,8 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.network.simple.SimpleChannel;
 import top.theillusivec4.curios.api.CuriosAPI;
-import top.theillusivec4.curios.api.capability.ICurio;
 import top.theillusivec4.curios.api.imc.CurioIMCMessage;
 
 @Mod(Reference.MODID)
@@ -33,10 +32,13 @@ public class IntercraftCore
 {
     public static IntercraftCore instance;
     public static final ResourceLocation RAD_ID = new ResourceLocation(Reference.MODID,"radiation");
+    public static final ResourceLocation HID_ID = new ResourceLocation(Reference.MODID,"identity_hidden");
     public static final ResourceLocation VEIN_ID = new ResourceLocation(Reference.MODID,"ore_vein");
-    public static final ResourceLocation PAT_ID = new ResourceLocation(Reference.MODID,"pattern");
+    //public static final ResourceLocation PAT_ID = new ResourceLocation(Reference.MODID,"pattern");
 
-    public static int defDensity = 3;
+    public static final SimpleChannel NETWORK = IntercraftPacketHandler.getNetworkChannel();
+
+    public static final int defDensity = 3;
 
     public IntercraftCore()
     {
@@ -90,12 +92,10 @@ public class IntercraftCore
         //LootConditionManager.registerCondition(new DestroyedBy.Serializer());
 
 
-
-
-
-        CapabilityManager.INSTANCE.register(IRadiation.class, new RadiationStorage(), new RadiationStorage.Factory());
-        CapabilityManager.INSTANCE.register(IOreVeins.class,  new OreVeinStorage(),   new OreVeinStorage.Factory());
-        //CapabilityManager.INSTANCE.register(IPattern.class,  new PatternStorage(),    new PatternStorage.Factory());
+        CapabilityManager.INSTANCE.register(IRadiation.class,       new RadiationStorage(),      new RadiationStorage.Factory());
+        CapabilityManager.INSTANCE.register(IOreVeins.class,        new OreVeinStorage(),        new OreVeinStorage.Factory());
+        CapabilityManager.INSTANCE.register(IIdentityHidden.class,  new IdentityHiddenStorage(), new IdentityHiddenStorage.Factory());
+        //CapabilityManager.INSTANCE.register(IPattern.class,         new PatternStorage(),        new PatternStorage.Factory());
 
         MinecraftForge.EVENT_BUS.addListener(IntercraftEventHandler::attachCapabilityEntity);
         MinecraftForge.EVENT_BUS.addListener(IntercraftEventHandler::attachCapabilityChunk);
@@ -108,6 +108,6 @@ public class IntercraftCore
 
     public void onClientSetup(final FMLClientSetupEvent event)
     {
-        //ClientRegistry.bindTileEntitySpecialRenderer(TreeTapTileEntity.class, new TreeTapTileEntityRenderer<>());
+        //ClientRegistry.bindTileEntitySpecialRenderer(TreeTapTileEntity.class, new TreeTapTileEntityRenderer<>()); // Broken as heck.
     }
 }

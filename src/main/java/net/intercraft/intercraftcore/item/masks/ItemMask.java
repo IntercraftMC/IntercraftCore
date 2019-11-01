@@ -1,7 +1,12 @@
 package net.intercraft.intercraftcore.item.masks;
 
+import net.intercraft.intercraftcore.IntercraftCore;
 import net.intercraft.intercraftcore.Reference;
 import net.intercraft.intercraftcore.init.IntercraftItemGroups;
+import net.intercraft.intercraftcore.init.capabilities.identity_hidden.IIdentityHidden;
+import net.intercraft.intercraftcore.init.capabilities.identity_hidden.IdentityHidden;
+import net.intercraft.intercraftcore.init.capabilities.identity_hidden.IdentityHiddenProvider;
+import net.intercraft.intercraftcore.networking.MessageIdentityHidden;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -17,6 +22,7 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.fml.network.PacketDistributor;
 import top.theillusivec4.curios.api.capability.CuriosCapability;
 import top.theillusivec4.curios.api.capability.ICurio;
 
@@ -83,9 +89,9 @@ public class ItemMask extends Item
                     if (entityLivingBase instanceof PlayerEntity) {
                         entityLivingBase.sendMessage(new TranslationTextComponent("info."+Reference.MODID+".identity.hidden"));
 
-                        //((PlayerEntity) entityLivingBase).addStat();
-                        entityLivingBase.addTag(Reference.MODID+":name_hidden");
-
+                        IIdentityHidden hidden = entityLivingBase.getCapability(IdentityHiddenProvider.HID_CAP).orElseThrow(NullPointerException::new);
+                        if (!hidden.getHidden())
+                            hidden.setHidden((PlayerEntity) entityLivingBase,true);
                     }
                 }
             }
@@ -98,9 +104,10 @@ public class ItemMask extends Item
                 if (hidesIdentity()) {
                     if (entityLivingBase instanceof PlayerEntity) {
                         entityLivingBase.sendMessage(new TranslationTextComponent("info."+Reference.MODID+".identity.shown"));
-                        //((PlayerEntity) entityLivingBase).addStat();
-                        entityLivingBase.removeTag(Reference.MODID+":name_hidden");
 
+                        IIdentityHidden hidden = entityLivingBase.getCapability(IdentityHiddenProvider.HID_CAP).orElseThrow(NullPointerException::new);
+                        if (hidden.getHidden())
+                            hidden.setHidden((PlayerEntity) entityLivingBase,false);
                     }
                 }
             }

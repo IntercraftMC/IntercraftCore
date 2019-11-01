@@ -2,6 +2,7 @@ package net.intercraft.intercraftcore.command;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
+import net.intercraft.intercraftcore.Reference;
 import net.intercraft.intercraftcore.init.capabilities.radiation.IRadiation;
 import net.intercraft.intercraftcore.init.capabilities.radiation.RadiationProvider;
 import net.minecraft.command.CommandSource;
@@ -17,7 +18,8 @@ public class RadiationDebugCommand
 
     public static void register(CommandDispatcher<CommandSource> dispatcher)
     {
-        //System.out.println("Registering Radiation Debug command.");
+        System.out.println("Registering Radiation Debug command.");
+
         dispatcher.register(Commands.literal("radiation").requires((cmd) -> {
             return cmd.hasPermissionLevel(2);
         }).then(Commands.literal("get").then(Commands.argument("entity", EntityArgument.entity()).executes((cmd) -> {
@@ -42,10 +44,10 @@ public class RadiationDebugCommand
 
                 IRadiation cap = entity.getCapability(RadiationProvider.RAD_CAP).orElse(RadiationProvider.RAD_CAP.getDefaultInstance());
 
-                source.sendFeedback(new TranslationTextComponent("commands.intercraftcore.radiation.get", cap.getExposure(), cap.getAbsorbed(), entity.getDisplayName()), false);
+                source.sendFeedback(new TranslationTextComponent("commands."+Reference.MODID+".radiation.get", cap.getExposure(), cap.getAbsorbed(), entity.getDisplayName()), false);
 
                 } else {
-                    source.sendErrorMessage(new TranslationTextComponent("commands.intercraftcore.radiation.error.invalid",entity.getDisplayName()));
+                    source.sendErrorMessage(new TranslationTextComponent("commands."+Reference.MODID+".radiation.error.invalid",entity.getDisplayName()));
                     break;
                 }
         }
@@ -67,19 +69,19 @@ public class RadiationDebugCommand
 
                     case "exposure": {
                         cap.setExposure(value);
-                        source.sendFeedback(new TranslationTextComponent("commands.intercraftcore.radiation.exposure.set", value, entity.getDisplayName()), true);
+                        source.sendFeedback(new TranslationTextComponent("commands."+Reference.MODID+".radiation.exposure.set", value, entity.getDisplayName()), true);
                         break;
                     }
                     case "absorbed": {
                         cap.setAbsorbed(value);
-                        source.sendFeedback(new TranslationTextComponent("commands.intercraftcore.radiation.absorbed.set", value, entity.getDisplayName()), true);
+                        source.sendFeedback(new TranslationTextComponent("commands."+Reference.MODID+".radiation.absorbed.set", value, entity.getDisplayName()), true);
                         break;
                     }
                     default:
-                        source.sendErrorMessage(new TranslationTextComponent("commands.intercraftcore.radiation.error.typo", type));
+                        source.sendErrorMessage(new TranslationTextComponent("commands."+Reference.MODID+".radiation.error.typo", type));
                 }
             } else {
-                source.sendErrorMessage(new TranslationTextComponent("commands.intercraftcore.radiation.error.invalid",entity.getDisplayName()));
+                source.sendErrorMessage(new TranslationTextComponent("commands."+Reference.MODID+".radiation.error.invalid",entity.getDisplayName()));
                 break;
             }
         }

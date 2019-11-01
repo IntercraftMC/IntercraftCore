@@ -17,8 +17,8 @@ public class IntercraftStats
     //public static final StatType<EntityType<?>> NAME_HIDDEN;
 
     static {
-        //NAME_HIDDEN = registerType("name_hidden")
-        //NAME_HIDDEN = registerType("name_hidden",Registry.ENTITY_TYPE);
+        //NAME_HIDDEN = registerType("identity_hidden")
+        //NAME_HIDDEN = registerType("identity_hidden",Registry.ENTITY_TYPE);
     }
 
 

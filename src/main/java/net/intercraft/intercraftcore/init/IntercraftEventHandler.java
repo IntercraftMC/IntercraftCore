@@ -2,11 +2,17 @@ package net.intercraft.intercraftcore.init;
 
 import net.intercraft.intercraftcore.IntercraftCore;
 import net.intercraft.intercraftcore.Reference;
+import net.intercraft.intercraftcore.command.IdentityHiddenDebugCommand;
 import net.intercraft.intercraftcore.command.OreVeinDebugCommand;
 import net.intercraft.intercraftcore.command.RadiationDebugCommand;
+import net.intercraft.intercraftcore.init.capabilities.identity_hidden.IIdentityHidden;
+import net.intercraft.intercraftcore.init.capabilities.identity_hidden.IdentityHidden;
+import net.intercraft.intercraftcore.init.capabilities.identity_hidden.IdentityHiddenProvider;
 import net.intercraft.intercraftcore.init.capabilities.ore_veins.OreVeinProvider;
+import net.intercraft.intercraftcore.init.capabilities.radiation.IRadiation;
 import net.intercraft.intercraftcore.init.capabilities.radiation.RadiationProvider;
 import net.intercraft.intercraftcore.item.masks.ModelBand;
+import net.intercraft.intercraftcore.networking.MessageIdentityHidden;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.CreatureEntity;
@@ -16,6 +22,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.FallingBlockEntity;
 import net.minecraft.entity.monster.ElderGuardianEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.tags.BlockTags;
@@ -23,6 +30,7 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.chunk.Chunk;
+import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -34,10 +42,12 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.entity.EntityStruckByLightningEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.world.ExplosionEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
+import net.minecraftforge.fml.network.PacketDistributor;
 import top.theillusivec4.curios.api.capability.CuriosCapability;
 import top.theillusivec4.curios.api.capability.ICurio;
 
@@ -59,6 +69,7 @@ public class IntercraftEventHandler
     {
         RadiationDebugCommand.register(event.getCommandDispatcher());
         OreVeinDebugCommand.register(event.getCommandDispatcher());
+        IdentityHiddenDebugCommand.register(event.getCommandDispatcher());
     }
 
     //@SubscribeEvent
@@ -70,17 +81,57 @@ public class IntercraftEventHandler
             System.out.println(event.getEntity().getDisplayName().getString());
     }
 
+    @SubscribeEvent
+    public static void onPlayerStartTracking(final PlayerEvent.StartTracking event)
+    {
+        if (event.getTarget() instanceof PlayerEntity) {
+            IIdentityHidden hiddenTarget = event.getTarget().getCapability(IdentityHiddenProvider.HID_CAP).orElseThrow(NullPointerException::new);
+            IntercraftCore.NETWORK.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) event.getPlayer()), new MessageIdentityHidden(event.getPlayer().getEntityId(), hiddenTarget.getHidden()));
+        }
+    }
+
+    @SubscribeEvent
+    public static void onPlayerLoggedIn(final PlayerEvent.PlayerLoggedInEvent event)
+    {
+        IdentityHidden.updatePlayerNames(event.getPlayer(),event.getPlayer().dimension);
+    }
+
+    @SubscribeEvent
+    public static void onPlayerChangedDimension(final PlayerEvent.PlayerChangedDimensionEvent event)
+    {
+        IdentityHidden.updatePlayerNames(event.getPlayer(),event.getTo());
+    }
+
+
+    @SubscribeEvent
+    public static void onPlayerClone(final PlayerEvent.Clone event)
+    {
+        if (!event.isWasDeath()) {
+            IRadiation radiationOri = event.getOriginal().getCapability(RadiationProvider.RAD_CAP).orElseThrow(NullPointerException::new);
+            IRadiation radiationNew = event.getPlayer().getCapability(RadiationProvider.RAD_CAP).orElseThrow(NullPointerException::new);
+            radiationNew.setAbsorbed(radiationOri.getAbsorbed());
+            radiationNew.setExposure(radiationOri.getExposure());
+
+            IIdentityHidden hiddenOri = event.getOriginal().getCapability(IdentityHiddenProvider.HID_CAP).orElseThrow(NullPointerException::new);
+            IIdentityHidden hiddenNew = event.getPlayer().getCapability(IdentityHiddenProvider.HID_CAP).orElseThrow(NullPointerException::new);
+            hiddenNew.setHidden(hiddenOri.getHidden());
+        }
+        IdentityHidden.updatePlayerNames(event.getPlayer(),event.getPlayer().dimension);
+    }
+
+
+
+
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
-    public static void onRenderPlayer(RenderLivingEvent.Specials.Pre event)
+    public static void onRenderEntity(RenderLivingEvent.Specials.Pre event)
     {
         if (event.getEntity() instanceof PlayerEntity) {
             if (event.isCancelable()) {
 
-                //event.setCanceled(true);
-                //if (event.getEntity().getTags().contains(Reference.MODID+":name_hidden"))
-                    //event.setCanceled(true);
-                //event.getEntity().getTags().forEach(tag -> System.out.println(tag));
+                IIdentityHidden hidden = event.getEntity().getCapability(IdentityHiddenProvider.HID_CAP).orElseThrow(NullPointerException::new);
+                if (hidden.getHidden())
+                    event.setCanceled(true);
             }
         }
     }
@@ -223,6 +274,10 @@ public class IntercraftEventHandler
 
     public static void attachCapabilityEntity(AttachCapabilitiesEvent<Entity> event)
     {
+
+        if (event.getObject() instanceof PlayerEntity)
+            event.addCapability(IntercraftCore.HID_ID, new IdentityHiddenProvider((PlayerEntity) event.getObject()));
+
         if (event.getObject() instanceof LivingEntity)
             if (!((LivingEntity) event.getObject()).isEntityUndead())
                 if (event.getObject() instanceof CreatureEntity || event.getObject() instanceof PlayerEntity) {
@@ -234,8 +289,6 @@ public class IntercraftEventHandler
 
     public static void attachCapabilityChunk(AttachCapabilitiesEvent<Chunk> event)
     {
-
         event.addCapability(IntercraftCore.VEIN_ID, new OreVeinProvider());
-        //event.addCapability(IntercraftCore.PAT_ID, new PatternProvider());
     }
 }

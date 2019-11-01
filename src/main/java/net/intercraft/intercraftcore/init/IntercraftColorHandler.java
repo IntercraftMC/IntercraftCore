@@ -35,10 +35,8 @@ public class IntercraftColorHandler
      */
 
     private static List<Item> items = new ArrayList<Item>(){{
-        /*add(IntercraftItems.COPPER.CHUNK);
-        add(IntercraftItems.TIN.CHUNK);
-        add(IntercraftItems.LEAD.CHUNK);*/
         add(IntercraftItems.COPPERCOIL);
+        add(IntercraftItems.INSULATEDCOPPERCOIL);
     }};
 
     /**
@@ -46,10 +44,8 @@ public class IntercraftColorHandler
      */
 
     private static List<Block> blocks = new ArrayList<Block>(){{
-            /*add(IntercraftBlocks.COPPERORE);
-            add(IntercraftBlocks.TINORE);
-            add(IntercraftBlocks.LEADORE);*/
-        }};
+
+    }};
 
 
     @SubscribeEvent
@@ -61,7 +57,7 @@ public class IntercraftColorHandler
          * Groups of items to be coloured
          */
 
-        ItemElementGroup[] groups = {
+        final ItemElementGroup[] groups = {
                 IntercraftItems.ALUMINIUM,
                 IntercraftItems.COPPER,
                 IntercraftItems.GOLD,
@@ -99,25 +95,25 @@ public class IntercraftColorHandler
         }
 
         /**
-         * Registering Item colours
+         * Registering Item + ItemBlock colours
          */
 
         for (Item item : items) {
 
             if (item instanceof ItemHardChunk)
-                event.getItemColors().register(new ItemColorHandler(((ItemHardChunk)item).getTint(), true),item);
+                event.getItemColors().register(new ItemColorHandler(((ItemHardChunk)item).getTint(),1),item);
             else if (item instanceof ItemElement)
-                event.getItemColors().register(new ItemColorHandler(((ItemElement)item).getTint(), false),item);
+                event.getItemColors().register(new ItemColorHandler(((ItemElement)item).getTint()),item);
             else if (item instanceof ItemWireCoil)
-                event.getItemColors().register(new ItemColorHandler(((ItemWireCoil)item).getTint(), true),item);
+                event.getItemColors().register(new ItemColorHandler(((ItemWireCoil)item).getTint(),1),item);
         }
         for (Block block : blocks) {
             if (block instanceof BlockHardOre)
-                event.getItemColors().register(new BlockColorHandler(((BlockHardOre) block).getTint()),block);
+                event.getItemColors().register(new BlockColorHandler(((BlockHardOre)block).getTint()),block);
             else if (block instanceof BlockElement)
-                event.getItemColors().register(new BlockColorHandler(((BlockElement) block).getTint()),block);
+                event.getItemColors().register(new BlockColorHandler(((BlockElement)block).getTint()),block);
             else if (block instanceof BlockFrame)
-                event.getItemColors().register(new BlockColorHandler(((BlockFrame) block).getTint()),block);
+                event.getItemColors().register(new BlockColorHandler(((BlockFrame)block).getTint()),block);
         }
 
         System.out.println("[Item Colours] Done.");
@@ -129,10 +125,10 @@ public class IntercraftColorHandler
 
 
         /**
-         * Groups of items to be coloured
+         * Groups of blocks to be coloured
          */
 
-        BlockElementGroup[] groups = {
+        final BlockElementGroup[] groups = {
                 IntercraftBlocks.ALUMINIUM,
                 IntercraftBlocks.COPPER,
                 IntercraftBlocks.GOLD,
@@ -182,29 +178,43 @@ public class IntercraftColorHandler
 
 
         System.out.println("[Block Colours] Done.");
-
     }
 
 
     private static class ItemColorHandler implements IItemColor
     {
         private int tint;
-        private boolean layer;
+        private int layer;
 
-        public ItemColorHandler(int tint, boolean layer)
+        /**
+         * ColorHandler Constructor
+         *
+         * @param tint colour to be tinted with
+         */
+        public ItemColorHandler(int tint)
         {
-            this.tint = tint;
+            this.tint  = tint;
+            this.layer = -1;
+        }
+
+        /**
+         * ColorHandler Constructor for particular texture layer.
+         *
+         * @param tint colour to be tinted with
+         * @param layer layer to be coloured
+         */
+        public ItemColorHandler(int tint, int layer)
+        {
+            this.tint  = tint;
             this.layer = layer;
         }
 
         public int getColor(ItemStack stack, int tint)
         {
 
-            if (this.layer)
-                if (tint == 0)
-                    return 0xFFFFFF;
-            return this.tint;
-
+            if (this.layer == -1)
+                return this.tint;
+            return this.layer == tint ? this.tint : 0xFFFFFF;
 
         }
     }

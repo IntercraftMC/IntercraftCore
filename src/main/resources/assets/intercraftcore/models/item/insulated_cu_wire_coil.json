@@ -1,0 +1,16 @@
+{
+  "parent":"item/generated",
+  "textures":{
+    "layer0":"intercraftcore:item/coil",
+    "layer1":"intercraftcore:item/wires",
+    "layer2":"intercraftcore:item/insulation"
+  },
+  "overrides":[
+    {
+      "predicate":{
+        "empty":1
+      },
+      "model":"intercraftcore:item/wire_coil_empty"
+    }
+  ]
+}
