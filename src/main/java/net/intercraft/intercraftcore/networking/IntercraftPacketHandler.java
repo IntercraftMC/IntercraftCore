@@ -37,6 +37,14 @@ public class IntercraftPacketHandler
                 .consumer(MessageIdentityHidden::handle)
                 .add(); index++;
 
+        // Send Tree Tap Tile Entity data to client.
+
+        channel.messageBuilder(MessageTreeTap.class,index)
+                .encoder(MessageTreeTap::encode)
+                .decoder(MessageTreeTap::decode)
+                .consumer(MessageTreeTap::handle)
+                .add(); index++;
+
         return channel;
     }
 

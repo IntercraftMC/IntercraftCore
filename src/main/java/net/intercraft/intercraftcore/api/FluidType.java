@@ -5,9 +5,9 @@ import net.minecraft.particles.ParticleTypes;
 
 public enum FluidType
 {
-    NONE("none",0,0,null),
-    WATER("water",2,0.4, ParticleTypes.DRIPPING_WATER),
-    RESIN("resin",3,1, ParticleTypes.DRIPPING_WATER);
+    NONE( "none", 0,0,   null),
+    WATER("water",2,0.4, ParticleTypes.FALLING_WATER),
+    RESIN("resin",3,1,   ParticleTypes.FALLING_WATER);
 
     private final String name;
     private final double viscosity;
@@ -41,7 +41,7 @@ public enum FluidType
         return this.alpha;
     }
 
-    public BasicParticleType getResourceLocation()
+    public BasicParticleType getParticle()
     {
         return this.basicParticleType;
     }

@@ -39,7 +39,7 @@ import static net.minecraft.state.properties.BlockStateProperties.HORIZONTAL_FAC
 public class BlockTreeTap extends Block
 {
 
-    //                                                                    double x1,       double y1,       double z1,        double x2,        double y2,         double z2
+    //                                                                    double x1, double y1, double z1, double x2, double y2, double z2
     protected static final VoxelShape SHAPE_WEST = Block.makeCuboidShape(10.0D, 1.0D, 5.0D, 16.0D, 11.0D, 11.0D);
     protected static final VoxelShape SHAPE_EAST = Block.makeCuboidShape(0.0D, 1.0D, 5.0D, 6.0D, 11.0D, 11.0D);
     protected static final VoxelShape SHAPE_NORTH = Block.makeCuboidShape(5.0D, 1.0D, 10.0D, 11.0D, 11.0D, 16.0D);
@@ -69,24 +69,34 @@ public class BlockTreeTap extends Block
     public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit)
     {
         TreeTapTileEntity tile = state.getBlock().hasTileEntity(state) ? (TreeTapTileEntity) worldIn.getTileEntity(pos) : null;
-        if (tile == null) return false;
+        if (tile == null) throw new NullPointerException("Could not find TreeTapTileEntity!");
 
          ItemStack stack = player.getHeldItem(handIn);
 
-        player.sendMessage(new StringTextComponent(String.format("Can fill: %s has volume: %s is type: %s and viscosity: %s.",tile.getCanFill(), tile.getVolume(), tile.getFluidType().getName(), tile.getFluidType().getViscosity())));
+        if (player.isCreative() && stack.getItem() == Items.STICK) {
+            if (worldIn.isRemote)
+                player.sendMessage(new StringTextComponent(String.format("[CLIENT] Can fill: %s has volume: %s is type: %s and viscosity: %s.", tile.getCanFill(), tile.getVolume(), tile.getFluidType().getName(), tile.getFluidType().getViscosity())));
+            else
+                player.sendMessage(new StringTextComponent(String.format("[SERVER] Can fill: %s has volume: %s is type: %s and viscosity: %s.", tile.getCanFill(), tile.getVolume(), tile.getFluidType().getName(), tile.getFluidType().getViscosity())));
+        }
+
 
          if (!worldIn.isRemote) {
 
-             if (player.isCreative())
-                if (stack.getItem() == Items.STICK)
-                    player.sendMessage(new StringTextComponent(String.format("Can fill: %s has volume: %s is type: %s and viscosity: %s.",tile.getCanFill(), tile.getVolume(), tile.getFluidType().getName(), tile.getFluidType().getViscosity())));
-                else if (stack.getItem() == Items.BONE) {
-                    tile.setCanFill(!tile.getCanFill());
-                    if (player.getHeldItemOffhand().getItem() == Items.WATER_BUCKET)
+             if (player.isCreative()) {
+                 if (stack.getItem() == Items.BONE) {
+                    if (player.getHeldItemOffhand().getItem() == Items.WATER_BUCKET) {
                         tile.setFluidType(FluidType.WATER);
-                    else if (player.getHeldItemOffhand().getItem() == IntercraftItems.RESIN_BUCKET)
+                        return true;
+                    }
+                    else if (player.getHeldItemOffhand().getItem() == IntercraftItems.RESIN_BUCKET) {
                         tile.setFluidType(FluidType.RESIN);
+                        return true;
+                    }
+                     tile.setCanFill(!tile.getCanFill());
+                     return true;
                 }
+             }
 
 
              if (stack.getItem() == Items.BUCKET) {

@@ -108,6 +108,6 @@ public class IntercraftCore
 
     public void onClientSetup(final FMLClientSetupEvent event)
     {
-        //ClientRegistry.bindTileEntitySpecialRenderer(TreeTapTileEntity.class, new TreeTapTileEntityRenderer<>()); // Broken as heck.
+
     }
 }

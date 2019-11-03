@@ -1,23 +1,32 @@
 package net.intercraft.intercraftcore.tileentity;
 
+import net.intercraft.intercraftcore.IntercraftCore;
 import net.intercraft.intercraftcore.api.FluidType;
 import net.intercraft.intercraftcore.init.IntercraftTileEntities;
 import net.intercraft.intercraftcore.networking.IntercraftPacketHandler;
 import net.intercraft.intercraftcore.networking.MessageTreeTap;
+import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SUpdateTileEntityPacket;
+import net.minecraft.particles.IParticleData;
+import net.minecraft.particles.ItemParticleData;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.fml.network.PacketDistributor;
 
 import javax.annotation.Nullable;
 
+import static net.minecraft.state.properties.BlockStateProperties.HORIZONTAL_FACING;
+
 public class TreeTapTileEntity extends TileEntity implements ITickableTileEntity
 {
 
-    private int volume = 0;
-    private boolean canFill = false;
-    private FluidType fluidType = FluidType.NONE;
+    public int volume = 0;
+    public boolean canFill = false;
+    public FluidType fluidType = FluidType.NONE;
 
     public static final int maxVolume = 1000;
 
@@ -44,8 +53,9 @@ public class TreeTapTileEntity extends TileEntity implements ITickableTileEntity
             if (volume < maxVolume) {
 
 
-                if (getWorld().getGameTime() % fluidType.getViscosity() == 0) {
-                    setVolume(volume + 1);
+                if (getWorld().getGameTime() % (fluidType.getViscosity()*40) == 0) {
+                    //setVolume(volume + 1);
+                    add(1);
 
                     //world.addParticle(ParticleTypes.DRIPPING_WATER,pos.getX(),pos.getY()+0.5,pos.getZ(),0,-1,0);
 
@@ -57,18 +67,49 @@ public class TreeTapTileEntity extends TileEntity implements ITickableTileEntity
         }
     }
 
-
-    /*@Override
-    public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt)
+    public void add(int v)
     {
-        CompoundNBT compound = pkt.getNbtCompound();
-        volume = compound.getInt("volume");
-        canFill = compound.getBoolean("can_fill");
-        fluidType = FluidType.valueOf(compound.getString("fluid_type").toUpperCase());
-        world.notifyBlockUpdate(pos,world.getBlockState(pos),world.getBlockState(pos),2);
+        setVolume(volume + v);
+        double x = this.pos.getX()+0.5,y = this.pos.getY()+0.43,z = this.pos.getZ()+0.5;
+
+        switch (this.getBlockState().get(HORIZONTAL_FACING)) {
+
+            case WEST:
+                x += 0.26;
+                break;
+
+            case EAST:
+                x -= 0.26;
+                break;
+
+            case SOUTH:
+                z -= 0.26;
+                break;
+
+            default: case NORTH:
+                z += 0.26;
+
+        }
+
+        IParticleData particle = fluidType.getParticle();
+
+
+        Minecraft.getInstance().world.addParticle(particle,x,y,z,0,-1,0);
     }
 
-    @Nullable
+
+    @Override
+    public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt)
+    {
+        super.onDataPacket(net,pkt);
+        CompoundNBT compound = pkt.getNbtCompound();
+        volume = compound.getInt("volume");
+        //canFill = compound.getBoolean("can_fill");
+        fluidType = FluidType.valueOf(compound.getString("fluid_type").toUpperCase());
+        //world.notifyBlockUpdate(pos,world.getBlockState(pos),world.getBlockState(pos),2);
+    }
+
+    /*@Nullable
     @Override
     public SUpdateTileEntityPacket getUpdatePacket()
     {
@@ -85,7 +126,7 @@ public class TreeTapTileEntity extends TileEntity implements ITickableTileEntity
     {
         CompoundNBT compound = super.getUpdateTag();
         compound.putInt("volume", volume);
-        compound.putBoolean("can_fill",canFill);
+        //compound.putBoolean("can_fill",canFill);
         compound.putString("fluid_type",fluidType.getName());
         return compound;
     }
@@ -94,7 +135,7 @@ public class TreeTapTileEntity extends TileEntity implements ITickableTileEntity
     public void handleUpdateTag(CompoundNBT compound)
     {
         volume = compound.getInt("volume");
-        canFill = compound.getBoolean("can_fill");
+        //canFill = compound.getBoolean("can_fill");
         fluidType = FluidType.valueOf(compound.getString("fluid_type").toUpperCase());
         super.handleUpdateTag(compound);
     }
@@ -137,11 +178,12 @@ public class TreeTapTileEntity extends TileEntity implements ITickableTileEntity
         return this.fluidType;
     }
 
-    public void setVolume(int value)
+    public void setVolume(int volume)
     {
-        volume = value;
-        //IntercraftPacketHandler.INSTANCE.sendTo(PacketDistributor.ALL.noArg(), new MessageTreeTap(volume));
+        this.volume = volume;
         markDirty();
+        IntercraftCore.NETWORK.send(PacketDistributor.TRACKING_CHUNK.with(() -> (Chunk) this.getTileEntity().getWorld().getChunk(this.pos)),new MessageTreeTap(this.getPos(),volume,fluidType));
+
     }
 
     public void setCanFill(boolean bool)
@@ -150,9 +192,10 @@ public class TreeTapTileEntity extends TileEntity implements ITickableTileEntity
         markDirty();
     }
 
-    public void setFluidType(FluidType type)
+    public void setFluidType(FluidType fluidType)
     {
-        fluidType = type;
+        this.fluidType = fluidType;
         markDirty();
+        IntercraftCore.NETWORK.send(PacketDistributor.TRACKING_CHUNK.with(() -> (Chunk) this.getTileEntity().getWorld().getChunk(this.pos)),new MessageTreeTap(this.getPos(),volume,fluidType));
     }
 }

@@ -1,8 +1,13 @@
 package net.intercraft.intercraftcore.networking;
 
 import net.intercraft.intercraftcore.api.FluidType;
+import net.intercraft.intercraftcore.tileentity.TreeTapTileEntity;
+import net.minecraft.block.BlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.network.PacketBuffer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.network.NetworkEvent;
 
 import java.util.function.Supplier;
@@ -10,52 +15,31 @@ import java.util.function.Supplier;
 public class MessageTreeTap
 {
 
-    private int volume = -1;
-    private FluidType type ;
+    private int volume;
+    private FluidType type;
+    private BlockPos pos;
 
 
-    public MessageTreeTap()
+
+    public MessageTreeTap(BlockPos pos, int volume, FluidType type)
     {
-
-    }
-
-    public MessageTreeTap(int volume)
-    {
-        this.volume = volume;
-    }
-
-    public MessageTreeTap(FluidType type)
-    {
-        this.type = type;
-    }
-
-    public MessageTreeTap(int volume, FluidType type)
-    {
+        this.pos = pos;
         this.volume = volume;
         this.type = type;
-    }
-
-    public MessageTreeTap(PacketBuffer buf)
-    {
-        int v = -1;
-        FluidType f;
-
-        try {
-            v = buf.getInt(1);
-        } catch (IndexOutOfBoundsException e) { System.out.println("Fack...\n"+e); }
-
-        f = FluidType.valueOf(buf.readString(16).toUpperCase());
-
-        this.type = f;
-        this.volume = v != -1 ? v : this.volume;
-
-
     }
 
     public void handle(Supplier<NetworkEvent.Context> ctx)
     {
         ctx.get().enqueueWork(() -> {
-            if (ctx.get() == null || ctx.get().getSender() == null)return;
+
+            try {
+                TreeTapTileEntity tile = (TreeTapTileEntity)Minecraft.getInstance().world.getTileEntity(pos);
+
+                tile.volume = volume;
+                tile.fluidType = type;
+            } catch (NullPointerException err) {
+                System.out.println(String.format("Could not find TreeTapTileEntity at %s!",pos.toString()));
+            }
 
 
         });
@@ -63,50 +47,19 @@ public class MessageTreeTap
     }
 
 
-
-
-
-    public void encode(PacketBuffer buf)
+    public static void encode(MessageTreeTap message, PacketBuffer buffer)
     {
-        if (volume != -1)
-            buf.writeInt(volume);
-        if (type != null)
-            buf.writeString(type.getName());
+
+        buffer.writeInt(message.pos.getX());
+        buffer.writeInt(message.pos.getY());
+        buffer.writeInt(message.pos.getZ());
+
+        buffer.writeInt(message.volume);
+        buffer.writeString(message.type.getName());
     }
 
-
-
-    /*@Override
-    public void toBytes(PacketBuffer buf)
+    public static MessageTreeTap decode(final PacketBuffer buffer)
     {
-        if (volume != -1)
-            buf.writeInt(volume);
-        if (type != null)
-            buf.writeString(type.getSymbol());
+        return new MessageTreeTap(new BlockPos(buffer.readInt(),buffer.readInt(),buffer.readInt()),buffer.readInt(),FluidType.valueOf(buffer.readString().toUpperCase()));
     }
-
-    @Override
-    public Object fromBytes(PacketBuffer buf)
-    {
-        int v;
-        FluidType f;
-
-        try {
-            v = buf.getInt(1);
-        } catch (IndexOutOfBoundsException e) { System.out.println("Fack...\n"+e); }
-
-        f = FluidType.valueOf(buf.readString(16).toUpperCase());
-
-        return this;
-    }*/
-
-    /*@Override
-    public void executeClientSide(NetworkEvent.Context context) {
-
-    }
-
-    @Override
-    public void executeServerSide(NetworkEvent.Context context) {
-
-    }*/
 }

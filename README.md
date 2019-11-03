@@ -50,7 +50,7 @@ Core mod for InterCraft 1.14.4 modpack.
 
     - [ ] Stone Statues
 
-    *Stone statues spread around the world that were players once, petrified by a mysterious green light thousands of years ago. Frozen in time, caged in a stone prison waiting for the day to awake from their eternal slumber. [Maybe a playerID will wake up one day to rebuild civilization with science](https://www.youtube.com/watch?v=dQw4w9WgXcQ).*
+    *Stone statues spread around the world that were players once, petrified by a mysterious green light thousands of years ago. Frozen in time, caged in a stone prison waiting for the day to awake from their eternal slumber. [Maybe a player will wake up one day to rebuild civilization with science](https://www.youtube.com/watch?v=dQw4w9WgXcQ).*
     - [ ] Sky Block
     
     *A block that renders the current skybox of that dimension. Pretty much a copy of [OpenBlocks](https://minecraft.curseforge.com/projects/openblocks)' Sky Block, because they are cool. Can be crafted with Six (6) Sky Panels and one (1) Stone to make one Sky Block. Sky Panels can be found on the ground when the simulation is starting to crack.*
