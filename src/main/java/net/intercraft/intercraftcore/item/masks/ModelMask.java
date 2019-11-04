@@ -13,12 +13,12 @@ public class ModelMask extends EntityModel
 
     public ModelMask()
     {
-        this.textureWidth = 32;
-        this.textureHeight = 16;
+        this.textureWidth = 34;
+        this.textureHeight = 18;
 
         this.mask = new RendererModel(this,0,0);
         this.mask.setRotationPoint(0,0,0);
-        this.mask.addBox(-4.0F, -8.0F, -4F, 8, 8, 8, 0.0F);
+        this.mask.addBox(-4.0F, -8.0F, -5F, 8, 8, 9, 0.0F);
 
     }
 

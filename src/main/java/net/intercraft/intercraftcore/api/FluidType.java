@@ -6,15 +6,15 @@ import net.minecraft.particles.ParticleTypes;
 public enum FluidType
 {
     NONE( "none", 0,0,   null),
-    WATER("water",2,0.4, ParticleTypes.FALLING_WATER),
+    WATER("water",2,0.4f, ParticleTypes.FALLING_WATER),
     RESIN("resin",3,1,   ParticleTypes.FALLING_WATER);
 
     private final String name;
     private final double viscosity;
-    private final double alpha;
+    private final float alpha;
     private final BasicParticleType basicParticleType;
 
-    FluidType(String name, double viscosity, double alpha, BasicParticleType particleType)
+    FluidType(String name, double viscosity, float alpha, BasicParticleType particleType)
     {
         this.name = name;
         this.viscosity = viscosity;
@@ -36,7 +36,7 @@ public enum FluidType
     {
         return this.viscosity;
     }
-    public double getAlpha()
+    public float getAlpha()
     {
         return this.alpha;
     }

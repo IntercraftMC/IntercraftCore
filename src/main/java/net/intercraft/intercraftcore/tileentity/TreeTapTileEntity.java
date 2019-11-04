@@ -94,7 +94,8 @@ public class TreeTapTileEntity extends TileEntity implements ITickableTileEntity
         IParticleData particle = fluidType.getParticle();
 
 
-        Minecraft.getInstance().world.addParticle(particle,x,y,z,0,-1,0);
+        if (Minecraft.getInstance().world != null)
+            Minecraft.getInstance().world.addParticle(particle,x,y,z,0,-1,0);
     }
 
 

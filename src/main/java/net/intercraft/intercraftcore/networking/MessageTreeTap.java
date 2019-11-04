@@ -2,11 +2,8 @@ package net.intercraft.intercraftcore.networking;
 
 import net.intercraft.intercraftcore.api.FluidType;
 import net.intercraft.intercraftcore.tileentity.TreeTapTileEntity;
-import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.inventory.container.Container;
 import net.minecraft.network.PacketBuffer;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.network.NetworkEvent;
 

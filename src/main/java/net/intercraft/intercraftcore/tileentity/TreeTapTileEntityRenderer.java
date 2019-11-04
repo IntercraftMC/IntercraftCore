@@ -7,6 +7,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -15,6 +16,7 @@ import net.minecraftforge.client.model.animation.TileEntityRendererFast;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.extensions.IForgeTileEntity;
 import net.minecraftforge.fluids.IFluidTank;
+import org.lwjgl.opengl.GL11;
 
 import java.util.BitSet;
 import java.util.List;
@@ -25,7 +27,7 @@ public class TreeTapTileEntityRenderer<T extends TreeTapTileEntity> extends Tile
     @Override
     public void renderTileEntityFast(T te, double x, double y, double z, float partialTicks, int destroyStage, BufferBuilder buffer)
     {
-        // *Confusion sound*
+        // *Happiness sound*
 
 
         BlockPos pos = te.getPos();
@@ -36,21 +38,7 @@ public class TreeTapTileEntityRenderer<T extends TreeTapTileEntity> extends Tile
 
         if (state.has(BlockProperties.BUCKET))
             if (state.get(BlockProperties.BUCKET) != BucketType.NONE && te.getVolume() > 0) {
-                //buffer.setTranslation(x - pos.getX(), y - pos.getY(), z - pos.getZ());
-
-//                buffer.pos(0,0,0).color(1,1,1,1).endVertex();
-//                buffer.pos(4,0,0).color(1,1,1,1).endVertex();
-//                buffer.pos(0,0,4).color(1,1,1,1).endVertex();
-//                buffer.pos(4,0,4).color(1,1,1,1).endVertex();
-//
-//                buffer.pos(0,4,0).color(1,1,1,1).endVertex();
-//                buffer.pos(4,4,0).color(1,1,1,1).endVertex();
-//                buffer.pos(0,4,4).color(1,1,1,1).endVertex();
-//                buffer.pos(4,4,4).color(1,1,1,1).endVertex();
-
-
-
-                //render(te,x,y,z,buffer,state, te.getFluidType());
+                render(te,x,y,z,buffer,state);
 
 
             }
@@ -58,22 +46,29 @@ public class TreeTapTileEntityRenderer<T extends TreeTapTileEntity> extends Tile
 
     }
 
-    private void render(T te, double x, double y, double z, BufferBuilder buffer, BlockState state, FluidType type)
+    private void render(T te, double x, double y, double z, BufferBuilder buffer, BlockState state)
     {
         buffer.setTranslation(x,y,z);
 
 
 
         //minX, minY, minZ, maxX, maxY, maxZ
-        TextureAtlasSprite sprite = Minecraft.getInstance().getTextureMap().getAtlasSprite("minecraft:water_still");
+        TextureAtlasSprite sprite = Minecraft.getInstance().getTextureMap().getAtlasSprite("minecraft:block/water_still");
         float u1 = sprite.getMinU(), v1 = sprite.getMinV(), u2 = sprite.getMaxU(), v2 = sprite.getMaxV();
 
+        int upCombined = getWorld().getCombinedLight(te.getPos().up(), 0);
+        int upLMa = upCombined >> 16 & 65535;
+        int upLMb = upCombined & 65535;
+
+        float xMin = 0.06f,xMax = 0.93f,yMin = 0.125f,yMax = 0.5f,zMin = 0.06f,zMax = 0.93f;
 
 
-        buffer.pos(0.06, 0.5, 0.06).color(1,1,1,1).tex(u1, v1).endVertex();
-        buffer.pos(0.06, 0.5, 0.93).color(1,1,1,1).tex(u2, v1).endVertex();
-        buffer.pos(0.93, 0.5, 0.93).color(1,1,1,1).tex(u2, v2).endVertex();
-        buffer.pos(0.93, 0.5, 0.06).color(1,1,1,1).tex(u1, v2).endVertex();
+        float yLev = yMin+(yMax-yMin)*(((float)te.volume)/(float)TreeTapTileEntity.maxVolume);
+
+        buffer.pos(xMin, yLev, zMax).color(1,1,1,te.fluidType.getAlpha()).tex(u1, v2).lightmap(upLMa, upLMb).endVertex();
+        buffer.pos(xMax, yLev, zMax).color(1,1,1,te.fluidType.getAlpha()).tex(u2, v2).lightmap(upLMa, upLMb).endVertex();
+        buffer.pos(xMax, yLev, zMin).color(1,1,1,te.fluidType.getAlpha()).tex(u2, v1).lightmap(upLMa, upLMb).endVertex();
+        buffer.pos(xMin, yLev, zMin).color(1,1,1,te.fluidType.getAlpha()).tex(u1, v1).lightmap(upLMa, upLMb).endVertex();
 
 
         /*switch (state.get(HORIZONTAL_FACING)) {
