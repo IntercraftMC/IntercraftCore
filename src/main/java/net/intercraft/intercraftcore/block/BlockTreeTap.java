@@ -39,11 +39,10 @@ import static net.minecraft.state.properties.BlockStateProperties.HORIZONTAL_FAC
 public class BlockTreeTap extends Block
 {
 
-    //                                                                    double x1, double y1, double z1, double x2, double y2, double z2
-    protected static final VoxelShape SHAPE_WEST = Block.makeCuboidShape(10.0D, 1.0D, 5.0D, 16.0D, 11.0D, 11.0D);
-    protected static final VoxelShape SHAPE_EAST = Block.makeCuboidShape(0.0D, 1.0D, 5.0D, 6.0D, 11.0D, 11.0D);
+    protected static final VoxelShape SHAPE_WEST  = Block.makeCuboidShape(10.0D,1.0D, 5.0D,  16.0D, 11.0D, 11.0D);
+    protected static final VoxelShape SHAPE_EAST  = Block.makeCuboidShape(0.0D, 1.0D, 5.0D,  6.0D,  11.0D, 11.0D);
     protected static final VoxelShape SHAPE_NORTH = Block.makeCuboidShape(5.0D, 1.0D, 10.0D, 11.0D, 11.0D, 16.0D);
-    protected static final VoxelShape SHAPE_SOUTH = Block.makeCuboidShape(5.0D, 1.0D, 0.0D, 11.0D, 11.0D, 6.0D);
+    protected static final VoxelShape SHAPE_SOUTH = Block.makeCuboidShape(5.0D, 1.0D, 0.0D,  11.0D, 11.0D, 6.0D);
 
 
     public BlockTreeTap()
@@ -72,104 +71,99 @@ public class BlockTreeTap extends Block
         if (tile == null) throw new NullPointerException("Could not find TreeTapTileEntity!");
 
          ItemStack stack = player.getHeldItem(handIn);
+         BucketType bucket = state.get(BlockProperties.BUCKET);
 
-        if (player.isCreative() && stack.getItem() == Items.STICK) {
+        if (player.isCreative() && stack.getItem() == Items.STICK) { // Debugging.
+            final String d = String.format(" Can fill: %s has volume: %s is type: %s and viscosity: %s.", tile.getCanFill(), tile.getVolume(), tile.getFluidType().getName(), tile.getFluidType().getViscosity());
             if (worldIn.isRemote)
-                player.sendMessage(new StringTextComponent(String.format("[CLIENT] Can fill: %s has volume: %s is type: %s and viscosity: %s.", tile.getCanFill(), tile.getVolume(), tile.getFluidType().getName(), tile.getFluidType().getViscosity())));
+                player.sendMessage(new StringTextComponent("[CLIENT]"+d));
             else
-                player.sendMessage(new StringTextComponent(String.format("[SERVER] Can fill: %s has volume: %s is type: %s and viscosity: %s.", tile.getCanFill(), tile.getVolume(), tile.getFluidType().getName(), tile.getFluidType().getViscosity())));
+                player.sendMessage(new StringTextComponent("[SERVER]"+d));
+            return true;
         }
-
-
-         if (!worldIn.isRemote) {
-
-             if (player.isCreative()) {
+        if (!worldIn.isRemote) {
+             if (player.isCreative()) { // Debugging.
                  if (stack.getItem() == Items.BONE) {
-                    if (player.getHeldItemOffhand().getItem() == Items.WATER_BUCKET) {
-                        tile.setFluidType(FluidType.WATER);
-                        return true;
-                    }
-                    else if (player.getHeldItemOffhand().getItem() == IntercraftItems.RESIN_BUCKET) {
-                        tile.setFluidType(FluidType.RESIN);
-                        return true;
-                    }
+                     if (player.getHeldItemOffhand().getItem() == Items.WATER_BUCKET) {
+                         tile.setFluidType(FluidType.WATER);
+                         return true;
+                     }
+                     else if (player.getHeldItemOffhand().getItem() == IntercraftItems.RESIN_BUCKET) {
+                         tile.setFluidType(FluidType.RESIN);
+                         return true;
+                     }
                      tile.setCanFill(!tile.getCanFill());
                      return true;
-                }
+                 }
              }
 
+             for (BucketEnum bucketType : BucketEnum.values()) {
+                 if (stack.getItem().equals(bucketType.getEmpty())) {
+                     if (bucket != BucketType.NONE) return false;
+                     worldIn.setBlockState(pos,state.with(BlockProperties.BUCKET,bucketType.type));
+                     tile.setFluidType(FluidType.NONE);
+                     if (!player.isCreative())
+                         stack.shrink(1);
+                     return true;
 
-             if (stack.getItem() == Items.BUCKET) {
+                 } else if (stack.getItem().equals(bucketType.getWater())) {
+                     if (bucket != BucketType.NONE) return false;
+                     worldIn.setBlockState(pos,state.with(BlockProperties.BUCKET,bucketType.type));
+                     tile.setVolume(TreeTapTileEntity.maxVolume);
+                     tile.setFluidType(FluidType.WATER);
+                     if (!player.isCreative())
+                         stack.shrink(1);
+                     return true;
 
-                 if (state.get(BlockProperties.BUCKET) != BucketType.NONE) return false;
+                 } else if (stack.getItem().equals(bucketType.getResin())) {
+                     if (bucket != BucketType.NONE) return false;
+                     worldIn.setBlockState(pos,state.with(BlockProperties.BUCKET,bucketType.type));
+                     tile.setVolume(TreeTapTileEntity.maxVolume);
+                     tile.setFluidType(FluidType.RESIN);
+                     if (!player.isCreative())
+                         stack.shrink(1);
+                     return true;
 
+                 }
+             }
 
-                 worldIn.setBlockState(pos,state.with(BlockProperties.BUCKET,BucketType.METALIRON));
-                 tile.setFluidType(FluidType.NONE);
-                 tile.setVolume(0);
+             if (stack.isEmpty()) {
+                 if (bucket == BucketType.NONE) return false;
 
-                 if (!player.isCreative())
-                     stack.shrink(1);
-                 return true;
+                 final boolean needForce = tile.volume >= TreeTapTileEntity.maxVolume;
 
-             }  else if (stack.getItem() == Items.WATER_BUCKET) {
-
-                 if (state.get(BlockProperties.BUCKET) != BucketType.NONE) return false;
-
-                 worldIn.setBlockState(pos,state.with(BlockProperties.BUCKET, BucketType.METALIRON));
-                 tile.setFluidType(FluidType.WATER);
-                 tile.setVolume(TreeTapTileEntity.maxVolume);
-                 if (!player.isCreative())
-                     stack.shrink(1);
-                 return true;
-
-
-             } else if (stack.getItem() == IntercraftItems.RESIN_BUCKET) {
-
-                 if (state.get(BlockProperties.BUCKET) != BucketType.NONE) return false;
-
-                 worldIn.setBlockState(pos,state.with(BlockProperties.BUCKET, BucketType.METALIRON));
-                 tile.setFluidType(FluidType.RESIN);
-                 tile.setVolume(TreeTapTileEntity.maxVolume);
-                 if (!player.isCreative())
-                     stack.shrink(1);
-
-                 return true;
-
-             }  else if (stack.isEmpty()) {
-
-                 if (state.get(BlockProperties.BUCKET) == BucketType.NONE) return false;
-
-                 boolean force = tile.getVolume() >= TreeTapTileEntity.maxVolume;
-
-                 if (force || player.isSneaking()) {
-
-                     Item item;
-
-                     switch (tile.getFluidType()) {
-                         case RESIN:
-                             item = IntercraftItems.RESIN_BUCKET;
-                             break;
-                         case WATER:
-                             item = Items.WATER_BUCKET;
-                             break;
-                        default:
-                            item = Items.BUCKET;
+                 if (needForce || tile.volume == 0 || player.isSneaking()) {
+                     Item item = IntercraftItems.BUCKET_OAK;
+                     for (BucketEnum bucketType : BucketEnum.values()) {
+                         if (bucketType.type == bucket) {
+                             if (needForce) {
+                                 switch (tile.fluidType) {
+                                     case WATER:
+                                         item = bucketType.water;
+                                         break;
+                                     case RESIN:
+                                         item = bucketType.resin;
+                                         break;
+                                     default:
+                                         item = bucketType.empty;
+                                 }
+                                 break;
+                             } else {
+                                 item = bucketType.empty;
+                                 break;
+                             }
+                         }
                      }
-
-                     worldIn.setBlockState(pos,state.with(BlockProperties.BUCKET, BucketType.NONE));
-                     spawnAsEntity(worldIn, pos, new ItemStack(item));
+                     worldIn.setBlockState(pos,state.with(BlockProperties.BUCKET,BucketType.NONE));
+                     spawnAsEntity(worldIn,pos,new ItemStack(item));
 
                      tile.setVolume(0);
                      tile.setFluidType(FluidType.NONE);
-
                      return true;
                  }
-
              }
-                return false;
-         } else return true;
-
+         }
+         return true;
     }
 
 
@@ -217,7 +211,7 @@ public class BlockTreeTap extends Block
             case SOUTH:
                 return SHAPE_SOUTH;
 
-            default: case NORTH:
+            default:
                 return SHAPE_NORTH;
         }
     }
@@ -242,9 +236,62 @@ public class BlockTreeTap extends Block
     }
 
     @Override
-    public net.minecraftforge.common.ToolType getHarvestTool(BlockState state)
+    public ToolType getHarvestTool(BlockState state)
     {
         return ToolType.PICKAXE;
     }
 
+    public enum BucketEnum
+    {
+        /**
+         * Wooden buckets
+         */
+        WOODOAK(    BucketType.WOODOAK,    IntercraftItems.BUCKET_OAK,     IntercraftItems.WATER_BUCKET_OAK,     IntercraftItems.RESIN_BUCKET_OAK),
+        WOODSPRUCE( BucketType.WOODSPRUCE, IntercraftItems.BUCKET_SPRUCE,  IntercraftItems.WATER_BUCKET_SPRUCE,  IntercraftItems.RESIN_BUCKET_SPRUCE),
+        WOODBIRCH(  BucketType.WOODBIRCH,  IntercraftItems.BUCKET_BIRCH,   IntercraftItems.WATER_BUCKET_BIRCH,   IntercraftItems.RESIN_BUCKET_BIRCH),
+        WOODJUNGLE( BucketType.WOODJUNGLE, IntercraftItems.BUCKET_JUNGLE,  IntercraftItems.WATER_BUCKET_JUNGLE,  IntercraftItems.RESIN_BUCKET_JUNGLE),
+        WOODACACIA( BucketType.WOODACACIA, IntercraftItems.BUCKET_ACACIA,  IntercraftItems.WATER_BUCKET_ACACIA,  IntercraftItems.RESIN_BUCKET_ACACIA),
+        WOODDARKOAK(BucketType.WOODDARKOAK,IntercraftItems.BUCKET_DARK_OAK,IntercraftItems.WATER_BUCKET_DARK_OAK,IntercraftItems.RESIN_BUCKET_DARK_OAK),
+
+        /**
+         * Metal buckets
+         */
+
+        METALIRON(BucketType.METALIRON,Items.BUCKET,Items.WATER_BUCKET,IntercraftItems.RESIN_BUCKET);
+
+        private final BucketType type;
+        private final Item empty,water,resin;
+
+        /**
+         * BucketEnum Constructor
+         *
+         * @param type  The BlockState type
+         * @param empty The base bucket item
+         * @param water The water bucket item
+         * @param resin The resin bucket item
+         */
+
+        BucketEnum(BucketType type, Item empty, Item water, Item resin)
+        {
+            this.type  = type;
+            this.empty = empty;
+            this.water = water;
+            this.resin = resin;
+        }
+
+        public Item getEmpty()
+        {
+            return empty;
+        }
+
+        public Item getWater()
+        {
+            return water;
+        }
+
+        public Item getResin()
+        {
+            return resin;
+        }
+    }
 }

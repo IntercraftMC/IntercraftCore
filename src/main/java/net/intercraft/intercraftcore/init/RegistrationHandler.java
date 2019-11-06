@@ -1,7 +1,6 @@
 package net.intercraft.intercraftcore.init;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.item.Item;
 import net.minecraft.potion.Effect;
 import net.minecraft.stats.StatType;
@@ -57,7 +56,7 @@ public class RegistrationHandler
     {
         IntercraftItems.register();
         items.forEach(item -> event.getRegistry().register(item));
-        itemBlocks.forEach(block -> event.getRegistry().register(block)); //The heck? Feels like it should run into a null exception sometimes.
+        itemBlocks.forEach(block -> event.getRegistry().register(block));
         System.out.println("Item registration done.");
     }
 

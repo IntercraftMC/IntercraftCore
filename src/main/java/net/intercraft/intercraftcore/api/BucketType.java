@@ -5,7 +5,14 @@ import net.minecraft.util.IStringSerializable;
 public enum BucketType implements IStringSerializable
 {
     NONE("none"),
+
     WOODOAK("wood_oak"),
+    WOODSPRUCE("wood_spruce"),
+    WOODBIRCH("wood_birch"),
+    WOODJUNGLE("wood_jungle"),
+    WOODACACIA("wood_acacia"),
+    WOODDARKOAK("wood_dark_oak"),
+
     METALIRON("metal_iron");
 
     private final String name;

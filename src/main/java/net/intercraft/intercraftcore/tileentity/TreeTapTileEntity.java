@@ -53,7 +53,7 @@ public class TreeTapTileEntity extends TileEntity implements ITickableTileEntity
             if (volume < maxVolume) {
 
 
-                if (getWorld().getGameTime() % (fluidType.getViscosity()*40) == 0) {
+                if (getWorld().getGameTime() % (fluidType.getViscosity()) == 0) {
                     //setVolume(volume + 1);
                     add(1);
 

@@ -2,34 +2,27 @@ package net.intercraft.intercraftcore.tileentity;
 
 import net.intercraft.intercraftcore.api.BlockProperties;
 import net.intercraft.intercraftcore.api.BucketType;
-import net.intercraft.intercraftcore.api.FluidType;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.client.model.animation.TileEntityRendererFast;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.extensions.IForgeTileEntity;
-import net.minecraftforge.fluids.IFluidTank;
-import org.lwjgl.opengl.GL11;
 
-import java.util.BitSet;
-import java.util.List;
+import static net.minecraft.state.properties.BlockStateProperties.HORIZONTAL_FACING;
 
 public class TreeTapTileEntityRenderer<T extends TreeTapTileEntity> extends TileEntityRendererFast<T>
 {
 
+    private static final float
+            liquidLength          = 0.27f,  // The length/size of the square.
+            liquidOffset          = 0.321f, // How far it should offset to fit in the bucket.
+            liquidMaxHeightOffset = 0.02f;  // How high up the liquid can reach in the bucket.
+
     @Override
     public void renderTileEntityFast(T te, double x, double y, double z, float partialTicks, int destroyStage, BufferBuilder buffer)
     {
-        // *Happiness sound*
-
-
         BlockPos pos = te.getPos();
 
         net.minecraft.world.IEnviromentBlockReader world = MinecraftForgeClient.getRegionRenderCache(te.getWorld(), pos);
@@ -38,100 +31,52 @@ public class TreeTapTileEntityRenderer<T extends TreeTapTileEntity> extends Tile
 
         if (state.has(BlockProperties.BUCKET))
             if (state.get(BlockProperties.BUCKET) != BucketType.NONE && te.getVolume() > 0) {
-                render(te,x,y,z,buffer,state);
-
+                buffer.setTranslation(x,y,z);
+                render(te,buffer,state);
 
             }
 
 
     }
 
-    private void render(T te, double x, double y, double z, BufferBuilder buffer, BlockState state)
+    private void render(T te, BufferBuilder buffer, BlockState state)
     {
-        buffer.setTranslation(x,y,z);
-
-
-
-        //minX, minY, minZ, maxX, maxY, maxZ
-        TextureAtlasSprite sprite = Minecraft.getInstance().getTextureMap().getAtlasSprite("minecraft:block/water_still");
+        TextureAtlasSprite sprite = Minecraft.getInstance().getTextureMap().getAtlasSprite(te.fluidType.getTexture());
         float u1 = sprite.getMinU(), v1 = sprite.getMinV(), u2 = sprite.getMaxU(), v2 = sprite.getMaxV();
 
         int upCombined = getWorld().getCombinedLight(te.getPos().up(), 0);
         int upLMa = upCombined >> 16 & 65535;
         int upLMb = upCombined & 65535;
 
-        float xMin = 0.06f,xMax = 0.93f,yMin = 0.125f,yMax = 0.5f,zMin = 0.06f,zMax = 0.93f;
+        float xMin = 0.5f - liquidLength / 2, xMax = 0.5f + liquidLength / 2, yMin = 0.125f + liquidMaxHeightOffset, yMax = 0.5f, zMin = 0.5f- liquidLength / 2, zMax = 0.5f + liquidLength / 2;
 
+        float yLev = (yMin+(yMax-yMin)*(((float)te.volume)/(float)TreeTapTileEntity.maxVolume))- liquidMaxHeightOffset;
 
-        float yLev = yMin+(yMax-yMin)*(((float)te.volume)/(float)TreeTapTileEntity.maxVolume);
+        switch (state.get(HORIZONTAL_FACING)) {
+            case WEST:
+                xMax += liquidOffset;
+                xMin += liquidOffset;
+                break;
+
+            case EAST:
+                xMax -= liquidOffset;
+                xMin -= liquidOffset;
+                break;
+
+            case SOUTH:
+                zMax -= liquidOffset;
+                zMin -= liquidOffset;
+                break;
+
+            default: case NORTH:
+                zMax += liquidOffset;
+                zMin += liquidOffset;
+        }
+
 
         buffer.pos(xMin, yLev, zMax).color(1,1,1,te.fluidType.getAlpha()).tex(u1, v2).lightmap(upLMa, upLMb).endVertex();
         buffer.pos(xMax, yLev, zMax).color(1,1,1,te.fluidType.getAlpha()).tex(u2, v2).lightmap(upLMa, upLMb).endVertex();
         buffer.pos(xMax, yLev, zMin).color(1,1,1,te.fluidType.getAlpha()).tex(u2, v1).lightmap(upLMa, upLMb).endVertex();
         buffer.pos(xMin, yLev, zMin).color(1,1,1,te.fluidType.getAlpha()).tex(u1, v1).lightmap(upLMa, upLMb).endVertex();
-
-
-        /*switch (state.get(HORIZONTAL_FACING)) {
-            case WEST: {
-
-            }
-            case EAST: {
-
-            }
-            case SOUTH: {
-
-            }
-            default: {
-
-            }
-
-
-        }*/
-
-
-
-
     }
-
-
-    /*private AxisAlignedBB getRenderBounds(T te, AxisAlignedBB tankBounds)
-    {
-        float percent = (float) te.getVolume() / TreeTapTileEntity.maxVolume;
-
-        double tankHeight = tankBounds.maxY - tankBounds.minY;
-        double y1 = tankBounds.minY, y2 = (tankBounds.minY + (tankHeight * percent));
-
-        return new AxisAlignedBB(tankBounds.minX,y1,tankBounds.minZ, tankBounds.maxX, y2, tankBounds.maxZ);
-    }
-
-
-
-    class TankRenderInfo {
-
-        final IFluidTank tank;
-        final AxisAlignedBB bounds;
-        final BitSet faces = new BitSet(6);
-
-        TankRenderInfo(IFluidTank tank, AxisAlignedBB bounds, Direction... renderFaces) {
-            this.tank = tank;
-            this.bounds = bounds;
-            if (renderFaces.length == 0) {
-                faces.set(0, 6, true);
-            } else {
-                for (Direction face : renderFaces) {
-                    faces.set(face.getIndex(), true);
-                }
-            }
-        }
-
-        TankRenderInfo without(Direction face) {
-            faces.clear(face.getIndex());
-            return this;
-        }
-
-        boolean shouldRender(Direction face) {
-            return faces.get(face.getIndex());
-        }
-    }*/
-
 }

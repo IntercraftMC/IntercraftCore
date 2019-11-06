@@ -50,6 +50,126 @@
       },
       "apply": { "model": "intercraftcore:block/treetap/wood_oak_bucket", "y": 90 }
     },
+    {
+      "when": {
+        "facing": "north", "bucket": "wood_spruce"
+      },
+      "apply": { "model": "intercraftcore:block/treetap/wood_spruce_bucket" }
+    },
+    {
+      "when": {
+        "facing": "south", "bucket": "wood_spruce"
+      },
+      "apply": { "model": "intercraftcore:block/treetap/wood_spruce_bucket", "y": 180 }
+    },
+    {
+      "when": {
+        "facing": "west", "bucket": "wood_spruce"
+      },
+      "apply": { "model": "intercraftcore:block/treetap/wood_spruce_bucket", "y": 270 }
+    },
+    {
+      "when": {
+        "facing": "east", "bucket": "wood_spruce"
+      },
+      "apply": { "model": "intercraftcore:block/treetap/wood_spruce_bucket", "y": 90 }
+    },
+    {
+      "when": {
+        "facing": "north", "bucket": "wood_birch"
+      },
+      "apply": { "model": "intercraftcore:block/treetap/wood_birch_bucket" }
+    },
+    {
+      "when": {
+        "facing": "south", "bucket": "wood_birch"
+      },
+      "apply": { "model": "intercraftcore:block/treetap/wood_birch_bucket", "y": 180 }
+    },
+    {
+      "when": {
+        "facing": "west", "bucket": "wood_birch"
+      },
+      "apply": { "model": "intercraftcore:block/treetap/wood_birch_bucket", "y": 270 }
+    },
+    {
+      "when": {
+        "facing": "east", "bucket": "wood_birch"
+      },
+      "apply": { "model": "intercraftcore:block/treetap/wood_birch_bucket", "y": 90 }
+    },
+    {
+      "when": {
+        "facing": "north", "bucket": "wood_jungle"
+      },
+      "apply": { "model": "intercraftcore:block/treetap/wood_jungle_bucket" }
+    },
+    {
+      "when": {
+        "facing": "south", "bucket": "wood_jungle"
+      },
+      "apply": { "model": "intercraftcore:block/treetap/wood_jungle_bucket", "y": 180 }
+    },
+    {
+      "when": {
+        "facing": "west", "bucket": "wood_jungle"
+      },
+      "apply": { "model": "intercraftcore:block/treetap/wood_jungle_bucket", "y": 270 }
+    },
+    {
+      "when": {
+        "facing": "east", "bucket": "wood_jungle"
+      },
+      "apply": { "model": "intercraftcore:block/treetap/wood_jungle_bucket", "y": 90 }
+    },
+    {
+      "when": {
+        "facing": "north", "bucket": "wood_acacia"
+      },
+      "apply": { "model": "intercraftcore:block/treetap/wood_acacia_bucket" }
+    },
+    {
+      "when": {
+        "facing": "south", "bucket": "wood_acacia"
+      },
+      "apply": { "model": "intercraftcore:block/treetap/wood_acacia_bucket", "y": 180 }
+    },
+    {
+      "when": {
+        "facing": "west", "bucket": "wood_acacia"
+      },
+      "apply": { "model": "intercraftcore:block/treetap/wood_acacia_bucket", "y": 270 }
+    },
+    {
+      "when": {
+        "facing": "east", "bucket": "wood_acacia"
+      },
+      "apply": { "model": "intercraftcore:block/treetap/wood_acacia_bucket", "y": 90 }
+    },
+    {
+      "when": {
+        "facing": "north", "bucket": "wood_dark_oak"
+      },
+      "apply": { "model": "intercraftcore:block/treetap/wood_dark_oak_bucket" }
+    },
+    {
+      "when": {
+        "facing": "south", "bucket": "wood_dark_oak"
+      },
+      "apply": { "model": "intercraftcore:block/treetap/wood_dark_oak_bucket", "y": 180 }
+    },
+    {
+      "when": {
+        "facing": "west", "bucket": "wood_dark_oak"
+      },
+      "apply": { "model": "intercraftcore:block/treetap/wood_dark_oak_bucket", "y": 270 }
+    },
+    {
+      "when": {
+        "facing": "east", "bucket": "wood_dark_oak"
+      },
+      "apply": { "model": "intercraftcore:block/treetap/wood_dark_oak_bucket", "y": 90 }
+    },
 
 
     {
