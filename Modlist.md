@@ -11,7 +11,7 @@ If mod uses a dependency add in parentheses the name of it at the end of the mod
 - [BiblioCraft](https://minecraft.curseforge.com/projects/bibliocraft)
 - [BitHop](https://minecraft.curseforge.com/projects/bithop) (Shadowfacts' Forgelin) :heavy_multiplication_x:
 - [Bloodmoon](https://minecraft.curseforge.com/projects/bloodmoon)
-- [Comforts](https://minecraft.curseforge.com/projects/comforts) :large_orange_diamond:
+- [Comforts](https://minecraft.curseforge.com/projects/comforts) :large_orange_diamond::large_blue_diamond:
 - [Computronics](https://github.com/Vexatos/Computronics)
 - [Consecration](https://minecraft.curseforge.com/projects/consecration)
 - [Deep Resonance](https://minecraft.curseforge.com/projects/deep-resonance) (ElecCore, McJtyLib)
@@ -45,5 +45,5 @@ If mod uses a dependency add in parentheses the name of it at the end of the mod
 - [QuackLib](https://minecraft.curseforge.com/projects/quacklib)
 - [Redstone Flux](https://minecraft.curseforge.com/projects/redstone-flux)
 - [Rockhounding Mod: Core](https://minecraft.curseforge.com/projects/rockhounding-mod-core)
-- [Shadowfacts' Forgelin](https://minecraft.curseforge.com/projects/shadowfacts-forgelin)
+- [Shadowfacts' Forgelin](https://minecraft.curseforge.com/projects/shadowfacts-forgelin) :large_orange_diamond:
 - [The Spice of Life](https://minecraft.curseforge.com/projects/the-spice-of-life) :heavy_multiplication_x:
