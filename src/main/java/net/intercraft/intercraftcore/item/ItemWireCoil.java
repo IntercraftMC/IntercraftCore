@@ -29,15 +29,26 @@ public class ItemWireCoil extends Item
     private final int maxLength, maxSize, tint;
     private final boolean insulated;
 
+    /**
+     * ItemWireCoil Constructor
+     *
+     * @param name the metal element symbol.
+     * @param resistance the resistance multiplier.
+     * @param maxSize max length that can fit in the coil.
+     * @param maxLength how long a single cable point-to-point can be.
+     * @param insulated if contact with the player causes damage.
+     * @param tint the wire tint overlay.
+     */
+
     public ItemWireCoil(String name, double resistance, int maxSize, int maxLength, boolean insulated, int tint)
     {
         super(new Item.Properties().group(IntercraftItemGroups.WIRING).maxStackSize(1));
 
         this.resistance = resistance;
-        this.maxSize = maxSize;
-        this.maxLength = maxLength;
-        this.insulated = insulated;
-        this.tint = tint;
+        this.maxSize    = maxSize;
+        this.maxLength  = maxLength;
+        this.insulated  = insulated;
+        this.tint       = tint;
 
         addPropertyOverride(new ResourceLocation("empty"),(stack, worldIn, entityLivingBase) -> getSize(stack) <= 0 ? 1 : 0);
 
@@ -122,7 +133,7 @@ public class ItemWireCoil extends Item
 
         System.out.println(context.getPos());
 
-        // If it is a attachable block, save location to NBT, then draw line between that and next position. Abort if the distance > size or maxLength
+        // If it is a attachable block, save location to NBT, then draw line between that and next position. Abort if the distance > size or maxLength.
 
 
 
@@ -152,11 +163,13 @@ public class ItemWireCoil extends Item
     {
         super.addInformation(stack, worldIn, tooltip, flagIn);
 
-        double size = getSize(stack);
+        float size = getSize(stack);
         ITextComponent sizeS = colorDurability(size,size/maxSize);
 
-        tooltip.add(new TranslationTextComponent("tooltip."+Reference.MODID+".length.size",sizeS,maxSize));
-        tooltip.add(new TranslationTextComponent("tooltip."+Reference.MODID+".length.max",maxLength));
-        tooltip.add(new TranslationTextComponent("tooltip."+Reference.MODID+".resistance",resistance));
+        final String key = "tooltip."+Reference.MODID+".";
+
+        tooltip.add(new TranslationTextComponent(key+"length.size",sizeS,maxSize));
+        tooltip.add(new TranslationTextComponent(key+"length.max",maxLength));
+        tooltip.add(new TranslationTextComponent(key+"resistance",resistance));
     }
 }

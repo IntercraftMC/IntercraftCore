@@ -2,6 +2,7 @@ package net.intercraft.intercraftcore.init;
 
 import net.intercraft.intercraftcore.block.*;
 import net.intercraft.intercraftcore.block.group.BlockElementGroup;
+import net.intercraft.intercraftcore.block.group.BlockUraniumGroup;
 import net.intercraft.intercraftcore.element.alloys.Brass;
 import net.intercraft.intercraftcore.element.alloys.Bronze;
 import net.intercraft.intercraftcore.element.alloys.Steel;
@@ -15,7 +16,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.ResourceLocation;
 
-import java.util.Arrays;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class IntercraftBlocks
 {
@@ -26,6 +28,8 @@ public class IntercraftBlocks
     public static final Block CABLECASE;
     public static final Block TREETAP;
     public static final Block REDSTONEBEACON;
+    public static final Block AUTOCRAFTINGTABLE;
+    public static final Block DRAIN;
 
 
     public static final Block CHUNKLOADER;
@@ -54,6 +58,10 @@ public class IntercraftBlocks
     public static final Block VANILLA_ACACIA_PRESSUREPLATE;
     public static final Block VANILLA_DARKOAK_PRESSUREPLATE;
 
+
+    public static final Block VANILLA_BUBBLE_COLUMN;
+
+
     /**
     * Block Groups
     * */
@@ -76,18 +84,14 @@ public class IntercraftBlocks
     public static final BlockElementGroup BRONZE;
     public static final BlockElementGroup STEEL;
 
-    /**
-    * Ore Blocks
-    */
-
-    /*public static final Block COPPERORE;
-    public static final Block TINORE;
-    public static final Block LEADORE;*/
 
     static {
+
         CABLECASE = new BlockCableCase();
         TREETAP = new BlockTreeTap();
         REDSTONEBEACON = new BlockRedstoneBeacon();
+        AUTOCRAFTINGTABLE = new BlockAutoCraftingTable();
+        DRAIN = new BlockDrain();
 
 
         GRAVELSUBSTITUTE = new GravelBlock(Block.Properties.create(Material.SAND, MaterialColor.STONE).hardnessAndResistance(0.6F).sound(SoundType.GROUND)).setRegistryName("gravel");
@@ -101,49 +105,30 @@ public class IntercraftBlocks
         VANILLA_ACACIA_PRESSUREPLATE = new BlockPressurePlate("acacia_pressure_plate", PressurePlateBlock.Sensitivity.EVERYTHING, Block.Properties.create(Material.WOOD).doesNotBlockMovement().hardnessAndResistance(0.5F).sound(SoundType.WOOD));
         VANILLA_DARKOAK_PRESSUREPLATE = new BlockPressurePlate("dark_oak_pressure_plate", PressurePlateBlock.Sensitivity.EVERYTHING, Block.Properties.create(Material.WOOD).doesNotBlockMovement().hardnessAndResistance(0.5F).sound(SoundType.WOOD));
 
+        VANILLA_BUBBLE_COLUMN = new BlockBubbleColumn(new ResourceLocation("minecraft","bubble_column").toString(),Block.Properties.create(Material.BUBBLE_COLUMN).doesNotBlockMovement().noDrops());
+
         CHUNKLOADER = new BlockChunkloader("chunkloader");
         CHUNKLOADER_REDSTONE = new BlockChunkloaderRedstone();
         CHUNKLOADER_TIMER = new BlockChunkloaderTimer();
 
-        /*ALUMINIUM = new BlockElementGroup(Elements.ALUMINIUM);
-        COPPER = new BlockElementGroup(Elements.COPPER);
-        GOLD = new BlockElementGroup(Elements.GOLD);
-        IRIDIUM = new BlockElementGroup(Elements.IRIDIUM);
-        IRON = new BlockElementGroup(Elements.IRON);
-        LEAD = new BlockElementGroup(Elements.LEAD);
-        SILVER = new BlockElementGroup(Elements.SILVER);
-        THORIUM = new BlockElementGroup(Elements.THORIUM);
-        TIN = new BlockElementGroup(Elements.TIN);
-        TITANIUM = new BlockElementGroup(Elements.TITANIUM);
-        TUNGSTEN = new BlockElementGroup(Elements.TUNGSTEN);
-        URANIUM = new BlockElementGroup(Elements.URANIUM);
-        ZINC = new BlockElementGroup(Elements.ZINC);
-
-        BRASS = new BlockElementGroup(Elements.BRASS);
-        BRONZE = new BlockElementGroup(Elements.BRONZE);
-        STEEL = new BlockElementGroup(Elements.STEEL);*/
 
         ALUMINIUM = new BlockElementGroup(new Aluminium());
-        COPPER = new BlockElementGroup(new Copper());
-        GOLD = new BlockElementGroup(new Gold());
-        IRIDIUM = new BlockElementGroup(new Iridium());
-        IRON = new BlockElementGroup(new Iron());
-        LEAD = new BlockElementGroup(new Lead());
-        SILVER = new BlockElementGroup(new Silver());
-        THORIUM = new BlockElementGroup(new Thorium());
-        TIN = new BlockElementGroup(new Tin());
-        TITANIUM = new BlockElementGroup(new Titanium());
-        TUNGSTEN = new BlockElementGroup(new Tungsten());
-        URANIUM = new BlockElementGroup(new Uranium());
-        ZINC = new BlockElementGroup(new Zinc());
+        COPPER    = new BlockElementGroup(new Copper());
+        GOLD      = new BlockElementGroup(new Gold());
+        IRIDIUM   = new BlockElementGroup(new Iridium());
+        IRON      = new BlockElementGroup(new Iron());
+        LEAD      = new BlockElementGroup(new Lead());
+        SILVER    = new BlockElementGroup(new Silver());
+        THORIUM   = new BlockElementGroup(new Thorium());
+        TIN       = new BlockElementGroup(new Tin());
+        TITANIUM  = new BlockElementGroup(new Titanium());
+        TUNGSTEN  = new BlockElementGroup(new Tungsten());
+        URANIUM   = new BlockUraniumGroup(new Uranium());
+        ZINC      = new BlockElementGroup(new Zinc());
 
-        BRASS = new BlockElementGroup(new Brass());
+        BRASS  = new BlockElementGroup(new Brass());
         BRONZE = new BlockElementGroup(new Bronze());
-        STEEL = new BlockElementGroup(new Steel());
-
-        /*COPPERORE = new BlockOreCopper();
-        TINORE = new BlockOreTin();
-        LEADORE = new BlockOreLead();*/
+        STEEL  = new BlockElementGroup(new Steel());
 
     }
 
@@ -153,21 +138,24 @@ public class IntercraftBlocks
 
     public static void register()
     {
-        registerBlocks(IntercraftItemGroups.WIRING,true,CABLECASE);
-        registerBlocks(ItemGroup.TOOLS,true,TREETAP);
-        registerBlocks(IntercraftItemGroups.MACHINE,true,CHUNKLOADER,CHUNKLOADER_REDSTONE,CHUNKLOADER_TIMER);
-        registerBlocks(ItemGroup.REDSTONE,true,REDSTONEBEACON);
-        registerBlocks(null,false, GRAVELSUBSTITUTE,SANDSUBSTITUTE);
+        registerBlocks(IntercraftItemGroups.WIRING,CABLECASE);
+        registerBlocks(ItemGroup.TOOLS,TREETAP,DRAIN);
+        registerBlocks(IntercraftItemGroups.MACHINE,
+                CHUNKLOADER,CHUNKLOADER_REDSTONE,CHUNKLOADER_TIMER,
+                AUTOCRAFTINGTABLE
+        );
+        registerBlocks(ItemGroup.REDSTONE,REDSTONEBEACON);
+        registerBlocks(GRAVELSUBSTITUTE,SANDSUBSTITUTE);
 
-        registerReplaceBlockItem(Blocks.STONE_PRESSURE_PLATE, VANILLA_STONE_PRESSUREPLATE);
-        registerReplaceBlockItem(Blocks.OAK_PRESSURE_PLATE, VANILLA_OAK_PRESSUREPLATE);
-        registerReplaceBlockItem(Blocks.SPRUCE_PRESSURE_PLATE, VANILLA_SPRUCE_PRESSUREPLATE);
-        registerReplaceBlockItem(Blocks.BIRCH_PRESSURE_PLATE, VANILLA_BIRCH_PRESSUREPLATE);
-        registerReplaceBlockItem(Blocks.JUNGLE_PRESSURE_PLATE, VANILLA_JUNGLE_PRESSUREPLATE);
-        registerReplaceBlockItem(Blocks.ACACIA_PRESSURE_PLATE, VANILLA_ACACIA_PRESSUREPLATE);
+        registerReplaceBlockItem(Blocks.STONE_PRESSURE_PLATE,    VANILLA_STONE_PRESSUREPLATE);
+        registerReplaceBlockItem(Blocks.OAK_PRESSURE_PLATE,      VANILLA_OAK_PRESSUREPLATE);
+        registerReplaceBlockItem(Blocks.SPRUCE_PRESSURE_PLATE,   VANILLA_SPRUCE_PRESSUREPLATE);
+        registerReplaceBlockItem(Blocks.BIRCH_PRESSURE_PLATE,    VANILLA_BIRCH_PRESSUREPLATE);
+        registerReplaceBlockItem(Blocks.JUNGLE_PRESSURE_PLATE,   VANILLA_JUNGLE_PRESSUREPLATE);
+        registerReplaceBlockItem(Blocks.ACACIA_PRESSURE_PLATE,   VANILLA_ACACIA_PRESSUREPLATE);
         registerReplaceBlockItem(Blocks.DARK_OAK_PRESSURE_PLATE, VANILLA_DARKOAK_PRESSUREPLATE);
 
-        //registerOre(COPPERORE);
+        //registerBlocks(VANILLA_BUBBLE_COLUMN);
 
         registerElementBlocks(ALUMINIUM);
         registerElementBlocks(COPPER);
@@ -186,26 +174,57 @@ public class IntercraftBlocks
         registerElementBlocks(BRASS);
         registerElementBlocks(BRONZE);
         registerElementBlocks(STEEL);
-
-        //registerOreBlocks(COPPERORE,TINORE,LEADORE);
     }
 
     /**
      * Register a block(s)
+     *
+     * @param group  ItemGroup the BlockItem will reside.
+     * @param blocks block(s) to be registered.
      */
-    protected static void registerBlocks(ItemGroup group, final boolean item,Block...blocks)
+    protected static void registerBlocks(@Nullable ItemGroup group, @Nonnull Block...blocks)
     {
 
         for (Block block : blocks) {
             if (block != null) {
                 RegistrationHandler.blocks.add(block);
-                if (item)
+                if (group != null)
                     RegistrationHandler.itemBlocks.add(new BlockItem(block, new Item.Properties().group(group)).setRegistryName(block.getRegistryName()));
             }
         }
     }
 
-    protected static void registerReplaceBlockItem(Block blockR, Block block)
+    /**
+     * Register a block(s) with no ItemBlock.
+     *
+     * @param blocks block(s) to be registered.
+     */
+
+    protected static void registerBlocks(@Nonnull Block...blocks)
+    {
+        registerBlocks(null,blocks);
+    }
+
+    /**
+     * Register group of blocks
+     *
+     * @param group BlockElementGroup of blocks to be registered.
+     */
+
+    protected static void registerElementBlocks(@Nonnull BlockElementGroup group)
+    {
+        registerBlocks(IntercraftItemGroups.RESOURCES,group.BLOCK,group.FRAME);
+        registerOreBlocks(group.ORE);
+    }
+
+    /**
+     * Register-replace vanilla ItemBlock placement
+     *
+     * @param blockR Block who's ItemBlock is being overwritten.
+     * @param block  Replaced block.
+     */
+
+    protected static void registerReplaceBlockItem(@Nonnull Block blockR, @Nonnull Block block)
     {
 
         RegistrationHandler.blocks.add(block);
@@ -215,7 +234,20 @@ public class IntercraftBlocks
         RegistrationHandler.itemBlocks.add(blockItem);
     }
 
-    protected static void registerOreBlocks(Block...blocks)
+    /**
+     * Register a fluid //TODO Actually have it register some fluids.
+     *
+     * @param fluids fluid(s) to be registered.
+     */
+
+    protected static void registerFluidBlocks(@Nonnull Block...fluids)
+    {
+        for (Block fluid : fluids)
+            if (fluid != null)
+                RegistrationHandler.fluidBlocks.add(fluid);
+    }
+
+    protected static void registerOreBlocks(@Nonnull Block...blocks)
     {
 
         for (Block block : blocks) {
@@ -226,18 +258,4 @@ public class IntercraftBlocks
             }
         }
     }
-
-    protected static void registerFluidBlocks(Block...fluids)
-    {
-        for (Block fluid : fluids)
-            if (fluid != null)
-                RegistrationHandler.fluidBlocks.add(fluid);
-    }
-
-    protected static void registerElementBlocks(BlockElementGroup group)
-    {
-        registerBlocks(IntercraftItemGroups.RESOURCES,true,group.BLOCK,group.FRAME);
-        registerOreBlocks(group.ORE);
-    }
-
 }

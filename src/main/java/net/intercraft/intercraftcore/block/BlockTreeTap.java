@@ -92,6 +92,10 @@ public class BlockTreeTap extends Block
                          tile.setFluidType(FluidType.RESIN);
                          return true;
                      }
+                     else if (player.getHeldItemOffhand().getItem() == IntercraftItems.RUBBER_RESIN_BUCKET) {
+                         tile.setFluidType(FluidType.RUBBER_RESIN);
+                         return true;
+                     }
                      tile.setCanFill(!tile.getCanFill());
                      return true;
                  }
@@ -124,6 +128,15 @@ public class BlockTreeTap extends Block
                          stack.shrink(1);
                      return true;
 
+                 } else if (stack.getItem().equals(bucketType.getRubberResin())) {
+                     if (bucket != BucketType.NONE) return false;
+                     worldIn.setBlockState(pos,state.with(BlockProperties.BUCKET,bucketType.type));
+                     tile.setVolume(TreeTapTileEntity.maxVolume);
+                     tile.setFluidType(FluidType.RUBBER_RESIN);
+                     if (!player.isCreative())
+                         stack.shrink(1);
+                     return true;
+
                  }
              }
 
@@ -143,6 +156,9 @@ public class BlockTreeTap extends Block
                                          break;
                                      case RESIN:
                                          item = bucketType.resin;
+                                         break;
+                                     case RUBBER_RESIN:
+                                         item = bucketType.rubberResin;
                                          break;
                                      default:
                                          item = bucketType.empty;
@@ -246,21 +262,21 @@ public class BlockTreeTap extends Block
         /**
          * Wooden buckets
          */
-        WOODOAK(    BucketType.WOODOAK,    IntercraftItems.BUCKET_OAK,     IntercraftItems.WATER_BUCKET_OAK,     IntercraftItems.RESIN_BUCKET_OAK),
-        WOODSPRUCE( BucketType.WOODSPRUCE, IntercraftItems.BUCKET_SPRUCE,  IntercraftItems.WATER_BUCKET_SPRUCE,  IntercraftItems.RESIN_BUCKET_SPRUCE),
-        WOODBIRCH(  BucketType.WOODBIRCH,  IntercraftItems.BUCKET_BIRCH,   IntercraftItems.WATER_BUCKET_BIRCH,   IntercraftItems.RESIN_BUCKET_BIRCH),
-        WOODJUNGLE( BucketType.WOODJUNGLE, IntercraftItems.BUCKET_JUNGLE,  IntercraftItems.WATER_BUCKET_JUNGLE,  IntercraftItems.RESIN_BUCKET_JUNGLE),
-        WOODACACIA( BucketType.WOODACACIA, IntercraftItems.BUCKET_ACACIA,  IntercraftItems.WATER_BUCKET_ACACIA,  IntercraftItems.RESIN_BUCKET_ACACIA),
-        WOODDARKOAK(BucketType.WOODDARKOAK,IntercraftItems.BUCKET_DARK_OAK,IntercraftItems.WATER_BUCKET_DARK_OAK,IntercraftItems.RESIN_BUCKET_DARK_OAK),
+        WOODOAK(    BucketType.WOODOAK,    IntercraftItems.BUCKET_OAK,     IntercraftItems.WATER_BUCKET_OAK,     IntercraftItems.RESIN_BUCKET_OAK,     IntercraftItems.RUBBER_RESIN_BUCKET_OAK),
+        WOODSPRUCE( BucketType.WOODSPRUCE, IntercraftItems.BUCKET_SPRUCE,  IntercraftItems.WATER_BUCKET_SPRUCE,  IntercraftItems.RESIN_BUCKET_SPRUCE,  IntercraftItems.RUBBER_RESIN_BUCKET_SPRUCE),
+        WOODBIRCH(  BucketType.WOODBIRCH,  IntercraftItems.BUCKET_BIRCH,   IntercraftItems.WATER_BUCKET_BIRCH,   IntercraftItems.RESIN_BUCKET_BIRCH,   IntercraftItems.RUBBER_RESIN_BUCKET_BIRCH),
+        WOODJUNGLE( BucketType.WOODJUNGLE, IntercraftItems.BUCKET_JUNGLE,  IntercraftItems.WATER_BUCKET_JUNGLE,  IntercraftItems.RESIN_BUCKET_JUNGLE,  IntercraftItems.RUBBER_RESIN_BUCKET_JUNGLE),
+        WOODACACIA( BucketType.WOODACACIA, IntercraftItems.BUCKET_ACACIA,  IntercraftItems.WATER_BUCKET_ACACIA,  IntercraftItems.RESIN_BUCKET_ACACIA,  IntercraftItems.RUBBER_RESIN_BUCKET_ACACIA),
+        WOODDARKOAK(BucketType.WOODDARKOAK,IntercraftItems.BUCKET_DARK_OAK,IntercraftItems.WATER_BUCKET_DARK_OAK,IntercraftItems.RESIN_BUCKET_DARK_OAK,IntercraftItems.RUBBER_RESIN_BUCKET_DARK_OAK),
 
         /**
          * Metal buckets
          */
 
-        METALIRON(BucketType.METALIRON,Items.BUCKET,Items.WATER_BUCKET,IntercraftItems.RESIN_BUCKET);
+        METALIRON(BucketType.METALIRON,Items.BUCKET,Items.WATER_BUCKET,IntercraftItems.RESIN_BUCKET,IntercraftItems.RUBBER_RESIN_BUCKET);
 
         private final BucketType type;
-        private final Item empty,water,resin;
+        private final Item empty,water,resin, rubberResin;
 
         /**
          * BucketEnum Constructor
@@ -269,14 +285,16 @@ public class BlockTreeTap extends Block
          * @param empty The base bucket item
          * @param water The water bucket item
          * @param resin The resin bucket item
+         * @param rubberResin The rubber resin bucket item
          */
 
-        BucketEnum(BucketType type, Item empty, Item water, Item resin)
+        BucketEnum(BucketType type, Item empty, Item water, Item resin, Item rubberResin)
         {
-            this.type  = type;
-            this.empty = empty;
-            this.water = water;
-            this.resin = resin;
+            this.type        = type;
+            this.empty       = empty;
+            this.water       = water;
+            this.resin       = resin;
+            this.rubberResin = rubberResin;
         }
 
         public Item getEmpty()
@@ -292,6 +310,11 @@ public class BlockTreeTap extends Block
         public Item getResin()
         {
             return resin;
+        }
+
+        public Item getRubberResin()
+        {
+            return rubberResin;
         }
     }
 }

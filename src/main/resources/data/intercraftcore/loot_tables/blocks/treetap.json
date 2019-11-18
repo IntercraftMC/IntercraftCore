@@ -14,13 +14,443 @@
                 {
                   "condition": "minecraft:block_state_property",
                   "block": "intercraftcore:treetap",
-                  "properties": {
-                    "bucket": "metal_iron"
-                  }
+                  "properties": { "bucket": "metal_iron" }
+                },
+                {
+                  "condition": "intercraftcore:is_full"
+                },
+                {
+                  "condition": "intercraftcore:is_fluid", "fluid": "water"
+                }
+              ],
+              "name": "minecraft:water_bucket"
+            },
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "intercraftcore:treetap",
+                  "properties": { "bucket": "metal_iron" }
+                },
+                {
+                  "condition": "intercraftcore:is_full"
+                },
+                {
+                  "condition": "intercraftcore:is_fluid", "fluid": "resin"
+                }
+              ],
+              "name": "intercraftcore:resin_bucket"
+            },
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "intercraftcore:treetap",
+                  "properties": { "bucket": "metal_iron" }
+                },
+                {
+                  "condition": "intercraftcore:is_full"
+                },
+                {
+                  "condition": "intercraftcore:is_fluid", "fluid": "rubber_resin"
+                }
+              ],
+              "name": "intercraftcore:rubber_resin_bucket"
+            },
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "intercraftcore:treetap",
+                  "properties": { "bucket": "metal_iron" }
                 }
               ],
               "name": "minecraft:bucket"
+            },
+
+
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "intercraftcore:treetap",
+                  "properties": { "bucket": "wood_spruce" }
+                },
+                {
+                  "condition": "intercraftcore:is_full"
+                },
+                {
+                  "condition": "intercraftcore:is_fluid", "fluid": "water"
+                }
+              ],
+              "name": "intercraftcore:water_spruce_bucket"
+            },
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "intercraftcore:treetap",
+                  "properties": { "bucket": "wood_spruce" }
+                },
+                {
+                  "condition": "intercraftcore:is_full"
+                },
+                {
+                  "condition": "intercraftcore:is_fluid", "fluid": "resin"
+                }
+              ],
+              "name": "intercraftcore:resin_spruce_bucket"
+            },
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "intercraftcore:treetap",
+                  "properties": { "bucket": "wood_spruce" }
+                },
+                {
+                  "condition": "intercraftcore:is_full"
+                },
+                {
+                  "condition": "intercraftcore:is_fluid", "fluid": "rubber_resin"
+                }
+              ],
+              "name": "intercraftcore:rubber_resin_spruce_bucket"
+            },
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "intercraftcore:treetap",
+                  "properties": { "bucket": "wood_spruce" }
+                }
+              ],
+              "name": "intercraftcore:spruce_bucket"
+            },
+
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "intercraftcore:treetap",
+                  "properties": { "bucket": "wood_oak" }
+                },
+                {
+                  "condition": "intercraftcore:is_full"
+                },
+                {
+                  "condition": "intercraftcore:is_fluid", "fluid": "water"
+                }
+              ],
+              "name": "intercraftcore:water_oak_bucket"
+            },
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "intercraftcore:treetap",
+                  "properties": { "bucket": "wood_oak" }
+                },
+                {
+                  "condition": "intercraftcore:is_full"
+                },
+                {
+                  "condition": "intercraftcore:is_fluid", "fluid": "resin"
+                }
+              ],
+              "name": "intercraftcore:resin_oak_bucket"
+            },
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "intercraftcore:treetap",
+                  "properties": { "bucket": "wood_oak" }
+                },
+                {
+                  "condition": "intercraftcore:is_full"
+                },
+                {
+                  "condition": "intercraftcore:is_fluid", "fluid": "rubber_resin"
+                }
+              ],
+              "name": "intercraftcore:rubber_resin_oak_bucket"
+            },
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "intercraftcore:treetap",
+                  "properties": { "bucket": "wood_oak" }
+                }
+              ],
+              "name": "intercraftcore:oak_bucket"
+            },
+
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "intercraftcore:treetap",
+                  "properties": { "bucket": "wood_birch" }
+                },
+                {
+                  "condition": "intercraftcore:is_full"
+                },
+                {
+                  "condition": "intercraftcore:is_fluid", "fluid": "water"
+                }
+              ],
+              "name": "intercraftcore:water_birch_bucket"
+            },
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "intercraftcore:treetap",
+                  "properties": { "bucket": "wood_birch" }
+                },
+                {
+                  "condition": "intercraftcore:is_full"
+                },
+                {
+                  "condition": "intercraftcore:is_fluid", "fluid": "resin"
+                }
+              ],
+              "name": "intercraftcore:resin_birch_bucket"
+            },
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "intercraftcore:treetap",
+                  "properties": { "bucket": "wood_birch" }
+                },
+                {
+                  "condition": "intercraftcore:is_full"
+                },
+                {
+                  "condition": "intercraftcore:is_fluid", "fluid": "rubber_resin"
+                }
+              ],
+              "name": "intercraftcore:rubber_resin_birch_bucket"
+            },
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "intercraftcore:treetap",
+                  "properties": { "bucket": "wood_birch" }
+                }
+              ],
+              "name": "intercraftcore:birch_bucket"
+            },
+
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "intercraftcore:treetap",
+                  "properties": { "bucket": "wood_jungle" }
+                },
+                {
+                  "condition": "intercraftcore:is_full"
+                },
+                {
+                  "condition": "intercraftcore:is_fluid", "fluid": "water"
+                }
+              ],
+              "name": "intercraftcore:water_jungle_bucket"
+            },
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "intercraftcore:treetap",
+                  "properties": { "bucket": "wood_jungle" }
+                },
+                {
+                  "condition": "intercraftcore:is_full"
+                },
+                {
+                  "condition": "intercraftcore:is_fluid", "fluid": "resin"
+                }
+              ],
+              "name": "intercraftcore:resin_jungle_bucket"
+            },
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "intercraftcore:treetap",
+                  "properties": { "bucket": "wood_jungle" }
+                },
+                {
+                  "condition": "intercraftcore:is_full"
+                },
+                {
+                  "condition": "intercraftcore:is_fluid", "fluid": "rubber_resin"
+                }
+              ],
+              "name": "intercraftcore:rubber_resin_jungle_bucket"
+            },
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "intercraftcore:treetap",
+                  "properties": { "bucket": "wood_jungle" }
+                }
+              ],
+              "name": "intercraftcore:jungle_bucket"
+            },
+
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "intercraftcore:treetap",
+                  "properties": { "bucket": "wood_acacia" }
+                },
+                {
+                  "condition": "intercraftcore:is_full"
+                },
+                {
+                  "condition": "intercraftcore:is_fluid", "fluid": "water"
+                }
+              ],
+              "name": "intercraftcore:water_acacia_bucket"
+            },
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "intercraftcore:treetap",
+                  "properties": { "bucket": "wood_acacia" }
+                },
+                {
+                  "condition": "intercraftcore:is_full"
+                },
+                {
+                  "condition": "intercraftcore:is_fluid", "fluid": "resin"
+                }
+              ],
+              "name": "intercraftcore:resin_acacia_bucket"
+            },
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "intercraftcore:treetap",
+                  "properties": { "bucket": "wood_acacia" }
+                },
+                {
+                  "condition": "intercraftcore:is_full"
+                },
+                {
+                  "condition": "intercraftcore:is_fluid", "fluid": "rubber_resin"
+                }
+              ],
+              "name": "intercraftcore:rubber_resin_acacia_bucket"
+            },
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "intercraftcore:treetap",
+                  "properties": { "bucket": "wood_acacia" }
+                }
+              ],
+              "name": "intercraftcore:acacia_bucket"
+            },
+
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "intercraftcore:treetap",
+                  "properties": { "bucket": "wood_dark_oak" }
+                },
+                {
+                  "condition": "intercraftcore:is_full"
+                },
+                {
+                  "condition": "intercraftcore:is_fluid", "fluid": "water"
+                }
+              ],
+              "name": "intercraftcore:water_dark_oak_bucket"
+            },
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "intercraftcore:treetap",
+                  "properties": { "bucket": "wood_dark_oak" }
+                },
+                {
+                  "condition": "intercraftcore:is_full"
+                },
+                {
+                  "condition": "intercraftcore:is_fluid", "fluid": "resin"
+                }
+              ],
+              "name": "intercraftcore:resin_dark_oak_bucket"
+            },
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "intercraftcore:treetap",
+                  "properties": { "bucket": "wood_dark_oak" }
+                },
+                {
+                  "condition": "intercraftcore:is_full"
+                },
+                {
+                  "condition": "intercraftcore:is_fluid", "fluid": "rubber_resin"
+                }
+              ],
+              "name": "intercraftcore:rubber_resin_dark_oak_bucket"
+            },
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "intercraftcore:treetap",
+                  "properties": { "bucket": "wood_dark_oak" }
+                }
+              ],
+              "name": "intercraftcore:dark_oak_bucket"
             }
+
+
           ]
         }
       ]

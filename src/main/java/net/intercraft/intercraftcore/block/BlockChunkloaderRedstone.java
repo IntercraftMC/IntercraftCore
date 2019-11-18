@@ -36,13 +36,17 @@ public class BlockChunkloaderRedstone extends BlockChunkloader
                 BlockPos dub = getDuplicate(worldIn,pos);
                 if (dub != null) {
                     worldIn.setBlockState(pos,state.with(BlockProperties.ACTIVE,false));
+                    //tile.setCanLoad(false);
+
                     return;
                 }
             }
 
-            boolean flag = state.get(BlockProperties.ACTIVE);
-            if (flag != worldIn.isBlockPowered(pos))
-                worldIn.setBlockState(pos,state.cycle(BlockProperties.ACTIVE),2);
+            final boolean flag = state.get(BlockProperties.ACTIVE);
+            if (flag != worldIn.isBlockPowered(pos)) {
+                worldIn.setBlockState(pos, state.cycle(BlockProperties.ACTIVE), 2);
+                //tile.setCanLoad(!flag);
+            }
         }
     }
 }

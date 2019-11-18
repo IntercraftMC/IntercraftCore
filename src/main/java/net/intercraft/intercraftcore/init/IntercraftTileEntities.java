@@ -1,6 +1,7 @@
 package net.intercraft.intercraftcore.init;
 
 import net.intercraft.intercraftcore.Reference;
+import net.intercraft.intercraftcore.tileentity.AutoCraftingTableTileEntity;
 import net.intercraft.intercraftcore.tileentity.ChunkLoaderBaseTileEntity;
 import net.intercraft.intercraftcore.tileentity.ChunkLoaderTimerTileEntity;
 import net.intercraft.intercraftcore.tileentity.TreeTapTileEntity;
@@ -15,17 +16,21 @@ public class IntercraftTileEntities
     public static final TileEntityType<ChunkLoaderBaseTileEntity> CHUNKLOADER;
     public static final TileEntityType<ChunkLoaderBaseTileEntity> CHUNKLOADER_TIMER;
 
+    public static final TileEntityType<ChunkLoaderBaseTileEntity> AUTOCRAFTINGTABLE;
+
 
     static {
         TREETAP =           buildTE("treetap",TileEntityType.Builder.create(TreeTapTileEntity::new,IntercraftBlocks.TREETAP));
-        CHUNKLOADER =       buildTE("chunkloader",TileEntityType.Builder.create(ChunkLoaderBaseTileEntity::new,IntercraftBlocks.CHUNKLOADER,IntercraftBlocks.CHUNKLOADER_REDSTONE));
+        CHUNKLOADER =       buildTE("chunkloader",TileEntityType.Builder.create(() -> new ChunkLoaderBaseTileEntity(IntercraftTileEntities.CHUNKLOADER),IntercraftBlocks.CHUNKLOADER,IntercraftBlocks.CHUNKLOADER_REDSTONE));
         CHUNKLOADER_TIMER = buildTE("chunkloader_timer",TileEntityType.Builder.create(ChunkLoaderTimerTileEntity::new,IntercraftBlocks.CHUNKLOADER_TIMER));
+
+        AUTOCRAFTINGTABLE = buildTE("auto_crafting_table", TileEntityType.Builder.create(AutoCraftingTableTileEntity::new));
     }
 
 
     public static void register()
     {
-        registerTileEntities(TREETAP,CHUNKLOADER,CHUNKLOADER_TIMER);
+        registerTileEntities(TREETAP,CHUNKLOADER,CHUNKLOADER_TIMER,AUTOCRAFTINGTABLE);
     }
 
 

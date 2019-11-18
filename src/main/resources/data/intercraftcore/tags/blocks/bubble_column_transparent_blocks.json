@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "intercraftcore:stone_pressure_plate",
+    "intercraftcore:oak_pressure_plate",
+    "intercraftcore:spruce_pressure_plate",
+    "intercraftcore:birch_pressure_plate",
+    "intercraftcore:jungle_pressure_plate",
+    "intercraftcore:acacia_pressure_plate",
+    "intercraftcore:dark_oak_pressure_plate",
+
+    "intercraftcore:drain"
+  ]
+}

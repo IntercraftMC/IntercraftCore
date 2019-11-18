@@ -1,5 +1,7 @@
 {
   "item.intercraftcore.test_item": "Test",
+  "item.intercraftcore.amber_raw": "Unpolished Amber Gem",
+  "item.intercraftcore.amber_cut": "Cut Amber Gem",
   "item.intercraftcore.devil_mask": "Devil Mask",
   "item.intercraftcore.sun_glasses": "Sunglasses",
 
@@ -17,6 +19,13 @@
   "item.intercraftcore.resin_acacia_bucket": "Resin Acacia Bucket",
   "item.intercraftcore.resin_dark_oak_bucket": "Resin Dark Oak Bucket",
   
+  "item.intercraftcore.rubber_resin_oak_bucket": "Rubber Resin Oak Bucket",
+  "item.intercraftcore.rubber_resin_spruce_bucket": "Rubber Resin Spruce Bucket",
+  "item.intercraftcore.rubber_resin_birch_bucket": "Rubber Resin Birch Bucket",
+  "item.intercraftcore.rubber_resin_jungle_bucket": "Rubber Resin Jungle Bucket",
+  "item.intercraftcore.rubber_resin_acacia_bucket": "Rubber Resin Acacia Bucket",
+  "item.intercraftcore.rubber_resin_dark_oak_bucket": "Bucket which contains Rubber Resin and is made out of Dark Oak",
+  
   "item.intercraftcore.water_oak_bucket": "Water Oak Bucket",
   "item.intercraftcore.water_spruce_bucket": "Water Spruce Bucket",
   "item.intercraftcore.water_birch_bucket": "Water Birch Bucket",
@@ -25,6 +34,7 @@
   "item.intercraftcore.water_dark_oak_bucket": "Water Dark Oak Bucket",
 
   "item.intercraftcore.resin_bucket": "Resin Bucket",
+  "item.intercraftcore.rubber_resin_bucket": "Rubber Resin Bucket",
   "item.intercraftcore.oil_bucket": "Oil Bucket",
 
 
@@ -284,6 +294,8 @@
 
   "block.intercraftcore.treetap": "Tree Tap",
   "block.intercraftcore.redstone_beacon": "Redstone Beacon",
+  "block.intercraftcore.auto_crafting_table": "Auto Crafting Table",
+  "block.intercraftcore.drain": "Drain",
 
   "block.intercraftcore.chunkloader": "Chunkloader",
   "block.intercraftcore.chunkloader_redstone": "Chunkloader (Redstone)",

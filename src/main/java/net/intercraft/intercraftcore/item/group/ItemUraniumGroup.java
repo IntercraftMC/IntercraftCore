@@ -19,7 +19,7 @@ public class ItemUraniumGroup extends ItemElementGroup
     {
         if ((element.forms & form) == form) {
             try {
-                Constructor<?> constructor;// = itemElementClass.getConstructor(Element.class, String.class);
+                Constructor<?> constructor;
 
                 switch (form) {
 

@@ -19,10 +19,10 @@ import net.minecraftforge.registries.ForgeRegistries;
  * Thanks Draco18s. :)
  */
 
-public class BlockItemFunction extends LootFunction
+public class FunctionBlockItemFunction extends LootFunction
 {
 
-    protected BlockItemFunction(ILootCondition[] conditionsIn)
+    protected FunctionBlockItemFunction(ILootCondition[] conditionsIn)
     {
         super(conditionsIn);
     }
@@ -31,7 +31,7 @@ public class BlockItemFunction extends LootFunction
     protected ItemStack doApply(ItemStack stack, LootContext context)
     {
         BlockState state = context.get(LootParameters.BLOCK_STATE);
-        if(state.has(BlockProperties.DENSITY)) {
+        if (state.has(BlockProperties.DENSITY)) {
             int density = state.get(BlockProperties.DENSITY);
             ItemStack it = new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(state.getBlock().getRegistryName().getNamespace(),state.getBlock().getRegistryName().getPath())));
 
@@ -44,17 +44,18 @@ public class BlockItemFunction extends LootFunction
         return stack;
     }
 
-    public static class Serializer extends LootFunction.Serializer<BlockItemFunction>
+    public static class Serializer extends LootFunction.Serializer<FunctionBlockItemFunction>
     {
 
-        public Serializer() {
-            super(new ResourceLocation(Reference.MODID+":blockitem"), BlockItemFunction.class);
+        public Serializer()
+        {
+            super(new ResourceLocation(Reference.MODID+":blockitem"), FunctionBlockItemFunction.class);
         }
 
         @Override
-        public BlockItemFunction deserialize(JsonObject object, JsonDeserializationContext deserializationContext, ILootCondition[] conditionsIn)
+        public FunctionBlockItemFunction deserialize(JsonObject object, JsonDeserializationContext deserializationContext, ILootCondition[] conditionsIn)
         {
-            return new BlockItemFunction(conditionsIn);
+            return new FunctionBlockItemFunction(conditionsIn);
         }
     }
 }

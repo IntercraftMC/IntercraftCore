@@ -1,12 +1,9 @@
 package net.intercraft.intercraftcore.item.masks;
 
-import net.intercraft.intercraftcore.IntercraftCore;
 import net.intercraft.intercraftcore.Reference;
 import net.intercraft.intercraftcore.init.IntercraftItemGroups;
 import net.intercraft.intercraftcore.init.capabilities.identity_hidden.IIdentityHidden;
-import net.intercraft.intercraftcore.init.capabilities.identity_hidden.IdentityHidden;
 import net.intercraft.intercraftcore.init.capabilities.identity_hidden.IdentityHiddenProvider;
-import net.intercraft.intercraftcore.networking.MessageIdentityHidden;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -17,12 +14,10 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
-import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.fml.network.PacketDistributor;
 import top.theillusivec4.curios.api.capability.CuriosCapability;
 import top.theillusivec4.curios.api.capability.ICurio;
 

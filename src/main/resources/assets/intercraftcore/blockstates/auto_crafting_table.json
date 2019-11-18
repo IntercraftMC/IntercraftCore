@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "intercraftcore:block/auto_crafting_table"
+    }
+  }
+}

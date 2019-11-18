@@ -1,22 +1,27 @@
 package net.intercraft.intercraftcore.tileentity;
 
+import net.intercraft.intercraftcore.IntercraftCore;
 import net.intercraft.intercraftcore.api.BlockProperties;
-import net.intercraft.intercraftcore.init.IntercraftTileEntities;
+import net.intercraft.intercraftcore.networking.MessageChunkLoader;
 import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.world.chunk.Chunk;
+import net.minecraftforge.fml.network.PacketDistributor;
 
 public class ChunkLoaderBaseTileEntity extends TileEntity implements ITickableTileEntity
 {
 
-    private boolean canLoad = true;
+    public boolean canLoad = true;
 
 
-    public ChunkLoaderBaseTileEntity()
+    public ChunkLoaderBaseTileEntity(TileEntityType type)
     {
-        super(IntercraftTileEntities.CHUNKLOADER);
+        super(type);
     }
 
 
@@ -25,17 +30,16 @@ public class ChunkLoaderBaseTileEntity extends TileEntity implements ITickableTi
     public void tick()
     {
 
+        if (world.isRemote) return;
+
         if (canLoad) {
 
-            if (world.isRemote) return;
 
-            BlockState state = getBlockState();
-            if (!state.get(BlockProperties.ACTIVE)) return;
+            if (!getBlockState().get(BlockProperties.ACTIVE)) return;
 
             Chunk chunk = world.getChunkAt(pos);
 
-            // Should do the chunkloading here..
-
+            load(chunk);
 
 
         } else {
@@ -43,6 +47,13 @@ public class ChunkLoaderBaseTileEntity extends TileEntity implements ITickableTi
                 world.setBlockState(pos, getBlockState().with(BlockProperties.ACTIVE, false));
 
         }
+
+    }
+
+
+    public void load(Chunk chunk)
+    {
+        // Should do the chunkloading here..
 
     }
 
@@ -55,8 +66,22 @@ public class ChunkLoaderBaseTileEntity extends TileEntity implements ITickableTi
 
     public void setCanLoad(boolean value)
     {
+        BlockState stateOld = getBlockState();
         canLoad = value;
+        if (getBlockState().get(BlockProperties.ACTIVE) != value) {
+            world.setBlockState(pos, getBlockState().with(BlockProperties.ACTIVE, value));
+            world.notifyBlockUpdate(pos, stateOld, getBlockState(), 1);
+        }
+
+        IntercraftCore.NETWORK.send(PacketDistributor.TRACKING_CHUNK.with(() -> (Chunk) this.getTileEntity().getWorld().getChunk(pos)), new MessageChunkLoader(pos, value));
         markDirty();
+
+        //try {
+            //world.setBlockState(pos, getBlockState().with(BlockProperties.ACTIVE, value));
+        /*} catch (NullPointerException err) {
+            for (StackTraceElement stackTraceElement : err.getStackTrace())
+                System.out.println(String.format("Could not find %s",stackTraceElement.getClassName()));
+        }*/
     }
 
 
@@ -64,7 +89,7 @@ public class ChunkLoaderBaseTileEntity extends TileEntity implements ITickableTi
     public CompoundNBT write(CompoundNBT compound)
     {
 
-        compound.putBoolean("can_load",canLoad);
+        compound.putBoolean("can_load", canLoad);
 
         return super.write(compound);
     }
@@ -75,6 +100,32 @@ public class ChunkLoaderBaseTileEntity extends TileEntity implements ITickableTi
         super.read(compound);
 
         canLoad = compound.getBoolean("can_load");
+    }
+
+    @Override
+    public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt)
+    {
+        super.onDataPacket(net,pkt);
+        CompoundNBT compound = pkt.getNbtCompound();
+
+        canLoad = compound.getBoolean("can_load");
+    }
+
+    @Override
+    public CompoundNBT getUpdateTag()
+    {
+        CompoundNBT compound = super.getUpdateTag();
+        compound.putBoolean("can_load", canLoad);
+
+        return compound;
+    }
+
+    @Override
+    public void handleUpdateTag(CompoundNBT compound)
+    {
+
+        canLoad = compound.getBoolean("can_load");
+        super.handleUpdateTag(compound);
     }
 
     /*@Override

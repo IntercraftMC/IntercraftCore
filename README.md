@@ -42,7 +42,7 @@ Core mod for InterCraft 1.14.4 modpack.
     *I really like [ReactorCraft](https://sites.google.com/site/reikasminecraft/reactorcraft)'s way of creating multiblocks. You design the reactor yourself with pieces as indiviual blocks doing their thing. Doing that but for most of the generators where you decide how you want to build it.*
     - [ ] Unit
     
-    *Custom energy unit ("ICU"?) also losely modeled after real life (not completely as to not eat too much TPS).*
+    *Custom energy unit ("ICU"?) also loosely modeled after real life (not completely as to not eat too much TPS).*
 
 ### Custom Additions
 

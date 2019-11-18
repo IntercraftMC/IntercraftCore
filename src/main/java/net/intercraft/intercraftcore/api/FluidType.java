@@ -6,45 +6,59 @@ import net.minecraft.particles.ParticleTypes;
 
 public enum FluidType
 {
-    NONE( "none", 0,  0.0f, null,                                         null),
-    WATER("water",80 ,0.6f, Reference.MODID+":block/liquids/water_still", ParticleTypes.FALLING_WATER),
-    RESIN("resin",120,1.0f, Reference.MODID+":block/liquids/resin_still", ParticleTypes.FALLING_WATER);
+    WATER(       "water",        (short)80,  (short)0x5454EE, "minecraft:block/water_still",                ParticleTypes.FALLING_WATER),
+    RESIN(       "resin",        (short)200,                  Reference.MODID+":block/liquids/resin_still", ParticleTypes.FALLING_WATER),
+    RUBBER_RESIN("rubber_resin", (short)120, (short)0x90a718, Reference.MODID+":block/liquids/resin_still", ParticleTypes.FALLING_WATER),
 
-
+    NONE( "none", (short)0,null,null);
 
 
     private final String name, texture;
-    private final double viscosity;
-    private final float alpha;
+    private final short viscosity, tint;
     private final BasicParticleType basicParticleType;
 
-    FluidType(String name, double viscosity, float alpha, String texture, BasicParticleType particleType)
+    /**
+     * FluidType Constructor
+     *
+     * @param name name of the liquid.
+     * @param viscosity drop rate.
+     * @param tint colour override of the texture, -1 for no tint.
+     * @param texture texture name in texture map.
+     * @param particleType drop particle.
+     */
+
+    FluidType(String name, short viscosity, short tint, String texture, BasicParticleType particleType)
     {
-        this.name = name;
-        this.viscosity = viscosity;
-        this.alpha = alpha;
-        this.texture = texture;
+        this.name              = name;
+        this.viscosity         = viscosity;
+        this.tint              = tint;
+        this.texture           = texture;
         this.basicParticleType = particleType;
+    }
+
+    FluidType(String name, short viscosity, String texture, BasicParticleType particleType)
+    {
+        this(name,viscosity,(short)-1,texture,particleType);
     }
 
     public String toString()
     {
-        return String.format("{%s:%s}",getName(),viscosity);
+        return String.format("{%s,%s,%s}",name,tint,viscosity);
     }
 
     public String getName()
     {
-        return this.name;
+        return name;
     }
 
-    public double getViscosity()
+    public int getViscosity()
     {
-        return this.viscosity;
+        return viscosity;
     }
 
-    public float getAlpha()
+    public int getTint()
     {
-        return this.alpha;
+        return tint;
     }
 
     public String getTexture()
@@ -54,7 +68,7 @@ public enum FluidType
 
     public BasicParticleType getParticle()
     {
-        return this.basicParticleType;
+        return basicParticleType;
     }
 
 }

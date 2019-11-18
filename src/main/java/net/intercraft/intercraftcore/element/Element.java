@@ -8,63 +8,58 @@ public class Element
     /**
      * Element Type Bit flags
      */
-    public static final int INGOT      = 0x1;
-    public static final int NUGGET     = 0x2;
-    public static final int DUST       = 0x4;
-    public static final int DUST_SMALL = 0x8;
-    public static final int PLATE      = 0x10;
-    public static final int GEAR       = 0x20;
-    public static final int ROD        = 0x40;
-    public static final int CHUNK      = 0x80;
+    public static final short
+            INGOT      = 0x1,
+            NUGGET     = 0x2,
+            DUST       = 0x4,
+            DUST_SMALL = 0x8,
+            PLATE      = 0x10,
+            GEAR       = 0x20,
+            ROD        = 0x40,
+            CHUNK      = 0x80,
 
-    public static final int BLOCK      = 0x100;
-    public static final int FRAME      = 0x200;
-    public static final int ORE        = 0x400;
+            BLOCK      = 0x100,
+            FRAME      = 0x200,
+            ORE        = 0x400;
+            //LIQUID     = 0x800;
 
     /**
      * Element information
      */
-    public final String               name;
-    public final String               symbol;
-    public final int                  tintPrim;
-    public final int                  tintSec;
+    public final String name,     symbol;
+    public final short    tintPrim, tintSec;
     public final ElementComposition[] composition;
 
     /**
      * Byte forms of the group
      */
-        public int forms = INGOT | NUGGET | DUST | DUST_SMALL | PLATE | GEAR | ROD | CHUNK | BLOCK | FRAME | ORE;
+        public short forms = INGOT | NUGGET | DUST | DUST_SMALL | PLATE | GEAR | ROD | CHUNK | BLOCK | FRAME | ORE;
 
     /**
      * Element Constructor
      *
-     * @param name       Element name
-     * @param dictionary Element dictionary entry
+     * @param name       Element name.
+     * @param dictionary Element dictionary entry.
      */
     public Element(String name, ElementDictionary dictionary)
     {
-        this.name = name;
-        this.symbol = dictionary.getSymbol();
-        this.tintPrim = dictionary.getColorPrimary();
-        this.tintSec = dictionary.getColorSecondary();
+        this.name        = name;
+        this.symbol      = dictionary.getSymbol();
+        this.tintPrim    = (short) dictionary.getColorPrimary();
+        this.tintSec     = (short) dictionary.getColorSecondary();
         this.composition = dictionary.getComposition();
     }
 
     /**
-     * Element Constructor with type exclusions
+     * Element Constructor w. type exclusions
      *
-     * @param name         Element name
-     * @param dictionary   Element dictionary entry
-     * @param excludeForms Bit flags for group item/block forms to exclude
+     * @param name         Element name.
+     * @param dictionary   Element dictionary entry.
+     * @param excludeForms Bit flags for group item/block forms to exclude.
      */
     public Element(String name, ElementDictionary dictionary, int excludeForms)
     {
-        this.name = name;
-        this.symbol = dictionary.getSymbol();
-        this.tintPrim = dictionary.getColorPrimary();
-        this.tintSec = dictionary.getColorSecondary();
-        this.composition = dictionary.getComposition();
-
-        this.forms &= ~excludeForms;
+        this(name,dictionary);
+        forms &= ~excludeForms;
     }
 }

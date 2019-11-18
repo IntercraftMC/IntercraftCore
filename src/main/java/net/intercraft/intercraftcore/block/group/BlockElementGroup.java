@@ -1,7 +1,7 @@
 package net.intercraft.intercraftcore.block.group;
 
-import net.intercraft.intercraftcore.block.BlockElement;
-import net.intercraft.intercraftcore.block.BlockFrame;
+import net.intercraft.intercraftcore.block.BlockSolidElement;
+import net.intercraft.intercraftcore.block.BlockFrameElement;
 import net.intercraft.intercraftcore.element.Element;
 import net.intercraft.intercraftcore.block.BlockHardOre;
 import net.minecraft.block.Block;
@@ -14,9 +14,9 @@ public class BlockElementGroup
     /**
      * The generic block type
      */
-    protected final Class<BlockElement> blockElementClass;
+    protected final Class<BlockSolidElement> blockSolidElementClass;
     protected final Class<BlockHardOre> blockHardOreClass;
-    protected final Class<BlockFrame> blockFrameClass;
+    protected final Class<BlockFrameElement> blockFrameElementClass;
 
     /**
      * Keep a reference to the element
@@ -31,16 +31,16 @@ public class BlockElementGroup
     public final Block ORE;
 
     /**
-     * Create an block group for the given element
+     * Create a block group for the given element.
      *
-     * @param element
+     * @param element Element.
      */
     public BlockElementGroup(Element element)
     {
-        this.element = element;
-        this.blockElementClass = BlockElement.class;
-        this.blockFrameClass   = BlockFrame.class;
-        this.blockHardOreClass = BlockHardOre.class;
+        this.element           = element;
+        blockSolidElementClass = BlockSolidElement.class;
+        blockFrameElementClass = BlockFrameElement.class;
+        blockHardOreClass      = BlockHardOre.class;
 
 
         BLOCK = createBlock(Element.BLOCK, "block");
@@ -49,37 +49,61 @@ public class BlockElementGroup
     }
 
     /**
-     * Create an element item form
+     * Create an element block form.
      *
-     * @param form
-     * @param suffix
+     * @param form Element type.
+     * @param suffix Element name.
      */
     protected Block createBlock(int form, String suffix)
     {
         if ((element.forms & form) == form) {
             try {
-                Constructor<?> constructor;// = blockElementClass.getConstructor(Element.class, String.class);
+                Constructor<?> constructor;
 
                 switch (form) {
                     case Element.FRAME:
-                        constructor = blockFrameClass.getConstructor(Element.class, String.class);
+                        constructor = createConstructor(blockFrameElementClass);
                         break;
 
                     case Element.ORE:
-                        constructor = blockHardOreClass.getConstructor(Element.class, String.class);
+                        constructor = createConstructor(blockHardOreClass);
                         break;
 
                     default:
-                        constructor = blockElementClass.getConstructor(Element.class, String.class);
+                        constructor = createConstructor(blockSolidElementClass);
                 }
 
                 return (Block) constructor.newInstance(new Object[] { element, suffix });
             }
-            catch (NoSuchMethodException e) {}
-            catch (InstantiationException e) {}
-            catch (IllegalAccessException e) {}
-            catch (InvocationTargetException e) {}
+            catch (InstantiationException e) {
+                printError(e);
+            }
+            catch (IllegalAccessException e) {
+                printError(e);
+            }
+            catch (InvocationTargetException e) {
+                printError(e);
+            }
         }
         return null;
+    }
+
+    protected Constructor<?> createConstructor(Class<?> clazz)
+    {
+
+        try {
+            return clazz.getConstructor(Element.class, String.class);
+        }
+        catch (NoSuchMethodException e) {
+            printError(e);
+        }
+
+        return null;
+    }
+
+    protected void printError(Exception e)
+    {
+        System.out.println(String.format("[%s]: {%s}", e.getClass().getSimpleName(), e));
+
     }
 }

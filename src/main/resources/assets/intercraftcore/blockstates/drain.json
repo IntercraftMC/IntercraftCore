@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "facing=north,half=bottom": { "model": "intercraftcore:block/drain_bottom" },
+    "facing=south,half=bottom": { "model": "intercraftcore:block/drain_bottom", "y": 180 },
+    "facing=east,half=bottom": { "model": "intercraftcore:block/drain_bottom", "y": 90 },
+    "facing=west,half=bottom": { "model": "intercraftcore:block/drain_bottom", "y": 270 },
+
+    "facing=north,half=top": { "model": "intercraftcore:block/drain_top" },
+    "facing=south,half=top": { "model": "intercraftcore:block/drain_top", "y": 180 },
+    "facing=east,half=top": { "model": "intercraftcore:block/drain_top", "y": 90 },
+    "facing=west,half=top": { "model": "intercraftcore:block/drain_top", "y": 270 }
+  }
+}

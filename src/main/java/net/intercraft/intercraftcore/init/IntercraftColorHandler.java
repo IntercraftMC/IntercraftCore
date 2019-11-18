@@ -1,8 +1,11 @@
 package net.intercraft.intercraftcore.init;
 
-import net.intercraft.intercraftcore.block.BlockElement;
-import net.intercraft.intercraftcore.block.BlockFrame;
+import net.intercraft.intercraftcore.api.FluidType;
+import net.intercraft.intercraftcore.block.BlockAutoCraftingTable;
+import net.intercraft.intercraftcore.block.BlockSolidElement;
+import net.intercraft.intercraftcore.block.BlockFrameElement;
 import net.intercraft.intercraftcore.block.group.BlockElementGroup;
+import net.intercraft.intercraftcore.item.ItemBucketNonFluid;
 import net.intercraft.intercraftcore.item.ItemElement;
 import net.intercraft.intercraftcore.item.ItemWireCoil;
 import net.intercraft.intercraftcore.item.group.ItemElementGroup;
@@ -35,8 +38,17 @@ public class IntercraftColorHandler
      */
 
     private static List<Item> items = new ArrayList<Item>(){{
-        add(IntercraftItems.COPPERCOIL);
-        add(IntercraftItems.INSULATEDCOPPERCOIL);
+
+        add(IntercraftItems.RUBBER_RESIN_BUCKET_OAK);
+        add(IntercraftItems.RUBBER_RESIN_BUCKET_SPRUCE);
+        add(IntercraftItems.RUBBER_RESIN_BUCKET_BIRCH);
+        add(IntercraftItems.RUBBER_RESIN_BUCKET_JUNGLE);
+        add(IntercraftItems.RUBBER_RESIN_BUCKET_ACACIA);
+        add(IntercraftItems.RUBBER_RESIN_BUCKET_DARK_OAK);
+        add(IntercraftItems.RUBBER_RESIN_BUCKET);
+
+        add(IntercraftItems.COPPER_COIL);
+        add(IntercraftItems.INSULATED_COPPER_COIL);
     }};
 
     /**
@@ -44,7 +56,7 @@ public class IntercraftColorHandler
      */
 
     private static List<Block> blocks = new ArrayList<Block>(){{
-
+        add(IntercraftBlocks.AUTOCRAFTINGTABLE);
     }};
 
 
@@ -106,14 +118,18 @@ public class IntercraftColorHandler
                 event.getItemColors().register(new ItemColorHandler(((ItemElement)item).getTint()),item);
             else if (item instanceof ItemWireCoil)
                 event.getItemColors().register(new ItemColorHandler(((ItemWireCoil)item).getTint(),1),item);
+            else if (item instanceof ItemBucketNonFluid)
+                event.getItemColors().register(new ItemColorHandler(FluidType.RUBBER_RESIN.getTint(),1),item);
         }
         for (Block block : blocks) {
             if (block instanceof BlockHardOre)
                 event.getItemColors().register(new BlockColorHandler(((BlockHardOre)block).getTint()),block);
-            else if (block instanceof BlockElement)
-                event.getItemColors().register(new BlockColorHandler(((BlockElement)block).getTint()),block);
-            else if (block instanceof BlockFrame)
-                event.getItemColors().register(new BlockColorHandler(((BlockFrame)block).getTint()),block);
+            else if (block instanceof BlockSolidElement)
+                event.getItemColors().register(new BlockColorHandler(((BlockSolidElement)block).getTint()),block);
+            else if (block instanceof BlockFrameElement)
+                event.getItemColors().register(new BlockColorHandler(((BlockFrameElement)block).getTint()),block);
+            else if (block instanceof BlockAutoCraftingTable)
+                event.getItemColors().register(new BlockColorHandler(((BlockAutoCraftingTable)block).getTint()),block);
         }
 
         System.out.println("[Item Colours] Done.");
@@ -168,10 +184,13 @@ public class IntercraftColorHandler
 
             if (block instanceof BlockHardOre)
                 event.getBlockColors().register(new BlockColorHandler(((BlockHardOre) block).getTint()),block);
-            else if (block instanceof BlockElement)
-                event.getBlockColors().register(new BlockColorHandler(((BlockElement) block).getTint()),block);
-            else if (block instanceof BlockFrame)
-                event.getBlockColors().register(new BlockColorHandler(((BlockFrame) block).getTint()),block);
+            else if (block instanceof BlockSolidElement)
+                event.getBlockColors().register(new BlockColorHandler(((BlockSolidElement) block).getTint()),block);
+            else if (block instanceof BlockFrameElement)
+                event.getBlockColors().register(new BlockColorHandler(((BlockFrameElement) block).getTint()),block);
+            else if (block instanceof BlockAutoCraftingTable)
+                event.getBlockColors().register(new BlockColorHandler(((BlockAutoCraftingTable) block).getTint()),block);
+
 
 
         }
@@ -187,26 +206,25 @@ public class IntercraftColorHandler
         private int layer;
 
         /**
-         * ColorHandler Constructor
-         *
-         * @param tint colour to be tinted with
-         */
-        public ItemColorHandler(int tint)
-        {
-            this.tint  = tint;
-            this.layer = -1;
-        }
-
-        /**
          * ColorHandler Constructor for particular texture layer.
          *
-         * @param tint colour to be tinted with
-         * @param layer layer to be coloured
+         * @param tint colour to be tinted with.
+         * @param layer layer to be coloured.
          */
         public ItemColorHandler(int tint, int layer)
         {
             this.tint  = tint;
             this.layer = layer;
+        }
+
+        /**
+         * ColorHandler Constructor
+         *
+         * @param tint colour to be tinted with.
+         */
+        public ItemColorHandler(int tint)
+        {
+            this(tint,-1);
         }
 
         public int getColor(ItemStack stack, int tint)

@@ -1,5 +1,6 @@
 package net.intercraft.intercraftcore;
 
+import net.intercraft.intercraftcore.init.IntercraftCapabilities;
 import net.intercraft.intercraftcore.init.IntercraftEventHandler;
 import net.intercraft.intercraftcore.init.RegistrationHandler;
 import net.intercraft.intercraftcore.init.capabilities.identity_hidden.IIdentityHidden;
@@ -9,11 +10,14 @@ import net.intercraft.intercraftcore.init.capabilities.ore_veins.OreVeinStorage;
 import net.intercraft.intercraftcore.init.capabilities.radiation.IRadiation;
 import net.intercraft.intercraftcore.init.capabilities.radiation.RadiationStorage;
 import net.intercraft.intercraftcore.init.gen.OreGen;
-import net.intercraft.intercraftcore.init.loot.functions.BlockItemFunction;
-import net.intercraft.intercraftcore.init.loot.functions.HarderSetCount;
+import net.intercraft.intercraftcore.init.loot.conditions.ConditionIsFluid;
+import net.intercraft.intercraftcore.init.loot.conditions.ConditionIsFull;
+import net.intercraft.intercraftcore.init.loot.functions.FunctionBlockItemFunction;
+import net.intercraft.intercraftcore.init.loot.functions.FunctionHarderSetCount;
 import net.intercraft.intercraftcore.networking.IntercraftPacketHandler;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Tuple;
+import net.minecraft.world.storage.loot.conditions.LootConditionManager;
 import net.minecraft.world.storage.loot.functions.LootFunctionManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
@@ -31,9 +35,6 @@ import top.theillusivec4.curios.api.imc.CurioIMCMessage;
 public class IntercraftCore
 {
     public static IntercraftCore instance;
-    public static final ResourceLocation RAD_ID = new ResourceLocation(Reference.MODID,"radiation");
-    public static final ResourceLocation HID_ID = new ResourceLocation(Reference.MODID,"identity_hidden");
-    public static final ResourceLocation VEIN_ID = new ResourceLocation(Reference.MODID,"ore_vein");
     //public static final ResourceLocation PAT_ID = new ResourceLocation(Reference.MODID,"pattern");
 
     public static final SimpleChannel NETWORK = IntercraftPacketHandler.getNetworkChannel();
@@ -87,19 +88,18 @@ public class IntercraftCore
     public void onCommonSetup(final FMLCommonSetupEvent event)
     {
 
-        LootFunctionManager.registerFunction(new BlockItemFunction.Serializer());
-        LootFunctionManager.registerFunction(new HarderSetCount.Serializer());
+        IntercraftCapabilities.init();
+
+        LootFunctionManager.registerFunction(new FunctionBlockItemFunction.Serializer());
+        LootFunctionManager.registerFunction(new FunctionHarderSetCount.Serializer());
         //LootConditionManager.registerCondition(new DestroyedBy.Serializer());
-
-
-        CapabilityManager.INSTANCE.register(IRadiation.class,       new RadiationStorage(),      new RadiationStorage.Factory());
-        CapabilityManager.INSTANCE.register(IOreVeins.class,        new OreVeinStorage(),        new OreVeinStorage.Factory());
-        CapabilityManager.INSTANCE.register(IIdentityHidden.class,  new IdentityHiddenStorage(), new IdentityHiddenStorage.Factory());
+        LootConditionManager.registerCondition(new ConditionIsFull.Serializer());
+        LootConditionManager.registerCondition(new ConditionIsFluid.Serializer());
         //CapabilityManager.INSTANCE.register(IPattern.class,         new PatternStorage(),        new PatternStorage.Factory());
 
-        MinecraftForge.EVENT_BUS.addListener(IntercraftEventHandler::attachCapabilityEntity);
+        /*MinecraftForge.EVENT_BUS.addListener(IntercraftEventHandler::attachCapabilityEntity);
         MinecraftForge.EVENT_BUS.addListener(IntercraftEventHandler::attachCapabilityChunk);
-        MinecraftForge.EVENT_BUS.addListener(IntercraftEventHandler::attachCapabilityItem);
+        MinecraftForge.EVENT_BUS.addListener(IntercraftEventHandler::attachCapabilityItem);*/
 
         OreGen.setupOreGen();
 

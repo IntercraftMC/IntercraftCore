@@ -4,23 +4,16 @@ import net.intercraft.intercraftcore.api.BlockProperties;
 import net.intercraft.intercraftcore.init.IntercraftTileEntities;
 import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SUpdateTileEntityPacket;
-import net.minecraft.tileentity.ITickableTileEntity;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.chunk.Chunk;
 
-public class ChunkLoaderTimerTileEntity extends TileEntity implements ITickableTileEntity
+public class ChunkLoaderTimerTileEntity extends ChunkLoaderBaseTileEntity
 {
-
-    private boolean canLoad = true;
-
     private long duration;
 
-    private int seconds = 0;
-    private int minutes = 30;
-    private int hours = 0;
-    private int days = 0;
+    private int // Default countdown values.
+            seconds = 30,
+            minutes = 4,
+            hours   = 0,
+            days    = 0;
 
     public ChunkLoaderTimerTileEntity()
     {
@@ -29,56 +22,45 @@ public class ChunkLoaderTimerTileEntity extends TileEntity implements ITickableT
     }
 
 
-
-
     @Override
     public void tick()
     {
 
+        super.tick();
+
         if (canLoad) {
 
-            if (getWorld().isRemote) return;
+            if (world.isRemote) return;
 
             BlockState state = getBlockState();
             if (!state.get(BlockProperties.ACTIVE)) return;
 
             if (duration > 0) {
 
-
-                // Should do the chunkloading here..
-
-                Chunk chunk = world.getChunkAt(pos);
-
                 setDuration(duration-1);
             } else {
                 world.setBlockState(pos,getBlockState().with(BlockProperties.ACTIVE,false));
+                //setCanLoad(false);
                 setDuration(getResetTime());
             }
 
         } else {
-            if (getBlockState().get(BlockProperties.ACTIVE))
+            if (getBlockState().get(BlockProperties.ACTIVE)) {
                 world.setBlockState(pos, getBlockState().with(BlockProperties.ACTIVE, false));
+                //setCanLoad(false);
+            }
         }
     }
 
 
-    private int mult(int value, int multi)
+    private int m(int value, int multi)
     {
-        if (value <= 1)
-            return 1;
-        else
-            return value*multi;
-
+        return value <= 1 ? 1 : value*multi;
     }
 
-    public boolean getCanLoad()
+    private long getResetTime()
     {
-        return canLoad;
-    }
-
-    public long getResetTime()
-    {
-        return mult(days,24) * mult(hours,60) * mult(minutes,60) * mult(minutes,60) * mult(seconds,20);
+        return m(days,24) * m(hours,60) * m(minutes,60) * m(seconds,60) * 20;
     }
 
 
@@ -107,12 +89,6 @@ public class ChunkLoaderTimerTileEntity extends TileEntity implements ITickableT
         return days;
     }
 
-
-    public void setCanLoad(boolean value)
-    {
-        canLoad = value;
-        markDirty();
-    }
 
     public void setDuration(long value)
     {
@@ -150,12 +126,12 @@ public class ChunkLoaderTimerTileEntity extends TileEntity implements ITickableT
     public CompoundNBT write(CompoundNBT compound)
     {
 
-        compound.putBoolean("can_load",canLoad);
+        //compound.putBoolean("canLoad",canLoad);
         compound.putLong("duration",duration);
-        compound.putInt("sec",seconds);
+        /*compound.putInt("sec",seconds);
         compound.putInt("min",minutes);
         compound.putInt("hour",hours);
-        compound.putInt("day",days);
+        compound.putInt("day",days);*/
 
         return super.write(compound);
     }
@@ -165,19 +141,50 @@ public class ChunkLoaderTimerTileEntity extends TileEntity implements ITickableT
     {
         super.read(compound);
 
-        canLoad = compound.getBoolean("can_load");
+        //canLoad = compound.getBoolean("canLoad");
         duration = compound.getLong("duration");
-        seconds = compound.getInt("sec");
+        /*seconds = compound.getInt("sec");
         minutes = compound.getInt("min");
         hours = compound.getInt("hour");
-        days = compound.getInt("day");
+        days = compound.getInt("day");*/
+    }
+
+
+    /*@Override
+    public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt)
+    {
+        super.onDataPacket(net,pkt);
+        CompoundNBT compound = pkt.getNbtCompound();
+
+        duration = compound.getLong("duration");
     }
 
     @Override
     public CompoundNBT getUpdateTag()
     {
         CompoundNBT compound = super.getUpdateTag();
-        compound.putBoolean("can_load",canLoad);
+        compound.putLong("duration",duration);
+
+        return compound;
+    }
+
+    @Override
+    public void handleUpdateTag(CompoundNBT compound)
+    {
+
+        duration = compound.getLong("duration");
+        super.handleUpdateTag(compound);
+    }*/
+
+
+
+
+
+    /*@Override
+    public CompoundNBT getUpdateTag()
+    {
+        CompoundNBT compound = super.getUpdateTag();
+        //compound.putBoolean("canLoad",canLoad);
         compound.putLong("duration",duration);
         compound.putInt("sec",seconds);
         compound.putInt("min",minutes);
@@ -189,7 +196,7 @@ public class ChunkLoaderTimerTileEntity extends TileEntity implements ITickableT
     @Override
     public void handleUpdateTag(CompoundNBT compound)
     {
-        canLoad = compound.getBoolean("can_load");
+        //canLoad = compound.getBoolean("canLoad");
         duration = compound.getLong("duration");
         seconds = compound.getInt("sec");
         minutes = compound.getInt("min");
@@ -204,7 +211,7 @@ public class ChunkLoaderTimerTileEntity extends TileEntity implements ITickableT
         CompoundNBT compound = new CompoundNBT();
         //Write your data into the nbtTag
 
-        compound.putBoolean("can_load",canLoad);
+        compound.putBoolean("canLoad",canLoad);
         compound.putLong("duration",duration);
         compound.putInt("sec",seconds);
         compound.putInt("min",minutes);
@@ -218,7 +225,7 @@ public class ChunkLoaderTimerTileEntity extends TileEntity implements ITickableT
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt){
         CompoundNBT compound = pkt.getNbtCompound();
 
-        canLoad = compound.getBoolean("can_load");
+        canLoad = compound.getBoolean("canLoad");
         duration = compound.getLong("duration");
         seconds = compound.getInt("sec");
         minutes = compound.getInt("min");
@@ -226,7 +233,7 @@ public class ChunkLoaderTimerTileEntity extends TileEntity implements ITickableT
         days = compound.getInt("day");
 
         //Handle your Data
-    }
+    }*/
 
 
 }

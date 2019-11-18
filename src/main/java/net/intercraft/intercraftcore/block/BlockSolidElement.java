@@ -6,14 +6,14 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.BlockRenderLayer;
 
-public class BlockFrame extends Block
+public class BlockSolidElement extends Block
 {
 
     protected Element element;
 
-    public BlockFrame(Element element, String registrySuffix)
+    public BlockSolidElement(Element element, String registrySuffix)
     {
-        super(Properties.create(Material.IRON).hardnessAndResistance(5.0F, 6.0F).sound(SoundType.METAL));
+        super(Block.Properties.create(Material.IRON).hardnessAndResistance(5.0F, 6.0F).sound(SoundType.METAL));
         this.element = element;
         setRegistryName(element.symbol + "_" + registrySuffix);
 
@@ -22,7 +22,7 @@ public class BlockFrame extends Block
     @Override
     public BlockRenderLayer getRenderLayer()
     {
-        return BlockRenderLayer.TRANSLUCENT;
+        return BlockRenderLayer.SOLID;
     }
 
     public int getTint() {

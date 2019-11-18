@@ -2,6 +2,7 @@ package net.intercraft.intercraftcore.init;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import net.minecraft.particles.ParticleType;
 import net.minecraft.potion.Effect;
 import net.minecraft.stats.StatType;
 import net.minecraft.tileentity.TileEntityType;
@@ -20,7 +21,9 @@ public class RegistrationHandler
     protected static final List<Item>           items = new LinkedList<>();
     protected static final List<Effect>         effects = new LinkedList<>();
     protected static final List<TileEntityType> tileentities = new LinkedList<>();
+
     protected static final List<StatType<?>>    stats = new LinkedList<>();
+    protected static final List<ParticleType<?>>particles = new LinkedList<>();
 
 
     public static void register(final RegistryEvent.Register event)
@@ -37,6 +40,8 @@ public class RegistrationHandler
             registerTileEntities(event);
         } else if (generic == StatType.class) {
             registerStats(event);
+        } else if (generic == ParticleType.class) {
+            //registerParticles(event);
         }
 
 
@@ -74,10 +79,17 @@ public class RegistrationHandler
         System.out.println("TileEntity registration done.");
     }
 
-    protected static void registerStats(final  RegistryEvent.Register<StatType<?>> event)
+    protected static void registerStats(final RegistryEvent.Register<StatType<?>> event)
     {
         IntercraftStats.register();
-        stats.forEach(statType -> event.getRegistry().register(statType));
+        stats.forEach(stat -> event.getRegistry().register(stat));
         System.out.println("Stats registration done.");
+    }
+
+    protected static void registerParticles(final RegistryEvent.Register<ParticleType<?>> event)
+    {
+        IntercraftParticles.register();
+        particles.forEach(paricle -> event.getRegistry().register(paricle));
+        System.out.println("Particle registration done.");
     }
 }

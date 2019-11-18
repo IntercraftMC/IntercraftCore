@@ -45,27 +45,27 @@ public class ItemElementGroup
         this.itemHardChunkClass = ItemHardChunk.class;
 
 
-        INGOT = createItem(Element.INGOT, "ingot");
-        NUGGET = createItem(Element.NUGGET, "nugget");
-        DUST = createItem(Element.DUST, "dust");
+        INGOT      = createItem(Element.INGOT, "ingot");
+        NUGGET     = createItem(Element.NUGGET, "nugget");
+        DUST       = createItem(Element.DUST, "dust");
         DUST_SMALL = createItem(Element.DUST_SMALL, "dustsmall");
-        PLATE = createItem(Element.PLATE, "plate");
-        GEAR = createItem(Element.GEAR, "gear");
-        ROD = createItem(Element.ROD, "rod");
-        CHUNK = createItem(Element.CHUNK, "chunk");
+        PLATE      = createItem(Element.PLATE, "plate");
+        GEAR       = createItem(Element.GEAR, "gear");
+        ROD        = createItem(Element.ROD, "rod");
+        CHUNK      = createItem(Element.CHUNK, "chunk");
     }
 
     /**
      * Create an element item form
      *
-     * @param form
-     * @param suffix
+     * @param form   the element type.
+     * @param suffix the element name.
      */
     protected Item createItem(int form, String suffix)
     {
         if ((element.forms & form) == form) {
             try {
-                Constructor<?> constructor;// = itemElementClass.getConstructor(Element.class, String.class);
+                Constructor<?> constructor;
 
                 switch (form) {
 

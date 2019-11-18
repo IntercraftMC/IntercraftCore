@@ -5,6 +5,7 @@ import net.intercraft.intercraftcore.tileentity.TreeTapTileEntityRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -23,7 +24,6 @@ public class ClientHandler
      */
 
     private static final ResourceLocation[] textures = new ResourceLocation[] {
-        new ResourceLocation(Reference.MODID,"block/liquids/water_still"),
         new ResourceLocation(Reference.MODID,"block/liquids/resin_still")
     };
 
@@ -36,7 +36,15 @@ public class ClientHandler
     @SubscribeEvent
     public static void onTextureStitch(final TextureStitchEvent.Pre event)
     {
-        for (ResourceLocation texture : textures) { event.addSprite(texture); }
+        for (ResourceLocation texture : textures)
+            event.addSprite(texture);
+
+    }
+
+    @SubscribeEvent
+    public static void onParticleRegisterFactory(final ParticleFactoryRegisterEvent event)
+    {
+
     }
 
 }

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1,
+      "name": "intercraftcore:birch_pressure_plate",
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:birch_pressure_plate"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ]
+    }
+  ]
+}

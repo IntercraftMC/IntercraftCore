@@ -23,9 +23,9 @@ logoFile="intercraftcore.png"
 [[dependencies.intercraftcore]]
     modId="forge"
     mandatory=true
-    versionRange="[28.1.1,]"
+    versionRange="[28.1.90,]"
 
 [[dependencies.intercraftcore]]
     modId="curios"
     mandatory=true
-    versionRange="[FORGE-1.14.4-0.24,]"
+    versionRange="[FORGE-1.14.4-1.0.5.3,]"

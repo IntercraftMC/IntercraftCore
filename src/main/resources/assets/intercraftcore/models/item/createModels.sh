@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 NAME="bucket"
-FLUID="water"
+FLUID="rubber_resin"
 
 #MATCHERS=("ingot" "nugget" "dust" "dustsmall" "plate" "gear" "rod")
 #MATCHERS=("al" "cu" "au" "ir" "fe" "pb" "li" "hg" "ag" "th" "sn" "ti" "w" "u" "zn" "cuzn" "cusn" "fec")

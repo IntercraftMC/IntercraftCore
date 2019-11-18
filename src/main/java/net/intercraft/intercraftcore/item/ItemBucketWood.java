@@ -17,7 +17,7 @@ public class ItemBucketWood extends BucketItem
     {
         super(() -> Fluids.EMPTY, new Item.Properties().group(ItemGroup.MISC).maxStackSize(16));
         setRegistryName(type+"_bucket");
-        this.bucketEmpty = this;
+        this.bucketEmpty = null;
     }
 
     public ItemBucketWood(FlowingFluid fluid, String type, Item empty)
@@ -28,9 +28,12 @@ public class ItemBucketWood extends BucketItem
     }
 
 
+
+
+
     @Override
     protected ItemStack emptyBucket(ItemStack stack, PlayerEntity playerEntity)
     {
-        return playerEntity.abilities.isCreativeMode ? new ItemStack(bucketEmpty) : stack;
+        return playerEntity.isCreative() ? stack : bucketEmpty != null ? new ItemStack(bucketEmpty) : stack;
     }
 }

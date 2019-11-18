@@ -3,19 +3,19 @@ package net.intercraft.intercraftcore.item;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 
-public class ItemBucketResin extends Item
+public class ItemBucketNonFluid extends Item
 {
-    public ItemBucketResin()
+    public ItemBucketNonFluid(String name)
     {
         super(new Item.Properties().group(ItemGroup.MISC).maxStackSize(1));
 
-        setRegistryName("resin_bucket");
+        setRegistryName(name+"_bucket");
     }
 
-    public ItemBucketResin(String type)
+    public ItemBucketNonFluid(String name,String type)
     {
         super(new Item.Properties().group(ItemGroup.MISC).maxStackSize(1));
 
-        setRegistryName("resin_"+type+"_bucket");
+        setRegistryName(name+"_"+type+"_bucket");
     }
 }
