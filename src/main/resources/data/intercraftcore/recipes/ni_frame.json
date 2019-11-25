@@ -1,0 +1,1 @@
+{"type":"minecraft:crafting_shaped","pattern":["###","I I","###"],"key":{"#":{"item":"intercraftcore:ni_plate"},"I":{"item":"intercraftcore:ni_rod"}},"result":{"item":"intercraftcore:ni_frame"}}

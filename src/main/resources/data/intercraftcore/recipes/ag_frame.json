@@ -1,0 +1,1 @@
+{"type":"minecraft:crafting_shaped","pattern":["###","I I","###"],"key":{"#":{"item":"intercraftcore:ag_plate"},"I":{"item":"intercraftcore:ag_rod"}},"result":{"item":"intercraftcore:ag_frame"}}

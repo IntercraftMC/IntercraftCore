@@ -3,26 +3,23 @@ package net.intercraft.intercraftcore.tileentity;
 import net.intercraft.intercraftcore.IntercraftCore;
 import net.intercraft.intercraftcore.api.FluidType;
 import net.intercraft.intercraftcore.init.IntercraftTileEntities;
-import net.intercraft.intercraftcore.networking.IntercraftPacketHandler;
 import net.intercraft.intercraftcore.networking.MessageTreeTap;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.particles.IParticleData;
-import net.minecraft.particles.ItemParticleData;
-import net.minecraft.particles.ParticleTypes;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.fml.network.PacketDistributor;
 
-import javax.annotation.Nullable;
-
 import static net.minecraft.state.properties.BlockStateProperties.HORIZONTAL_FACING;
 
 public class TreeTapTileEntity extends TileEntity implements ITickableTileEntity
 {
+
+    //private static final ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(1);
 
     public int volume = 0;
     public boolean canFill = false;
@@ -67,9 +64,14 @@ public class TreeTapTileEntity extends TileEntity implements ITickableTileEntity
         }
     }
 
+
     public void add(int v)
     {
+
+        /*Runnable run = () -> setVolume(volume + v);
+        executor.schedule(run,118,TimeUnit.MILLISECONDS);*/
         setVolume(volume + v);
+
         double x = this.pos.getX()+0.5,y = this.pos.getY()+0.43,z = this.pos.getZ()+0.5;
 
         switch (this.getBlockState().get(HORIZONTAL_FACING)) {
@@ -91,7 +93,7 @@ public class TreeTapTileEntity extends TileEntity implements ITickableTileEntity
 
         }
 
-        IParticleData particle = fluidType.getParticle();
+        IParticleData particle = (IParticleData) fluidType.getParticle();
 
 
         if (Minecraft.getInstance().world != null)

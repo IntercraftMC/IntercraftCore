@@ -1,21 +1,24 @@
 package net.intercraft.intercraftcore.api;
 
 import net.intercraft.intercraftcore.Reference;
+import net.intercraft.intercraftcore.init.IntercraftParticles;
 import net.minecraft.particles.BasicParticleType;
+import net.minecraft.particles.ParticleType;
 import net.minecraft.particles.ParticleTypes;
 
-public enum FluidType
+public enum     FluidType
 {
-    WATER(       "water",        (short)80,  (short)0x5454EE, "minecraft:block/water_still",                ParticleTypes.FALLING_WATER),
-    RESIN(       "resin",        (short)200,                  Reference.MODID+":block/liquids/resin_still", ParticleTypes.FALLING_WATER),
-    RUBBER_RESIN("rubber_resin", (short)120, (short)0x90a718, Reference.MODID+":block/liquids/resin_still", ParticleTypes.FALLING_WATER),
+    WATER(       "water",        (short)80,  0x4a73e7, "minecraft:block/water_still",                ParticleTypes.FALLING_WATER),
+    RESIN(       "resin",        (short)200, 0xf9de96, Reference.MODID+":block/liquids/resin_still", ParticleTypes.FALLING_WATER),
+    RUBBER_RESIN("rubber_resin", (short)120, 0xdbeaec, Reference.MODID+":block/liquids/resin_still", ParticleTypes.FALLING_WATER),
 
     NONE( "none", (short)0,null,null);
 
 
     private final String name, texture;
-    private final short viscosity, tint;
-    private final BasicParticleType basicParticleType;
+    private final short viscosity;
+    private final int tint;
+    private final ParticleType basicParticleType;
 
     /**
      * FluidType Constructor
@@ -27,7 +30,7 @@ public enum FluidType
      * @param particleType drop particle.
      */
 
-    FluidType(String name, short viscosity, short tint, String texture, BasicParticleType particleType)
+    FluidType(String name, short viscosity, int tint, String texture, ParticleType particleType)
     {
         this.name              = name;
         this.viscosity         = viscosity;
@@ -38,7 +41,7 @@ public enum FluidType
 
     FluidType(String name, short viscosity, String texture, BasicParticleType particleType)
     {
-        this(name,viscosity,(short)-1,texture,particleType);
+        this(name,viscosity,-1,texture,particleType);
     }
 
     public String toString()
@@ -66,7 +69,7 @@ public enum FluidType
         return texture;
     }
 
-    public BasicParticleType getParticle()
+    public ParticleType getParticle()
     {
         return basicParticleType;
     }

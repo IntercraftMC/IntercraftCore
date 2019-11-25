@@ -1,0 +1,7 @@
+{
+  "reaction_water": {
+    "category": "item",
+    "subtitle": "subtitle.intercraftcore.reaction_water",
+    "sounds": [ "intercraftcore:reaction_water1" ]
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "parent":"item/generated",
+  "textures":{
+    "layer0":"intercraftcore:item/box",
+    "layer1":"intercraftcore:item/box_open",
+    "layer2":"intercraftcore:item/box_dec_open",
+    "layer3":"intercraftcore:item/box_hazards_radioactive"
+  }
+}

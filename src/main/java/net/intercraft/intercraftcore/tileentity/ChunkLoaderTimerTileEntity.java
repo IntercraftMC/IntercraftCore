@@ -1,11 +1,15 @@
 package net.intercraft.intercraftcore.tileentity;
 
+import net.intercraft.intercraftcore.Reference;
 import net.intercraft.intercraftcore.api.BlockProperties;
 import net.intercraft.intercraftcore.init.IntercraftTileEntities;
 import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.INameable;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 
-public class ChunkLoaderTimerTileEntity extends ChunkLoaderBaseTileEntity
+public class ChunkLoaderTimerTileEntity extends ChunkLoaderBaseTileEntity implements INameable
 {
     private long duration;
 
@@ -149,6 +153,11 @@ public class ChunkLoaderTimerTileEntity extends ChunkLoaderBaseTileEntity
         days = compound.getInt("day");*/
     }
 
+    @Override
+    public ITextComponent getName()
+    {
+        return new TranslationTextComponent(Reference.MODID+".container.chunkloader_timer");
+    }
 
     /*@Override
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt)

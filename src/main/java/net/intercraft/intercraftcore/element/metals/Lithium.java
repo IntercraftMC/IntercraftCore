@@ -7,6 +7,6 @@ public class Lithium extends Element
 {
     public Lithium()
     {
-        super("lithium", ElementDictionary.LITHIUM, GEAR | ROD | FRAME);
+        super("lithium", ElementDictionary.LITHIUM, GEAR | ROD | FRAME | CHUNK | ORE);
     }
 }

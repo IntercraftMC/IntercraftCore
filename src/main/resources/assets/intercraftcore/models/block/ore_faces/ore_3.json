@@ -1,63 +1,8 @@
 {
-    "textures": {
-        "base": "minecraft:block/stone",
-        "ore": "intercraftcore:block/ore_faces/ore_3",
-        "particle": "minecraft:block/stone"
-    },
-    "elements": [
-        {   "from": [0,0,0],
-            "to": [16,16,16],
-            "faces": {
-                "down": { "texture": "#base" },
-                "up": { "texture": "#base" },
-                "north": { "texture": "#base" },
-                "south": { "texture": "#base" },
-                "west": { "texture": "#base" },
-                "east": { "texture": "#base" }
-            }
-        },
-        {   "from": [0,0,0],
-            "to": [16,16,16],
-            "faces": {
-                "down": { "tintindex": 1, "texture": "#ore" },
-                "up": { "tintindex": 1, "texture": "#ore" },
-                "north": { "tintindex": 1, "texture": "#ore" },
-                "south": { "tintindex": 1, "texture": "#ore" },
-                "west": { "tintindex": 1, "texture": "#ore" },
-                "east": { "tintindex": 1, "texture": "#ore" }
-            }
-        }
-    ],
-    "display": {
-        "gui": {
-            "rotation": [ 30, 45, 0 ],
-            "translation": [ 0, 0, 0],
-            "scale":[ 0.625, 0.625, 0.625 ]
-        },
-        "ground": {
-            "rotation": [ 0, 0, 0 ],
-            "translation": [ 0, 3, 0],
-            "scale":[ 0.25, 0.25, 0.25 ]
-        },
-        "head": {
-            "rotation": [ 0, 180, 0 ],
-            "translation": [ 0, 0, 0],
-            "scale":[ 1, 1, 1]
-        },
-        "fixed": {
-            "rotation": [ 0, 180, 0 ],
-            "translation": [ 0, 0, 0],
-            "scale":[ 0.5, 0.5, 0.5 ]
-        },
-        "thirdperson_righthand": {
-            "rotation": [ 75, 315, 0 ],
-            "translation": [ 0, 2.5, 0],
-            "scale": [ 0.375, 0.375, 0.375 ]
-        },
-        "firstperson_righthand": {
-            "rotation": [ 0, 315, 0 ],
-            "translation": [ 0, 0, 0],
-            "scale": [ 0.4, 0.4, 0.4 ]
-        }
-    }
+  "parent" : "intercraftcore:block/ore_faces/ore_0",
+  "textures": {
+    "base": "minecraft:block/stone",
+    "ore": "intercraftcore:block/ore_faces/ore_3",
+    "particle": "minecraft:block/stone"
+  }
 }

@@ -1,6 +1,7 @@
 package net.intercraft.intercraftcore;
 
 import net.intercraft.intercraftcore.init.IntercraftCapabilities;
+import net.intercraft.intercraftcore.init.IntercraftContainerTypes;
 import net.intercraft.intercraftcore.init.IntercraftEventHandler;
 import net.intercraft.intercraftcore.init.RegistrationHandler;
 import net.intercraft.intercraftcore.init.capabilities.identity_hidden.IIdentityHidden;
@@ -14,7 +15,10 @@ import net.intercraft.intercraftcore.init.loot.conditions.ConditionIsFluid;
 import net.intercraft.intercraftcore.init.loot.conditions.ConditionIsFull;
 import net.intercraft.intercraftcore.init.loot.functions.FunctionBlockItemFunction;
 import net.intercraft.intercraftcore.init.loot.functions.FunctionHarderSetCount;
+import net.intercraft.intercraftcore.inventory.container.ContainerScreenChunkloaderTimer;
+import net.intercraft.intercraftcore.inventory.container.ContainerScreenItemItemStack;
 import net.intercraft.intercraftcore.networking.IntercraftPacketHandler;
+import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.storage.loot.conditions.LootConditionManager;
@@ -50,7 +54,7 @@ public class IntercraftCore
         // Setup initial event listeners
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onCommonSetup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueue);
-        //FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onClientSetup);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onClientSetup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(RegistrationHandler::register);
 
 
@@ -97,6 +101,7 @@ public class IntercraftCore
         LootConditionManager.registerCondition(new ConditionIsFluid.Serializer());
         //CapabilityManager.INSTANCE.register(IPattern.class,         new PatternStorage(),        new PatternStorage.Factory());
 
+
         /*MinecraftForge.EVENT_BUS.addListener(IntercraftEventHandler::attachCapabilityEntity);
         MinecraftForge.EVENT_BUS.addListener(IntercraftEventHandler::attachCapabilityChunk);
         MinecraftForge.EVENT_BUS.addListener(IntercraftEventHandler::attachCapabilityItem);*/
@@ -108,6 +113,7 @@ public class IntercraftCore
 
     public void onClientSetup(final FMLClientSetupEvent event)
     {
-
+        ScreenManager.registerFactory(IntercraftContainerTypes.ITEMITEMSTACK_CONTAINER, ContainerScreenItemItemStack::new);
+        ScreenManager.registerFactory(IntercraftContainerTypes.CHUNKLOADER_TIMER_INTERFACE, ContainerScreenChunkloaderTimer::new);
     }
 }

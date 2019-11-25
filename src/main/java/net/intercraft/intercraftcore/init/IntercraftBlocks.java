@@ -2,6 +2,7 @@ package net.intercraft.intercraftcore.init;
 
 import net.intercraft.intercraftcore.block.*;
 import net.intercraft.intercraftcore.block.group.BlockElementGroup;
+import net.intercraft.intercraftcore.block.group.BlockLithiumGroup;
 import net.intercraft.intercraftcore.block.group.BlockUraniumGroup;
 import net.intercraft.intercraftcore.element.alloys.Brass;
 import net.intercraft.intercraftcore.element.alloys.Bronze;
@@ -72,6 +73,7 @@ public class IntercraftBlocks
     public static final BlockElementGroup IRIDIUM;
     public static final BlockElementGroup IRON;
     public static final BlockElementGroup LEAD;
+    public static final BlockElementGroup LITHIUM;
     public static final BlockElementGroup SILVER;
     public static final BlockElementGroup THORIUM;
     public static final BlockElementGroup TIN;
@@ -118,6 +120,7 @@ public class IntercraftBlocks
         IRIDIUM   = new BlockElementGroup(new Iridium());
         IRON      = new BlockElementGroup(new Iron());
         LEAD      = new BlockElementGroup(new Lead());
+        LITHIUM   = new BlockLithiumGroup(new Lithium());
         SILVER    = new BlockElementGroup(new Silver());
         THORIUM   = new BlockElementGroup(new Thorium());
         TIN       = new BlockElementGroup(new Tin());
@@ -163,6 +166,7 @@ public class IntercraftBlocks
         registerElementBlocks(IRIDIUM);
         registerElementBlocks(IRON);
         registerElementBlocks(LEAD);
+        registerElementBlocks(LITHIUM);
         registerElementBlocks(SILVER);
         registerElementBlocks(THORIUM);
         registerElementBlocks(TIN);
@@ -206,6 +210,22 @@ public class IntercraftBlocks
     }
 
     /**
+     * Register a block with a desired block item.
+     *
+     * @param block block to be registered.
+     * @param blockItem block item to be registered with.
+     */
+    /*protected static void registerBlockWithBlockItem(@Nonnull Block block, @Nonnull BlockItem blockItem)
+    {
+        if (block != null)
+            RegistrationHandler.blocks.add(block);
+        if (blockItem != null)
+            RegistrationHandler.itemBlocks.add(blockItem);
+
+    }*/
+
+
+    /**
      * Register group of blocks
      *
      * @param group BlockElementGroup of blocks to be registered.
@@ -235,7 +255,7 @@ public class IntercraftBlocks
     }
 
     /**
-     * Register a fluid //TODO Actually have it register some fluids.
+     * Register a fluid //TODO Actually have it register fluids.
      *
      * @param fluids fluid(s) to be registered.
      */

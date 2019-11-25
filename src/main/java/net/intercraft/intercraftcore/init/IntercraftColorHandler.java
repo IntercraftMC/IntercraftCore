@@ -5,12 +5,9 @@ import net.intercraft.intercraftcore.block.BlockAutoCraftingTable;
 import net.intercraft.intercraftcore.block.BlockSolidElement;
 import net.intercraft.intercraftcore.block.BlockFrameElement;
 import net.intercraft.intercraftcore.block.group.BlockElementGroup;
-import net.intercraft.intercraftcore.item.ItemBucketNonFluid;
-import net.intercraft.intercraftcore.item.ItemElement;
-import net.intercraft.intercraftcore.item.ItemWireCoil;
+import net.intercraft.intercraftcore.item.*;
 import net.intercraft.intercraftcore.item.group.ItemElementGroup;
 import net.intercraft.intercraftcore.block.BlockHardOre;
-import net.intercraft.intercraftcore.item.ItemHardChunk;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.renderer.color.IBlockColor;
@@ -24,6 +21,7 @@ import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +44,23 @@ public class IntercraftColorHandler
         add(IntercraftItems.RUBBER_RESIN_BUCKET_ACACIA);
         add(IntercraftItems.RUBBER_RESIN_BUCKET_DARK_OAK);
         add(IntercraftItems.RUBBER_RESIN_BUCKET);
+        
+        add(IntercraftItems.RESIN_BUCKET_OAK);
+        add(IntercraftItems.RESIN_BUCKET_SPRUCE);
+        add(IntercraftItems.RESIN_BUCKET_BIRCH);
+        add(IntercraftItems.RESIN_BUCKET_JUNGLE);
+        add(IntercraftItems.RESIN_BUCKET_ACACIA);
+        add(IntercraftItems.RESIN_BUCKET_DARK_OAK);
+        add(IntercraftItems.RESIN_BUCKET);
+        
+        add(IntercraftItems.WATER_BUCKET_OAK);
+        add(IntercraftItems.WATER_BUCKET_SPRUCE);
+        add(IntercraftItems.WATER_BUCKET_BIRCH);
+        add(IntercraftItems.WATER_BUCKET_JUNGLE);
+        add(IntercraftItems.WATER_BUCKET_ACACIA);
+        add(IntercraftItems.WATER_BUCKET_DARK_OAK);
+
+        add(IntercraftItems.LEAD_BOX);
 
         add(IntercraftItems.COPPER_COIL);
         add(IntercraftItems.INSULATED_COPPER_COIL);
@@ -76,6 +91,7 @@ public class IntercraftColorHandler
                 IntercraftItems.IRIDIUM,
                 IntercraftItems.IRON,
                 IntercraftItems.LEAD,
+                IntercraftItems.LITHIUM,
                 IntercraftItems.SILVER,
                 IntercraftItems.THORIUM,
                 IntercraftItems.TIN,
@@ -118,8 +134,13 @@ public class IntercraftColorHandler
                 event.getItemColors().register(new ItemColorHandler(((ItemElement)item).getTint()),item);
             else if (item instanceof ItemWireCoil)
                 event.getItemColors().register(new ItemColorHandler(((ItemWireCoil)item).getTint(),1),item);
+            else if (item instanceof ItemBucketWood)
+                event.getItemColors().register(new ItemColorHandler(((ItemBucketWood)item).getTint(),1),item);
             else if (item instanceof ItemBucketNonFluid)
-                event.getItemColors().register(new ItemColorHandler(FluidType.RUBBER_RESIN.getTint(),1),item);
+                event.getItemColors().register(new ItemColorHandler(((ItemBucketNonFluid)item).getTint(),1),item);
+            else if (item instanceof ItemItemStackContainer)
+                event.getItemColors().register(new ItemColorHandler(((ItemItemStackContainer)item).getTint(),0),item);
+
         }
         for (Block block : blocks) {
             if (block instanceof BlockHardOre)
@@ -132,7 +153,7 @@ public class IntercraftColorHandler
                 event.getItemColors().register(new BlockColorHandler(((BlockAutoCraftingTable)block).getTint()),block);
         }
 
-        System.out.println("[Item Colours] Done.");
+        System.out.println("[Item Colours] Done");
     }
 
     @SubscribeEvent
@@ -151,6 +172,7 @@ public class IntercraftColorHandler
                 IntercraftBlocks.IRIDIUM,
                 IntercraftBlocks.IRON,
                 IntercraftBlocks.LEAD,
+                IntercraftBlocks.LITHIUM,
                 IntercraftBlocks.SILVER,
                 IntercraftBlocks.THORIUM,
                 IntercraftBlocks.TIN,
@@ -196,14 +218,13 @@ public class IntercraftColorHandler
         }
 
 
-        System.out.println("[Block Colours] Done.");
+        System.out.println("[Block Colours] Done");
     }
 
 
     private static class ItemColorHandler implements IItemColor
     {
-        private int tint;
-        private int layer;
+        private final int tint,layer;
 
         /**
          * ColorHandler Constructor for particular texture layer.
@@ -218,7 +239,7 @@ public class IntercraftColorHandler
         }
 
         /**
-         * ColorHandler Constructor
+         * ColorHandler Constructor for all texture layers.
          *
          * @param tint colour to be tinted with.
          */
@@ -227,18 +248,17 @@ public class IntercraftColorHandler
             this(tint,-1);
         }
 
-        public int getColor(ItemStack stack, int tint)
+        @Override
+        public int getColor(@Nonnull ItemStack stack, int tintIndex)
         {
-
-            if (this.layer == -1)
-                return this.tint;
-            return this.layer == tint ? this.tint : 0xFFFFFF;
-
+            if (layer == -1)
+                return tint;
+            return layer == tintIndex ? tint : 0xFFFFFF;
         }
     }
     private static class BlockColorHandler implements IBlockColor, IItemColor
     {
-        private int tint;
+        private final int tint;
 
         public BlockColorHandler(int tint)
         {
@@ -246,16 +266,16 @@ public class IntercraftColorHandler
         }
 
 
-
-        public int getColor(ItemStack stack, int tint)
+        @Override
+        public int getColor(@Nonnull ItemStack stack, int tintIndex)
         {
-            return this.tint;
+            return tint;
         }
 
         @Override
         public int getColor(BlockState blockState, @Nullable IEnviromentBlockReader iEnviromentBlockReader, @Nullable BlockPos blockPos, int i)
         {
-            return this.tint;
+            return tint;
         }
     }
 }

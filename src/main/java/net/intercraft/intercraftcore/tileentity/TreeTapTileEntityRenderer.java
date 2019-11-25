@@ -3,6 +3,7 @@ package net.intercraft.intercraftcore.tileentity;
 import net.intercraft.intercraftcore.api.BlockProperties;
 import net.intercraft.intercraftcore.api.BucketType;
 import net.intercraft.intercraftcore.api.FluidType;
+import net.intercraft.intercraftcore.api.Util;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -75,7 +76,8 @@ public class TreeTapTileEntityRenderer<T extends TreeTapTileEntity> extends Tile
         }
 
 
-        float[] c = hex2rgb(te.fluidType.getTint());
+
+        float[] c = te.getFluidType().getTint() != -1 ? div(Util.hex2rgb(te.fluidType.getTint())) : new float[] {1,1,1};
 
         buffer.pos(xMin, yLev, zMax).color(c[0],c[1],c[2],1f).tex(u1, v2).lightmap(upLMa, upLMb).endVertex();
         buffer.pos(xMax, yLev, zMax).color(c[0],c[1],c[2],1f).tex(u2, v2).lightmap(upLMa, upLMb).endVertex();
@@ -83,12 +85,8 @@ public class TreeTapTileEntityRenderer<T extends TreeTapTileEntity> extends Tile
         buffer.pos(xMin, yLev, zMin).color(c[0],c[1],c[2],1f).tex(u1, v1).lightmap(upLMa, upLMb).endVertex();
     }
 
-
-    private static float[] hex2rgb(int hex)
+    private float[] div(int[] c)
     {
-        if (hex != -1) {
-            int r = (hex & 0xFF0000) >> 16, g = (hex & 0xFF00) >> 8, b = (hex & 0xFF);
-            return new float[]{r/255f,g/255f,b/255f};
-        } else return new float[]{1,1,1};
+        return new float[]{c[0]/255f,c[1]/255f,c[2]/255f};
     }
 }

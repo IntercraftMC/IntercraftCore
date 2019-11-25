@@ -2,66 +2,67 @@ package net.intercraft.intercraftcore.init;
 
 import net.intercraft.intercraftcore.IntercraftCore;
 import net.intercraft.intercraftcore.Reference;
+import net.intercraft.intercraftcore.api.Sounds;
+import net.intercraft.intercraftcore.block.BlockFrameLithium;
+import net.intercraft.intercraftcore.block.BlockSolidLithium;
 import net.intercraft.intercraftcore.command.IdentityHiddenDebugCommand;
 import net.intercraft.intercraftcore.command.OreVeinDebugCommand;
 import net.intercraft.intercraftcore.command.RadiationDebugCommand;
 import net.intercraft.intercraftcore.init.capabilities.identity_hidden.IIdentityHidden;
 import net.intercraft.intercraftcore.init.capabilities.identity_hidden.IdentityHidden;
 import net.intercraft.intercraftcore.init.capabilities.identity_hidden.IdentityHiddenProvider;
-import net.intercraft.intercraftcore.init.capabilities.ore_veins.OreVeinProvider;
 import net.intercraft.intercraftcore.init.capabilities.radiation.IRadiation;
 import net.intercraft.intercraftcore.init.capabilities.radiation.RadiationProvider;
-import net.intercraft.intercraftcore.item.masks.ModelBand;
+import net.intercraft.intercraftcore.item.ItemLithium;
 import net.intercraft.intercraftcore.networking.MessageIdentityHidden;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.CreatureEntity;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.FallingBlockEntity;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.monster.ElderGuardianEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.util.Direction;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.chunk.Chunk;
+import net.minecraft.world.Explosion;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderLivingEvent;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.entity.EntityStruckByLightningEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.event.world.ExplosionEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.network.PacketDistributor;
-import top.theillusivec4.curios.api.capability.CuriosCapability;
-import top.theillusivec4.curios.api.capability.ICurio;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.Random;
+import java.util.function.Supplier;
 
 @Mod.EventBusSubscriber
 public class IntercraftEventHandler
 {
 
-    private static final ResourceLocation cobblestoneID = new ResourceLocation("forge","cobblestone");
-    private static final ResourceLocation gravelID = new ResourceLocation("forge","gravel");
-    private static final ResourceLocation anvilID = new ResourceLocation("minecraft","anvil");
+    private static final ResourceLocation cobblestoneID     = new ResourceLocation("forge","cobblestone");
+    private static final ResourceLocation gravelID          = new ResourceLocation("forge","gravel");
+    private static final ResourceLocation anvilID           = new ResourceLocation("minecraft","anvil");
     private static final ResourceLocation smashableBlocksID = new ResourceLocation(Reference.MODID,"smashable_blocks");
+
+
+    private static final float maxReactionVolume = 4.6f;
 
     @SubscribeEvent
     public static void onServerStarting(final FMLServerStartingEvent event)
@@ -78,6 +79,24 @@ public class IntercraftEventHandler
         //if (!(event.getEntity() instanceof PlayerEntity))
         if (event.getEntity() instanceof FallingBlockEntity)
             System.out.println(event.getEntity().getDisplayName().getString());
+    }
+
+    @SubscribeEvent//(priority = EventPriority.HIGHEST)
+    public static void onBlockHarvest(final BlockEvent.HarvestDropsEvent event)
+    {
+        ItemStack tool = event.getHarvester().getActiveItemStack();
+        if (!tool.isEnchanted()) return;
+        int lvl = EnchantmentHelper.getEnchantmentLevel(IntercraftEnchantments.AUTO_PICKUP,tool);
+        if (lvl > 0) {
+            for (ItemStack drop : event.getDrops()) {
+                boolean moved = event.getHarvester().addItemStackToInventory(drop);
+                if (moved) {
+                    drop.shrink(drop.getCount());
+                    //System.out.println("Moved the drop to player's inventory.");
+                }
+            }
+        }
+
     }
 
     @SubscribeEvent
@@ -183,7 +202,6 @@ public class IntercraftEventHandler
         }
     }
 
-
     @SubscribeEvent
     public static void onWorldTick(TickEvent.WorldTickEvent event)
     {
@@ -195,6 +213,43 @@ public class IntercraftEventHandler
 
 
             ((ServerWorld) event.world).getEntities().forEach(entity -> {
+
+                if (entity instanceof ItemEntity) {
+                    ItemStack stack = ((ItemEntity) entity).getItem();
+                    //if (ItemTags.getCollection().getOrCreate(reactiveWithWater).contains(stack.getItem()))
+                    if (stack.getItem() instanceof ItemLithium || getBlock(stack) instanceof BlockSolidLithium || getBlock(stack) instanceof BlockFrameLithium)
+                        if (entity.isInWater()) {
+                            double x = entity.posX, y = entity.posY, z = entity.posZ;
+                            entity.remove();
+
+                            float volume = Math.min(maxReactionVolume,stack.getCount()*0.6f), range = Math.min(0.6f,0.3f*(stack.getCount()));
+                            short smoke = ((short) (24 * (stack.getCount()*0.5f)));
+
+                            if (stack.getItem() instanceof BlockItem) { // Large item.
+                                //volume = 0.8f+stack.getCount()*0.2f;
+                                volume = Math.min(maxReactionVolume,stack.getCount()*0.8f);
+                                range  = Math.min(0.8f,0.3f*stack.getCount());
+                                smoke  = ((short) (96 * (stack.getCount()*0.5f)));
+                                //entity.world.createExplosion(entity,x,y,z,0.1f,Explosion.Mode.BREAK);
+                            } else if (isIn(stack,"_nugget") || isIn(stack,"_dustsmall")) {  // Small item.
+                                //volume = 0.1f+stack.getCount()*0.2f;
+                                volume = Math.min(maxReactionVolume,stack.getCount()*0.3f);
+                                smoke  = ((short) (16 * (stack.getCount()*0.5f)));
+                            }
+
+
+                            if (Minecraft.getInstance().world != null) {
+
+                                Minecraft.getInstance().world.playSound(x,y,z, Sounds.REACTION_WATER, SoundCategory.AMBIENT,volume,1,false);
+                                for (short i=0;i<smoke;i++) {
+                                    Minecraft.getInstance().world.addParticle(ParticleTypes.LARGE_SMOKE, x+nextRandomRange(-range,range), y+nextRandomRange(0,0.6f+range), z+nextRandomRange(-range,range), 0, -0.04f, 0);
+                                }
+
+
+                            }
+                        }
+                }
+
 
                 if (entity instanceof FallingBlockEntity) {
 
@@ -216,5 +271,20 @@ public class IntercraftEventHandler
                 entity.getCapability(RadiationProvider.RAD_CAP).ifPresent(cap -> cap.tick(entity));
             });
         }
+    }
+
+    private static boolean isIn(ItemStack stack, String search)
+    {
+        return stack.getItem().getRegistryName().getPath().contains(search);
+    }
+
+    private static float nextRandomRange(float min, float max) {
+        Random r = new Random();
+        return (r.nextInt((int)((max-min)*10+1))+min*10) / 10.0f;
+    }
+
+    private static Block getBlock(ItemStack stack)
+    {
+        return Block.getBlockFromItem(stack.getItem());
     }
 }

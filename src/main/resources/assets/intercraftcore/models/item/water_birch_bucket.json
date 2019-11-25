@@ -1,1 +1,1 @@
-{ "parent": "item/generated", "textures": { "layer0": "intercraftcore:item/buckets/birch_bucket", "layer1": "intercraftcore:item/buckets/fluid_water" } }
+{ "parent": "item/generated", "textures": { "layer0": "intercraftcore:item/buckets/birch_bucket", "layer1": "intercraftcore:item/buckets/bucket_fluid" } }

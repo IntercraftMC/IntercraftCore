@@ -27,7 +27,7 @@ public class Element
      * Element information
      */
     public final String name,     symbol;
-    public final short    tintPrim, tintSec;
+    public final int    tintPrim, tintSec;
     public final ElementComposition[] composition;
 
     /**
@@ -45,8 +45,8 @@ public class Element
     {
         this.name        = name;
         this.symbol      = dictionary.getSymbol();
-        this.tintPrim    = (short) dictionary.getColorPrimary();
-        this.tintSec     = (short) dictionary.getColorSecondary();
+        this.tintPrim    = dictionary.getColorPrimary();
+        this.tintSec     = dictionary.getColorSecondary();
         this.composition = dictionary.getComposition();
     }
 

@@ -2,11 +2,13 @@ package net.intercraft.intercraftcore.init;
 
 import net.intercraft.intercraftcore.ElementDictionary;
 import net.intercraft.intercraftcore.Reference;
+import net.intercraft.intercraftcore.api.FluidType;
 import net.intercraft.intercraftcore.element.alloys.*;
 import net.intercraft.intercraftcore.element.metals.*;
 import net.intercraft.intercraftcore.element.nonmetals.*;
 import net.intercraft.intercraftcore.item.*;
 import net.intercraft.intercraftcore.item.group.ItemElementGroup;
+import net.intercraft.intercraftcore.item.group.ItemLithiumGroup;
 import net.intercraft.intercraftcore.item.group.ItemUraniumGroup;
 import net.intercraft.intercraftcore.item.masks.ItemGlasses;
 import net.intercraft.intercraftcore.item.masks.ItemMask;
@@ -26,6 +28,8 @@ public class IntercraftItems
     public static final Item TEST;
     public static final Item AMBER_RAW;
     public static final Item AMBER_CUT;
+
+    public static final Item LEAD_BOX;
 
     /**
      * Face masks
@@ -92,6 +96,7 @@ public class IntercraftItems
     public static final ItemElementGroup IRIDIUM;
     public static final ItemElementGroup IRON;
     public static final ItemElementGroup LEAD;
+    public static final ItemElementGroup LITHIUM;
     public static final ItemElementGroup SILVER;
     public static final ItemElementGroup THORIUM;
     public static final ItemElementGroup TIN;
@@ -118,6 +123,8 @@ public class IntercraftItems
         AMBER_RAW = new ItemGeneric("amber_raw",new Item.Properties().group(IntercraftItemGroups.RESOURCES));
         AMBER_CUT = new ItemGeneric("amber_cut",new Item.Properties().group(IntercraftItemGroups.RESOURCES));
 
+        LEAD_BOX = new ItemItemStackContainer("lead_box",(short) 4,0.6f,ElementDictionary.LEAD.getColorPrimary());
+
         DEVILMASK  = new ItemMask(   "devil_mask",  new ResourceLocation(Reference.MODID,"textures/masks/devil_mask.png"));
         SUNGLASSES = new ItemGlasses("sun_glasses", new ResourceLocation(Reference.MODID,"textures/masks/sun_glasses.png"));
 
@@ -136,23 +143,23 @@ public class IntercraftItems
         WATER_BUCKET_ACACIA   = new ItemBucketWood(Fluids.WATER,"acacia",BUCKET_ACACIA);
         WATER_BUCKET_DARK_OAK = new ItemBucketWood(Fluids.WATER,"dark_oak",BUCKET_DARK_OAK);
 
-        RESIN_BUCKET_OAK      = new ItemBucketNonFluid("resin","oak");
-        RESIN_BUCKET_SPRUCE   = new ItemBucketNonFluid("resin","spruce");
-        RESIN_BUCKET_BIRCH    = new ItemBucketNonFluid("resin","birch");
-        RESIN_BUCKET_JUNGLE   = new ItemBucketNonFluid("resin","jungle");
-        RESIN_BUCKET_ACACIA   = new ItemBucketNonFluid("resin","acacia");
-        RESIN_BUCKET_DARK_OAK = new ItemBucketNonFluid("resin","dark_oak");
+        RESIN_BUCKET_OAK      = new ItemBucketNonFluid("resin","oak", FluidType.RESIN.getTint());
+        RESIN_BUCKET_SPRUCE   = new ItemBucketNonFluid("resin","spruce", FluidType.RESIN.getTint());
+        RESIN_BUCKET_BIRCH    = new ItemBucketNonFluid("resin","birch", FluidType.RESIN.getTint());
+        RESIN_BUCKET_JUNGLE   = new ItemBucketNonFluid("resin","jungle", FluidType.RESIN.getTint());
+        RESIN_BUCKET_ACACIA   = new ItemBucketNonFluid("resin","acacia", FluidType.RESIN.getTint());
+        RESIN_BUCKET_DARK_OAK = new ItemBucketNonFluid("resin","dark_oak", FluidType.RESIN.getTint());
 
-        RESIN_BUCKET = new ItemBucketNonFluid("resin");
+        RESIN_BUCKET = new ItemBucketNonFluid("resin", FluidType.RESIN.getTint());
         
-        RUBBER_RESIN_BUCKET_OAK      = new ItemBucketNonFluid("rubber_resin","oak");
-        RUBBER_RESIN_BUCKET_SPRUCE   = new ItemBucketNonFluid("rubber_resin","spruce");
-        RUBBER_RESIN_BUCKET_BIRCH    = new ItemBucketNonFluid("rubber_resin","birch");
-        RUBBER_RESIN_BUCKET_JUNGLE   = new ItemBucketNonFluid("rubber_resin","jungle");
-        RUBBER_RESIN_BUCKET_ACACIA   = new ItemBucketNonFluid("rubber_resin","acacia");
-        RUBBER_RESIN_BUCKET_DARK_OAK = new ItemBucketNonFluid("rubber_resin","dark_oak");
+        RUBBER_RESIN_BUCKET_OAK      = new ItemBucketNonFluid("rubber_resin","oak", FluidType.RUBBER_RESIN.getTint());
+        RUBBER_RESIN_BUCKET_SPRUCE   = new ItemBucketNonFluid("rubber_resin","spruce", FluidType.RUBBER_RESIN.getTint());
+        RUBBER_RESIN_BUCKET_BIRCH    = new ItemBucketNonFluid("rubber_resin","birch", FluidType.RUBBER_RESIN.getTint());
+        RUBBER_RESIN_BUCKET_JUNGLE   = new ItemBucketNonFluid("rubber_resin","jungle", FluidType.RUBBER_RESIN.getTint());
+        RUBBER_RESIN_BUCKET_ACACIA   = new ItemBucketNonFluid("rubber_resin","acacia", FluidType.RUBBER_RESIN.getTint());
+        RUBBER_RESIN_BUCKET_DARK_OAK = new ItemBucketNonFluid("rubber_resin","dark_oak", FluidType.RUBBER_RESIN.getTint());
 
-        RUBBER_RESIN_BUCKET = new ItemBucketNonFluid("rubber_resin");
+        RUBBER_RESIN_BUCKET = new ItemBucketNonFluid("rubber_resin", FluidType.RUBBER_RESIN.getTint());
 
 
         COPPER_COIL           = new ItemWireCoil(ElementDictionary.COPPER.getSymbol(),0.6, 1024,60,               ElementDictionary.COPPER.getColorPrimary());
@@ -166,6 +173,7 @@ public class IntercraftItems
         IRIDIUM   = new ItemElementGroup(new Iridium());
         IRON      = new ItemElementGroup(new Iron());
         LEAD      = new ItemElementGroup(new Lead());
+        LITHIUM   = new ItemLithiumGroup(new Lithium());
         SILVER    = new ItemElementGroup(new Silver());
         THORIUM   = new ItemElementGroup(new Thorium());
         TIN       = new ItemElementGroup(new Tin());
@@ -189,6 +197,8 @@ public class IntercraftItems
     {
         registerItems(TEST,AMBER_RAW,AMBER_CUT);
 
+        registerItems(LEAD_BOX);
+
         registerItems(DEVILMASK,SUNGLASSES);
 
 
@@ -208,6 +218,7 @@ public class IntercraftItems
         registerElementItems(IRIDIUM);
         registerElementItems(IRON);
         registerElementItems(LEAD);
+        registerElementItems(LITHIUM);
         registerElementItems(SILVER);
         registerElementItems(THORIUM);
         registerElementItems(TIN);
