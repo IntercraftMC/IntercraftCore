@@ -36,12 +36,12 @@ public class ItemElementGroup
     /**
      * Create an item group for the given element
      *
-     * @param element
+     * @param element Element to use for creation of items.
      */
     public ItemElementGroup(Element element)
     {
-        this.element = element;
-        this.itemElementClass = ItemElement.class;
+        this.element            = element;
+        this.itemElementClass   = ItemElement.class;
         this.itemHardChunkClass = ItemHardChunk.class;
 
 
@@ -82,10 +82,7 @@ public class ItemElementGroup
             catch (InstantiationException e) {
                 printError(e);
             }
-            catch (IllegalAccessException e) {
-                printError(e);
-            }
-            catch (InvocationTargetException e) {
+            catch (IllegalAccessException | InvocationTargetException e) {
                 printError(e);
             }
         }
@@ -110,6 +107,4 @@ public class ItemElementGroup
         System.out.println(String.format("[%s]: {%s}", e.getClass().getSimpleName(), e));
 
     }
-
-
 }

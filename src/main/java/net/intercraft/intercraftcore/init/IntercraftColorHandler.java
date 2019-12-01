@@ -1,6 +1,5 @@
 package net.intercraft.intercraftcore.init;
 
-import net.intercraft.intercraftcore.api.FluidType;
 import net.intercraft.intercraftcore.block.BlockAutoCraftingTable;
 import net.intercraft.intercraftcore.block.BlockSolidElement;
 import net.intercraft.intercraftcore.block.BlockFrameElement;
@@ -138,8 +137,8 @@ public class IntercraftColorHandler
                 event.getItemColors().register(new ItemColorHandler(((ItemBucketWood)item).getTint(),1),item);
             else if (item instanceof ItemBucketNonFluid)
                 event.getItemColors().register(new ItemColorHandler(((ItemBucketNonFluid)item).getTint(),1),item);
-            else if (item instanceof ItemItemStackContainer)
-                event.getItemColors().register(new ItemColorHandler(((ItemItemStackContainer)item).getTint(),0),item);
+            else if (item instanceof ItemSingleItemStackContainer)
+                event.getItemColors().register(new ItemColorHandler(((ItemSingleItemStackContainer)item).getTint(),0),item);
 
         }
         for (Block block : blocks) {

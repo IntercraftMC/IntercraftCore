@@ -2,29 +2,23 @@ package net.intercraft.intercraftcore;
 
 import net.intercraft.intercraftcore.init.IntercraftCapabilities;
 import net.intercraft.intercraftcore.init.IntercraftContainerTypes;
-import net.intercraft.intercraftcore.init.IntercraftEventHandler;
 import net.intercraft.intercraftcore.init.RegistrationHandler;
-import net.intercraft.intercraftcore.init.capabilities.identity_hidden.IIdentityHidden;
-import net.intercraft.intercraftcore.init.capabilities.identity_hidden.IdentityHiddenStorage;
-import net.intercraft.intercraftcore.init.capabilities.ore_veins.IOreVeins;
-import net.intercraft.intercraftcore.init.capabilities.ore_veins.OreVeinStorage;
-import net.intercraft.intercraftcore.init.capabilities.radiation.IRadiation;
-import net.intercraft.intercraftcore.init.capabilities.radiation.RadiationStorage;
 import net.intercraft.intercraftcore.init.gen.OreGen;
 import net.intercraft.intercraftcore.init.loot.conditions.ConditionIsFluid;
 import net.intercraft.intercraftcore.init.loot.conditions.ConditionIsFull;
 import net.intercraft.intercraftcore.init.loot.functions.FunctionBlockItemFunction;
 import net.intercraft.intercraftcore.init.loot.functions.FunctionHarderSetCount;
-import net.intercraft.intercraftcore.inventory.container.ContainerScreenChunkloaderTimer;
-import net.intercraft.intercraftcore.inventory.container.ContainerScreenItemItemStack;
+import net.intercraft.intercraftcore.inventory.container.ContainerScreenChunkLoaderTimer;
+import net.intercraft.intercraftcore.inventory.container.ContainerScreenSingleItemStackContainer;
 import net.intercraft.intercraftcore.networking.IntercraftPacketHandler;
+import net.minecraft.advancements.Advancement;
+import net.minecraft.advancements.Criterion;
+import net.minecraft.advancements.criterion.CriterionInstance;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.storage.loot.conditions.LootConditionManager;
 import net.minecraft.world.storage.loot.functions.LootFunctionManager;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -113,7 +107,7 @@ public class IntercraftCore
 
     public void onClientSetup(final FMLClientSetupEvent event)
     {
-        ScreenManager.registerFactory(IntercraftContainerTypes.ITEMITEMSTACK_CONTAINER, ContainerScreenItemItemStack::new);
-        ScreenManager.registerFactory(IntercraftContainerTypes.CHUNKLOADER_TIMER_INTERFACE, ContainerScreenChunkloaderTimer::new);
+        ScreenManager.registerFactory(IntercraftContainerTypes.ITEMITEMSTACK_CONTAINER, ContainerScreenSingleItemStackContainer::new);
+        ScreenManager.registerFactory(IntercraftContainerTypes.CHUNKLOADER_TIMER_INTERFACE, ContainerScreenChunkLoaderTimer::new);
     }
 }

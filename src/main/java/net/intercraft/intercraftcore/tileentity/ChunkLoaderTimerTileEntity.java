@@ -1,15 +1,24 @@
 package net.intercraft.intercraftcore.tileentity;
 
+import io.netty.buffer.Unpooled;
 import net.intercraft.intercraftcore.Reference;
 import net.intercraft.intercraftcore.api.BlockProperties;
 import net.intercraft.intercraftcore.init.IntercraftTileEntities;
+import net.intercraft.intercraftcore.inventory.container.ContainerChunkLoaderTimer;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.INameable;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 
-public class ChunkLoaderTimerTileEntity extends ChunkLoaderBaseTileEntity implements INameable
+import javax.annotation.Nullable;
+
+public class ChunkLoaderTimerTileEntity extends ChunkLoaderBaseTileEntity implements INamedContainerProvider,INameable
 {
     private long duration;
 
@@ -156,7 +165,30 @@ public class ChunkLoaderTimerTileEntity extends ChunkLoaderBaseTileEntity implem
     @Override
     public ITextComponent getName()
     {
-        return new TranslationTextComponent(Reference.MODID+".container.chunkloader_timer");
+        return new TranslationTextComponent("container."+Reference.MODID+".chunkloader_timer");
+    }
+
+    @Override
+    public ITextComponent getDisplayName()
+    {
+        return getName();
+    }
+
+    @Nullable
+    @Override
+    public Container createMenu(int id, PlayerInventory playerInventory, PlayerEntity playerEntity)
+    {
+        PacketBuffer buffer = new PacketBuffer(Unpooled.buffer().writeLong(duration).writeInt(seconds).writeInt(minutes).writeInt(hours).writeInt(days));
+
+        /*buffer.writeLong(duration);
+
+        buffer.writeInt(seconds);
+        buffer.writeInt(minutes);
+        buffer.writeInt(hours);
+        buffer.writeInt(days);*/
+
+
+        return new ContainerChunkLoaderTimer(id, playerInventory, buffer);
     }
 
     /*@Override

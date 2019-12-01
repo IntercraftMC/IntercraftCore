@@ -12,6 +12,7 @@ import net.intercraft.intercraftcore.init.capabilities.identity_hidden.IIdentity
 import net.intercraft.intercraftcore.init.capabilities.identity_hidden.IdentityHidden;
 import net.intercraft.intercraftcore.init.capabilities.identity_hidden.IdentityHiddenProvider;
 import net.intercraft.intercraftcore.init.capabilities.radiation.IRadiation;
+import net.intercraft.intercraftcore.init.capabilities.radiation.Radiation;
 import net.intercraft.intercraftcore.init.capabilities.radiation.RadiationProvider;
 import net.intercraft.intercraftcore.item.ItemLithium;
 import net.intercraft.intercraftcore.networking.MessageIdentityHidden;
@@ -268,7 +269,8 @@ public class IntercraftEventHandler
 
                 }
 
-                entity.getCapability(RadiationProvider.RAD_CAP).ifPresent(cap -> cap.tick(entity));
+                if (event.world.getGameTime() % Radiation.tickrate == 0)
+                    entity.getCapability(RadiationProvider.RAD_CAP).ifPresent(cap -> cap.tick(entity));
             });
         }
     }

@@ -78,10 +78,7 @@ public class BlockElementGroup
             catch (InstantiationException e) {
                 printError(e);
             }
-            catch (IllegalAccessException e) {
-                printError(e);
-            }
-            catch (InvocationTargetException e) {
+            catch (IllegalAccessException | InvocationTargetException e) {
                 printError(e);
             }
         }

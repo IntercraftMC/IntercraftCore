@@ -49,12 +49,10 @@ public class BlockUraniumGroup extends BlockElementGroup
             catch (InstantiationException e) {
                 printError(e);
             }
-            catch (IllegalAccessException e) {
+            catch (IllegalAccessException | InvocationTargetException e) {
                 printError(e);
             }
-            catch (InvocationTargetException e) {
-                printError(e);
-            }
+
         }
         return null;
     }

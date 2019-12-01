@@ -11,7 +11,8 @@ import net.minecraft.tileentity.TileEntity;
 public class Radiation implements IRadiation, IRadiationEmitter, IRadiationBlocker
 {
 
-    private final int AbsDropRate = 1, ExpDropRate = 3;
+    private final short AbsDropRate = 1, ExpDropRate = 3;
+    public static final int tickrate = 5;
     private final int[] levels = {
             5000,
             10000,

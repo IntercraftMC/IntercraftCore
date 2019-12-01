@@ -6,6 +6,11 @@
   "item.intercraftcore.sun_glasses": "Sunglasses",
 
   "item.intercraftcore.lead_box": "Lead Box",
+  "item.intercraftcore.lead_box.full": "Lead Box (%s)",
+  "item.intercraftcore.steel_box": "Steel Box",
+  "item.intercraftcore.steel_box.full": "Steel Box (%s)",
+  "item.intercraftcore.glass_jar": "Glass Jar",
+  "item.intercraftcore.glass_jar.full": "Glass Jar (%s)",
 
   "item.intercraftcore.oak_bucket": "Oak Bucket",
   "item.intercraftcore.spruce_bucket": "Spruce Bucket",
@@ -313,11 +318,14 @@
 
 
   "container.intercraftcore.itemstack_storage.lead_box": "Lead Box",
+  "container.intercraftcore.itemstack_storage.steel_box": "Steel Box",
+  "container.intercraftcore.itemstack_storage.glass_jar": "Big Glass Jar",
 
   "effect.intercraftcore.radiation_sickness": "Radiation Sickness",
 
 
   "death.attack.intercraftcore.radiation": "%1$s died from radiation poison",
+  "death.attack.intercraftcore.disobedience": "%1$s angered the devs",
 
 
   "tooltip.intercraftcore.composition": "%s: %s%%",
@@ -325,6 +333,11 @@
   "tooltip.intercraftcore.length.max": "Max length: %s",
   "tooltip.intercraftcore.length.size": "%s / %s",
 
+
+  "info.intercraftcore.tip.container.open": "Hold %1$s and press %2$s to open",
+  "info.intercraftcore.tip.container.open.annoyed": "Just hold %1$s and press %2$s to open, not that hard..",
+  "info.intercraftcore.tip.container.open.feed_up": "Just please hold %1$s and press %2$s to open the dang thing!",
+  "info.intercraftcore.tip.container.open.baby": "Fine, I'll do it for you you big baby!",
 
   "info.intercraftcore.identity.hidden": "Your name is now hidden",
   "info.intercraftcore.identity.shown": "Your name is now visible",

@@ -23,7 +23,7 @@ logoFile="intercraftcore.png"
 [[dependencies.intercraftcore]]
     modId="forge"
     mandatory=true
-    versionRange="[28.1.90,]"
+    versionRange="[28.1.96,]"
 
 [[dependencies.intercraftcore]]
     modId="curios"

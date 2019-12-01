@@ -22,7 +22,7 @@ Core mod for InterCraft 1.14.4 modpack.
     - [ ] Ore Gen.
     
     *Ores spawning after the vanilla ore generation algorithm but change the `density` blockstate depending on the chunk's metal concentration of that particular ore type (copper, lead, silver, iron, etc).*
-    - [ ] Oil
+    - [ ] [Oil](/../../issues/4)
     - [ ] Minerals :heavy_check_mark:
 - Compatibility
     - [ ] [OpenComputers](https://minecraft.curseforge.com/projects/opencomputers) :heavy_check_mark:
@@ -40,14 +40,18 @@ Core mod for InterCraft 1.14.4 modpack.
     - [ ] Generators (Water, air, geothermal, fission, steam)
     
     *I really like [ReactorCraft](https://sites.google.com/site/reikasminecraft/reactorcraft)'s way of creating multiblocks. You design the reactor yourself with pieces as indiviual blocks doing their thing. Doing that but for most of the generators where you decide how you want to build it.*
-    - [ ] Unit
+    - [ ] ~~Unit~~ (going to use Forge's built-in energy)
     
     *Custom energy unit ("ICU"?) also loosely modeled after real life (not completely as to not eat too much TPS).*
 
-### Custom Additions
+Custom Additions
+-------------------
 
 - Additions
 
+    - [ ] Hazardous Materials Storage
+
+    *Item when opened can store a single stack of items. Used for storing dangerous or reactive resources in a box. Glass Boxes (Jars) can be filled with a liquid and store a item stack with it to remove possible oxygen reaction, renders the stack inside.*
     - [ ] Stone Statues
 
     *Stone statues spread around the world that were players once, petrified by a mysterious green light thousands of years ago. Frozen in time, caged in a stone prison waiting for the day to awake from their eternal slumber. [Maybe a player will wake up one day to rebuild civilization with science](https://www.youtube.com/watch?v=dQw4w9WgXcQ).*
@@ -61,6 +65,13 @@ Core mod for InterCraft 1.14.4 modpack.
     
     *Works just like a regular Anvil except for lasting a bit longer than a regular Anvil. But has the special ability to allow Enchanting of tools beyond thirty six (36) levels. Crafted from "Glitchium" Blocks and Ingots like a regular Anvil. Possibly allowing incompatible Enchants to be combined.*
     
+    - Redstone
+        - [ ] Redstone Beacon
+        
+        *A Redstone torch that will continuously emit a certain signal strength unless powered like a regular Redstone Torch.*
+        - [ ] Block Updater
+        
+        *A simple block who's purpose is replacing any Redstone sensitive block that causes a block update in use with Redstone contraptions. Is cheap and causes no lightning updates or creates sounds.*
     - Chunkloading
         - [ ] Chunkloader
         

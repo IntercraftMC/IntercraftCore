@@ -123,7 +123,7 @@ public class IntercraftItems
         AMBER_RAW = new ItemGeneric("amber_raw",new Item.Properties().group(IntercraftItemGroups.RESOURCES));
         AMBER_CUT = new ItemGeneric("amber_cut",new Item.Properties().group(IntercraftItemGroups.RESOURCES));
 
-        LEAD_BOX = new ItemItemStackContainer("lead_box",(short) 4,0.6f,ElementDictionary.LEAD.getColorPrimary());
+        LEAD_BOX = new ItemSingleItemStackContainer("lead_box",0.6f,ElementDictionary.LEAD.getColorPrimary());
 
         DEVILMASK  = new ItemMask(   "devil_mask",  new ResourceLocation(Reference.MODID,"textures/masks/devil_mask.png"));
         SUNGLASSES = new ItemGlasses("sun_glasses", new ResourceLocation(Reference.MODID,"textures/masks/sun_glasses.png"));
