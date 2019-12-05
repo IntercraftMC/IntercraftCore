@@ -26,91 +26,43 @@ public class IntercraftItems
      */
 
     public static final Item TEST;
-    public static final Item AMBER_RAW;
-    public static final Item AMBER_CUT;
+    public static final Item AMBER_RAW, AMBER_CUT;
 
-    public static final Item LEAD_BOX;
+    public static final ItemSingleStackContainer LEAD_BOX, STEEL_BOX;
+    public static final ItemSingleStackGlassContainer LARGE_GLASS_JAR;
 
     /**
      * Face masks
      */
 
-    public static final ItemMask DEVILMASK;
+    public static final ItemMask DEVIL_MASK;
     public static final ItemGlasses SUNGLASSES;
-
-
 
     /**
     * Fluid Buckets
     */
 
-    public static final Item BUCKET_OAK;
-    public static final Item BUCKET_SPRUCE;
-    public static final Item BUCKET_BIRCH;
-    public static final Item BUCKET_JUNGLE;
-    public static final Item BUCKET_ACACIA;
-    public static final Item BUCKET_DARK_OAK;
-
-    public static final Item WATER_BUCKET_OAK;
-    public static final Item WATER_BUCKET_SPRUCE;
-    public static final Item WATER_BUCKET_BIRCH;
-    public static final Item WATER_BUCKET_JUNGLE;
-    public static final Item WATER_BUCKET_ACACIA;
-    public static final Item WATER_BUCKET_DARK_OAK;
-
-    public static final Item RESIN_BUCKET_OAK;
-    public static final Item RESIN_BUCKET_SPRUCE;
-    public static final Item RESIN_BUCKET_BIRCH;
-    public static final Item RESIN_BUCKET_JUNGLE;
-    public static final Item RESIN_BUCKET_ACACIA;
-    public static final Item RESIN_BUCKET_DARK_OAK;
-
-    public static final Item RESIN_BUCKET;
-    
-    public static final Item RUBBER_RESIN_BUCKET_OAK;
-    public static final Item RUBBER_RESIN_BUCKET_SPRUCE;
-    public static final Item RUBBER_RESIN_BUCKET_BIRCH;
-    public static final Item RUBBER_RESIN_BUCKET_JUNGLE;
-    public static final Item RUBBER_RESIN_BUCKET_ACACIA;
-    public static final Item RUBBER_RESIN_BUCKET_DARK_OAK;
-
-    public static final Item RUBBER_RESIN_BUCKET;
-
-    //public static final Item OILBUCKET;
+    public static final Item
+     /* Empty */        BUCKET_OAK, BUCKET_SPRUCE, BUCKET_BIRCH,BUCKET_JUNGLE, BUCKET_ACACIA, BUCKET_DARK_OAK,
+     /* Water */        WATER_BUCKET_OAK, WATER_BUCKET_SPRUCE, WATER_BUCKET_BIRCH, WATER_BUCKET_JUNGLE, WATER_BUCKET_ACACIA, WATER_BUCKET_DARK_OAK,
+     /* Resin */        RESIN_BUCKET_OAK, RESIN_BUCKET_SPRUCE, RESIN_BUCKET_BIRCH, RESIN_BUCKET_JUNGLE, RESIN_BUCKET_ACACIA, RESIN_BUCKET_DARK_OAK, RESIN_BUCKET,
+     /* Rubber Resin */ RUBBER_RESIN_BUCKET_OAK, RUBBER_RESIN_BUCKET_SPRUCE, RUBBER_RESIN_BUCKET_BIRCH, RUBBER_RESIN_BUCKET_JUNGLE, RUBBER_RESIN_BUCKET_ACACIA, RUBBER_RESIN_BUCKET_DARK_OAK, RUBBER_RESIN_BUCKET;
 
     /**
      * Coils
      */
 
-    public static final Item COPPER_COIL;
-    public static final Item INSULATED_COPPER_COIL;
+    public static final ItemWireCoil COPPER_COIL, INSULATED_COPPER_COIL;
 
 
     /**
      * Item Groups
      */
 
-    public static final ItemElementGroup ALUMINIUM;
-    public static final ItemElementGroup COPPER;
-    public static final ItemElementGroup GOLD;
-    public static final ItemElementGroup IRIDIUM;
-    public static final ItemElementGroup IRON;
-    public static final ItemElementGroup LEAD;
-    public static final ItemElementGroup LITHIUM;
-    public static final ItemElementGroup SILVER;
-    public static final ItemElementGroup THORIUM;
-    public static final ItemElementGroup TIN;
-    public static final ItemElementGroup TITANIUM;
-    public static final ItemElementGroup TUNGSTEN;
-    public static final ItemElementGroup URANIUM;
-    public static final ItemElementGroup ZINC;
-
-    public static final ItemElementGroup CARBON;
-    public static final ItemElementGroup SILICON;
-
-    public static final ItemElementGroup BRASS;
-    public static final ItemElementGroup BRONZE;
-    public static final ItemElementGroup STEEL;
+    public static final ItemElementGroup
+     /* Metals */   ALUMINIUM, COPPER, GOLD, IRIDIUM, IRON, LEAD, LITHIUM, SILVER, THORIUM, TIN, TITANIUM, TUNGSTEN, URANIUM, ZINC,
+     /* Minerals */ CARBON, SILICON,
+     /* Alloys */   BRASS, BRONZE, STEEL;
 
 
 
@@ -123,9 +75,11 @@ public class IntercraftItems
         AMBER_RAW = new ItemGeneric("amber_raw",new Item.Properties().group(IntercraftItemGroups.RESOURCES));
         AMBER_CUT = new ItemGeneric("amber_cut",new Item.Properties().group(IntercraftItemGroups.RESOURCES));
 
-        LEAD_BOX = new ItemSingleItemStackContainer("lead_box",0.6f,ElementDictionary.LEAD.getColorPrimary());
+        LEAD_BOX        = new ItemSingleStackContainer("lead_box",0.8f,ElementDictionary.LEAD.getColorPrimary());
+        STEEL_BOX       = new ItemSingleStackContainer("steel_box",0.15f,ElementDictionary.STEEL.getColorPrimary());
+        LARGE_GLASS_JAR = new ItemSingleStackGlassContainer("large_glass_jar",0.01f);
 
-        DEVILMASK  = new ItemMask(   "devil_mask",  new ResourceLocation(Reference.MODID,"textures/masks/devil_mask.png"));
+        DEVIL_MASK = new ItemMask(   "devil_mask",  new ResourceLocation(Reference.MODID,"textures/masks/devil_mask.png"));
         SUNGLASSES = new ItemGlasses("sun_glasses", new ResourceLocation(Reference.MODID,"textures/masks/sun_glasses.png"));
 
 
@@ -150,8 +104,6 @@ public class IntercraftItems
         RESIN_BUCKET_ACACIA   = new ItemBucketNonFluid("resin","acacia", FluidType.RESIN.getTint());
         RESIN_BUCKET_DARK_OAK = new ItemBucketNonFluid("resin","dark_oak", FluidType.RESIN.getTint());
 
-        RESIN_BUCKET = new ItemBucketNonFluid("resin", FluidType.RESIN.getTint());
-        
         RUBBER_RESIN_BUCKET_OAK      = new ItemBucketNonFluid("rubber_resin","oak", FluidType.RUBBER_RESIN.getTint());
         RUBBER_RESIN_BUCKET_SPRUCE   = new ItemBucketNonFluid("rubber_resin","spruce", FluidType.RUBBER_RESIN.getTint());
         RUBBER_RESIN_BUCKET_BIRCH    = new ItemBucketNonFluid("rubber_resin","birch", FluidType.RUBBER_RESIN.getTint());
@@ -159,6 +111,7 @@ public class IntercraftItems
         RUBBER_RESIN_BUCKET_ACACIA   = new ItemBucketNonFluid("rubber_resin","acacia", FluidType.RUBBER_RESIN.getTint());
         RUBBER_RESIN_BUCKET_DARK_OAK = new ItemBucketNonFluid("rubber_resin","dark_oak", FluidType.RUBBER_RESIN.getTint());
 
+        RESIN_BUCKET = new ItemBucketNonFluid("resin", FluidType.RESIN.getTint());
         RUBBER_RESIN_BUCKET = new ItemBucketNonFluid("rubber_resin", FluidType.RUBBER_RESIN.getTint());
 
 
@@ -197,42 +150,23 @@ public class IntercraftItems
     {
         registerItems(TEST,AMBER_RAW,AMBER_CUT);
 
-        registerItems(LEAD_BOX);
+        registerItems(LEAD_BOX,STEEL_BOX,LARGE_GLASS_JAR);
 
-        registerItems(DEVILMASK,SUNGLASSES);
+        registerItems(DEVIL_MASK,SUNGLASSES);
 
 
-        registerItems(BUCKET_OAK,      BUCKET_SPRUCE,      BUCKET_BIRCH,      BUCKET_JUNGLE,      BUCKET_ACACIA,      BUCKET_DARK_OAK);
-        registerItems(WATER_BUCKET_OAK,WATER_BUCKET_SPRUCE,WATER_BUCKET_BIRCH,WATER_BUCKET_JUNGLE,WATER_BUCKET_ACACIA,WATER_BUCKET_DARK_OAK);
-        registerItems(RESIN_BUCKET_OAK,RESIN_BUCKET_SPRUCE,RESIN_BUCKET_BIRCH,RESIN_BUCKET_JUNGLE,RESIN_BUCKET_ACACIA,RESIN_BUCKET_DARK_OAK);
+        registerItems(BUCKET_OAK, BUCKET_SPRUCE, BUCKET_BIRCH, BUCKET_JUNGLE, BUCKET_ACACIA, BUCKET_DARK_OAK);
+        registerItems(WATER_BUCKET_OAK, WATER_BUCKET_SPRUCE, WATER_BUCKET_BIRCH, WATER_BUCKET_JUNGLE, WATER_BUCKET_ACACIA, WATER_BUCKET_DARK_OAK);
+        registerItems(RESIN_BUCKET_OAK, RESIN_BUCKET_SPRUCE, RESIN_BUCKET_BIRCH, RESIN_BUCKET_JUNGLE, RESIN_BUCKET_ACACIA, RESIN_BUCKET_DARK_OAK);
         registerItem(RESIN_BUCKET);
-        registerItems(RUBBER_RESIN_BUCKET_OAK,RUBBER_RESIN_BUCKET_SPRUCE,RUBBER_RESIN_BUCKET_BIRCH,RUBBER_RESIN_BUCKET_JUNGLE,RUBBER_RESIN_BUCKET_ACACIA,RUBBER_RESIN_BUCKET_DARK_OAK);
+        registerItems(RUBBER_RESIN_BUCKET_OAK, RUBBER_RESIN_BUCKET_SPRUCE, RUBBER_RESIN_BUCKET_BIRCH, RUBBER_RESIN_BUCKET_JUNGLE, RUBBER_RESIN_BUCKET_ACACIA, RUBBER_RESIN_BUCKET_DARK_OAK);
         registerItems(RUBBER_RESIN_BUCKET);
 
         registerItems(COPPER_COIL, INSULATED_COPPER_COIL);
 
-
-        registerElementItems(ALUMINIUM);
-        registerElementItems(COPPER);
-        registerElementItems(GOLD);
-        registerElementItems(IRIDIUM);
-        registerElementItems(IRON);
-        registerElementItems(LEAD);
-        registerElementItems(LITHIUM);
-        registerElementItems(SILVER);
-        registerElementItems(THORIUM);
-        registerElementItems(TIN);
-        registerElementItems(TITANIUM);
-        registerElementItems(TUNGSTEN);
-        registerElementItems(URANIUM);
-        registerElementItems(ZINC);
-
-        registerElementItems(CARBON);
-        registerElementItems(SILICON);
-
-        registerElementItems(BRASS);
-        registerElementItems(BRONZE);
-        registerElementItems(STEEL);
+        registerElementsItems(ALUMINIUM, COPPER, GOLD, IRIDIUM, IRON, LEAD, LITHIUM, SILVER, THORIUM, TIN, TITANIUM, TUNGSTEN, URANIUM, ZINC);
+        registerElementsItems(CARBON, SILICON);
+        registerElementsItems(BRASS, BRONZE, STEEL);
     }
 
     /**
@@ -259,9 +193,8 @@ public class IntercraftItems
         }
     }
 
-
     /**
-     * Register group of blocks
+     * Register group of items
      *
      * @param group ItemElementGroup of items to be registered.
      */
@@ -269,7 +202,17 @@ public class IntercraftItems
     protected static void registerElementItems(@Nonnull ItemElementGroup group)
     {
         registerItems(group.INGOT, group.NUGGET, group.DUST, group.DUST_SMALL, group.PLATE, group.GEAR, group.ROD, group.CHUNK);
-        //registerBlocks(group.BLOCK_SOLID);
     }
 
+    /**
+     * Register group of items
+     *
+     * @param groups ItemElementGroup(s) of items to be registered.
+     */
+
+    protected static void registerElementsItems(@Nonnull ItemElementGroup...groups)
+    {
+        for (ItemElementGroup group : groups)
+            registerElementItems(group);
+    }
 }

@@ -45,7 +45,7 @@ public class IntercraftItemGroups
         @Override
         public ItemStack createIcon()
         {
-            return new ItemStack(IntercraftItems.DEVILMASK);
+            return new ItemStack(IntercraftItems.DEVIL_MASK);
         }
     };
 }

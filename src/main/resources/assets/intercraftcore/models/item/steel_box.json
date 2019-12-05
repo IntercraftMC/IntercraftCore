@@ -1,0 +1,16 @@
+{
+  "parent":"item/generated",
+  "textures":{
+    "layer0":"intercraftcore:item/box",
+    "layer1":"intercraftcore:item/box_dec",
+    "layer2":"intercraftcore:item/box_hazards_poisonous"
+  },
+  "overrides":[
+    {
+      "predicate":{
+        "open":1
+      },
+      "model":"intercraftcore:item/steel_box_open"
+    }
+  ]
+}
