@@ -38,53 +38,27 @@ public class IntercraftBlocks
     public static final Block CHUNKLOADER_TIMER;
 
 
-
     /**
     * Fluids
     */
 
 
     /**
-    * Vanilla feature blocks
-    */
+     * Vanilla feature blocks
+     */
 
-    public static final Block GRAVELSUBSTITUTE;
-    public static final Block SANDSUBSTITUTE;
-
-    public static final Block VANILLA_STONE_PRESSUREPLATE;
-    public static final Block VANILLA_OAK_PRESSUREPLATE;
-    public static final Block VANILLA_SPRUCE_PRESSUREPLATE;
-    public static final Block VANILLA_BIRCH_PRESSUREPLATE;
-    public static final Block VANILLA_JUNGLE_PRESSUREPLATE;
-    public static final Block VANILLA_ACACIA_PRESSUREPLATE;
-    public static final Block VANILLA_DARKOAK_PRESSUREPLATE;
-
-
+    public static final Block GRAVELSUBSTITUTE, SANDSUBSTITUTE;
+    public static final Block VANILLA_STONE_PRESSUREPLATE, VANILLA_OAK_PRESSUREPLATE, VANILLA_SPRUCE_PRESSUREPLATE, VANILLA_BIRCH_PRESSUREPLATE, VANILLA_JUNGLE_PRESSUREPLATE, VANILLA_ACACIA_PRESSUREPLATE, VANILLA_DARKOAK_PRESSUREPLATE;
     public static final Block VANILLA_BUBBLE_COLUMN;
 
 
     /**
-    * Block Groups
-    * */
+     * Block Groups
+     */
 
-    public static final BlockElementGroup ALUMINIUM;
-    public static final BlockElementGroup COPPER;
-    public static final BlockElementGroup GOLD;
-    public static final BlockElementGroup IRIDIUM;
-    public static final BlockElementGroup IRON;
-    public static final BlockElementGroup LEAD;
-    public static final BlockElementGroup LITHIUM;
-    public static final BlockElementGroup SILVER;
-    public static final BlockElementGroup THORIUM;
-    public static final BlockElementGroup TIN;
-    public static final BlockElementGroup TITANIUM;
-    public static final BlockElementGroup TUNGSTEN;
-    public static final BlockElementGroup URANIUM;
-    public static final BlockElementGroup ZINC;
-
-    public static final BlockElementGroup BRASS;
-    public static final BlockElementGroup BRONZE;
-    public static final BlockElementGroup STEEL;
+    public static final BlockElementGroup
+            ALUMINIUM, COPPER, GOLD, IRIDIUM, IRON, LEAD, LITHIUM, SILVER, THORIUM, TIN, TITANIUM, TUNGSTEN, URANIUM, ZINC,
+            BRASS, BRONZE, STEEL;
 
 
     static {
@@ -160,24 +134,8 @@ public class IntercraftBlocks
 
         //registerBlocks(VANILLA_BUBBLE_COLUMN);
 
-        registerElementBlocks(ALUMINIUM);
-        registerElementBlocks(COPPER);
-        registerElementBlocks(GOLD);
-        registerElementBlocks(IRIDIUM);
-        registerElementBlocks(IRON);
-        registerElementBlocks(LEAD);
-        registerElementBlocks(LITHIUM);
-        registerElementBlocks(SILVER);
-        registerElementBlocks(THORIUM);
-        registerElementBlocks(TIN);
-        registerElementBlocks(TITANIUM);
-        registerElementBlocks(TUNGSTEN);
-        registerElementBlocks(URANIUM);
-        registerElementBlocks(ZINC);
-
-        registerElementBlocks(BRASS);
-        registerElementBlocks(BRONZE);
-        registerElementBlocks(STEEL);
+        registerElementsBlocks(ALUMINIUM, COPPER, GOLD, IRIDIUM, IRON, LEAD, LITHIUM, SILVER, THORIUM, TIN, TITANIUM, TUNGSTEN, URANIUM, ZINC);
+        registerElementsBlocks(BRASS, BRONZE, STEEL);
     }
 
     /**
@@ -235,6 +193,18 @@ public class IntercraftBlocks
     {
         registerBlocks(IntercraftItemGroups.RESOURCES,group.BLOCK,group.FRAME);
         registerOreBlocks(group.ORE);
+    }
+
+    /**
+     * Register group of blocks
+     *
+     * @param groups BlockElementGroup(s) of blocks to be registered.
+     */
+
+    protected static void registerElementsBlocks(@Nonnull BlockElementGroup...groups)
+    {
+        for (BlockElementGroup group : groups)
+            registerElementBlocks(group);
     }
 
     /**

@@ -61,6 +61,9 @@ public class IntercraftColorHandler
 
         add(IntercraftItems.LEAD_BOX);
         add(IntercraftItems.STEEL_BOX);
+        add(IntercraftItems.LARGE_RED_GLASS_JAR);
+        add(IntercraftItems.LARGE_GREEN_GLASS_JAR);
+        add(IntercraftItems.LARGE_BLUE_GLASS_JAR);
 
         add(IntercraftItems.COPPER_COIL);
         add(IntercraftItems.INSULATED_COPPER_COIL);
@@ -138,8 +141,12 @@ public class IntercraftColorHandler
                 event.getItemColors().register(new ItemColorHandler(((ItemBucketWood)item).getTint(),1),item);
             else if (item instanceof ItemBucketNonFluid)
                 event.getItemColors().register(new ItemColorHandler(((ItemBucketNonFluid)item).getTint(),1),item);
-            else if (item instanceof ItemSingleStackContainer && ((ItemSingleStackContainer)item).getTint() != -1)
-                event.getItemColors().register(new ItemColorHandler(((ItemSingleStackContainer)item).getTint(),0),item);
+            else if (item instanceof ItemSingleStackContainer && ((ItemSingleStackContainer)item).getTint() != -1) {
+                if (item instanceof ItemSingleStackGlassContainer)
+                    event.getItemColors().register(new ItemColorHandler(((ItemSingleStackContainer) item).getTint()), item);
+                else
+                    event.getItemColors().register(new ItemColorHandler(((ItemSingleStackContainer) item).getTint(), 0), item);
+            }
         }
 
         for (Block block : blocks) {

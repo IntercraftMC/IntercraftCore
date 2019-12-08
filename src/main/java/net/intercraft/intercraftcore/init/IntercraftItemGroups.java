@@ -24,6 +24,18 @@ public class IntercraftItemGroups
     };
 
     /**
+    * Wiring tab
+    */
+    public static final ItemGroup CONTAINERS = new ItemGroup(Reference.MODID + ".containers")
+    {
+        @Override
+        public ItemStack createIcon()
+        {
+            return new ItemStack(IntercraftItems.LARGE_GLASS_JAR);
+        }
+    };
+
+    /**
     * Machines Tab
     */
 

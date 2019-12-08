@@ -30,6 +30,7 @@ public class IntercraftItems
 
     public static final ItemSingleStackContainer LEAD_BOX, STEEL_BOX;
     public static final ItemSingleStackGlassContainer LARGE_GLASS_JAR;
+    public static final ItemSingleStackGlassContainer LARGE_RED_GLASS_JAR, LARGE_GREEN_GLASS_JAR, LARGE_BLUE_GLASS_JAR;
 
     /**
      * Face masks
@@ -75,9 +76,12 @@ public class IntercraftItems
         AMBER_RAW = new ItemGeneric("amber_raw",new Item.Properties().group(IntercraftItemGroups.RESOURCES));
         AMBER_CUT = new ItemGeneric("amber_cut",new Item.Properties().group(IntercraftItemGroups.RESOURCES));
 
-        LEAD_BOX        = new ItemSingleStackContainer("lead_box",0.8f,ElementDictionary.LEAD.getColorPrimary());
-        STEEL_BOX       = new ItemSingleStackContainer("steel_box",0.15f,ElementDictionary.STEEL.getColorPrimary());
-        LARGE_GLASS_JAR = new ItemSingleStackGlassContainer("large_glass_jar",0.01f);
+        LEAD_BOX              = new ItemSingleStackContainer(new Item.Properties(),"lead_box",0.8f,ElementDictionary.LEAD.getColorPrimary());
+        STEEL_BOX             = new ItemSingleStackContainer(new Item.Properties(),"steel_box",0.15f,ElementDictionary.STEEL.getColorPrimary());
+        LARGE_GLASS_JAR       = new ItemSingleStackGlassContainer("large_glass_jar",0.01f);
+        LARGE_RED_GLASS_JAR   = new ItemSingleStackGlassContainer("large_red_glass_jar",0.01f, 0xfe0f2e);
+        LARGE_GREEN_GLASS_JAR = new ItemSingleStackGlassContainer("large_green_glass_jar",0.01f, 0x65A565);
+        LARGE_BLUE_GLASS_JAR  = new ItemSingleStackGlassContainer("large_blue_glass_jar",0.01f, 0x7f93ff);
 
         DEVIL_MASK = new ItemMask(   "devil_mask",  new ResourceLocation(Reference.MODID,"textures/masks/devil_mask.png"));
         SUNGLASSES = new ItemGlasses("sun_glasses", new ResourceLocation(Reference.MODID,"textures/masks/sun_glasses.png"));
@@ -150,7 +154,7 @@ public class IntercraftItems
     {
         registerItems(TEST,AMBER_RAW,AMBER_CUT);
 
-        registerItems(LEAD_BOX,STEEL_BOX,LARGE_GLASS_JAR);
+        registerItems(LEAD_BOX,STEEL_BOX,LARGE_GLASS_JAR,LARGE_RED_GLASS_JAR,LARGE_GREEN_GLASS_JAR,LARGE_BLUE_GLASS_JAR);
 
         registerItems(DEVIL_MASK,SUNGLASSES);
 

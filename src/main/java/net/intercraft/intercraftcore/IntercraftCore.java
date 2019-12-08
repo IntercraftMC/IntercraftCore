@@ -38,6 +38,7 @@ public class IntercraftCore
     public static final SimpleChannel NETWORK = IntercraftPacketHandler.getNetworkChannel();
 
     public static final int defDensity = 3;
+    public static short failedToOpen = 0;
 
     public IntercraftCore()
     {

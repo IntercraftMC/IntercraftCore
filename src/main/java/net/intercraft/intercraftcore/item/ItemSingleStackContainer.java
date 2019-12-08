@@ -1,12 +1,15 @@
 package net.intercraft.intercraftcore.item;
 
 import io.netty.buffer.Unpooled;
+import net.intercraft.intercraftcore.IntercraftCore;
 import net.intercraft.intercraftcore.Reference;
 import net.intercraft.intercraftcore.init.IntercraftDamageSources;
+import net.intercraft.intercraftcore.init.IntercraftItemGroups;
 import net.intercraft.intercraftcore.init.capabilities.stackContainer.StackContainerProvider;
 import net.intercraft.intercraftcore.inventory.container.ContainerSingleItemStackContainer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
@@ -17,14 +20,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.*;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.util.text.*;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
 public class ItemSingleStackContainer extends Item
 {
@@ -34,7 +37,6 @@ public class ItemSingleStackContainer extends Item
     private final float isolation;
     private final int tint;
 
-    private static short failedToOpen = 0;
     private boolean isOpen = false;
 
     /**
@@ -45,9 +47,9 @@ public class ItemSingleStackContainer extends Item
      * @param tint the colour the second layer will be tinted with. -1 for no tint.
      */
 
-    public ItemSingleStackContainer(String name, float isolation, int tint)
+    public ItemSingleStackContainer(Item.Properties properties,String name, float isolation, int tint)
     {
-        super(new Item.Properties().group(ItemGroup.TOOLS).maxStackSize(1));
+        super(properties.maxStackSize(1).group(IntercraftItemGroups.CONTAINERS));
 
         if (isolation < 0 || isolation > 1) throw new IllegalArgumentException("Can only be between 0 and 1!");
 
@@ -59,9 +61,9 @@ public class ItemSingleStackContainer extends Item
         setRegistryName(name);
     }
 
-    public ItemSingleStackContainer(String name, float isolation)
+    public ItemSingleStackContainer(Item.Properties properties,String name, float isolation)
     {
-        this(name,isolation,-1);
+        this(properties,name,isolation,-1);
     }
 
     @Nullable
@@ -71,53 +73,58 @@ public class ItemSingleStackContainer extends Item
         return new StackContainerProvider((short) 1);
     }
 
+    public boolean hasFluid()
+    {
+        return false;
+    }
+
 
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn)
     {
         ItemStack stack = playerIn.getHeldItem(handIn);
 
-        if (!worldIn.isRemote) {
+        /*IItemHandler handler = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElseThrow(NullPointerException::new);
+        System.out.println(handler.getStackInSlot(0).getDisplayName().getFormattedText());*/
 
-            if (playerIn.isSneaking()) {
-                if (failedToOpen != 0)
-                    failedToOpen = 0;
-                openContainer(playerIn);
+        if (playerIn.isSneaking()) {
+            if (IntercraftCore.failedToOpen != 0)
+                IntercraftCore.failedToOpen = 0;
+            openContainer(playerIn);
 
-                return new ActionResult<>(ActionResultType.SUCCESS, stack);
-            } else {
-                String
-                        sneakBtn = Minecraft.getInstance().gameSettings.keyBindSneak.getLocalizedName(),
-                        useBtn = Minecraft.getInstance().gameSettings.keyBindUseItem.getLocalizedName(),
-                        key = "info."+Reference.MODID+".tip.container.open";
+            return new ActionResult<>(ActionResultType.SUCCESS, stack);
+        } else {
+            String
+                    sneakBtn = Minecraft.getInstance().gameSettings.keyBindSneak.getLocalizedName(),
+                    useBtn = Minecraft.getInstance().gameSettings.keyBindUseItem.getLocalizedName(),
+                    key = "info."+Reference.MODID+".tip.container.open";
 
-                if (failedToOpen > 40) {
-                    // Anger the devs advancement.
-                    IntercraftDamageSources.killPlayer(playerIn,IntercraftDamageSources.DISOBEDIENCE);
-                    failedToOpen = 0;
-                }
-                else if (failedToOpen > 28) {
-                    playerIn.sendStatusMessage(new TranslationTextComponent(key+".baby"),true);
-                    openContainer(playerIn);
-                }
-                else if (failedToOpen > 20)
-                    playerIn.sendStatusMessage(new TranslationTextComponent(key+".feed_up",sneakBtn,useBtn),true);
-                else if (failedToOpen > 12)
-                    playerIn.sendStatusMessage(new TranslationTextComponent(key +".annoyed",sneakBtn,useBtn),true);
-                else if (failedToOpen > 4)
-                    playerIn.sendStatusMessage(new TranslationTextComponent(key,sneakBtn,useBtn),true);
-
-                failedToOpen++;
+            if (IntercraftCore.failedToOpen > 40) {
+                // Anger the devs advancement.
+                IntercraftDamageSources.killPlayer(playerIn,IntercraftDamageSources.DISOBEDIENCE);
+                IntercraftCore.failedToOpen = 0;
             }
+            else if (IntercraftCore.failedToOpen > 28) {
+                playerIn.sendStatusMessage(new TranslationTextComponent(key+".baby"),true);
+                openContainer(playerIn);
+            }
+            else if (IntercraftCore.failedToOpen > 20)
+                playerIn.sendStatusMessage(new TranslationTextComponent(key+".feed_up",sneakBtn,useBtn),true);
+            else if (IntercraftCore.failedToOpen > 12)
+                playerIn.sendStatusMessage(new TranslationTextComponent(key +".annoyed",sneakBtn,useBtn),true);
+            else if (IntercraftCore.failedToOpen > 4)
+                playerIn.sendStatusMessage(new TranslationTextComponent(key,sneakBtn,useBtn),true);
 
-            return new ActionResult<>(ActionResultType.FAIL, stack);
-            //return super.onItemRightClick(worldIn, playerIn, handIn);
+            IntercraftCore.failedToOpen++;
         }
 
         return new ActionResult<>(ActionResultType.FAIL, stack);
+        //return super.onItemRightClick(worldIn, playerIn, handIn);
+
+
     }
 
-    private void openContainer(PlayerEntity playerIn)
+    protected void openContainer(PlayerEntity playerIn)
     {
         playerIn.openContainer(new INamedContainerProvider() {
             @Override
@@ -135,6 +142,17 @@ public class ItemSingleStackContainer extends Item
             }
         });
     }
+
+    /*@Nullable
+    @Override
+    public CompoundNBT getShareTag(ItemStack stack)
+    {
+        IItemHandler handler = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElseThrow(NullPointerException::new);
+
+        System.out.println("Send share tag.");
+
+        return null;
+    }*/
 
     @Override
     public String getTranslationKey(ItemStack stack)
@@ -159,10 +177,28 @@ public class ItemSingleStackContainer extends Item
         return tint;
     }
 
-    public ItemStack getContainedItemStack(ItemStack stack)
+    public static ItemStack getContainedItemStack(ItemStack stack)
     {
         IItemHandler handler = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElseThrow(NullPointerException::new);
         return handler.getStackInSlot(0);
+    }
+
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn)
+    {
+        super.addInformation(stack, worldIn, tooltip, flagIn);
+
+        TranslationTextComponent text = new TranslationTextComponent("info."+Reference.MODID+".tip.container.open",
+                Minecraft.getInstance().gameSettings.keyBindSneak.getLocalizedName(),
+                Minecraft.getInstance().gameSettings.keyBindUseItem.getLocalizedName());
+        text.setStyle(new Style().setColor(TextFormatting.YELLOW));
+        tooltip.add(text);
+
+        ItemStack stack1 = getContainedItemStack(stack);
+
+        if (stack1 != ItemStack.EMPTY && stack1.getMaxStackSize() > 1)
+            tooltip.add(new StringTextComponent("x"+stack1.getCount()).setStyle(new Style().setColor(TextFormatting.GRAY)));
+
     }
 
     public void setOpen(boolean open)

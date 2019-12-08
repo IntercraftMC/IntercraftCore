@@ -5,6 +5,9 @@ import net.intercraft.intercraftcore.block.BlockBubbleColumn;
 import net.intercraft.intercraftcore.init.capabilities.bubble_column_drag.BubbleColumnDragProvider;
 import net.intercraft.intercraftcore.init.capabilities.bubble_column_drag.BubbleColumnDragStorage;
 import net.intercraft.intercraftcore.init.capabilities.bubble_column_drag.IBubbleColumnDrag;
+import net.intercraft.intercraftcore.init.capabilities.fluid_container.FluidContainerProvider;
+import net.intercraft.intercraftcore.init.capabilities.fluid_container.FluidContainerStorage;
+import net.intercraft.intercraftcore.init.capabilities.fluid_container.IFluidContainer;
 import net.intercraft.intercraftcore.init.capabilities.identity_hidden.IIdentityHidden;
 import net.intercraft.intercraftcore.init.capabilities.identity_hidden.IdentityHiddenProvider;
 import net.intercraft.intercraftcore.init.capabilities.identity_hidden.IdentityHiddenStorage;
@@ -14,7 +17,9 @@ import net.intercraft.intercraftcore.init.capabilities.ore_veins.OreVeinStorage;
 import net.intercraft.intercraftcore.init.capabilities.radiation.IRadiation;
 import net.intercraft.intercraftcore.init.capabilities.radiation.RadiationProvider;
 import net.intercraft.intercraftcore.init.capabilities.radiation.RadiationStorage;
+import net.intercraft.intercraftcore.item.ItemSingleStackGlassContainer;
 import net.intercraft.intercraftcore.item.masks.ModelBand;
+import net.intercraft.intercraftcore.tileentity.TreeTapTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.CreatureEntity;
@@ -24,6 +29,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.chunk.Chunk;
@@ -50,6 +56,7 @@ public class IntercraftCapabilities
     public static final ResourceLocation
             RAD_ID = new ResourceLocation(Reference.MODID,"radiation"),
             HID_ID = new ResourceLocation(Reference.MODID,"identity_hidden"),
+            FLU_ID = new ResourceLocation(Reference.MODID,"fluid_container"),
             //BUC_ID = new ResourceLocation(Reference.MODID,"bubble_column_drag"),
             VEN_ID = new ResourceLocation(Reference.MODID,"ore_vein");
 
@@ -57,6 +64,7 @@ public class IntercraftCapabilities
     {
         CapabilityManager.INSTANCE.register(IRadiation.class,        new RadiationStorage(),        new RadiationStorage.Factory());
         CapabilityManager.INSTANCE.register(IIdentityHidden.class,   new IdentityHiddenStorage(),   new IdentityHiddenStorage.Factory());
+        //CapabilityManager.INSTANCE.register(IFluidContainer.class,   new FluidContainerStorage(),   new FluidContainerStorage.Factory());
         CapabilityManager.INSTANCE.register(IBubbleColumnDrag.class, new BubbleColumnDragStorage(), new BubbleColumnDragStorage.Factory());
         CapabilityManager.INSTANCE.register(IOreVeins.class,         new OreVeinStorage(),          new OreVeinStorage.Factory());
 
@@ -76,51 +84,58 @@ public class IntercraftCapabilities
     public static void attachCapabilityItem(AttachCapabilitiesEvent<ItemStack> event)
     {
 
-        if (!(event.getObject() instanceof ItemStack)) return;
+        /*if (event.getObject().getItem() instanceof ItemSingleStackGlassContainer) {
+            event.addCapability(FLU_ID,new FluidContainerProvider());
+        }*/
 
-        if (event.getObject().getItem() != Items.CLOCK) return;
-
-
-
-        ResourceLocation texture = new ResourceLocation(Reference.MODID,"textures/masks/clock.png");
+        if (event.getObject().getItem() == Items.CLOCK) {
 
 
-        ICurio curio = new ICurio() {
-            @Override
-            public boolean hasRender(String identifier, LivingEntity entityLivingBase)
-            {
-                return true;
-            }
-
-            @Override
-            public void doRender(String identifier, LivingEntity entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale)
-            {
-
-                Minecraft.getInstance().getTextureManager().bindTexture(texture);
-
-                net.intercraft.intercraftcore.api.RenderHelper.followLeftArmTransformation(entitylivingbaseIn, ModelBand.modelClock.wrist);
-                ModelBand.modelClock.render(entitylivingbaseIn,limbSwing,limbSwingAmount,ageInTicks,netHeadYaw,headPitch,scale);
+            ResourceLocation texture = new ResourceLocation(Reference.MODID, "textures/masks/clock.png");
 
 
-            }
-        };
+            ICurio curio = new ICurio() {
+                @Override
+                public boolean hasRender(String identifier, LivingEntity entityLivingBase) {
+                    return true;
+                }
 
-        ICapabilityProvider provider = new ICapabilityProvider() {
-            private final LazyOptional<ICurio> curioOpt = LazyOptional.of(() -> curio);
+                @Override
+                public void doRender(String identifier, LivingEntity entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
 
-            @Nonnull
-            @Override
-            public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap,
-                                                     @Nullable Direction side) {
+                    Minecraft.getInstance().getTextureManager().bindTexture(texture);
 
-                return CuriosCapability.ITEM.orEmpty(cap, curioOpt);
-            }
-        };
-
-        event.addCapability(CuriosCapability.ID_ITEM, provider);
+                    net.intercraft.intercraftcore.api.RenderHelper.followLeftArmTransformation(entitylivingbaseIn, ModelBand.modelClock.wrist);
+                    ModelBand.modelClock.render(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 
 
+                }
+            };
+
+            ICapabilityProvider provider = new ICapabilityProvider() {
+                private final LazyOptional<ICurio> curioOpt = LazyOptional.of(() -> curio);
+
+                @Nonnull
+                @Override
+                public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap,
+                                                         @Nullable Direction side) {
+
+                    return CuriosCapability.ITEM.orEmpty(cap, curioOpt);
+                }
+            };
+
+            event.addCapability(CuriosCapability.ID_ITEM, provider);
+        }
     }
+
+    @SubscribeEvent
+    public static void attachCapabilityTileEntity(AttachCapabilitiesEvent<TileEntity> event)
+    {
+        /*if (event.getObject() instanceof TreeTapTileEntity) {
+            event.addCapability(FLU_ID, new FluidContainerProvider());
+        }*/
+    }
+
 
     @SubscribeEvent
     public static void attachCapabilityEntity(AttachCapabilitiesEvent<Entity> event)

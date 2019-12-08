@@ -45,6 +45,12 @@ public class IntercraftPacketHandler
                 .consumer(MessageTreeTap::handle)
                 .add(); index++;
 
+        /*channel.messageBuilder(MessageStackInContainer.class,index)
+                .encoder(MessageStackInContainer::encode)
+                .decoder(MessageStackInContainer::decode)
+                .consumer(MessageStackInContainer::handle)
+                .add(); index++;*/
+
         // Send ChunkLoaderTileEntity data to client.
 
         channel.messageBuilder(MessageChunkLoader.class,index)

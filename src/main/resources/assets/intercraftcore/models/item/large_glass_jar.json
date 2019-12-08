@@ -1,1 +1,70 @@
-{ "parent": "item/generated", "textures": { "layer0": "intercraftcore:item/glass_jar" } }
+{
+    "__comment": "Model generated using MrCrayfish's Model Creator (https://mrcrayfish.com/tools?id=mc)",
+    "textures": {
+        "large_glass_jar_wall": "intercraftcore:item/large_glass_jar_wall",
+        "large_glass_jar_end": "intercraftcore:item/large_glass_jar_end",
+        "black_terracotta": "minecraft:block/black_terracotta"
+    },
+    "overrides":[
+        {
+            "predicate":{
+                "open":1
+            },
+            "model":"intercraftcore:item/large_glass_jar_open"
+        }
+    ],
+    "display": {
+        "gui": {
+            "rotation": [ 25, 60, 0 ],
+            "translation": [ 0, 1, 0 ],
+            "scale": [ 0.955, 0.955, 0.955 ]
+        },
+        "ground": {
+            "rotation": [ 0, 0, 0 ],
+            "translation": [ 0, 3, 0 ],
+            "scale": [ 0.5, 0.5, 0.5 ]
+        },
+        "fixed": {
+            "rotation": [ 0, 0, 0 ],
+            "translation": [ 0, 2, -2 ],
+            "scale": [ 1.2, 1.2, 1.2 ]
+        },
+        "firstperson_righthand": {
+            "rotation": [ 0, 31, 0 ],
+            "translation": [ 1, 3.5, 0 ],
+            "scale": [ 0.6, 0.6, 0.6 ]
+        },
+        "thirdperson_righthand": {
+            "rotation": [ 5, 177, 0 ],
+            "translation": [ 0, -0.5, -1 ],
+            "scale": [ 0.475, 0.475, 0.475 ]
+        }
+    },
+    "elements": [
+        {
+            "name": "Cube",
+            "from": [ 6, 11, 6 ], 
+            "to": [ 10, 12, 10 ], 
+            "faces": {
+                "north": {  "texture": "#black_terracotta", "uv": [ 0, 0, 4, 1 ] },
+                "east": { "texture": "#black_terracotta", "uv": [ 0, 0, 4, 1 ] },
+                "south": { "texture": "#black_terracotta", "uv": [ 0, 0, 4, 1 ] },
+                "west": { "texture": "#black_terracotta", "uv": [ 0, 0, 4, 1 ] },
+                "up": { "texture": "#black_terracotta", "uv": [ 0, 0, 4, 4 ] }
+            }
+        },
+        {
+            "name": "Cube",
+            "from": [ 4, 1, 4 ], 
+            "to": [ 12, 11, 12 ], 
+            "faces": {
+                "north": { "tintindex": 1, "texture": "#large_glass_jar_wall", "uv": [ 0, 0, 8, 10 ] },
+                "east": { "tintindex": 1, "texture": "#large_glass_jar_wall", "uv": [ 0, 0, 8, 10 ] },
+                "south": { "tintindex": 1, "texture": "#large_glass_jar_wall", "uv": [ 0, 0, 8, 10 ] },
+                "west": { "tintindex": 1, "texture": "#large_glass_jar_wall", "uv": [ 0, 0, 8, 10 ] },
+                "up": { "tintindex": 1, "texture": "#large_glass_jar_end", "uv": [ 0, 0, 8, 8 ] },
+                "down": { "tintindex": 1, "texture": "#large_glass_jar_end", "uv": [ 0, 0, 8, 8 ] }
+            }
+        }
+    ]
+}

@@ -62,10 +62,10 @@ public class ContainerScreenSingleItemStackContainer extends ContainerScreen<Con
 
         //this.minecraft.getTextureManager().deleteTexture(BACKGROUND_TEXTURE);
 
-        this.minecraft.getTextureManager().bindTexture(BACKGROUND_SLOT_TEXTURE);
+        /*this.minecraft.getTextureManager().bindTexture(BACKGROUND_SLOT_TEXTURE);
         GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-        blit(k+container.slotX-1,l+container.slotY-1,0,0,18,18);
+        blit(k+container.slotX-1,l+container.slotY-1,0,0,18,18);*/
 
 
 

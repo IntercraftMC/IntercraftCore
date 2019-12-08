@@ -11,6 +11,12 @@
   "item.intercraftcore.steel_box.full": "Steel Box (%s)",
   "item.intercraftcore.large_glass_jar": "Large Glass Jar",
   "item.intercraftcore.large_glass_jar.full": "Large Glass Jar (%s)",
+  "item.intercraftcore.large_red_glass_jar": "Large Green Stained Glass Jar",
+  "item.intercraftcore.large_red_glass_jar.full": "Large Red Stained Glass Jar (%s)",
+  "item.intercraftcore.large_green_glass_jar": "Large Red Stained Glass Jar",
+  "item.intercraftcore.large_green_glass_jar.full": "Large Green Stained Glass Jar (%s)",
+  "item.intercraftcore.large_blue_glass_jar": "Large Blue Stained Glass Jar",
+  "item.intercraftcore.large_blue_glass_jar.full": "Large Blue Stained Glass Jar (%s)",
 
   "item.intercraftcore.oak_bucket": "Oak Bucket",
   "item.intercraftcore.spruce_bucket": "Spruce Bucket",
@@ -51,7 +57,7 @@
   "item.intercraftcore.empty_wire_coil": "Wire Coil",
 
 
-
+  "__comment": "Use my language generator to make all these entries instead of translating them manually.",
   "item.intercraftcore.al_ingot": "Aluminium Ingot",
   "item.intercraftcore.al_nugget": "Aluminium Nugget",
   "item.intercraftcore.al_dust": "Aluminium Dust",
@@ -299,6 +305,8 @@
   "block.intercraftcore.zn_ore.2": "Medium Zinc Ore",
   "block.intercraftcore.zn_ore.3": "Rich Zinc Ore",
 
+
+
   "block.intercraftcore.treetap": "Tree Tap",
   "block.intercraftcore.redstone_beacon": "Redstone Beacon",
   "block.intercraftcore.auto_crafting_table": "Auto Crafting Table",
@@ -312,6 +320,7 @@
   "enchantment.intercraftcore.auto_pickup": "Auto Pickup",
 
   "itemGroup.intercraftcore.resources": "Resources",
+  "itemGroup.intercraftcore.containers": "Containers",
   "itemGroup.intercraftcore.wiring": "Wiring",
   "itemGroup.intercraftcore.machine": "Machines",
   "itemGroup.intercraftcore.vanity": "Vanity Items",
@@ -320,12 +329,16 @@
   "container.intercraftcore.itemstack_storage.lead_box": "Lead Box",
   "container.intercraftcore.itemstack_storage.steel_box": "Steel Box",
   "container.intercraftcore.itemstack_storage.large_glass_jar": "Large Glass Jar",
+  "container.intercraftcore.itemstack_storage.large_red_glass_jar": "Large Red Stained Glass Jar",
+  "container.intercraftcore.itemstack_storage.large_green_glass_jar": "Large Green Stained Glass Jar",
+  "container.intercraftcore.itemstack_storage.large_blue_glass_jar": "Large Blue Stained Glass Jar",
+
 
   "effect.intercraftcore.radiation_sickness": "Radiation Sickness",
 
 
   "death.attack.intercraftcore.radiation": "%1$s died from radiation poison",
-  "death.attack.intercraftcore.disobedience": "%1$s angered the devs",
+  "death.attack.intercraftcore.disobedience": "%1$s took it too far",
 
 
   "tooltip.intercraftcore.composition": "%s: %s%%",

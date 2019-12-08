@@ -9,10 +9,11 @@ import net.minecraft.particles.ParticleTypes;
 public enum     FluidType
 {
     WATER(       "water",        (short)80,  0x4a73e7, "minecraft:block/water_still",                ParticleTypes.FALLING_WATER),
+    MILK(        "milk",         (short)80,  0xe3e3e3, "minecraft:block/water_still",                ParticleTypes.FALLING_WATER),
     RESIN(       "resin",        (short)200, 0xf9de96, Reference.MODID+":block/liquids/resin_still", ParticleTypes.FALLING_WATER),
     RUBBER_RESIN("rubber_resin", (short)120, 0xdbeaec, Reference.MODID+":block/liquids/resin_still", ParticleTypes.FALLING_WATER),
 
-    NONE( "none", (short)0,null,null);
+    NONE("none", (short)0,null,null);
 
 
     private final String name, texture;

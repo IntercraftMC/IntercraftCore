@@ -3,6 +3,7 @@ package net.intercraft.intercraftcore.inventory.container;
 import net.intercraft.intercraftcore.init.IntercraftContainerTypes;
 import net.intercraft.intercraftcore.init.capabilities.stackContainer.StackContainerProvider;
 import net.intercraft.intercraftcore.item.ItemSingleStackContainer;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.IInventory;
@@ -12,6 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.SlotItemHandler;
 
 import javax.annotation.Nonnull;
@@ -22,8 +24,9 @@ public class ContainerSingleItemStackContainer extends Container
 
     //private IInventory itemStorageInventory;
     private StackContainerProvider provider;
-    public short slotX = 8+4*18, slotY = 20;
+    public short slotX = 8+4*18, slotY = 33;
     public final short stuckHotbarSlot;
+    private final ItemStack itemStorage;
     //private final PacketBuffer data;
 
 
@@ -35,9 +38,9 @@ public class ContainerSingleItemStackContainer extends Container
 
         //int tint = data.getInt(0);
 
-        ItemStack itemStorage = playerInventory.getCurrentItem();
+        itemStorage = playerInventory.getCurrentItem();
 
-        itemStorage.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(cap -> addSlot(new SlotItemHandlerContainer(cap,0,slotX,slotY)));
+        itemStorage.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(handler -> addSlot(new SlotItemHandlerContainer(handler,0,slotX,slotY)));
 
 
 
@@ -50,6 +53,37 @@ public class ContainerSingleItemStackContainer extends Container
         bindPlayerInventory(playerInventory);
     }
 
+
+    @Override
+    public void onContainerClosed(PlayerEntity playerIn)
+    {
+        super.onContainerClosed(playerIn);
+
+        //System.out.println(handler.getStackInSlot(0).getDisplayName().getFormattedText());
+
+        /*if (!playerIn.world.isRemote()) {
+            IItemHandler handler = getHandler(itemStorage);
+
+            ItemStack stack = Minecraft.getInstance().player.getActiveItemStack();
+            IItemHandlerModifiable handler1 = (IItemHandlerModifiable) getHandler(stack);
+            handler1.setStackInSlot(stuckHotbarSlot,handler.getStackInSlot(stuckHotbarSlot));
+
+
+        }*/
+
+
+        /*ItemStack containedStack = getHandler(itemStorage).getStackInSlot(0);
+        if (playerIn.world.isRemote) {
+            IItemHandler handler = getHandler(itemStorage);
+            ((IItemHandlerModifiable) handler).setStackInSlot(0,containedStack);
+        }*/
+
+    }
+
+    private static IItemHandler getHandler(ItemStack stack)
+    {
+        return stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElseThrow(NullPointerException::new);
+    }
 
     @Override
     public boolean canInteractWith(PlayerEntity playerIn)
