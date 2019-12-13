@@ -1,4 +1,4 @@
-package net.intercraft.intercraftcore.tileentity;
+package net.intercraft.intercraftcore.client;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 import net.intercraft.intercraftcore.item.ItemSingleStackContainer;
@@ -23,15 +23,15 @@ public class SingleStackGlassContainerItemRender extends ItemStackTileEntityRend
         //ItemSingleStackGlassContainer container = (ItemSingleStackGlassContainer) itemStackIn.getItem();
         if (itemStackIn.getItem() instanceof ItemSingleStackGlassContainer) {
 
-            ItemStack itemStack = ItemSingleStackContainer.getContainedItemStack(itemStackIn);
+            //ItemStack itemStack = ItemSingleStackContainer.getContainedItemStack(itemStackIn);
 
 
-            if (itemStack != ItemStack.EMPTY) {
+            if (/*itemStack != ItemStack.EMPTY*/false) {
                 GlStateManager.pushMatrix();
 
 
 
-                Minecraft.getInstance().getItemRenderer().renderItem(itemStack, ItemCameraTransforms.TransformType.FIXED);
+                //Minecraft.getInstance().getItemRenderer().renderItem(itemStack, ItemCameraTransforms.TransformType.FIXED);
 
 
                 /*Minecraft.getInstance().getItemRenderer().renderItem(itemStack, ItemCameraTransforms.TransformType.FIRST_PERSON_RIGHT_HAND);

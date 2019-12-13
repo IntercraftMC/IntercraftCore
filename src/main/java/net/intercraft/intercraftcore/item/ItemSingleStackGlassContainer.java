@@ -2,26 +2,38 @@ package net.intercraft.intercraftcore.item;
 
 import net.intercraft.intercraftcore.api.FluidType;
 import net.intercraft.intercraftcore.init.IntercraftItems;
-import net.intercraft.intercraftcore.tileentity.SingleStackGlassContainerItemRender;
+import net.intercraft.intercraftcore.init.capabilities.fluid_container.FluidContainerStorage;
+import net.intercraft.intercraftcore.init.capabilities.fluid_container.IFluidContainer;
+import net.intercraft.intercraftcore.init.capabilities.stackContainer.StackFluidContainerProvider;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.IItemHandlerModifiable;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
 public class ItemSingleStackGlassContainer extends ItemSingleStackContainer
 {
-    public ItemSingleStackGlassContainer(String name, float isolation, int tint)
+
+    public static final short maxVolume = 1000;
+
+    public ItemSingleStackGlassContainer(Item.Properties properties,String name, float isolation, int tint)
     {
-        super(new Item.Properties()/*.setTEISR(() -> () -> SingleStackGlassContainerItemRender.INSTANCE)*/,name,isolation,tint);
+        super(properties,name,isolation,tint);
     }
 
-    public ItemSingleStackGlassContainer(String name, float isolation)
+    public ItemSingleStackGlassContainer(Item.Properties properties, String name, float isolation)
     {
-        this(name,isolation,-1);
+        this(properties,name,isolation,-1);
     }
 
     @Override
@@ -30,12 +42,44 @@ public class ItemSingleStackGlassContainer extends ItemSingleStackContainer
         super.openContainer(playerIn);
     }
 
-    @Nullable
+    /*@Nullable
     @Override
     public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundNBT nbt)
     {
-        return super.initCapabilities(stack, nbt);
+        //if (FluidContainerStorage.FLUID_CONTAINER_CAPABILITY == null || CapabilityItemHandler.ITEM_HANDLER_CAPABILITY == null) return null;
+        return new StackFluidContainerProvider((short) 1,maxVolume);
     }
+
+
+    public static IFluidContainer getFluidContainer(ItemStack stack) // Does not work as @initCapabilities is called before capabilities are registered.
+    {
+        return stack.getCapability(FluidContainerStorage.FLUID_CONTAINER_CAPABILITY).orElseThrow(NullPointerException::new);
+    }*/
+
+
+
+    /*@Nullable
+    @Override
+    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundNBT nbt)
+    {
+        //if (FluidContainerStorage.FLUID_CONTAINER_CAPABILITY == null || CapabilityItemHandler.ITEM_HANDLER_CAPABILITY == null) return null;
+        return new StackFluidContainerProvider((short) 1,maxVolume,stack);
+    }
+
+    public static IFluidHandler getFluidContainer(ItemStack stack) // Does not work as @initCapabilities is called before capabilities are registered.
+    {
+        //return stack.getCapability(FluidContainerStorage.FLUID_CONTAINER_CAPABILITY).orElseThrow(NullPointerException::new);
+        return stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY).orElseThrow(NullPointerException::new);
+
+    }
+
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn)
+    {
+        super.addInformation(stack, worldIn, tooltip, flagIn);
+        //tooltip.add(new StringTextComponent(getFluidContainer(stack).getFluidInTank(0).getTranslationKey()));
+        //tooltip.add(new StringTextComponent(getFluidContainer(stack).getFluid().getName()));
+    }*/
 
     @Override
     public boolean hasFluid() // Will render a fluid later.

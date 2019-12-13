@@ -1,1 +1,1 @@
-{"type":"minecraft:crafting_shapeless","ingredients":[{"item":"intercraftcore:al_block"}],"result":{"item":"intercraftcore:al_ingot","count":9}}
+{"type":"minecraft:crafting_shapeless","group":"al_ingot","ingredients":[{"item":"intercraftcore:al_block"}],"result":{"item":"intercraftcore:al_ingot","count":9}}

@@ -1,1 +1,1 @@
-{"type":"minecraft:crafting_shaped","pattern":["###","###","###"],"key":{"#":{"item":"intercraftcore:si_dustsmall"}},"result":{"item":"intercraftcore:si_dust"}}
+{"type":"minecraft:crafting_shaped","group":"si_dust","pattern":["###","###","###"],"key":{"#":{"item":"intercraftcore:si_dustsmall"}},"result":{"item":"intercraftcore:si_dust"}}

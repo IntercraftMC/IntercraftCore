@@ -1,9 +1,10 @@
-package net.intercraft.intercraftcore.tileentity;
+package net.intercraft.intercraftcore.client;
 
 import net.intercraft.intercraftcore.api.BlockProperties;
 import net.intercraft.intercraftcore.api.BucketType;
 import net.intercraft.intercraftcore.api.FluidType;
 import net.intercraft.intercraftcore.api.Util;
+import net.intercraft.intercraftcore.tileentity.TreeTapTileEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;

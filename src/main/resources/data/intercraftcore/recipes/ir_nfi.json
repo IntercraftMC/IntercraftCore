@@ -1,1 +1,1 @@
-{"type":"minecraft:crafting_shapeless","ingredients":[{"item":"intercraftcore:ir_ingot"}],"result":{"item":"intercraftcore:ir_nugget","count":9}}
+{"type":"minecraft:crafting_shapeless","group":"ir_nugget","ingredients":[{"item":"intercraftcore:ir_ingot"}],"result":{"item":"intercraftcore:ir_nugget","count":9}}

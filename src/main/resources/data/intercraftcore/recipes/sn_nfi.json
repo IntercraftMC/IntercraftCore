@@ -1,1 +1,1 @@
-{"type":"minecraft:crafting_shapeless","ingredients":[{"item":"intercraftcore:sn_ingot"}],"result":{"item":"intercraftcore:sn_nugget","count":9}}
+{"type":"minecraft:crafting_shapeless","group":"sn_nugget","ingredients":[{"item":"intercraftcore:sn_ingot"}],"result":{"item":"intercraftcore:sn_nugget","count":9}}

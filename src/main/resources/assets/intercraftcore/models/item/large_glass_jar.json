@@ -3,7 +3,7 @@
     "textures": {
         "large_glass_jar_wall": "intercraftcore:item/large_glass_jar_wall",
         "large_glass_jar_end": "intercraftcore:item/large_glass_jar_end",
-        "black_terracotta": "minecraft:block/black_terracotta"
+        "lid": "minecraft:block/dark_oak_planks"
     },
     "overrides":[
         {
@@ -46,11 +46,11 @@
             "from": [ 6, 11, 6 ], 
             "to": [ 10, 12, 10 ], 
             "faces": {
-                "north": {  "texture": "#black_terracotta", "uv": [ 0, 0, 4, 1 ] },
-                "east": { "texture": "#black_terracotta", "uv": [ 0, 0, 4, 1 ] },
-                "south": { "texture": "#black_terracotta", "uv": [ 0, 0, 4, 1 ] },
-                "west": { "texture": "#black_terracotta", "uv": [ 0, 0, 4, 1 ] },
-                "up": { "texture": "#black_terracotta", "uv": [ 0, 0, 4, 4 ] }
+                "north": {  "texture": "#lid", "uv": [ 0, 0, 4, 1 ] },
+                "east": { "texture": "#lid", "uv": [ 0, 0, 4, 1 ] },
+                "south": { "texture": "#lid", "uv": [ 0, 0, 4, 1 ] },
+                "west": { "texture": "#lid", "uv": [ 0, 0, 4, 1 ] },
+                "up": { "texture": "#lid", "uv": [ 0, 0, 4, 4 ] }
             }
         },
         {

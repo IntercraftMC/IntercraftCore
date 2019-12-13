@@ -1,1 +1,1 @@
-{"type":"minecraft:crafting_shaped","pattern":["###","I I","###"],"key":{"#":{"item":"intercraftcore:pb_plate"},"I":{"item":"intercraftcore:pb_rod"}},"result":{"item":"intercraftcore:pb_frame"}}
+{"type":"minecraft:crafting_shaped","group":"frame","pattern":["###","I I","###"],"key":{"#":{"item":"intercraftcore:pb_plate"},"I":{"item":"intercraftcore:pb_rod"}},"result":{"item":"intercraftcore:pb_frame"}}

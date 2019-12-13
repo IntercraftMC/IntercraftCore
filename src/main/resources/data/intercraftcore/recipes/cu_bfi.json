@@ -1,1 +1,1 @@
-{"type":"minecraft:crafting_shaped","pattern":["###","###","###"],"key":{"#":{"item":"intercraftcore:cu_ingot"}},"result":{"item":"intercraftcore:cu_block"}}
+{"type":"minecraft:crafting_shaped","group":"cu_block","pattern":["###","###","###"],"key":{"#":{"item":"intercraftcore:cu_ingot"}},"result":{"item":"intercraftcore:cu_block"}}

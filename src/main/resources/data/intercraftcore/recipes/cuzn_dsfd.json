@@ -1,1 +1,1 @@
-{"type":"minecraft:crafting_shapeless","ingredients":[{"item":"intercraftcore:cuzn_dust"}],"result":{"item":"intercraftcore:cuzn_dustsmall","count":9}}
+{"type":"minecraft:crafting_shapeless","group":"cuzn_dustsmall","ingredients":[{"item":"intercraftcore:cuzn_dust"}],"result":{"item":"intercraftcore:cuzn_dustsmall","count":9}}

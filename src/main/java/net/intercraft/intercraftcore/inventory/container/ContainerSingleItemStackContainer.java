@@ -15,6 +15,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.SlotItemHandler;
+import top.theillusivec4.curios.api.inventory.CurioStackHandler;
 
 import javax.annotation.Nonnull;
 
@@ -42,7 +43,7 @@ public class ContainerSingleItemStackContainer extends Container
 
         itemStorage.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(handler -> addSlot(new SlotItemHandlerContainer(handler,0,slotX,slotY)));
 
-
+        //addSlot(new SlotItemHandler(((ItemSingleStackContainer) itemStorage.getItem()).getStackHandler(),0,slotX,slotY));
 
         //ItemStack itemStorage = ((PlayerEntity) playerInventory.player.world.getEntityByID(data.getInt(0))).getActiveItemStack();
 

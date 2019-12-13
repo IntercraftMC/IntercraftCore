@@ -1,0 +1,149 @@
+{
+    "__comment": "Model generated using MrCrayfish's Model Creator (https://mrcrayfish.com/tools?id=mc)",
+    "textures": {
+        "particle": "minecraft:block/light_gray_concrete",
+        "strut": "minecraft:block/light_gray_concrete"
+    },
+    "elements": [
+        {
+            "name": "Cube",
+            "from": [ 1, 1, 1 ], 
+            "to": [ 15, 2, 2 ], 
+            "faces": {
+                "north": { "texture": "#strut", "uv": [ 0, 0, 14, 1 ] },
+                "east": { "texture": "#strut", "uv": [ 0, 0, 1, 1 ] },
+                "south": { "texture": "#strut", "uv": [ 0, 0, 14, 1 ] },
+                "west": { "texture": "#strut", "uv": [ 0, 0, 1, 1 ] },
+                "up": { "texture": "#strut", "uv": [ 0, 0, 14, 1 ] },
+                "down": { "texture": "#strut", "uv": [ 0, 0, 14, 1 ] }
+            }
+        },
+        {
+            "name": "Cube",
+            "from": [ 1, 1, 14 ], 
+            "to": [ 15, 2, 15 ], 
+            "faces": {
+                "north": { "texture": "#strut", "uv": [ 0, 0, 14, 1 ] },
+                "east": { "texture": "#strut", "uv": [ 0, 0, 1, 1 ] },
+                "south": { "texture": "#strut", "uv": [ 0, 0, 14, 1 ] },
+                "west": { "texture": "#strut", "uv": [ 0, 0, 1, 1 ] },
+                "up": { "texture": "#strut", "uv": [ 0, 0, 15, 1 ] },
+                "down": { "texture": "#strut", "uv": [ 0, 0, 14, 1 ] }
+            }
+        },
+        {
+            "name": "Cube",
+            "from": [ 1, 14, 1 ], 
+            "to": [ 15, 15, 2 ], 
+            "faces": {
+                "north": { "texture": "#strut", "uv": [ 0, 0, 14, 1 ] },
+                "east": { "texture": "#strut", "uv": [ 0, 0, 1, 1 ] },
+                "south": { "texture": "#strut", "uv": [ 0, 0, 14, 1 ] },
+                "west": { "texture": "#strut", "uv": [ 0, 0, 1, 1 ] },
+                "up": { "texture": "#strut", "uv": [ 0, 0, 14, 1 ] },
+                "down": { "texture": "#strut", "uv": [ 0, 0, 14, 1 ] }
+            }
+        },
+        {
+            "name": "Cube",
+            "from": [ 1, 14, 14 ], 
+            "to": [ 15, 15, 15 ], 
+            "faces": {
+                "north": { "texture": "#strut", "uv": [ 0, 0, 14, 1 ] },
+                "east": { "texture": "#strut", "uv": [ 0, 0, 1, 1 ] },
+                "south": { "texture": "#strut", "uv": [ 0, 0, 14, 1 ] },
+                "west": { "texture": "#strut", "uv": [ 0, 0, 1, 1 ] },
+                "up": { "texture": "#strut", "uv": [ 0, 0, 14, 1 ] },
+                "down": { "texture": "#strut", "uv": [ 0, 0, 14, 1 ] }
+            }
+        },
+        {
+            "name": "Cube",
+            "from": [ 1, 1, 2 ], 
+            "to": [ 2, 2, 14 ], 
+            "faces": {
+                "east": { "texture": "#strut", "uv": [ 0, 0, 12, 1 ] },
+                "west": { "texture": "#strut", "uv": [ 0, 0, 12, 1 ] },
+                "up": { "texture": "#strut", "uv": [ 0, 0, 1, 12 ] },
+                "down": { "texture": "#strut", "uv": [ 0, 0, 1, 12 ] }
+            }
+        },
+        {
+            "name": "Cube",
+            "from": [ 14, 1, 2 ], 
+            "to": [ 15, 2, 14 ], 
+            "faces": {
+                "east": { "texture": "#strut", "uv": [ 0, 0, 12, 1 ] },
+                "west": { "texture": "#strut", "uv": [ 0, 0, 12, 1 ] },
+                "up": { "texture": "#strut", "uv": [ 0, 0, 1, 12 ] },
+                "down": { "texture": "#strut", "uv": [ 0, 0, 1, 12 ] }
+            }
+        },
+        {
+            "name": "Cube",
+            "from": [ 1, 14, 2 ], 
+            "to": [ 2, 15, 14 ], 
+            "faces": {
+                "east": { "texture": "#strut", "uv": [ 0, 0, 12, 1 ] },
+                "west": { "texture": "#strut", "uv": [ 0, 0, 12, 1 ] },
+                "up": { "texture": "#strut", "uv": [ 0, 0, 1, 12 ] },
+                "down": { "texture": "#strut", "uv": [ 0, 0, 1, 12 ] }
+            }
+        },
+        {
+            "name": "Cube",
+            "from": [ 14, 14, 2 ], 
+            "to": [ 15, 15, 14 ], 
+            "faces": {
+                "east": { "texture": "#strut", "uv": [ 0, 0, 12, 1 ] },
+                "west": { "texture": "#strut", "uv": [ 0, 0, 12, 1 ] },
+                "up": { "texture": "#strut", "uv": [ 0, 0, 1, 12 ] },
+                "down": { "texture": "#strut", "uv": [ 0, 0, 1, 12 ] }
+            }
+        },
+        {
+            "name": "Cube",
+            "from": [ 1, 2, 1 ], 
+            "to": [ 2, 14, 2 ], 
+            "faces": {
+                "north": { "texture": "#strut", "uv": [ 0, 0, 1, 12 ] },
+                "east": { "texture": "#strut", "uv": [ 0, 0, 1, 12 ] },
+                "south": { "texture": "#strut", "uv": [ 0, 0, 1, 12 ] },
+                "west": { "texture": "#strut", "uv": [ 0, 0, 1, 12 ] }
+            }
+        },
+        {
+            "name": "Cube",
+            "from": [ 14, 2, 1 ], 
+            "to": [ 15, 14, 2 ], 
+            "faces": {
+                "north": { "texture": "#strut", "uv": [ 0, 0, 1, 12 ] },
+                "east": { "texture": "#strut", "uv": [ 0, 0, 1, 12 ] },
+                "south": { "texture": "#strut", "uv": [ 0, 0, 1, 12 ] },
+                "west": { "texture": "#strut", "uv": [ 0, 0, 1, 12 ] }
+            }
+        },
+        {
+            "name": "Cube",
+            "from": [ 1, 2, 14 ], 
+            "to": [ 2, 14, 15 ], 
+            "faces": {
+                "north": { "texture": "#strut", "uv": [ 0, 0, 1, 12 ] },
+                "east": { "texture": "#strut", "uv": [ 0, 0, 1, 12 ] },
+                "south": { "texture": "#strut", "uv": [ 0, 0, 1, 12 ] },
+                "west": { "texture": "#strut", "uv": [ 0, 0, 1, 12 ] }
+            }
+        },
+        {
+            "name": "Cube",
+            "from": [ 14, 2, 14 ], 
+            "to": [ 15, 14, 15 ], 
+            "faces": {
+                "north": { "texture": "#strut", "uv": [ 0, 0, 1, 12 ] },
+                "east": { "texture": "#strut", "uv": [ 0, 0, 1, 12 ] },
+                "south": { "texture": "#strut", "uv": [ 0, 0, 1, 12 ] },
+                "west": { "texture": "#strut", "uv": [ 0, 0, 1, 12 ] }
+            }
+        }
+    ]
+}

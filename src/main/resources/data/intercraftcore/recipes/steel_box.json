@@ -1,0 +1,19 @@
+{
+  "type":"minecraft:crafting_shaped",
+  "pattern":[
+    "ppp",
+    "pcp",
+    "ppp"
+  ],
+  "key":{
+    "p":{
+      "item":"intercraftcore:fec_plate"
+    },
+    "c":{
+      "tag":"forge:chests/wooden"
+    }
+  },
+  "result":{
+    "item":"intercraftcore:steel_box"
+  }
+}

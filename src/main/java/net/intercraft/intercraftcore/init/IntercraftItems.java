@@ -3,6 +3,7 @@ package net.intercraft.intercraftcore.init;
 import net.intercraft.intercraftcore.ElementDictionary;
 import net.intercraft.intercraftcore.Reference;
 import net.intercraft.intercraftcore.api.FluidType;
+import net.intercraft.intercraftcore.client.SingleStackGlassContainerItemRender;
 import net.intercraft.intercraftcore.element.alloys.*;
 import net.intercraft.intercraftcore.element.metals.*;
 import net.intercraft.intercraftcore.element.nonmetals.*;
@@ -78,10 +79,10 @@ public class IntercraftItems
 
         LEAD_BOX              = new ItemSingleStackContainer(new Item.Properties(),"lead_box",0.8f,ElementDictionary.LEAD.getColorPrimary());
         STEEL_BOX             = new ItemSingleStackContainer(new Item.Properties(),"steel_box",0.15f,ElementDictionary.STEEL.getColorPrimary());
-        LARGE_GLASS_JAR       = new ItemSingleStackGlassContainer("large_glass_jar",0.01f);
-        LARGE_RED_GLASS_JAR   = new ItemSingleStackGlassContainer("large_red_glass_jar",0.01f, 0xfe0f2e);
-        LARGE_GREEN_GLASS_JAR = new ItemSingleStackGlassContainer("large_green_glass_jar",0.01f, 0x65A565);
-        LARGE_BLUE_GLASS_JAR  = new ItemSingleStackGlassContainer("large_blue_glass_jar",0.01f, 0x7f93ff);
+        LARGE_GLASS_JAR       = new ItemSingleStackGlassContainer(new Item.Properties().setTEISR(() -> () -> SingleStackGlassContainerItemRender.INSTANCE),"large_glass_jar",0.01f);
+        LARGE_RED_GLASS_JAR   = new ItemSingleStackGlassContainer(new Item.Properties().setTEISR(() -> () -> SingleStackGlassContainerItemRender.INSTANCE),"large_red_glass_jar",0.01f, 0xfe0f2e);
+        LARGE_GREEN_GLASS_JAR = new ItemSingleStackGlassContainer(new Item.Properties().setTEISR(() -> () -> SingleStackGlassContainerItemRender.INSTANCE),"large_green_glass_jar",0.01f, 0x65A565);
+        LARGE_BLUE_GLASS_JAR  = new ItemSingleStackGlassContainer(new Item.Properties().setTEISR(() -> () -> SingleStackGlassContainerItemRender.INSTANCE),"large_blue_glass_jar",0.01f, 0x7f93ff);
 
         DEVIL_MASK = new ItemMask(   "devil_mask",  new ResourceLocation(Reference.MODID,"textures/masks/devil_mask.png"));
         SUNGLASSES = new ItemGlasses("sun_glasses", new ResourceLocation(Reference.MODID,"textures/masks/sun_glasses.png"));
@@ -115,7 +116,7 @@ public class IntercraftItems
         RUBBER_RESIN_BUCKET_ACACIA   = new ItemBucketNonFluid("rubber_resin","acacia", FluidType.RUBBER_RESIN.getTint());
         RUBBER_RESIN_BUCKET_DARK_OAK = new ItemBucketNonFluid("rubber_resin","dark_oak", FluidType.RUBBER_RESIN.getTint());
 
-        RESIN_BUCKET = new ItemBucketNonFluid("resin", FluidType.RESIN.getTint());
+        RESIN_BUCKET        = new ItemBucketNonFluid("resin", FluidType.RESIN.getTint());
         RUBBER_RESIN_BUCKET = new ItemBucketNonFluid("rubber_resin", FluidType.RUBBER_RESIN.getTint());
 
 

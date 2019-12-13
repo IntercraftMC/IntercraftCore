@@ -1,11 +1,8 @@
 package net.intercraft.intercraftcore.init;
 
 import net.intercraft.intercraftcore.Reference;
-import net.intercraft.intercraftcore.block.BlockBubbleColumn;
-import net.intercraft.intercraftcore.init.capabilities.bubble_column_drag.BubbleColumnDragProvider;
 import net.intercraft.intercraftcore.init.capabilities.bubble_column_drag.BubbleColumnDragStorage;
 import net.intercraft.intercraftcore.init.capabilities.bubble_column_drag.IBubbleColumnDrag;
-import net.intercraft.intercraftcore.init.capabilities.fluid_container.FluidContainerProvider;
 import net.intercraft.intercraftcore.init.capabilities.fluid_container.FluidContainerStorage;
 import net.intercraft.intercraftcore.init.capabilities.fluid_container.IFluidContainer;
 import net.intercraft.intercraftcore.init.capabilities.identity_hidden.IIdentityHidden;
@@ -17,10 +14,7 @@ import net.intercraft.intercraftcore.init.capabilities.ore_veins.OreVeinStorage;
 import net.intercraft.intercraftcore.init.capabilities.radiation.IRadiation;
 import net.intercraft.intercraftcore.init.capabilities.radiation.RadiationProvider;
 import net.intercraft.intercraftcore.init.capabilities.radiation.RadiationStorage;
-import net.intercraft.intercraftcore.item.ItemSingleStackGlassContainer;
 import net.intercraft.intercraftcore.item.masks.ModelBand;
-import net.intercraft.intercraftcore.tileentity.TreeTapTileEntity;
-import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.Entity;
@@ -28,7 +22,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
@@ -46,8 +39,6 @@ import top.theillusivec4.curios.api.capability.ICurio;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import static net.minecraft.state.properties.BlockStateProperties.WATERLOGGED;
-
 
 @Mod.EventBusSubscriber
 public class IntercraftCapabilities
@@ -64,8 +55,8 @@ public class IntercraftCapabilities
     {
         CapabilityManager.INSTANCE.register(IRadiation.class,        new RadiationStorage(),        new RadiationStorage.Factory());
         CapabilityManager.INSTANCE.register(IIdentityHidden.class,   new IdentityHiddenStorage(),   new IdentityHiddenStorage.Factory());
-        //CapabilityManager.INSTANCE.register(IFluidContainer.class,   new FluidContainerStorage(),   new FluidContainerStorage.Factory());
-        CapabilityManager.INSTANCE.register(IBubbleColumnDrag.class, new BubbleColumnDragStorage(), new BubbleColumnDragStorage.Factory());
+        CapabilityManager.INSTANCE.register(IFluidContainer.class,   new FluidContainerStorage(),   new FluidContainerStorage.Factory());
+        //CapabilityManager.INSTANCE.register(IBubbleColumnDrag.class, new BubbleColumnDragStorage(), new BubbleColumnDragStorage.Factory());
         CapabilityManager.INSTANCE.register(IOreVeins.class,         new OreVeinStorage(),          new OreVeinStorage.Factory());
 
     }
@@ -83,16 +74,8 @@ public class IntercraftCapabilities
     @SubscribeEvent
     public static void attachCapabilityItem(AttachCapabilitiesEvent<ItemStack> event)
     {
-
-        /*if (event.getObject().getItem() instanceof ItemSingleStackGlassContainer) {
-            event.addCapability(FLU_ID,new FluidContainerProvider());
-        }*/
-
         if (event.getObject().getItem() == Items.CLOCK) {
-
-
             ResourceLocation texture = new ResourceLocation(Reference.MODID, "textures/masks/clock.png");
-
 
             ICurio curio = new ICurio() {
                 @Override

@@ -1,0 +1,22 @@
+{
+  "type":"minecraft:crafting_shaped",
+  "pattern":[
+    "pbp",
+    "bcb",
+    "pbp"
+  ],
+  "key":{
+    "b":{
+      "item":"intercraftcore:pb_block"
+    },
+    "p":{
+      "item":"intercraftcore:pb_plate"
+    },
+    "c":{
+      "tag":"forge:chests/wooden"
+    }
+  },
+  "result":{
+    "item":"intercraftcore:lead_box"
+  }
+}

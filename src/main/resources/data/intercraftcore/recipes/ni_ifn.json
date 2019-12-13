@@ -1,1 +1,1 @@
-{"type":"minecraft:crafting_shaped","pattern":["###","###","###"],"key":{"#":{"item":"intercraftcore:ni_nugget"}},"result":{"item":"intercraftcore:ni_ingot"}}
+{"type":"minecraft:crafting_shaped","group":"ni_ingot","pattern":["###","###","###"],"key":{"#":{"item":"intercraftcore:ni_nugget"}},"result":{"item":"intercraftcore:ni_ingot"}}

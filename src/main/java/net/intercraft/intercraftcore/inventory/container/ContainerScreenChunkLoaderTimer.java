@@ -14,7 +14,7 @@ public class ContainerScreenChunkLoaderTimer extends ContainerScreen<ContainerCh
 
     private final int middleW = this.width / 2 ,middleH = this.height / 2;
 
-    private static final ResourceLocation BACKGROUND_TEXTURE = new ResourceLocation(Reference.MODID,"textures/gui/container/item_itemstack.png");
+    private static final ResourceLocation BACKGROUND_TEXTURE = new ResourceLocation(Reference.MODID,"textures/gui/container/chunkloader_timer.png");
 
     private TextFieldWidget seconds, minutes, hours, days;
 

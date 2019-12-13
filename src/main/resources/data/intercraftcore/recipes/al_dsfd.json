@@ -1,1 +1,1 @@
-{"type":"minecraft:crafting_shapeless","ingredients":[{"item":"intercraftcore:al_dust"}],"result":{"item":"intercraftcore:al_dustsmall","count":9}}
+{"type":"minecraft:crafting_shapeless","group":"al_dustsmall","ingredients":[{"item":"intercraftcore:al_dust"}],"result":{"item":"intercraftcore:al_dustsmall","count":9}}

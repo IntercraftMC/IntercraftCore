@@ -3,7 +3,7 @@ package net.intercraft.intercraftcore;
 import net.intercraft.intercraftcore.init.IntercraftParticles;
 import net.intercraft.intercraftcore.particles.ParticleDropLiquidType;
 import net.intercraft.intercraftcore.tileentity.TreeTapTileEntity;
-import net.intercraft.intercraftcore.tileentity.TreeTapTileEntityRenderer;
+import net.intercraft.intercraftcore.client.TreeTapTileEntityRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.particles.ParticleType;
 import net.minecraft.util.ResourceLocation;
@@ -37,6 +37,7 @@ public class ClientHandler
     public static void attachTER(final FMLClientSetupEvent event)
     {
         ClientRegistry.bindTileEntitySpecialRenderer(TreeTapTileEntity.class, new TreeTapTileEntityRenderer<>());
+        //ForgeRegistries.ITEMS.getValue(new ResourceLocation(Reference.MODID,"large_glass_jar"));
     }
 
     @SubscribeEvent

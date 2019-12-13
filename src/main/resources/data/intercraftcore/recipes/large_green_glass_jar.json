@@ -1,0 +1,17 @@
+{
+  "type":"minecraft:crafting_shaped",
+  "group":"large_glass_jar",
+  "pattern":[
+    "gtg",
+    "gcg",
+    "ggg"
+  ],
+  "key":{
+    "t":{"tag":"minecraft:wooden_slabs"},
+    "g":{"tag":"forge:glass_panes/green"},
+    "c":{"tag":"forge:chests/wooden"}
+  },
+  "result":{
+    "item":"intercraftcore:large_green_glass_jar"
+  }
+}
