@@ -8,17 +8,22 @@ import net.intercraft.intercraftcore.element.alloys.*;
 import net.intercraft.intercraftcore.element.metals.*;
 import net.intercraft.intercraftcore.element.nonmetals.*;
 import net.intercraft.intercraftcore.item.*;
+import net.intercraft.intercraftcore.item.group.ItemColoredGroup;
+import net.intercraft.intercraftcore.item.group.ItemColoredGroups.ItemColoredHazMatSuit;
 import net.intercraft.intercraftcore.item.group.ItemElementGroup;
 import net.intercraft.intercraftcore.item.group.ItemLithiumGroup;
 import net.intercraft.intercraftcore.item.group.ItemUraniumGroup;
 import net.intercraft.intercraftcore.item.masks.ItemGlasses;
+import net.intercraft.intercraftcore.item.masks.ItemHazMatMask;
 import net.intercraft.intercraftcore.item.masks.ItemMask;
 import net.minecraft.fluid.Fluids;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;
+import java.lang.reflect.Constructor;
 
 public class IntercraftItems
 {
@@ -29,9 +34,18 @@ public class IntercraftItems
     public static final Item TEST;
     public static final Item AMBER_RAW, AMBER_CUT;
 
+    //public static final ItemColoredGroup<ItemSingleStackGlassContainer> LARGE_TINTED_GLASS_JAR;
     public static final ItemSingleStackContainer LEAD_BOX, STEEL_BOX;
     public static final ItemSingleStackGlassContainer LARGE_GLASS_JAR;
-    public static final ItemSingleStackGlassContainer LARGE_RED_GLASS_JAR, LARGE_GREEN_GLASS_JAR, LARGE_BLUE_GLASS_JAR;
+    public static final ItemColoredGroup<ItemSingleStackGlassContainer> LARGE_TINTED_GLASS_JAR;
+
+
+    /**
+     * Armour
+     */
+
+    public static final ItemColoredGroup<ItemHazMatSuit> HAZMAT_HELMET,HAZMAT_CHESTPLATE,HAZMAT_PANTS;
+    public static final ItemHazMatSuit HAZMAT_BOOTS;
 
     /**
      * Face masks
@@ -39,6 +53,7 @@ public class IntercraftItems
 
     public static final ItemMask DEVIL_MASK;
     public static final ItemGlasses SUNGLASSES;
+    public static final ItemHazMatMask HAZMAT_MASK;
 
     /**
     * Fluid Buckets
@@ -77,15 +92,28 @@ public class IntercraftItems
         AMBER_RAW = new ItemGeneric("amber_raw",new Item.Properties().group(IntercraftItemGroups.RESOURCES));
         AMBER_CUT = new ItemGeneric("amber_cut",new Item.Properties().group(IntercraftItemGroups.RESOURCES));
 
-        LEAD_BOX              = new ItemSingleStackContainer(new Item.Properties(),"lead_box",0.8f,ElementDictionary.LEAD.getColorPrimary());
-        STEEL_BOX             = new ItemSingleStackContainer(new Item.Properties(),"steel_box",0.15f,ElementDictionary.STEEL.getColorPrimary());
-        LARGE_GLASS_JAR       = new ItemSingleStackGlassContainer(new Item.Properties().setTEISR(() -> () -> SingleStackGlassContainerItemRender.INSTANCE),"large_glass_jar",0.01f);
-        LARGE_RED_GLASS_JAR   = new ItemSingleStackGlassContainer(new Item.Properties().setTEISR(() -> () -> SingleStackGlassContainerItemRender.INSTANCE),"large_red_glass_jar",0.01f, 0xfe0f2e);
-        LARGE_GREEN_GLASS_JAR = new ItemSingleStackGlassContainer(new Item.Properties().setTEISR(() -> () -> SingleStackGlassContainerItemRender.INSTANCE),"large_green_glass_jar",0.01f, 0x65A565);
-        LARGE_BLUE_GLASS_JAR  = new ItemSingleStackGlassContainer(new Item.Properties().setTEISR(() -> () -> SingleStackGlassContainerItemRender.INSTANCE),"large_blue_glass_jar",0.01f, 0x7f93ff);
 
-        DEVIL_MASK = new ItemMask(   "devil_mask",  new ResourceLocation(Reference.MODID,"textures/masks/devil_mask.png"));
-        SUNGLASSES = new ItemGlasses("sun_glasses", new ResourceLocation(Reference.MODID,"textures/masks/sun_glasses.png"));
+        LEAD_BOX               = new ItemSingleStackContainer("lead_box",new Item.Properties(),0.8f,ElementDictionary.LEAD.getColorPrimary());
+        STEEL_BOX              = new ItemSingleStackContainer("steel_box",new Item.Properties(),0.15f,ElementDictionary.STEEL.getColorPrimary());
+        LARGE_GLASS_JAR        = new ItemSingleStackGlassContainer("large_glass_jar",new Item.Properties()/*.setTEISR(() -> () -> SingleStackGlassContainerItemRender.INSTANCE)*/,0.01f);
+        LARGE_TINTED_GLASS_JAR = new ItemColoredGroup<ItemSingleStackGlassContainer>("large_%s_glass_jar",new Item.Properties()/*.setTEISR(() -> () -> SingleStackGlassContainerItemRender.INSTANCE)*/,0.01f) {
+            @Override
+            protected Constructor<ItemSingleStackGlassContainer> createConstructor() throws NoSuchMethodException
+            {
+                return ItemSingleStackGlassContainer.class.getConstructor(String.class, Item.Properties.class, float.class, int.class);
+            }
+        };
+
+        //                                                                                                    TOP  MID  BOT
+        HAZMAT_HELMET     = new ItemColoredHazMatSuit("helmet",     EquipmentSlotType.HEAD, new float[] {0.6f,0.0f,0.0f}, new Item.Properties().maxStackSize(1).maxDamage(255).group(ItemGroup.COMBAT));
+        HAZMAT_CHESTPLATE = new ItemColoredHazMatSuit("chestplate", EquipmentSlotType.CHEST,new float[] {0.1f,0.6f,0.1f}, new Item.Properties().maxStackSize(1).maxDamage(255).group(ItemGroup.COMBAT));
+        HAZMAT_PANTS      = new ItemColoredHazMatSuit("pants",      EquipmentSlotType.LEGS, new float[] {0.0f,0.4f,0.2f}, new Item.Properties().maxStackSize(1).maxDamage(255).group(ItemGroup.COMBAT));
+        HAZMAT_BOOTS      = new ItemHazMatSuit("hazmat_boots",     EquipmentSlotType.FEET, new float[] {0.0f,0.1f,0.6f}, new Item.Properties().maxStackSize(1).maxDamage(255).group(ItemGroup.COMBAT));
+
+
+        DEVIL_MASK  = new ItemMask(   "devil_mask",  new ResourceLocation(Reference.MODID,"textures/masks/devil_mask.png"));
+        SUNGLASSES  = new ItemGlasses("sun_glasses", new ResourceLocation(Reference.MODID,"textures/masks/sun_glasses.png"));
+        HAZMAT_MASK = new ItemHazMatMask();
 
 
         BUCKET_OAK      = new ItemBucketWood("oak");
@@ -153,35 +181,29 @@ public class IntercraftItems
      */
     public static void register()
     {
-        registerItems(TEST,AMBER_RAW,AMBER_CUT);
+        registerItem(TEST,AMBER_RAW,AMBER_CUT);
 
-        registerItems(LEAD_BOX,STEEL_BOX,LARGE_GLASS_JAR,LARGE_RED_GLASS_JAR,LARGE_GREEN_GLASS_JAR,LARGE_BLUE_GLASS_JAR);
+        registerItem(LEAD_BOX, STEEL_BOX, LARGE_GLASS_JAR);
+        registerColoredGroup(LARGE_TINTED_GLASS_JAR);
 
-        registerItems(DEVIL_MASK,SUNGLASSES);
+        registerColoredGroup(HAZMAT_HELMET,HAZMAT_CHESTPLATE,HAZMAT_PANTS);
+        registerItem(HAZMAT_BOOTS,HAZMAT_MASK);
+
+        registerItem(DEVIL_MASK,SUNGLASSES);
 
 
-        registerItems(BUCKET_OAK, BUCKET_SPRUCE, BUCKET_BIRCH, BUCKET_JUNGLE, BUCKET_ACACIA, BUCKET_DARK_OAK);
-        registerItems(WATER_BUCKET_OAK, WATER_BUCKET_SPRUCE, WATER_BUCKET_BIRCH, WATER_BUCKET_JUNGLE, WATER_BUCKET_ACACIA, WATER_BUCKET_DARK_OAK);
-        registerItems(RESIN_BUCKET_OAK, RESIN_BUCKET_SPRUCE, RESIN_BUCKET_BIRCH, RESIN_BUCKET_JUNGLE, RESIN_BUCKET_ACACIA, RESIN_BUCKET_DARK_OAK);
+        registerItem(BUCKET_OAK, BUCKET_SPRUCE, BUCKET_BIRCH, BUCKET_JUNGLE, BUCKET_ACACIA, BUCKET_DARK_OAK);
+        registerItem(WATER_BUCKET_OAK, WATER_BUCKET_SPRUCE, WATER_BUCKET_BIRCH, WATER_BUCKET_JUNGLE, WATER_BUCKET_ACACIA, WATER_BUCKET_DARK_OAK);
+        registerItem(RESIN_BUCKET_OAK, RESIN_BUCKET_SPRUCE, RESIN_BUCKET_BIRCH, RESIN_BUCKET_JUNGLE, RESIN_BUCKET_ACACIA, RESIN_BUCKET_DARK_OAK);
         registerItem(RESIN_BUCKET);
-        registerItems(RUBBER_RESIN_BUCKET_OAK, RUBBER_RESIN_BUCKET_SPRUCE, RUBBER_RESIN_BUCKET_BIRCH, RUBBER_RESIN_BUCKET_JUNGLE, RUBBER_RESIN_BUCKET_ACACIA, RUBBER_RESIN_BUCKET_DARK_OAK);
-        registerItems(RUBBER_RESIN_BUCKET);
+        registerItem(RUBBER_RESIN_BUCKET_OAK, RUBBER_RESIN_BUCKET_SPRUCE, RUBBER_RESIN_BUCKET_BIRCH, RUBBER_RESIN_BUCKET_JUNGLE, RUBBER_RESIN_BUCKET_ACACIA, RUBBER_RESIN_BUCKET_DARK_OAK);
+        registerItem(RUBBER_RESIN_BUCKET);
 
-        registerItems(COPPER_COIL, INSULATED_COPPER_COIL);
+        registerItem(COPPER_COIL, INSULATED_COPPER_COIL);
 
-        registerElementsItems(ALUMINIUM, COPPER, GOLD, IRIDIUM, IRON, LEAD, LITHIUM, SILVER, THORIUM, TIN, TITANIUM, TUNGSTEN, URANIUM, ZINC);
-        registerElementsItems(CARBON, SILICON);
-        registerElementsItems(BRASS, BRONZE, STEEL);
-    }
-
-    /**
-     * Register an item
-     *
-     * @param item Item to be registered.
-     */
-    protected static void registerItem(@Nonnull Item item)
-    {
-        RegistrationHandler.items.add(item);
+        registerElementItems(ALUMINIUM, COPPER, GOLD, IRIDIUM, IRON, LEAD, LITHIUM, SILVER, THORIUM, TIN, TITANIUM, TUNGSTEN, URANIUM, ZINC);
+        registerElementItems(CARBON, SILICON);
+        registerElementItems(BRASS, BRONZE, STEEL);
     }
 
     /**
@@ -189,24 +211,11 @@ public class IntercraftItems
      *
      * @param items Item(s) to be registered.
      */
-    protected static void registerItems(@Nonnull Item... items)
+    protected static void registerItem(@Nonnull Item...items)
     {
-        for (Item item : items) {
-            if (item != null) {
+        for (Item item : items)
+            if (item != null)
                 RegistrationHandler.items.add(item);
-            }
-        }
-    }
-
-    /**
-     * Register group of items
-     *
-     * @param group ItemElementGroup of items to be registered.
-     */
-
-    protected static void registerElementItems(@Nonnull ItemElementGroup group)
-    {
-        registerItems(group.INGOT, group.NUGGET, group.DUST, group.DUST_SMALL, group.PLATE, group.GEAR, group.ROD, group.CHUNK);
     }
 
     /**
@@ -215,9 +224,22 @@ public class IntercraftItems
      * @param groups ItemElementGroup(s) of items to be registered.
      */
 
-    protected static void registerElementsItems(@Nonnull ItemElementGroup...groups)
+
+    protected static void registerElementItems(@Nonnull ItemElementGroup...groups)
     {
         for (ItemElementGroup group : groups)
-            registerElementItems(group);
+            registerItem(group.INGOT, group.NUGGET, group.DUST, group.DUST_SMALL, group.PLATE, group.GEAR, group.ROD, group.CHUNK);
+    }
+
+    /**
+     * Register group of items
+     *
+     * @param groups ItemColoredGroup(s) of items to be registered.
+     */
+
+    protected static void registerColoredGroup(@Nonnull ItemColoredGroup<?>...groups)
+    {
+        for (ItemColoredGroup<?> group : groups)
+            registerItem(group.WHITE, group.ORANGE, group.MAGENTA, group.LIGHT_BLUE, group.YELLOW, group.LIME, group.PINK, group.GRAY, group.LIGHT_GRAY, group.CYAN, group.PURPLE, group.BLUE, group.BROWN, group.GREEN, group.RED, group.BLACK);
     }
 }

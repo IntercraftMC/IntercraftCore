@@ -11,20 +11,20 @@ public enum ElementDictionary
 
     ALUMINIUM("al",0xd8f0ff,0x996100, new ElementComposition[] {new ElementComposition("al",0.9), new ElementComposition("ti",0.1)}),
     COPPER(   "cu",0xc1834b,0x5e9c59, new ElementComposition[] {new ElementComposition("cu",0.99),new ElementComposition("au",0.01)}),
-    GOLD(     "au",0xe7e74c,0xe7e74c, new ElementComposition[] {new ElementComposition("au",0.99),new ElementComposition("cu",0.01)}),
-    IRIDIUM(  "ir",0xffffff,0xf0ffd8, new ElementComposition[] {new ElementComposition("ir",0.55),new ElementComposition("os",0.45)}),
-    IRON(     "fe",0xe5dddd,0xb6a8a8, new ElementComposition[] {new ElementComposition("fe",1)}),
+    GOLD(     "au",0xe7e74c,0xe7e74c, 3, new ElementComposition[] {new ElementComposition("au",0.99),new ElementComposition("cu",0.01)}),
+    IRIDIUM(  "ir",0xffffff,0xf0ffd8, 3, new ElementComposition[] {new ElementComposition("ir",0.55),new ElementComposition("os",0.45)}),
+    IRON(     "fe",0xe5dddd,0xb6a8a8, 3, new ElementComposition[] {new ElementComposition("fe",1)}),
     LEAD(     "pb",0x664c86,0xc1c2c5, new ElementComposition[] {new ElementComposition("pb",1)}),
-    LITHIUM(  "li",0xdfe3ee,0xc1c2cf, new ElementComposition[] {}),
-    MERCURY(  "hg",0xe8e9ee,0xbc2b3b, new ElementComposition[] {}),
+    LITHIUM(  "li",0xdfe3ee,0xc1c2cf, new ElementComposition[] {new ElementComposition("li",1)}),
+    MERCURY(  "hg",0xe8e9ee,0xbc2b3b, new ElementComposition[] {new ElementComposition("hg",1)}),
     NICKEL(   "ni",0xdfe3ee,0xc1c2cf, new ElementComposition[] {new ElementComposition("ni",0.95),new ElementComposition("fe",0.05)}),
-    SILVER(   "ag",0xffffff,0xdaf7f8, new ElementComposition[] {}),
-    THORIUM(  "th",0x333,   0x444818, new ElementComposition[] {}),
-    TIN(      "sn",0x9daaae,0xc7bdc4, new ElementComposition[] {}),
-    TITANIUM( "ti",0xE8E9EE,0x9abdc4, new ElementComposition[] {}),
-    TUNGSTEN( "w", 0x1d2630,0x5e5454, new ElementComposition[] {}),
-    URANIUM(  "u", 0x077a07,0xaeb559, new ElementComposition[] {}),
-    ZINC(     "zn",0xaecfd8,0xaeb5ca, new ElementComposition[] {}),
+    SILVER(   "ag",0xffffff,0xdaf7f8, 3, new ElementComposition[] {new ElementComposition("ag",1)}),
+    THORIUM(  "th",0x333,   0x444818, 3, new ElementComposition[] {new ElementComposition("th",1)}),
+    TIN(      "sn",0x9daaae,0xc7bdc4, new ElementComposition[] {new ElementComposition("sn",1)}),
+    TITANIUM( "ti",0xE8E9EE,0x9abdc4, 3, new ElementComposition[] {new ElementComposition("ti",1)}),
+    TUNGSTEN( "w", 0x1d2630,0x5e5454, 3, new ElementComposition[] {new ElementComposition("w",1)}),
+    URANIUM(  "u", 0x077a07,0xaeb559, 3, new ElementComposition[] {new ElementComposition("u",1)}),
+    ZINC(     "zn",0xaecfd8,0xaeb5ca, new ElementComposition[] {new ElementComposition("zn",1)}),
 
 
     /**
@@ -48,63 +48,51 @@ public enum ElementDictionary
 
     private final String symbol;
     private final int colorPrimary, colorSecondary;
+    private final float hardness;
     private final ElementComposition[] composition;
 
 
     ElementDictionary(String symbol, int colorPrimary, int colorSecondary, ElementComposition[] composition)
     {
+        this(symbol,colorPrimary,colorSecondary,1,composition);
+    }
+
+    ElementDictionary(String symbol, int colorPrimary, int colorSecondary, float hardness, ElementComposition[] composition)
+    {
         this.symbol = symbol;
         this.colorPrimary = colorPrimary;
         this.colorSecondary = colorSecondary;
+        this.hardness = hardness;
         this.composition = composition;
     }
 
     public String getSymbol()
     {
-        return this.symbol;
+        return symbol;
     }
 
     public int getColorPrimary()
     {
-        return this.colorPrimary;
+        return colorPrimary;
     }
 
     public int getColorSecondary()
     {
-        return this.colorSecondary;
+        return colorSecondary;
+    }
+
+    public float getHarvestLevel()
+    {
+        return hardness;
     }
 
     public ElementComposition[] getComposition()
     {
-        return this.composition;
+        return composition;
     }
 
     public ElementComposition getComposition(int index)
     {
-        return this.composition[index];
+        return composition[index];
     }
-    
-    /*class Elements
-    {
-        public final Element ALUMINIUM = new Aluminium();
-        public final Element COPPER    = new Copper();
-        public final Element GOLD      = new Gold();
-        public final Element IRIDIUM   = new Iridium();
-        public final Element IRON      = new Iron();
-        public final Element LEAD      = new Lead();
-        public final Element LITHIUM   = new Lithium();
-        public final Element MERCURY   = new Mercury();
-        public final Element SILVER    = new Silver();
-        public final Element THORIUM   = new Thorium();
-        public final Element TIN       = new Tin();
-        public final Element TITANIUM  = new Titanium();
-        public final Element TUNGSTEN  = new Tungsten();
-        public final Element URANIUM   = new Uranium();
-        public final Element ZINC      = new Zinc();
-        //public final Element CARBON;
-        //public final Element SILICON;
-        public final Element BRASS     = new Brass();
-        public final Element BRONZE    = new Bronze();
-        public final Element STEEL     = new Steel();
-    }*/
 }

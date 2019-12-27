@@ -1,11 +1,10 @@
 #!/usr/bin/env bash
 
-NAME="bucket"
-FLUID="rubber_resin"
+NAME="hazmat_helmet"
 
 #MATCHERS=("ingot" "nugget" "dust" "dustsmall" "plate" "gear" "rod")
 #MATCHERS=("al" "cu" "au" "ir" "fe" "pb" "li" "hg" "ag" "th" "sn" "ti" "w" "u" "zn" "cuzn" "cusn" "fec")
-MATCHERS=("oak" "spruce" "birch" "jungle" "acacia" "dark_oak")
+MATCHERS=("white" "orange" "magenta" "light_blue" "yellow" "lime" "pink" "gray" "light_gray" "cyan" "purple" "blue" "brown" "green" "red" "black")
 
 for VAR in ${MATCHERS[*]}
 do
@@ -13,11 +12,11 @@ do
     {
       \"parent\": \"item/generated\",
       \"textures\": {
-        \"layer0\": \"intercraftcore:item/buckets/${VAR}_${NAME}\",
-        \"layer1\": \"intercraftcore:item/buckets/fluid_${FLUID}\"
+        \"layer0\": \"intercraftcore:item/${NAME}_outline\",
+        \"layer1\": \"intercraftcore:item/${NAME}\"
       }
     }
     "
-    echo "Creating file "$FLUID"_"$VAR"_"$NAME".json"
-    echo $STRUCTURE > $FLUID"_"$VAR"_"$NAME".json"
+    echo "Creating file "${VAR}"_"${NAME}".json"
+    echo $STRUCTURE > ${VAR}"_"${NAME}".json"
 done

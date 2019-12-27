@@ -3,7 +3,7 @@ package net.intercraft.intercraftcore.tileentity;
 import net.intercraft.intercraftcore.IntercraftCore;
 import net.intercraft.intercraftcore.api.FluidType;
 import net.intercraft.intercraftcore.init.IntercraftTileEntities;
-import net.intercraft.intercraftcore.networking.MessageTreeTap;
+import net.intercraft.intercraftcore.networking.messages.MessageTreeTap;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;

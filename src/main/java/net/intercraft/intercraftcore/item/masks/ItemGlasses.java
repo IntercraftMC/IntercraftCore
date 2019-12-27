@@ -1,5 +1,6 @@
 package net.intercraft.intercraftcore.item.masks;
 
+import net.intercraft.intercraftcore.client.models.ModelGlasses;
 import net.intercraft.intercraftcore.init.IntercraftItemGroups;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.LivingEntity;
@@ -86,7 +87,7 @@ public class ItemGlasses extends Item
 
                 Minecraft.getInstance().getTextureManager().bindTexture(texture);
 
-                RenderHelper.followHeadRotations(entitylivingbaseIn,ModelGlasses.modelGlasses.mask);
+                RenderHelper.followHeadRotations(entitylivingbaseIn, ModelGlasses.modelGlasses.mask);
                 ModelGlasses.modelGlasses.render(entitylivingbaseIn,limbSwing,limbSwingAmount,ageInTicks,netHeadYaw,headPitch,scale);
 
 
@@ -105,15 +106,13 @@ public class ItemGlasses extends Item
             }
         };
 
-        ICapabilityProvider provider = new ICapabilityProvider()
-        {
+        ICapabilityProvider provider = new ICapabilityProvider() {
             private final LazyOptional<ICurio> curioOpt = LazyOptional.of(() -> curio);
 
             @Nonnull
             @Override
             public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side)
             {
-
                 return CuriosCapability.ITEM.orEmpty(cap, curioOpt);
             }
         };

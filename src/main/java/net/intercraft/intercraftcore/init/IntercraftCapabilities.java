@@ -1,8 +1,7 @@
 package net.intercraft.intercraftcore.init;
 
 import net.intercraft.intercraftcore.Reference;
-import net.intercraft.intercraftcore.init.capabilities.bubble_column_drag.BubbleColumnDragStorage;
-import net.intercraft.intercraftcore.init.capabilities.bubble_column_drag.IBubbleColumnDrag;
+import net.intercraft.intercraftcore.init.capabilities.DummyStorage;
 import net.intercraft.intercraftcore.init.capabilities.fluid_container.FluidContainerStorage;
 import net.intercraft.intercraftcore.init.capabilities.fluid_container.IFluidContainer;
 import net.intercraft.intercraftcore.init.capabilities.identity_hidden.IIdentityHidden;
@@ -14,7 +13,9 @@ import net.intercraft.intercraftcore.init.capabilities.ore_veins.OreVeinStorage;
 import net.intercraft.intercraftcore.init.capabilities.radiation.IRadiation;
 import net.intercraft.intercraftcore.init.capabilities.radiation.RadiationProvider;
 import net.intercraft.intercraftcore.init.capabilities.radiation.RadiationStorage;
-import net.intercraft.intercraftcore.item.masks.ModelBand;
+import net.intercraft.intercraftcore.init.capabilities.radiation.api.IRadiationEmitter;
+import net.intercraft.intercraftcore.init.capabilities.radiation.api.RadiationEmitterProvider;
+import net.intercraft.intercraftcore.client.models.ModelBand;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.Entity;
@@ -54,6 +55,7 @@ public class IntercraftCapabilities
     public static void init()
     {
         CapabilityManager.INSTANCE.register(IRadiation.class,        new RadiationStorage(),        new RadiationStorage.Factory());
+        CapabilityManager.INSTANCE.register(IRadiationEmitter.class, new DummyStorage<>(),          new RadiationEmitterProvider.Factory());
         CapabilityManager.INSTANCE.register(IIdentityHidden.class,   new IdentityHiddenStorage(),   new IdentityHiddenStorage.Factory());
         CapabilityManager.INSTANCE.register(IFluidContainer.class,   new FluidContainerStorage(),   new FluidContainerStorage.Factory());
         //CapabilityManager.INSTANCE.register(IBubbleColumnDrag.class, new BubbleColumnDragStorage(), new BubbleColumnDragStorage.Factory());

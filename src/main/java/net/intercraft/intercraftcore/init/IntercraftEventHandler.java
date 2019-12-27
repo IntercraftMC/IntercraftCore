@@ -15,7 +15,7 @@ import net.intercraft.intercraftcore.init.capabilities.radiation.IRadiation;
 import net.intercraft.intercraftcore.init.capabilities.radiation.Radiation;
 import net.intercraft.intercraftcore.init.capabilities.radiation.RadiationProvider;
 import net.intercraft.intercraftcore.item.ItemLithium;
-import net.intercraft.intercraftcore.networking.MessageIdentityHidden;
+import net.intercraft.intercraftcore.networking.messages.MessageIdentityHidden;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -27,15 +27,12 @@ import net.minecraft.entity.monster.ElderGuardianEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.Explosion;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -46,12 +43,12 @@ import net.minecraftforge.event.entity.EntityStruckByLightningEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.event.world.ExplosionEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.network.PacketDistributor;
 import java.util.Random;
-import java.util.function.Supplier;
 
 @Mod.EventBusSubscriber
 public class IntercraftEventHandler
@@ -71,6 +68,17 @@ public class IntercraftEventHandler
         RadiationDebugCommand.register(event.getCommandDispatcher());
         OreVeinDebugCommand.register(event.getCommandDispatcher());
         IdentityHiddenDebugCommand.register(event.getCommandDispatcher());
+    }
+
+
+    @SubscribeEvent(priority = EventPriority.LOWEST)
+    public static void onRenderTickEvent(final TickEvent.RenderTickEvent event)
+    {
+        if (Minecraft.getInstance().isGameFocused()) {
+            Minecraft.getInstance().mainWindow.setFramerateLimit(Minecraft.getInstance().gameSettings.framerateLimit);
+        } else {
+            Minecraft.getInstance().mainWindow.setFramerateLimit(4);
+        }
     }
 
     //@SubscribeEvent

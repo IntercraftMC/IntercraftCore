@@ -1,0 +1,7 @@
+{
+  "parent" : "intercraftcore:item/large_glass_jar_open",
+  "textures": {
+      "wall": "intercraftcore:item/large_stained_glass_jar_wall",
+      "end": "intercraftcore:item/large_stained_glass_jar_end"
+  }
+}

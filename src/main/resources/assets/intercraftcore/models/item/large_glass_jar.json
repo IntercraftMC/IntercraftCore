@@ -1,8 +1,8 @@
 {
     "__comment": "Model generated using MrCrayfish's Model Creator (https://mrcrayfish.com/tools?id=mc)",
     "textures": {
-        "large_glass_jar_wall": "intercraftcore:item/large_glass_jar_wall",
-        "large_glass_jar_end": "intercraftcore:item/large_glass_jar_end",
+        "wall": "intercraftcore:item/large_glass_jar_wall",
+        "end": "intercraftcore:item/large_glass_jar_end",
         "lid": "minecraft:block/dark_oak_planks"
     },
     "overrides":[
@@ -58,12 +58,12 @@
             "from": [ 4, 1, 4 ], 
             "to": [ 12, 11, 12 ], 
             "faces": {
-                "north": { "tintindex": 1, "texture": "#large_glass_jar_wall", "uv": [ 0, 0, 8, 10 ] },
-                "east": { "tintindex": 1, "texture": "#large_glass_jar_wall", "uv": [ 0, 0, 8, 10 ] },
-                "south": { "tintindex": 1, "texture": "#large_glass_jar_wall", "uv": [ 0, 0, 8, 10 ] },
-                "west": { "tintindex": 1, "texture": "#large_glass_jar_wall", "uv": [ 0, 0, 8, 10 ] },
-                "up": { "tintindex": 1, "texture": "#large_glass_jar_end", "uv": [ 0, 0, 8, 8 ] },
-                "down": { "tintindex": 1, "texture": "#large_glass_jar_end", "uv": [ 0, 0, 8, 8 ] }
+                "north": { "tintindex": 1, "texture": "#wall", "uv": [ 0, 0, 8, 10 ] },
+                "east": { "tintindex": 1, "texture": "#wall", "uv": [ 0, 0, 8, 10 ] },
+                "south": { "tintindex": 1, "texture": "#wall", "uv": [ 0, 0, 8, 10 ] },
+                "west": { "tintindex": 1, "texture": "#wall", "uv": [ 0, 0, 8, 10 ] },
+                "up": { "tintindex": 1, "texture": "#end", "uv": [ 0, 0, 8, 8 ] },
+                "down": { "tintindex": 1, "texture": "#end", "uv": [ 0, 0, 8, 8 ] }
             }
         }
     ]

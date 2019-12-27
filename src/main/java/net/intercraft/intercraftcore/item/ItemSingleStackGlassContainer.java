@@ -2,38 +2,23 @@ package net.intercraft.intercraftcore.item;
 
 import net.intercraft.intercraftcore.api.FluidType;
 import net.intercraft.intercraftcore.init.IntercraftItems;
-import net.intercraft.intercraftcore.init.capabilities.fluid_container.FluidContainerStorage;
-import net.intercraft.intercraftcore.init.capabilities.fluid_container.IFluidContainer;
-import net.intercraft.intercraftcore.init.capabilities.stackContainer.StackFluidContainerProvider;
-import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.world.World;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.IItemHandlerModifiable;
-
-import javax.annotation.Nullable;
-import java.util.List;
 
 public class ItemSingleStackGlassContainer extends ItemSingleStackContainer
 {
 
-    public static final short maxVolume = 1000;
+    public static final short maxFluidVolume = 1000;
 
-    public ItemSingleStackGlassContainer(Item.Properties properties,String name, float isolation, int tint)
+    public ItemSingleStackGlassContainer(String name, Item.Properties properties, float isolation, int tint)
     {
-        super(properties,name,isolation,tint);
+        super(name,properties,isolation,tint);
     }
 
-    public ItemSingleStackGlassContainer(Item.Properties properties, String name, float isolation)
+    public ItemSingleStackGlassContainer(String name, Item.Properties properties, float isolation)
     {
-        this(properties,name,isolation,-1);
+        this(name,properties,isolation,-1);
     }
 
     @Override

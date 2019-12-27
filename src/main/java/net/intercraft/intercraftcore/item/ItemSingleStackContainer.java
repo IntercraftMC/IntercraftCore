@@ -5,7 +5,6 @@ import net.intercraft.intercraftcore.IntercraftCore;
 import net.intercraft.intercraftcore.Reference;
 import net.intercraft.intercraftcore.init.IntercraftDamageSources;
 import net.intercraft.intercraftcore.init.IntercraftItemGroups;
-import net.intercraft.intercraftcore.init.capabilities.stackContainer.StackContainerProvider;
 import net.intercraft.intercraftcore.inventory.container.ContainerSingleItemStackContainer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
@@ -16,15 +15,14 @@ import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.*;
 import net.minecraft.util.text.*;
 import net.minecraft.world.World;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
+import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -32,7 +30,7 @@ import java.util.List;
 public class ItemSingleStackContainer extends Item
 {
 
-    public static final ResourceLocation open = new ResourceLocation(Reference.MODID,"open");
+    public static final ResourceLocation open = new ResourceLocation("open");
 
     private final float isolation;
     private final int tint;
@@ -40,7 +38,7 @@ public class ItemSingleStackContainer extends Item
     private boolean isOpen = false;
 
 
-    //private final ItemStackHandler stackHandler;
+    private final ItemStackHandler stackHandler;
 
     /**
      * Item Constructor
@@ -50,11 +48,11 @@ public class ItemSingleStackContainer extends Item
      * @param tint the colour the second layer will be tinted with. -1 for no tint.
      */
 
-    public ItemSingleStackContainer(Item.Properties properties,String name, float isolation, int tint)
+    public ItemSingleStackContainer(String name,Item.Properties properties, float isolation, int tint)
     {
         super(properties.maxStackSize(1).group(IntercraftItemGroups.CONTAINERS));
 
-        //this.stackHandler = new ItemStackHandler(1);
+        this.stackHandler = new ItemStackHandler(1);
 
         if (isolation < 0 || isolation > 1) throw new IllegalArgumentException("Can only be between 0 and 1!");
 
@@ -66,9 +64,9 @@ public class ItemSingleStackContainer extends Item
         setRegistryName(name);
     }
 
-    public ItemSingleStackContainer(Item.Properties properties,String name, float isolation)
+    public ItemSingleStackContainer(String name, Item.Properties properties, float isolation)
     {
-        this(properties,name,isolation,-1);
+        this(name,properties,isolation,-1);
     }
 
 
@@ -77,11 +75,12 @@ public class ItemSingleStackContainer extends Item
         return stackHandler;
     }*/
 
-    public ItemStack getContainedItemStack(ItemStack stack)
+    public ItemStack getContainedItemStack(/*ItemStack stack*/)
     {
-        IItemHandler handler = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElseThrow(NullPointerException::new);
-        return handler.getStackInSlot(0);
-        //return stackHandler.getStackInSlot(0);
+        /*IItemHandler handler = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElseThrow(NullPointerException::new);
+        return handler.getStackInSlot(0);*/
+        ItemStack stack = stackHandler.getStackInSlot(0);
+        return stack.getItem() == Items.AIR ? ItemStack.EMPTY : stack;
     }
 
     /*protected INBT writeNBT(IItemHandler handler)
@@ -113,50 +112,48 @@ public class ItemSingleStackContainer extends Item
         return isOpen;
     }
 
-    @Nullable
+    public ItemStackHandler getStackHandler()
+    {
+        return stackHandler;
+    }
+
+    /*@Nullable
     @Override
     public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundNBT nbt)
     {
         return new StackContainerProvider((short) 1);
-    }
-
-
-    @Nullable
-    @Override
-    public CompoundNBT getShareTag(ItemStack stack)
-    {
-        IItemHandler handler = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElseThrow(NullPointerException::new);
-        CompoundNBT nbt = new CompoundNBT();
-        nbt.putInt("Slot",0);
-        handler.getStackInSlot(0).write(nbt);
-        System.out.println("Get");
-        System.out.println("write: "+handler.getStackInSlot(0).getDisplayName().getFormattedText());
-        System.out.println("supplied: "+stack.getDisplayName().getFormattedText());
-
-        return nbt;
-
-        //return (CompoundNBT) writeNBT(stackHandler);
-
-
-    }
-
-    @Override
-    public void readShareTag(ItemStack stack, @Nullable CompoundNBT nbt)
-    {
-        ItemStack readStack =  ItemStack.read(nbt);
-        System.out.println("Read");
-        System.out.println("read: "+readStack.getDisplayName().getFormattedText());
-        System.out.println("supplied: "+stack.getDisplayName().getFormattedText());
-        IItemHandler handler = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElseThrow(NullPointerException::new);
-        ((IItemHandlerModifiable) handler).setStackInSlot(0,readStack);
-
-        //readNBT(stackHandler,nbt);
-    }
+    }*/
 
     @Override
     public boolean shouldSyncTag()
     {
         return true;
+    }
+
+    @Nullable
+    @Override
+    public CompoundNBT getShareTag(ItemStack stack)
+    {
+        //IItemHandler handler = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElseThrow(NullPointerException::new);
+        CompoundNBT nbt = stack.getTag();
+        CompoundNBT stackNBT = new CompoundNBT();
+        //handler.getStackInSlot(0).write(stackNBT);
+        stackHandler.getStackInSlot(0).write(stackNBT);
+        nbt.put("Stack",stackNBT);
+        //stack.setTag(nbt);
+
+        return nbt;
+    }
+
+    @Override
+    public void readShareTag(ItemStack stack, @Nullable CompoundNBT nbt)
+    {
+        ItemStack readStack =  ItemStack.read((CompoundNBT) stack.getTag().get("Stack"));
+        //IItemHandler handler = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElseThrow(NullPointerException::new);
+        //((IItemHandlerModifiable) handler).setStackInSlot(0,readStack);
+        ((IItemHandlerModifiable) stackHandler).setStackInSlot(0,readStack);
+
+        //readNBT(stackHandler,nbt);
     }
 
     public boolean hasFluid()
@@ -216,6 +213,7 @@ public class ItemSingleStackContainer extends Item
             @Override
             public ITextComponent getDisplayName()
             {
+                setOpen(true);
                 return new TranslationTextComponent("container." + Reference.MODID + ".itemstack_storage." + getRegistryName().getPath());
             }
 
@@ -243,7 +241,7 @@ public class ItemSingleStackContainer extends Item
     @Override
     public String getTranslationKey(ItemStack stack)
     {
-        ItemStack containedStack = getContainedItemStack(stack);
+        ItemStack containedStack = getContainedItemStack();
         String k = super.getTranslationKey();
         return containedStack == ItemStack.EMPTY ? k : I18n.format(k+".full", containedStack.getDisplayName().getFormattedText());
     }
@@ -275,7 +273,7 @@ public class ItemSingleStackContainer extends Item
         tooltip.add(text);
 
         //ItemStack stack1 = getContainedItemStack(stack);
-        ItemStack stack1 = getContainedItemStack(stack);
+        ItemStack stack1 = getContainedItemStack();
 
         if (stack1 != ItemStack.EMPTY && stack1.getMaxStackSize() > 1)
             tooltip.add(new StringTextComponent("x"+stack1.getCount()).setStyle(new Style().setColor(TextFormatting.GRAY)));

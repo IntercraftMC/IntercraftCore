@@ -1,10 +1,12 @@
 package net.intercraft.intercraftcore.item.masks;
 
 import net.intercraft.intercraftcore.Reference;
+import net.intercraft.intercraftcore.client.models.ModelMask;
 import net.intercraft.intercraftcore.init.IntercraftItemGroups;
 import net.intercraft.intercraftcore.init.capabilities.identity_hidden.IIdentityHidden;
 import net.intercraft.intercraftcore.init.capabilities.identity_hidden.IdentityHiddenProvider;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -28,7 +30,7 @@ import javax.annotation.Nullable;
 public class ItemMask extends Item
 {
 
-    private final ResourceLocation texture;
+    protected final ResourceLocation texture;
 
     public ItemMask(String name, ResourceLocation texture)
     {
@@ -39,24 +41,30 @@ public class ItemMask extends Item
     }
 
 
-    public void onEquipped(String identifier, LivingEntity entityLivingBase)
+    protected void onEquipped(String identifier, LivingEntity entityLivingBase)
     {
 
     }
 
-    public void onUnequipped(String identifier, LivingEntity entityLivingBase)
+    protected void onUnequipped(String identifier, LivingEntity entityLivingBase)
     {
 
     }
 
-    public void onCurioTick(String identifier, int index, LivingEntity entityLivingBase)
+    protected void onCurioTick(String identifier, int index, LivingEntity entityLivingBase)
     {
 
     }
 
+    protected void doRender(String identifier, LivingEntity entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale)
+    {
+        Minecraft.getInstance().getTextureManager().bindTexture(texture);
 
+        ICurio.RenderHelper.followHeadRotations(entitylivingbaseIn, ModelMask.modelMask.mask);
+        ModelMask.modelMask.render(entitylivingbaseIn,limbSwing,limbSwingAmount,ageInTicks,netHeadYaw,headPitch,scale);
+    }
 
-    public boolean hidesIdentity()
+    protected boolean hidesIdentity()
     {
         return true;
     }
@@ -116,13 +124,7 @@ public class ItemMask extends Item
             @Override
             public void doRender(String identifier, LivingEntity entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale)
             {
-
-                Minecraft.getInstance().getTextureManager().bindTexture(texture);
-
-                ICurio.RenderHelper.followHeadRotations(entitylivingbaseIn,ModelMask.modelMask.mask);
-                ModelMask.modelMask.render(entitylivingbaseIn,limbSwing,limbSwingAmount,ageInTicks,netHeadYaw,headPitch,scale);
-
-
+                ItemMask.this.doRender(identifier, entitylivingbaseIn, limbSwing, limbSwingAmount, partialTicks, ageInTicks, netHeadYaw, headPitch, scale);
             }
 
             @Override
@@ -138,15 +140,13 @@ public class ItemMask extends Item
             }
         };
 
-        ICapabilityProvider provider = new ICapabilityProvider()
-        {
+        ICapabilityProvider provider = new ICapabilityProvider() {
             private final LazyOptional<ICurio> curioOpt = LazyOptional.of(() -> curio);
 
             @Nonnull
             @Override
             public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side)
             {
-
                 return CuriosCapability.ITEM.orEmpty(cap, curioOpt);
             }
         };

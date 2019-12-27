@@ -1,7 +1,15 @@
 {
   "parent" : "intercraftcore:item/large_glass_jar",
+  "overrides":[
+    {
+      "predicate":{
+        "open":1
+      },
+      "model":"intercraftcore:item/large_tinted_glass_jar_open"
+    }
+  ],
   "textures": {
-      "large_glass_jar_wall": "intercraftcore:item/large_stained_glass_jar_wall",
-      "large_glass_jar_end": "intercraftcore:item/large_stained_glass_jar_end"
+      "wall": "intercraftcore:item/large_stained_glass_jar_wall",
+      "end": "intercraftcore:item/large_stained_glass_jar_end"
   }
 }

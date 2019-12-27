@@ -21,28 +21,22 @@ import javax.annotation.Nullable;
 public class BlockHardOre extends Block
 {
 
-    private int tint;
+    private final int tint;
+    private final float hardness;
 
     public BlockHardOre(Element element, String suffix)
     {
-        super(Block.Properties.create(Material.ROCK, MaterialColor.STONE).hardnessAndResistance(1.5F,6.0F));
+        super(Block.Properties.create(Material.ROCK, MaterialColor.STONE).hardnessAndResistance(element.hardness,6.0F));
 
         setRegistryName(element.symbol+"_ore");
 
         setDefaultState(getDefaultState().with(BlockProperties.DENSITY,IntercraftCore.defDensity));
 
-        this.tint = element.tintSec;
+        hardness = element.hardness;
+        tint = element.tintSec;
 
 
     }
-
-    /*protected ItemStack getSilkTouchDrop(BlockState state) {
-        CompoundNBT nbt = new CompoundNBT();
-        nbt.putInt("density",state.get(BlockProperties.DENSITY));
-        ItemStack stack = new ItemStack(this);
-        stack.setTag(nbt);
-        return stack;
-    }*/
 
     public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
         try {
@@ -54,27 +48,11 @@ public class BlockHardOre extends Block
         }
     }
 
-    /*public IItemProvider getItemDropped(BlockState state, World worldIn, BlockPos pos, int fortune) {
-        return this.drop;
-    }
-    public int getItemsToDropCount(BlockState state, int fortune, World worldIn, BlockPos pos, Random random) {
-        int toRet = (state.get(BlockProperties.DENSITY)+1)*dropMultiplier;
-
-        return Math.max(toRet,dropMultiplier);
-
-    }*/
-
-    /*public void onExplosionDestroy(World worldIn, BlockPos pos, Explosion explosionIn)
-    {
-        new ItemEntity(worldIn,pos.getX(),pos.getY(),pos.getZ(), new ItemStack(this.drop,dropMultiplier));
-    }*/
-
 
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
     {
         builder.add(BlockProperties.DENSITY);
     }
-
 
     @Override
     public net.minecraftforge.common.ToolType getHarvestTool(BlockState state)
@@ -97,10 +75,14 @@ public class BlockHardOre extends Block
         return BlockRenderLayer.CUTOUT;
     }
 
+    public float getHardness()
+    {
+        return hardness;
+    }
 
     public int getTint()
     {
-        return this.tint;
+        return tint;
     }
 
 

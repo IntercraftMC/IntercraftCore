@@ -1,6 +1,6 @@
-{   "parent": "intercraftcore:block/chunkloaders/chunkloader_inactive",
+{
+  "parent": "intercraftcore:block/chunkloaders/chunkloader_inactive",
   "textures": {
-    "bottom": "minecraft:block/enchanting_table_bottom",
     "top": "intercraftcore:block/chunkloader_top_inactive",
     "side": "intercraftcore:block/chunkloader_redstone_side_inactive"
   }

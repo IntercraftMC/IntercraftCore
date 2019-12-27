@@ -4,14 +4,10 @@ import net.minecraft.entity.Entity;
 
 public interface IRadiationEmitter
 {
+    int getIntensity();
 
-    /**
-    * How much radiation the block or item emits.
-    * @param entityTarget target.
-    * return How much to give.
-    * */
+    void setIntensity(int intensity);
 
-    long emitting(Entity entityTarget);
-
-
+    void addToEntity(Entity entity, float distanceTop, float distanceMiddle, float distanceBottom);
+    void addToEntity(Entity entity);
 }

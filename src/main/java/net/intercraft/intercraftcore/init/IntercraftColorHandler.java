@@ -5,6 +5,7 @@ import net.intercraft.intercraftcore.block.BlockSolidElement;
 import net.intercraft.intercraftcore.block.BlockFrameElement;
 import net.intercraft.intercraftcore.block.group.BlockElementGroup;
 import net.intercraft.intercraftcore.item.*;
+import net.intercraft.intercraftcore.item.group.ItemColoredGroup;
 import net.intercraft.intercraftcore.item.group.ItemElementGroup;
 import net.intercraft.intercraftcore.block.BlockHardOre;
 import net.minecraft.block.Block;
@@ -34,7 +35,7 @@ public class IntercraftColorHandler
      * Pre-determined items to be coloured
      */
 
-    private static List<Item> items = new ArrayList<Item>(){{
+    public static List<Item> items = new ArrayList<Item>(){{
 
         add(IntercraftItems.RUBBER_RESIN_BUCKET_OAK);
         add(IntercraftItems.RUBBER_RESIN_BUCKET_SPRUCE);
@@ -61,9 +62,6 @@ public class IntercraftColorHandler
 
         add(IntercraftItems.LEAD_BOX);
         add(IntercraftItems.STEEL_BOX);
-        add(IntercraftItems.LARGE_RED_GLASS_JAR);
-        add(IntercraftItems.LARGE_GREEN_GLASS_JAR);
-        add(IntercraftItems.LARGE_BLUE_GLASS_JAR);
 
         add(IntercraftItems.COPPER_COIL);
         add(IntercraftItems.INSULATED_COPPER_COIL);
@@ -73,7 +71,7 @@ public class IntercraftColorHandler
      * Pre-determined blocks to be coloured
      */
 
-    private static List<Block> blocks = new ArrayList<Block>(){{
+    public static List<Block> blocks = new ArrayList<Block>(){{
         add(IntercraftBlocks.AUTOCRAFTINGTABLE);
     }};
 
@@ -110,7 +108,14 @@ public class IntercraftColorHandler
                 IntercraftItems.BRONZE,
                 IntercraftItems.STEEL
         };
+        final ItemColoredGroup<?>[] coloredGroup = {
+                IntercraftItems.LARGE_TINTED_GLASS_JAR,
 
+                IntercraftItems.HAZMAT_HELMET,
+                IntercraftItems.HAZMAT_CHESTPLATE,
+                IntercraftItems.HAZMAT_PANTS
+                //IntercraftItems.HAZMAT_BOOTS
+        };
 
 
         /**
@@ -118,11 +123,12 @@ public class IntercraftColorHandler
          */
 
         for (ItemElementGroup group: groups) {
-            Item[] i = { group.INGOT, group.NUGGET, group.DUST, group.DUST_SMALL, group.PLATE, group.GEAR, group.ROD, group.CHUNK };
-            for (Item item: i)
-                if ( item != null)
-                    items.add(item);
-
+            for (Item item: new Item[] {group.INGOT, group.NUGGET, group.DUST, group.DUST_SMALL, group.PLATE, group.GEAR, group.ROD, group.CHUNK})
+                if (item != null) items.add(item);
+        }
+        for (ItemColoredGroup<?> group : coloredGroup) { // Don't need to register white, as it should be unaffected.
+            for (Item item : new Item[] {group.ORANGE, group.MAGENTA, group.LIGHT_BLUE, group.YELLOW, group.LIME, group.PINK, group.GRAY, group.LIGHT_GRAY, group.CYAN, group.PURPLE, group.BLUE, group.BROWN, group.GREEN, group.RED, group.BLACK})
+                if (item != null) items.add(item);
         }
 
         /**
@@ -141,6 +147,8 @@ public class IntercraftColorHandler
                 event.getItemColors().register(new ItemColorHandler(((ItemBucketWood)item).getTint(),1),item);
             else if (item instanceof ItemBucketNonFluid)
                 event.getItemColors().register(new ItemColorHandler(((ItemBucketNonFluid)item).getTint(),1),item);
+            else if (item instanceof ItemHazMatSuit)
+                event.getItemColors().register(new ItemColorHandler(((ItemHazMatSuit)item).getTint(),1),item);
             else if (item instanceof ItemSingleStackContainer && ((ItemSingleStackContainer)item).getTint() != -1) {
                 if (item instanceof ItemSingleStackGlassContainer)
                     event.getItemColors().register(new ItemColorHandler(((ItemSingleStackContainer) item).getTint()), item);
@@ -201,7 +209,7 @@ public class IntercraftColorHandler
         for (BlockElementGroup group: groups) {
             Block[] i = { group.BLOCK, group.FRAME, group.ORE };
             for (Block block: i)
-                if ( block != null)
+                if (block != null)
                     blocks.add(block);
 
         }

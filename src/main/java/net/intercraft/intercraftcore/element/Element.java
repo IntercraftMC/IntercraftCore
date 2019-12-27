@@ -28,6 +28,7 @@ public class Element
      */
     public final String name,     symbol;
     public final int    tintPrim, tintSec;
+    public final float hardness;
     public final ElementComposition[] composition;
 
     /**
@@ -47,6 +48,7 @@ public class Element
         this.symbol      = dictionary.getSymbol();
         this.tintPrim    = dictionary.getColorPrimary();
         this.tintSec     = dictionary.getColorSecondary();
+        this.hardness    = dictionary.getHarvestLevel();
         this.composition = dictionary.getComposition();
     }
 

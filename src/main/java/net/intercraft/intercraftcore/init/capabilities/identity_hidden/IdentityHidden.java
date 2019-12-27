@@ -1,7 +1,7 @@
 package net.intercraft.intercraftcore.init.capabilities.identity_hidden;
 
 import net.intercraft.intercraftcore.IntercraftCore;
-import net.intercraft.intercraftcore.networking.MessageIdentityHidden;
+import net.intercraft.intercraftcore.networking.messages.MessageIdentityHidden;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.world.dimension.DimensionType;

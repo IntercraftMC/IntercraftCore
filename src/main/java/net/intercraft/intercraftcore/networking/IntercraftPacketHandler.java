@@ -1,6 +1,9 @@
 package net.intercraft.intercraftcore.networking;
 
 import net.intercraft.intercraftcore.Reference;
+import net.intercraft.intercraftcore.networking.messages.MessageChunkLoader;
+import net.intercraft.intercraftcore.networking.messages.MessageIdentityHidden;
+import net.intercraft.intercraftcore.networking.messages.MessageTreeTap;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;

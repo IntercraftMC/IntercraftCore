@@ -1,6 +1,7 @@
-{   "parent": "block/block",
+{
+  "parent": "block/block",
   "textures": {
-    "particle": "minecraft:block/enchanting_table_bottom",
+    "particle": "intercraftcore:block/chunkloader_side_inactive",
     "bottom": "minecraft:block/enchanting_table_bottom",
     "top": "intercraftcore:block/chunkloader_top_inactive",
     "side": "intercraftcore:block/chunkloader_side_inactive"

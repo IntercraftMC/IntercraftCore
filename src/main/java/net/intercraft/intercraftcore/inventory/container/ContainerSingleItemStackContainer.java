@@ -25,7 +25,7 @@ public class ContainerSingleItemStackContainer extends Container
 
     //private IInventory itemStorageInventory;
     private StackContainerProvider provider;
-    public short slotX = 8+4*18, slotY = 33;
+    public final short slotX = 8+4*18, slotY = 33;
     public final short stuckHotbarSlot;
     private final ItemStack itemStorage;
     //private final PacketBuffer data;
@@ -41,9 +41,9 @@ public class ContainerSingleItemStackContainer extends Container
 
         itemStorage = playerInventory.getCurrentItem();
 
-        itemStorage.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(handler -> addSlot(new SlotItemHandlerContainer(handler,0,slotX,slotY)));
+        //itemStorage.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(handler -> addSlot(new SlotItemHandlerContainer(handler,0,slotX,slotY)));
 
-        //addSlot(new SlotItemHandler(((ItemSingleStackContainer) itemStorage.getItem()).getStackHandler(),0,slotX,slotY));
+        addSlot(new SlotItemHandler(((ItemSingleStackContainer) itemStorage.getItem()).getStackHandler(),0,slotX,slotY));
 
         //ItemStack itemStorage = ((PlayerEntity) playerInventory.player.world.getEntityByID(data.getInt(0))).getActiveItemStack();
 
@@ -60,24 +60,9 @@ public class ContainerSingleItemStackContainer extends Container
     {
         super.onContainerClosed(playerIn);
 
+        if (itemStorage.getItem() instanceof ItemSingleStackContainer)
+            ((ItemSingleStackContainer) itemStorage.getItem()).setOpen(false);
         //System.out.println(handler.getStackInSlot(0).getDisplayName().getFormattedText());
-
-        /*if (!playerIn.world.isRemote()) {
-            IItemHandler handler = getHandler(itemStorage);
-
-            ItemStack stack = Minecraft.getInstance().player.getActiveItemStack();
-            IItemHandlerModifiable handler1 = (IItemHandlerModifiable) getHandler(stack);
-            handler1.setStackInSlot(stuckHotbarSlot,handler.getStackInSlot(stuckHotbarSlot));
-
-
-        }*/
-
-
-        /*ItemStack containedStack = getHandler(itemStorage).getStackInSlot(0);
-        if (playerIn.world.isRemote) {
-            IItemHandler handler = getHandler(itemStorage);
-            ((IItemHandlerModifiable) handler).setStackInSlot(0,containedStack);
-        }*/
 
     }
 

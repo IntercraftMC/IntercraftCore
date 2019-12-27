@@ -6,11 +6,17 @@ public interface IRadiation
 {
     long getExposure();
 
-    void setExposure(long value);
-
     long getAbsorbed();
 
+    float getProtectionMultiplier(Radiation.ExposureEntryPoint entryPoint);
+
+    void addExposure(Entity entity,int valueTop,int valueMiddle,int valueBottom);
+
+    void setExposure(long value);
+
     void setAbsorbed(long value);
+
+    void setProtectionMultiplier(Radiation.ExposureEntryPoint entryPoint, float value);
 
     void tick(Entity entity);
 }
