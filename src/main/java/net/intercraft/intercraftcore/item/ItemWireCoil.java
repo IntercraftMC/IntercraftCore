@@ -1,12 +1,10 @@
 package net.intercraft.intercraftcore.item;
 
-import com.google.common.collect.Multimap;
 import net.intercraft.intercraftcore.Reference;
 import net.intercraft.intercraftcore.init.IntercraftItemGroups;
+import net.intercraft.intercraftcore.wire.Wire;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUseContext;
@@ -25,31 +23,35 @@ import java.util.List;
 public class ItemWireCoil extends Item
 {
 
-    private final double resistance;
+    private final Wire wire;
     private final int maxLength, maxSize, tint;
     private final boolean insulated;
+
+    private static final float lessMinThreshold = 2/3f, shortMinThreshold = 1/3f;
 
     /**
      * ItemWireCoil Constructor
      *
      * @param name the metal element symbol.
-     * @param resistance the resistance multiplier.
+     * @param wire What wire to place in the world.
      * @param maxSize max length that can fit in the coil.
      * @param maxLength how long a single cable point-to-point can be.
      * @param insulated if contact with the player causes damage.
      * @param tint the wire tint overlay.
      */
 
-    public ItemWireCoil(String name, double resistance, int maxSize, int maxLength, boolean insulated, int tint)
+    public ItemWireCoil(String name, Wire wire, int maxSize, int maxLength, boolean insulated, int tint)
     {
         super(new Item.Properties().group(IntercraftItemGroups.WIRING).maxStackSize(1));
 
-        this.resistance = resistance;
+        this.wire = wire;
         this.maxSize    = maxSize;
         this.maxLength  = maxLength;
         this.insulated  = insulated;
         this.tint       = tint;
 
+        addPropertyOverride(new ResourceLocation("less"),(stack, worldIn, entityLivingBase) -> ((float) getSize(stack)/maxSize) <= lessMinThreshold ? 1 : 0);
+        addPropertyOverride(new ResourceLocation("short"),(stack, worldIn, entityLivingBase) -> ((float) getSize(stack)/maxSize) <= shortMinThreshold ? 1 : 0);
         addPropertyOverride(new ResourceLocation("empty"),(stack, worldIn, entityLivingBase) -> getSize(stack) <= 0 ? 1 : 0);
 
 
@@ -59,14 +61,14 @@ public class ItemWireCoil extends Item
             setRegistryName(name+"_wire_coil");
     }
 
-    public ItemWireCoil(String name, double resistance, int maxSize, int maxLength, int tint)
+    public ItemWireCoil(String name, Wire wire, int maxSize, int maxLength, int tint)
     {
-        this(name,resistance,maxSize,maxLength,false,tint);
+        this(name,wire,maxSize,maxLength,false,tint);
     }
 
     public double getResistance()
     {
-        return resistance;
+        return wire.resistance;
     }
 
     public boolean isInsulated()
@@ -101,19 +103,19 @@ public class ItemWireCoil extends Item
 
     private ITextComponent colorDurability(double dur, double percent)
     {
-        if (percent > 0.66666666) {
+        if (percent > lessMinThreshold)
             return colorText((int)dur+"",TextFormatting.GREEN);
-        } else if (percent > 0.33333333) {
+        else if (percent > shortMinThreshold)
             return colorText((int)dur+"",TextFormatting.YELLOW);
-        }   return colorText((int)dur+"",TextFormatting.RED);
+        return colorText((int)dur+"",TextFormatting.RED);
     }
 
-    @Override
+    /*@Override
     public Multimap<String, AttributeModifier> getAttributeModifiers(EquipmentSlotType slot, ItemStack stack)
     {
         //stack.setDamage(1);
         return super.getAttributeModifiers(slot,stack);
-    }
+    }*/
 
     @Override
     public int getMaxDamage(ItemStack stack)
@@ -144,6 +146,14 @@ public class ItemWireCoil extends Item
     }
 
     @Override
+    public ItemStack getDefaultInstance()
+    {
+        ItemStack stack = super.getDefaultInstance();
+        stack.setDamage(1);
+        return stack;
+    }
+
+    @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn)
     {
         if (!worldIn.isRemote()) {
@@ -170,6 +180,6 @@ public class ItemWireCoil extends Item
 
         tooltip.add(new TranslationTextComponent(key+"length.size",sizeS,maxSize));
         tooltip.add(new TranslationTextComponent(key+"length.max",maxLength));
-        tooltip.add(new TranslationTextComponent(key+"resistance",resistance));
+        tooltip.add(new TranslationTextComponent(key+"resistance",wire.resistance));
     }
 }

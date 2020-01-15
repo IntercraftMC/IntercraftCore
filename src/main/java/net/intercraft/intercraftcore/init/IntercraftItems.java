@@ -16,6 +16,8 @@ import net.intercraft.intercraftcore.item.group.ItemUraniumGroup;
 import net.intercraft.intercraftcore.item.masks.ItemGlasses;
 import net.intercraft.intercraftcore.item.masks.ItemHazMatMask;
 import net.intercraft.intercraftcore.item.masks.ItemMask;
+import net.intercraft.intercraftcore.wire.WireCopper12mm;
+import net.intercraft.intercraftcore.wire.WireCopperInsulated12mm;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.Item;
@@ -148,8 +150,8 @@ public class IntercraftItems
         RUBBER_RESIN_BUCKET = new ItemBucketNonFluid("rubber_resin", FluidType.RUBBER_RESIN.getTint());
 
 
-        COPPER_COIL           = new ItemWireCoil(ElementDictionary.COPPER.getSymbol(),0.6, 1024,60,               ElementDictionary.COPPER.getColorPrimary());
-        INSULATED_COPPER_COIL = new ItemWireCoil(ElementDictionary.COPPER.getSymbol(),0.45,1024,60,true, ElementDictionary.COPPER.getColorPrimary());
+        COPPER_COIL           = new ItemWireCoil(ElementDictionary.COPPER.getSymbol(),new WireCopper12mm(),          1024,60,               ElementDictionary.COPPER.getColorPrimary());
+        INSULATED_COPPER_COIL = new ItemWireCoil(ElementDictionary.COPPER.getSymbol(),new WireCopperInsulated12mm(), 1024,60,true, ElementDictionary.COPPER.getColorPrimary());
 
 
 

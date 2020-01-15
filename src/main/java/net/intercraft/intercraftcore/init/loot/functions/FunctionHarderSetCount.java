@@ -7,11 +7,12 @@ import com.google.gson.JsonSerializationContext;
 import net.intercraft.intercraftcore.Reference;
 import net.intercraft.intercraftcore.api.BlockProperties;
 import net.minecraft.block.BlockState;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.Enchantments;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.storage.loot.LootContext;
-import net.minecraft.world.storage.loot.LootFunction;
-import net.minecraft.world.storage.loot.LootParameters;
+import net.minecraft.world.storage.loot.*;
 import net.minecraft.world.storage.loot.conditions.ILootCondition;
 
 /**
@@ -31,10 +32,15 @@ public class FunctionHarderSetCount extends LootFunction
     public ItemStack doApply(ItemStack stack, LootContext context)
     {
         BlockState state = context.get(LootParameters.BLOCK_STATE);
+        ItemStack tool = context.get(LootParameters.TOOL);
+        short fortune = tool != null ? (short) EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, tool) : 0;
 
         if (state.has(BlockProperties.DENSITY)) {
             int density = state.get(BlockProperties.DENSITY);
-            stack.setCount(Math.round(((int) multiplier)*(density+1)));
+            IRandomRange range = new RandomValueRange(Math.min(fortune+1,density+1),density+1);
+
+            stack.setCount(Math.round(range.generateInt(context.getRandom())*multiplier));
+
             return stack;
         }
         stack.setCount(1);

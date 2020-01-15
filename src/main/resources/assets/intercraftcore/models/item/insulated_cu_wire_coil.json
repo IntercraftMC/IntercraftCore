@@ -8,6 +8,18 @@
   "overrides":[
     {
       "predicate":{
+        "less":1
+      },
+      "model":"intercraftcore:item/insulated_less_wire_coil"
+    },
+    {
+      "predicate":{
+        "short":1
+      },
+      "model":"intercraftcore:item/insulated_short_wire_coil"
+    },
+    {
+      "predicate":{
         "empty":1
       },
       "model":"intercraftcore:item/wire_coil_empty"
