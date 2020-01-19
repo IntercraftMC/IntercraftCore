@@ -2,6 +2,101 @@ package net.intercraft.intercraftcore.api;
 
 public class Util
 {
+
+    /**
+     * Clockwise rotation
+     *
+     * Anti-Clockwise rotation
+     */
+
+    public static final float[][]
+            TCW = {
+            {0,-1},
+            {1,0}
+    },
+            TACW = {
+            {0,1},
+            {-1,0}
+    };
+
+    /**
+     * Generate rotation Matrix
+     *
+     * @param d Degrees to generate matrix from.
+     * @return Double-Array Matrix
+     */
+
+    public static float[][] generateMatrix(float d)
+    {
+        return new float[][] {
+                {(float)Math.cos(d),(float)-Math.sin(d)},
+                {(float)Math.sin(d),(float)Math.cos(d)}
+        };
+    }
+
+    /**
+     * Rotate coordinates from Matrix in X/Y axis
+     *
+     * @param matrix Rotation matrix to be used.
+     * @return New transformed coordinates.
+     */
+
+    public static float[] rotateY(float x,float y,float z,float[][] matrix)
+    {
+        return new float[] {matrix[0][0]*x+matrix[0][1]*z,y,matrix[1][0]*x+matrix[1][1]*z};
+    }
+
+    /**
+     * Rotate coordinates from degrees in X/Y axis
+     *
+     * @param d Degrees to generate matrix from.
+     * @return New transformed coordinates.
+     */
+
+    public static float[] rotateY(float x,float y,float z, float d)
+    {
+        return rotateY(x,y,z,generateMatrix(d));
+    }
+
+    public static short[] rotateY(short x,short y,short z,float[][] matrix)
+    {
+        final float[] c = rotateY((float)x,y,z,matrix);
+        return new short[] {(short)Math.round(c[0]),(short)Math.round(c[1]),(short)Math.round(c[2])};
+    }
+
+    public static short[] rotateY(short x,short y,short z,float d)
+    {
+        return rotateY(x,y,z,generateMatrix(d));
+    }
+
+
+    public static float[] rotateX(float x,float y,float z,float[][] matrix)
+    {
+        //return new float[] {matrix[0][0]*x+matrix[0][1]*z,y,matrix[1][0]*x+matrix[1][1]*z};
+        return new float[] {x,matrix[0][0]*y+matrix[0][1]*z,matrix[1][0]*y+matrix[1][1]*z};
+    }
+
+    public static float[] rotateX(float x,float y,float z, float d)
+    {
+        return rotateX(x,y,z,generateMatrix(d));
+    }
+
+    public static short[] rotateX(short x,short y,short z,float[][] matrix)
+    {
+        final float[] c = rotateX((float)x,y,z,matrix);
+        return new short[] {(short)Math.round(c[0]),(short)Math.round(c[1]),(short)Math.round(c[2])};
+    }
+
+    public static short[] rotateX(short x,short y,short z,float d)
+    {
+        return rotateX(x,y,z,generateMatrix(d));
+    }
+
+
+
+
+
+
     /**
      * Convert Hex to rgb
      *

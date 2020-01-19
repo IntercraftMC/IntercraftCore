@@ -3,7 +3,6 @@ package net.intercraft.intercraftcore.init;
 import net.intercraft.intercraftcore.ElementDictionary;
 import net.intercraft.intercraftcore.Reference;
 import net.intercraft.intercraftcore.api.FluidType;
-import net.intercraft.intercraftcore.client.SingleStackGlassContainerItemRender;
 import net.intercraft.intercraftcore.element.alloys.*;
 import net.intercraft.intercraftcore.element.metals.*;
 import net.intercraft.intercraftcore.element.nonmetals.*;
@@ -18,6 +17,8 @@ import net.intercraft.intercraftcore.item.masks.ItemHazMatMask;
 import net.intercraft.intercraftcore.item.masks.ItemMask;
 import net.intercraft.intercraftcore.wire.WireCopper12mm;
 import net.intercraft.intercraftcore.wire.WireCopperInsulated12mm;
+import net.intercraft.intercraftcore.wire.WireElectrum12mm;
+import net.intercraft.intercraftcore.wire.WireElectrumInsulated12mm;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.Item;
@@ -36,7 +37,6 @@ public class IntercraftItems
     public static final Item TEST;
     public static final Item AMBER_RAW, AMBER_CUT;
 
-    //public static final ItemColoredGroup<ItemSingleStackGlassContainer> LARGE_TINTED_GLASS_JAR;
     public static final ItemSingleStackContainer LEAD_BOX, STEEL_BOX;
     public static final ItemSingleStackGlassContainer LARGE_GLASS_JAR;
     public static final ItemColoredGroup<ItemSingleStackGlassContainer> LARGE_TINTED_GLASS_JAR;
@@ -72,6 +72,7 @@ public class IntercraftItems
      */
 
     public static final ItemWireCoil COPPER_COIL, INSULATED_COPPER_COIL;
+    public static final ItemWireCoil ELECTRUM_COIL, INSULATED_ELECTRUM_COIL;
 
 
     /**
@@ -81,7 +82,7 @@ public class IntercraftItems
     public static final ItemElementGroup
      /* Metals */   ALUMINIUM, COPPER, GOLD, IRIDIUM, IRON, LEAD, LITHIUM, SILVER, THORIUM, TIN, TITANIUM, TUNGSTEN, URANIUM, ZINC,
      /* Minerals */ CARBON, SILICON,
-     /* Alloys */   BRASS, BRONZE, STEEL;
+     /* Alloys */   BRASS, BRONZE, ELECTRUM, STEEL;
 
 
 
@@ -152,6 +153,9 @@ public class IntercraftItems
 
         COPPER_COIL           = new ItemWireCoil(ElementDictionary.COPPER.getSymbol(),new WireCopper12mm(),          1024,60,               ElementDictionary.COPPER.getColorPrimary());
         INSULATED_COPPER_COIL = new ItemWireCoil(ElementDictionary.COPPER.getSymbol(),new WireCopperInsulated12mm(), 1024,60,true, ElementDictionary.COPPER.getColorPrimary());
+        
+        ELECTRUM_COIL           = new ItemWireCoil(ElementDictionary.ELECTRUM.getSymbol(),new WireElectrum12mm(),          1024,60,               ElementDictionary.ELECTRUM.getColorPrimary());
+        INSULATED_ELECTRUM_COIL = new ItemWireCoil(ElementDictionary.ELECTRUM.getSymbol(),new WireElectrumInsulated12mm(), 1024,60,true, ElementDictionary.ELECTRUM.getColorPrimary());
 
 
 
@@ -175,6 +179,7 @@ public class IntercraftItems
 
         BRASS     = new ItemElementGroup(new Brass());
         BRONZE    = new ItemElementGroup(new Bronze());
+        ELECTRUM  = new ItemElementGroup(new Electrum());
         STEEL     = new ItemElementGroup(new Steel());
     }
 
@@ -183,41 +188,43 @@ public class IntercraftItems
      */
     public static void register()
     {
-        registerItem(TEST,AMBER_RAW,AMBER_CUT);
+        registerItems(TEST,AMBER_RAW,AMBER_CUT);
 
-        registerItem(LEAD_BOX, STEEL_BOX, LARGE_GLASS_JAR);
+        registerItems(LEAD_BOX, STEEL_BOX, LARGE_GLASS_JAR);
         registerColoredGroup(LARGE_TINTED_GLASS_JAR);
 
         registerColoredGroup(HAZMAT_HELMET,HAZMAT_CHESTPLATE,HAZMAT_PANTS);
-        registerItem(HAZMAT_BOOTS,HAZMAT_MASK);
+        registerItems(HAZMAT_BOOTS,HAZMAT_MASK);
 
-        registerItem(DEVIL_MASK,SUNGLASSES);
+        registerItems(DEVIL_MASK,SUNGLASSES);
 
 
-        registerItem(BUCKET_OAK, BUCKET_SPRUCE, BUCKET_BIRCH, BUCKET_JUNGLE, BUCKET_ACACIA, BUCKET_DARK_OAK);
-        registerItem(WATER_BUCKET_OAK, WATER_BUCKET_SPRUCE, WATER_BUCKET_BIRCH, WATER_BUCKET_JUNGLE, WATER_BUCKET_ACACIA, WATER_BUCKET_DARK_OAK);
-        registerItem(RESIN_BUCKET_OAK, RESIN_BUCKET_SPRUCE, RESIN_BUCKET_BIRCH, RESIN_BUCKET_JUNGLE, RESIN_BUCKET_ACACIA, RESIN_BUCKET_DARK_OAK);
-        registerItem(RESIN_BUCKET);
-        registerItem(RUBBER_RESIN_BUCKET_OAK, RUBBER_RESIN_BUCKET_SPRUCE, RUBBER_RESIN_BUCKET_BIRCH, RUBBER_RESIN_BUCKET_JUNGLE, RUBBER_RESIN_BUCKET_ACACIA, RUBBER_RESIN_BUCKET_DARK_OAK);
-        registerItem(RUBBER_RESIN_BUCKET);
+        registerItems(BUCKET_OAK, BUCKET_SPRUCE, BUCKET_BIRCH, BUCKET_JUNGLE, BUCKET_ACACIA, BUCKET_DARK_OAK);
+        registerItems(WATER_BUCKET_OAK, WATER_BUCKET_SPRUCE, WATER_BUCKET_BIRCH, WATER_BUCKET_JUNGLE, WATER_BUCKET_ACACIA, WATER_BUCKET_DARK_OAK);
+        registerItems(RESIN_BUCKET_OAK, RESIN_BUCKET_SPRUCE, RESIN_BUCKET_BIRCH, RESIN_BUCKET_JUNGLE, RESIN_BUCKET_ACACIA, RESIN_BUCKET_DARK_OAK);
+        registerItems(RESIN_BUCKET);
+        registerItems(RUBBER_RESIN_BUCKET_OAK, RUBBER_RESIN_BUCKET_SPRUCE, RUBBER_RESIN_BUCKET_BIRCH, RUBBER_RESIN_BUCKET_JUNGLE, RUBBER_RESIN_BUCKET_ACACIA, RUBBER_RESIN_BUCKET_DARK_OAK);
+        registerItems(RUBBER_RESIN_BUCKET);
 
-        registerItem(COPPER_COIL, INSULATED_COPPER_COIL);
+        registerItems(
+                COPPER_COIL, INSULATED_COPPER_COIL,
+                ELECTRUM_COIL, INSULATED_ELECTRUM_COIL
+        );
 
         registerElementItems(ALUMINIUM, COPPER, GOLD, IRIDIUM, IRON, LEAD, LITHIUM, SILVER, THORIUM, TIN, TITANIUM, TUNGSTEN, URANIUM, ZINC);
         registerElementItems(CARBON, SILICON);
-        registerElementItems(BRASS, BRONZE, STEEL);
+        registerElementItems(BRASS, BRONZE, ELECTRUM, STEEL);
     }
 
     /**
-     * Register an item
+     * Register an item(s)
      *
      * @param items Item(s) to be registered.
      */
-    protected static void registerItem(@Nonnull Item...items)
+    protected static void registerItems(@Nonnull Item...items)
     {
         for (Item item : items)
-            if (item != null)
-                RegistrationHandler.items.add(item);
+            if (item != null) RegistrationHandler.items.add(item);
     }
 
     /**
@@ -230,7 +237,7 @@ public class IntercraftItems
     protected static void registerElementItems(@Nonnull ItemElementGroup...groups)
     {
         for (ItemElementGroup group : groups)
-            registerItem(group.INGOT, group.NUGGET, group.DUST, group.DUST_SMALL, group.PLATE, group.GEAR, group.ROD, group.CHUNK);
+            registerItems(group.INGOT, group.NUGGET, group.DUST, group.DUST_SMALL, group.PLATE, group.GEAR, group.ROD, group.CHUNK);
     }
 
     /**
@@ -242,6 +249,6 @@ public class IntercraftItems
     protected static void registerColoredGroup(@Nonnull ItemColoredGroup<?>...groups)
     {
         for (ItemColoredGroup<?> group : groups)
-            registerItem(group.WHITE, group.ORANGE, group.MAGENTA, group.LIGHT_BLUE, group.YELLOW, group.LIME, group.PINK, group.GRAY, group.LIGHT_GRAY, group.CYAN, group.PURPLE, group.BLUE, group.BROWN, group.GREEN, group.RED, group.BLACK);
+            registerItems(group.WHITE, group.ORANGE, group.MAGENTA, group.LIGHT_BLUE, group.YELLOW, group.LIME, group.PINK, group.GRAY, group.LIGHT_GRAY, group.CYAN, group.PURPLE, group.BLUE, group.BROWN, group.GREEN, group.RED, group.BLACK);
     }
 }

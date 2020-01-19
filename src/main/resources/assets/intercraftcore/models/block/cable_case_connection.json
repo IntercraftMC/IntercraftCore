@@ -1,0 +1,57 @@
+{
+    "__comment": "Model generated using MrCrayfish's Model Creator (https://mrcrayfish.com/tools?id=mc)",
+    "textures": {
+        "particle": "minecraft:block/light_gray_concrete",
+        "strut": "minecraft:block/light_gray_concrete"
+    },
+    "elements": [
+        {
+            "name": "Cube",
+            "from": [ 2, 2, 14 ],
+            "to": [ 3, 3, 16 ],
+            "faces": {
+                "east": { "texture": "#strut", "uv": [ 0, 0, 2, 1 ] },
+                "south": { "texture": "#strut", "uv": [ 0, 0, 1, 1 ] },
+                "west": { "texture": "#strut", "uv": [ 0, 0, 2, 1 ] },
+                "up": { "texture": "#strut", "uv": [ 0, 0, 2, 1 ], "rotation": 270 },
+                "down": { "texture": "#strut", "uv": [ 0, 0, 2, 1 ], "rotation": 270 }
+            }
+        },
+        {
+            "name": "Cube",
+            "from": [ 13, 2, 14 ],
+            "to": [ 14, 3, 16 ],
+            "faces": {
+                "east": { "texture": "#strut", "uv": [ 0, 0, 2, 1 ] },
+                "south": { "texture": "#strut", "uv": [ 0, 0, 1, 1 ] },
+                "west": { "texture": "#strut", "uv": [ 0, 0, 2, 1 ] },
+                "up": { "texture": "#strut", "uv": [ 0, 0, 2, 1 ], "rotation": 270 },
+                "down": { "texture": "#strut", "uv": [ 0, 0, 2, 1 ], "rotation": 270 }
+            }
+        },
+        {
+            "name": "Cube",
+            "from": [ 2, 13, 14 ],
+            "to": [ 3, 14, 16 ],
+            "faces": {
+                "east": { "texture": "#strut", "uv": [ 0, 0, 2, 1 ] },
+                "south": { "texture": "#strut", "uv": [ 0, 0, 1, 1 ] },
+                "west": { "texture": "#strut", "uv": [ 0, 0, 2, 1 ] },
+                "up": { "texture": "#strut", "uv": [ 0, 0, 2, 1 ], "rotation": 270 },
+                "down": { "texture": "#strut", "uv": [ 0, 0, 2, 1 ], "rotation": 270 }
+            }
+        },
+        {
+            "name": "Cube",
+            "from": [ 13, 13, 14 ],
+            "to": [ 14, 14, 16 ],
+            "faces": {
+                "east": { "texture": "#strut", "uv": [ 0, 0, 2, 1 ] },
+                "south": { "texture": "#strut", "uv": [ 0, 0, 1, 1 ] },
+                "west": { "texture": "#strut", "uv": [ 0, 0, 2, 1 ] },
+                "up": { "texture": "#strut", "uv": [ 0, 0, 2, 1 ], "rotation": 270 },
+                "down": { "texture": "#strut", "uv": [ 0, 0, 2, 1 ], "rotation": 270 }
+            }
+        }
+    ]
+}

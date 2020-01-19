@@ -83,6 +83,8 @@
 
   "item.intercraftcore.cu_wire_coil": "Copper Wire Coil",
   "item.intercraftcore.insulated_cu_wire_coil": "Insulated Copper Wire Coil",
+  "item.intercraftcore.agau_wire_coil": "Electrum Wire Coil",
+  "item.intercraftcore.insulated_agau_wire_coil": "Insulated Electrum Wire Coil",
   "item.intercraftcore.empty_wire_coil": "Wire Coil",
 
 
@@ -230,7 +232,6 @@
   "item.intercraftcore.zn_dustsmall": "Tiny Pile of Zinc",
   "item.intercraftcore.zn_plate": "Zinc Plate",
   "item.intercraftcore.zn_rod": "Zinc Rod",
-
   "item.intercraftcore.c_ingot": "Carbon Ingot",
   "item.intercraftcore.c_nugget": "Carbon Nugget",
   "item.intercraftcore.c_dust": "Carbon Dust",
@@ -239,7 +240,6 @@
   "item.intercraftcore.si_dust": "Silicon Dust",
   "item.intercraftcore.si_dustsmall": "Tiny Pile of Silicon",
   "item.intercraftcore.si_rod": "Silicon Rod",
-
   "item.intercraftcore.cuzn_ingot": "Brass Ingot",
   "item.intercraftcore.cuzn_nugget": "Brass Nugget",
   "item.intercraftcore.cuzn_dust": "Brass Dust",
@@ -254,6 +254,13 @@
   "item.intercraftcore.cusn_plate": "Bronze Plate",
   "item.intercraftcore.cusn_gear": "Bronze Gear",
   "item.intercraftcore.cusn_rod": "Bronze Rod",
+  "item.intercraftcore.agau_ingot": "Electrum Ingot",
+  "item.intercraftcore.agau_nugget": "Electrum Nugget",
+  "item.intercraftcore.agau_dust": "Electrum Dust",
+  "item.intercraftcore.agau_dustsmall": "Tiny Pile of Electrum",
+  "item.intercraftcore.agau_plate": "Electrum Plate",
+  "item.intercraftcore.agau_gear": "Electrum Gear",
+  "item.intercraftcore.agau_rod": "Electrum Rod",
   "item.intercraftcore.fec_ingot": "Steel Ingot",
   "item.intercraftcore.fec_nugget": "Steel Nugget",
   "item.intercraftcore.fec_dust": "Steel Dust",
@@ -276,7 +283,6 @@
   "item.intercraftcore.w_chunk": "Tungsten Chunk",
   "item.intercraftcore.u_chunk": "Uranium Chunk",
   "item.intercraftcore.zn_chunk": "Zinc Chunk",
-
 
   "block.intercraftcore.al_block": "Aluminium Block",
   "block.intercraftcore.al_frame": "Aluminium Frame",
@@ -311,6 +317,8 @@
   "block.intercraftcore.cuzn_frame": "Brass Frame",
   "block.intercraftcore.cusn_block": "Bronze Block",
   "block.intercraftcore.cusn_frame": "Bronze Frame",
+  "block.intercraftcore.agau_block": "Electrum Block",
+  "block.intercraftcore.agau_frame": "Electrum Frame",
   "block.intercraftcore.fec_block": "Steel Block",
   "block.intercraftcore.fec_frame": "Steel Frame",
 

@@ -6,6 +6,6 @@ public class WireCopper12mm extends Wire
 {
     public WireCopper12mm()
     {
-        super("copper", 0.65f, ElementDictionary.COPPER.getColorPrimary(),(short) 12);
+        super("copper", 0.35f, ElementDictionary.COPPER.getColorPrimary(),(short) 12);
     }
 }

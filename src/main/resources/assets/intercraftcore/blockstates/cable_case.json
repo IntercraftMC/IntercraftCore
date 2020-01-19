@@ -1,7 +1,47 @@
 {
-  "variants": {
-    "": {
-      "model": "intercraftcore:block/cable_case"
+  "multipart": [
+    {
+      "when": { "OR": [
+        {"north": "true|false","south": "true|false","east": "true|false","west": "true|false","up": "true|false","down": "true|false"}
+      ]},
+      "apply": { "model": "intercraftcore:block/cable_case" }
+    },
+
+    {
+      "when": {
+        "north": true
+      },
+      "apply": { "model": "intercraftcore:block/cable_case_connection", "y": 180 }
+    },
+    {
+      "when": {
+        "south": true
+      },
+      "apply": { "model": "intercraftcore:block/cable_case_connection" }
+    },
+    {
+      "when": {
+        "east": true
+      },
+      "apply": { "model": "intercraftcore:block/cable_case_connection", "y": 270 }
+    },
+    {
+      "when": {
+        "west": true
+      },
+      "apply": { "model": "intercraftcore:block/cable_case_connection", "y": 90 }
+    },
+    {
+      "when": {
+        "up": true
+      },
+      "apply": { "model": "intercraftcore:block/cable_case_connection", "x": 90 }
+    },
+    {
+      "when": {
+        "down": true
+      },
+      "apply": { "model": "intercraftcore:block/cable_case_connection", "x": 270 }
     }
-  }
+  ]
 }

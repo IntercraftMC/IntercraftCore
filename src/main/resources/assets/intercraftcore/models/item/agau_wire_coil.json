@@ -1,0 +1,27 @@
+{
+  "parent":"item/generated",
+  "textures":{
+    "layer0":"intercraftcore:item/coil",
+    "layer1":"intercraftcore:item/wires"
+  },
+  "overrides":[
+    {
+      "predicate":{
+        "less":1
+      },
+      "model":"intercraftcore:item/less_wire_coil"
+    },
+    {
+      "predicate":{
+        "short":1
+      },
+      "model":"intercraftcore:item/short_wire_coil"
+    },
+    {
+      "predicate":{
+        "empty":1
+      },
+      "model":"intercraftcore:item/empty_wire_coil"
+    }
+  ]
+}

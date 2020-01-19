@@ -28,13 +28,13 @@ public enum ElementDictionary
 
 
     /**
-     * Minerals
+     * Minerals + Ores
      */
 
     CARBON(   "c",     0x000000,0x000000, new ElementComposition[] {new ElementComposition("c", 1)}),
     SILICON(  "si",    0x000000,0x000000, new ElementComposition[] {new ElementComposition("si",1)}),
-    GALENA(   "pbag",  0x000000,0x000000, new ElementComposition[] {new ElementComposition("pb",0.87),new ElementComposition("s",0.12),new ElementComposition("ag",0.01)}),
-    SPODUMENE("lialsi",0x000000,0x000000, new ElementComposition[] {new ElementComposition("li",0.95),new ElementComposition("al",0.04),new ElementComposition("si",0.01)}),
+    GALENA(   "pbag",  0x746486, new ElementComposition[] {new ElementComposition("pb",0.87),new ElementComposition("s",0.12),new ElementComposition("ag",0.01)}),
+    SPODUMENE("lialsi",0xba6f87, new ElementComposition[] {new ElementComposition("li",0.95),new ElementComposition("al",0.04),new ElementComposition("si",0.01)}),
 
 
 
@@ -45,7 +45,7 @@ public enum ElementDictionary
 
     BRASS(   "cuzn",0xc8a23c, new ElementComposition[] {new ElementComposition("cu",0.6), new ElementComposition("zn",0.4)}),
     BRONZE(  "cusn",0xffa23c, new ElementComposition[] {new ElementComposition("cu",0.88),new ElementComposition("sn",0.12)}),
-    ELECTRUM("agau",0xfdfd3b, new ElementComposition[] {new ElementComposition("ag",0.5),new ElementComposition("au",0.5)}),
+    ELECTRUM("agau",0xffe05c, new ElementComposition[] {new ElementComposition("ag",0.5),new ElementComposition("au",0.5)}),
     STEEL(   "fec", 0x6b6d74, new ElementComposition[] {new ElementComposition("fe",0.99),new ElementComposition("c",0.01)});
 
     private final String symbol;
@@ -61,7 +61,7 @@ public enum ElementDictionary
 
     ElementDictionary(String symbol, int colorPrimary, ElementComposition[] composition)
     {
-        this(symbol,colorPrimary,-1,1,composition);
+        this(symbol,colorPrimary,colorPrimary,1,composition);
     }
 
     ElementDictionary(String symbol, int colorPrimary, int colorSecondary, float hardness, ElementComposition[] composition)

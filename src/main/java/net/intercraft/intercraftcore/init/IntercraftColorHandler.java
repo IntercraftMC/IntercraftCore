@@ -18,6 +18,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IEnviromentBlockReader;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ColorHandlerEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -65,6 +66,8 @@ public class IntercraftColorHandler
 
         add(IntercraftItems.COPPER_COIL);
         add(IntercraftItems.INSULATED_COPPER_COIL);
+        add(IntercraftItems.ELECTRUM_COIL);
+        add(IntercraftItems.INSULATED_ELECTRUM_COIL);
     }};
 
     /**
@@ -76,7 +79,7 @@ public class IntercraftColorHandler
     }};
 
 
-    @SubscribeEvent
+    @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void ItemColorHandlerEvent(ColorHandlerEvent.Item event)
     {   System.out.println("Registering item colours ..");
 
@@ -106,6 +109,7 @@ public class IntercraftColorHandler
 
                 IntercraftItems.BRASS,
                 IntercraftItems.BRONZE,
+                IntercraftItems.ELECTRUM,
                 IntercraftItems.STEEL
         };
         final ItemColoredGroup<?>[] coloredGroup = {
@@ -172,7 +176,7 @@ public class IntercraftColorHandler
         System.out.println("[Item Colours] Done");
     }
 
-    @SubscribeEvent
+    @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void BlockColorHandlerEvent(ColorHandlerEvent.Block event)
     {   System.out.println("Registering block colours ..");
 
