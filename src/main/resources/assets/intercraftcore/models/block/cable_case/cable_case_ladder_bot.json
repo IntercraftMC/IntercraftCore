@@ -1,0 +1,43 @@
+{
+    "__comment": "Model generated using MrCrayfish's Model Creator (https://mrcrayfish.com/tools?id=mc)",
+    "parent": "intercraftcore:block/cable_case/cable_case_ladder_mid",
+    "elements": [
+        {
+            "name": "Cube",
+            "from": [ 4, 0, 6 ], 
+            "to": [ 5, 3, 9 ], 
+            "faces": {
+                "north": { "texture": "#side", "uv": [ 0, 0, 1, 3 ] },
+                "east": { "texture": "#side", "uv": [ 0, 0, 3, 3 ] },
+                "south": { "texture": "#side", "uv": [ 0, 0, 1, 3 ] },
+                "west": { "texture": "#side", "uv": [ 0, 0, 3, 3 ] },
+                "up": { "texture": "#side", "uv": [ 0, 0, 1, 3 ] },
+                "down": { "texture": "#side", "uv": [ 0, 0, 1, 3 ] }
+            }
+        },
+        {
+            "name": "Cube",
+            "from": [ 11, 0, 6 ], 
+            "to": [ 12, 3, 9 ], 
+            "faces": {
+                "north": { "texture": "#side", "uv": [ 1, 0, 0, 3 ] },
+                "east": { "texture": "#side", "uv": [ 3, 0, 0, 3 ] },
+                "south": { "texture": "#side", "uv": [ 1, 0, 0, 3 ] },
+                "west": { "texture": "#side", "uv": [ 3, 0, 0, 3 ] },
+                "up": { "texture": "#side", "uv": [ 1, 0, 0, 3 ] },
+                "down": { "texture": "#side", "uv": [ 1, 0, 0, 3 ] }
+            }
+        },
+        {
+            "name": "Cube",
+            "from": [ 5, 0, 7 ], 
+            "to": [ 11, 1, 8 ], 
+            "faces": {
+                "north": { "texture": "#side", "uv": [ 0, 0, 6, 1 ] },
+                "south": { "texture": "#side", "uv": [ 0, 0, 6, 1 ] },
+                "up": { "texture": "#side", "uv": [ 0, 0, 6, 1 ] },
+                "down": { "texture": "#side", "uv": [ 0, 0, 6, 1 ] }
+            }
+        }
+    ]
+}

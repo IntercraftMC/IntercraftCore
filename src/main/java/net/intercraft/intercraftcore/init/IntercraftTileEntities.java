@@ -1,10 +1,7 @@
 package net.intercraft.intercraftcore.init;
 
 import net.intercraft.intercraftcore.Reference;
-import net.intercraft.intercraftcore.tileentity.AutoCraftingTableTileEntity;
-import net.intercraft.intercraftcore.tileentity.ChunkLoaderBaseTileEntity;
-import net.intercraft.intercraftcore.tileentity.ChunkLoaderTimerTileEntity;
-import net.intercraft.intercraftcore.tileentity.TreeTapTileEntity;
+import net.intercraft.intercraftcore.tileentity.*;
 import net.minecraft.tileentity.TileEntityType;
 
 import java.util.Arrays;
@@ -13,6 +10,7 @@ public class IntercraftTileEntities
 {
 
     public static final TileEntityType<TreeTapTileEntity> TREETAP;
+    public static final TileEntityType<CableCaseTileEntity> CABLECASE;
     public static final TileEntityType<ChunkLoaderBaseTileEntity> CHUNKLOADER;
     public static final TileEntityType<ChunkLoaderBaseTileEntity> CHUNKLOADER_TIMER;
 
@@ -20,7 +18,10 @@ public class IntercraftTileEntities
 
 
     static {
-        TREETAP =           buildTE("treetap",TileEntityType.Builder.create(TreeTapTileEntity::new,IntercraftBlocks.TREETAP));
+        TREETAP   =           buildTE("treetap",TileEntityType.Builder.create(TreeTapTileEntity::new,IntercraftBlocks.TREETAP));
+        CABLECASE =           buildTE("cable_case",TileEntityType.Builder.create(CableCaseTileEntity::new,IntercraftBlocks.CABLECASE));
+
+
         CHUNKLOADER =       buildTE("chunkloader",TileEntityType.Builder.create(() -> new ChunkLoaderBaseTileEntity(IntercraftTileEntities.CHUNKLOADER),IntercraftBlocks.CHUNKLOADER,IntercraftBlocks.CHUNKLOADER_REDSTONE));
         CHUNKLOADER_TIMER = buildTE("chunkloader_timer",TileEntityType.Builder.create(ChunkLoaderTimerTileEntity::new,IntercraftBlocks.CHUNKLOADER_TIMER));
 
@@ -30,7 +31,7 @@ public class IntercraftTileEntities
 
     public static void register()
     {
-        registerTileEntities(TREETAP,CHUNKLOADER,CHUNKLOADER_TIMER,AUTOCRAFTINGTABLE);
+        registerTileEntities(TREETAP,CABLECASE,CHUNKLOADER,CHUNKLOADER_TIMER,AUTOCRAFTINGTABLE);
     }
 
 

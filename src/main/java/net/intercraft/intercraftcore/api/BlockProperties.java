@@ -14,13 +14,13 @@ public class BlockProperties
     public static final EnumProperty<BucketType> BUCKET = EnumProperty.create("bucket", BucketType.class);
     public static final BooleanProperty ACTIVE = BooleanProperty.create("active");
 
-    public static final BooleanProperty
-            CONNECTED_NORTH = BooleanProperty.create("north"),
-            CONNECTED_SOUTH = BooleanProperty.create("south"),
-            CONNECTED_EAST = BooleanProperty.create("east"),
-            CONNECTED_WEST = BooleanProperty.create("west"),
-            CONNECTED_UP = BooleanProperty.create("up"),
-            CONNECTED_DOWN = BooleanProperty.create("down");
+    public static final EnumProperty<CableCaseFaces>
+            CONNECTED_NORTH = EnumProperty.create("north", CableCaseFaces.class),
+            CONNECTED_SOUTH = EnumProperty.create("south", CableCaseFaces.class),
+            CONNECTED_EAST = EnumProperty.create("east", CableCaseFaces.class),
+            CONNECTED_WEST = EnumProperty.create("west", CableCaseFaces.class),
+            CONNECTED_UP = EnumProperty.create("up", CableCaseFaces.class),
+            CONNECTED_DOWN = EnumProperty.create("down", CableCaseFaces.class);
 
 
     //public static final EnumProperty<FluidType> FLUIDTYPE = EnumProperty.create("fluid_type", FluidType.class);

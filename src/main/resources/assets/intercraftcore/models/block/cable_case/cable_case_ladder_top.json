@@ -1,0 +1,32 @@
+{
+    "__comment": "Model generated using MrCrayfish's Model Creator (https://mrcrayfish.com/tools?id=mc)",
+    "parent": "intercraftcore:block/cable_case/cable_case_ladder_mid",
+    "elements": [
+        {
+            "name": "Cube",
+            "from": [ 4, 13, 6 ], 
+            "to": [ 5, 16, 9 ], 
+            "faces": {
+                "north": { "texture": "#side", "uv": [ 1, 0, 0, 3 ] },
+                "east": { "texture": "#side", "uv": [ 3, 0, 0, 3 ] },
+                "south": { "texture": "#side", "uv": [ 1, 0, 0, 3 ] },
+                "west": { "texture": "#side", "uv": [ 3, 0, 0, 3 ] },
+                "up": { "texture": "#side", "uv": [ 1, 0, 0, 3 ] },
+                "down": { "texture": "#side", "uv": [ 1, 0, 0, 3 ] }
+            }
+        },
+        {
+            "name": "Cube",
+            "from": [ 11, 13, 6 ], 
+            "to": [ 12, 16, 9 ], 
+            "faces": {
+                "north": { "texture": "#side", "uv": [ 1, 0, 0, 3 ] },
+                "east": { "texture": "#side", "uv": [ 3, 0, 0, 3 ] },
+                "south": { "texture": "#side", "uv": [ 1, 0, 0, 3 ] },
+                "west": { "texture": "#side", "uv": [ 3, 0, 0, 3 ] },
+                "up": { "texture": "#side", "uv": [ 1, 0, 0, 3 ] },
+                "down": { "texture": "#side", "uv": [ 1, 0, 0, 3 ] }
+            }
+        }
+    ]
+}

@@ -1,11 +1,14 @@
 package net.intercraft.intercraftcore.block;
 
 import net.intercraft.intercraftcore.api.BlockProperties;
+import net.intercraft.intercraftcore.api.CableCaseFaces;
 import net.intercraft.intercraftcore.api.Util;
+import net.intercraft.intercraftcore.tileentity.CableCaseTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
 import net.minecraft.state.StateContainer;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
@@ -14,6 +17,8 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
+
+import javax.annotation.Nullable;
 
 import static net.intercraft.intercraftcore.api.BlockProperties.CONNECTED_NORTH;
 import static net.intercraft.intercraftcore.api.BlockProperties.CONNECTED_SOUTH;
@@ -25,12 +30,9 @@ import static net.intercraft.intercraftcore.api.BlockProperties.CONNECTED_DOWN;
 public class BlockCableCase extends Block
 {
 
-    private static byte[] SIDE = {0,2,2,2,14,14};
-
-    protected static final VoxelShape[] CONNECTION_SIDES = getSides(SIDE[0],SIDE[1],SIDE[2],SIDE[3],SIDE[4],SIDE[5]);
-    protected static final VoxelShape MIDDLE = Block.makeCuboidShape(2,2,2,14,14,14);
-            /*CONNECTION_TOP = Block.makeCuboidShape(2,14,2,14,16,14),
-            CONNECTION_BOTTOM = Block.makeCuboidShape(2,0,2,14,2,14);*/
+    private static final byte[] SIDE = {0,2,2,2,14,14}, SIDE_MOD = {0,0,2,2,16,16};
+    public static final VoxelShape[] CONNECTION_SIDES = getSides(SIDE[0],SIDE[1],SIDE[2],SIDE[3],SIDE[4],SIDE[5]);
+    public static final VoxelShape MIDDLE = Block.makeCuboidShape(2,2,2,14,14,14);
 
 
     public BlockCableCase() {
@@ -38,7 +40,7 @@ public class BlockCableCase extends Block
         super(Block.Properties.create(Material.ANVIL).hardnessAndResistance(3.0f,3.0f));
 
 
-        setDefaultState(getDefaultState().with(CONNECTED_NORTH, false).with(CONNECTED_SOUTH, false).with(CONNECTED_EAST, false).with(CONNECTED_WEST, false).with(CONNECTED_UP, false).with(CONNECTED_DOWN, false));
+        setDefaultState(getDefaultState().with(CONNECTED_NORTH,CableCaseFaces.NONE).with(CONNECTED_SOUTH, CableCaseFaces.NONE).with(CONNECTED_EAST, CableCaseFaces.NONE).with(CONNECTED_WEST, CableCaseFaces.NONE).with(CONNECTED_UP, CableCaseFaces.NONE).with(CONNECTED_DOWN, CableCaseFaces.NONE));
         setRegistryName("cable_case");
 
 
@@ -61,62 +63,122 @@ public class BlockCableCase extends Block
         return t;
     }
 
+    private static boolean canDisCConnect(Direction facing, final BlockState stateIn, final BlockState stateOpp)
+    {
+        final BlockState[] s = {stateIn,stateOpp};
+
+        for (byte i=0;i<2;i++) {
+            switch (facing) {
+                case NORTH:
+                    if (s[i].get(BlockProperties.CONNECTED_NORTH) == CableCaseFaces.PLATE || s[i].get(BlockProperties.CONNECTED_NORTH) == CableCaseFaces.MODULE)
+                        return false;
+                    break;
+                case SOUTH:
+                    if (s[i].get(BlockProperties.CONNECTED_SOUTH) == CableCaseFaces.PLATE || s[i].get(BlockProperties.CONNECTED_SOUTH) == CableCaseFaces.MODULE)
+                        return false;
+                    break;
+                case EAST:
+                    if (s[i].get(BlockProperties.CONNECTED_EAST) == CableCaseFaces.PLATE || s[i].get(BlockProperties.CONNECTED_EAST) == CableCaseFaces.MODULE)
+                        return false;
+                    break;
+                case WEST:
+                    if (s[i].get(BlockProperties.CONNECTED_WEST) == CableCaseFaces.PLATE || s[i].get(BlockProperties.CONNECTED_WEST) == CableCaseFaces.MODULE)
+                        return false;
+                    break;
+                case UP:
+                    if (s[i].get(BlockProperties.CONNECTED_UP) == CableCaseFaces.PLATE || s[i].get(BlockProperties.CONNECTED_UP) == CableCaseFaces.MODULE)
+                        return false;
+                    break;
+                default:
+                    if (s[i].get(BlockProperties.CONNECTED_DOWN) == CableCaseFaces.PLATE || s[i].get(BlockProperties.CONNECTED_DOWN) == CableCaseFaces.MODULE)
+                        return false;
+            }
+            facing = facing.getOpposite();
+        }
+
+        return true;
+    }
+
+    @Override
+    public boolean hasTileEntity(BlockState state)
+    {
+        return true;
+    }
+
+    @Nullable
+    @Override
+    public TileEntity createTileEntity(BlockState state, IBlockReader world)
+    {
+        return new CableCaseTileEntity();
+    }
+
     @Override
     public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos)
     {
         if (!worldIn.isRemote()) {
 
-            if (worldIn.getBlockState(facingPos).getBlock().equals(this)) {
-                BlockState stateOpp = worldIn.getBlockState(facingPos);
+            BlockState stateOpp = worldIn.getBlockState(facingPos);
 
-                switch (facing) {
-                    case NORTH:
-                        stateIn.with(BlockProperties.CONNECTED_NORTH, true);
-                        stateOpp.with(BlockProperties.CONNECTED_SOUTH, true);
-                        break;
-                    case SOUTH:
-                        stateIn.with(BlockProperties.CONNECTED_SOUTH, true);
-                        stateOpp.with(BlockProperties.CONNECTED_NORTH, true);
-                        break;
-                    case EAST:
-                        stateIn.with(BlockProperties.CONNECTED_EAST, true);
-                        stateOpp.with(BlockProperties.CONNECTED_WEST, true);
-                        break;
-                    case WEST:
-                        stateIn.with(BlockProperties.CONNECTED_WEST, true);
-                        stateOpp.with(BlockProperties.CONNECTED_EAST, true);
-                        break;
-                    case UP:
-                        stateIn.with(BlockProperties.CONNECTED_UP, true);
-                        stateOpp.with(BlockProperties.CONNECTED_DOWN, true);
-                        break;
-                    default:
-                        stateIn.with(BlockProperties.CONNECTED_DOWN, true);
-                        stateOpp.with(BlockProperties.CONNECTED_UP, true);
-                }
-                worldIn.setBlockState(currentPos, stateIn, 2);
-                worldIn.setBlockState(facingPos, stateOpp, 2);
+            //if (canDisCConnect(facing,stateIn,stateOpp))
+            if (worldIn.getBlockState(facingPos).getBlock().equals(this)) {
+                //if (canDisCConnect(facing,stateIn,stateOpp)) {
+                    switch (facing) {
+                        case NORTH:
+                            stateIn = stateIn.with(BlockProperties.CONNECTED_NORTH, CableCaseFaces.CONNECTED);
+                            stateOpp = stateOpp.with(BlockProperties.CONNECTED_SOUTH, CableCaseFaces.CONNECTED);
+                            break;
+                        case SOUTH:
+                            stateIn = stateIn.with(BlockProperties.CONNECTED_SOUTH, CableCaseFaces.CONNECTED);
+                            stateOpp = stateOpp.with(BlockProperties.CONNECTED_NORTH, CableCaseFaces.CONNECTED);
+                            break;
+                        case EAST:
+                            stateIn = stateIn.with(BlockProperties.CONNECTED_EAST, CableCaseFaces.CONNECTED);
+                            stateOpp = stateOpp.with(BlockProperties.CONNECTED_WEST, CableCaseFaces.CONNECTED);
+                            break;
+                        case WEST:
+                            stateIn = stateIn.with(BlockProperties.CONNECTED_WEST, CableCaseFaces.CONNECTED);
+                            stateOpp = stateOpp.with(BlockProperties.CONNECTED_EAST, CableCaseFaces.CONNECTED);
+                            break;
+                        case UP:
+                            stateIn = stateIn.with(BlockProperties.CONNECTED_UP, CableCaseFaces.CONNECTED);
+                            stateOpp = stateOpp.with(BlockProperties.CONNECTED_DOWN, CableCaseFaces.CONNECTED);
+                            break;
+                        default:
+                            stateIn = stateIn.with(BlockProperties.CONNECTED_DOWN, CableCaseFaces.CONNECTED);
+                            stateOpp = stateOpp.with(BlockProperties.CONNECTED_UP, CableCaseFaces.CONNECTED);
+                    }
+                    worldIn.setBlockState(currentPos, stateIn, 2);
+                    worldIn.setBlockState(facingPos, stateOpp, 2);
+                //}
             } else {
+                CableCaseFaces s;
                 switch (facing) {
                     case NORTH:
-                        stateIn.with(BlockProperties.CONNECTED_NORTH, false);
+                        s = stateIn.get(BlockProperties.CONNECTED_NORTH);
+                        stateIn = stateIn.with(BlockProperties.CONNECTED_NORTH, CableCaseFaces.NONE);
                         break;
                     case SOUTH:
-                        stateIn.with(BlockProperties.CONNECTED_SOUTH, false);
+                        s = stateIn.get(BlockProperties.CONNECTED_NORTH);
+                        stateIn = stateIn.with(BlockProperties.CONNECTED_SOUTH, CableCaseFaces.NONE);
                         break;
                     case EAST:
-                        stateIn.with(BlockProperties.CONNECTED_EAST, false);
+                        s = stateIn.get(BlockProperties.CONNECTED_NORTH);
+                        stateIn = stateIn.with(BlockProperties.CONNECTED_EAST, CableCaseFaces.NONE);
                         break;
                     case WEST:
-                        stateIn.with(BlockProperties.CONNECTED_WEST, false);
+                        s = stateIn.get(BlockProperties.CONNECTED_NORTH);
+                        stateIn = stateIn.with(BlockProperties.CONNECTED_WEST, CableCaseFaces.NONE);
                         break;
                     case UP:
-                        stateIn.with(BlockProperties.CONNECTED_UP, false);
+                        s = stateIn.get(BlockProperties.CONNECTED_NORTH);
+                        stateIn = stateIn.with(BlockProperties.CONNECTED_UP, CableCaseFaces.NONE);
                         break;
                     default:
-                        stateIn.with(BlockProperties.CONNECTED_DOWN, false);
+                        s = stateIn.get(BlockProperties.CONNECTED_NORTH);
+                        stateIn = stateIn.with(BlockProperties.CONNECTED_DOWN, CableCaseFaces.NONE);
                 }
-                worldIn.setBlockState(currentPos, stateIn, 2);
+                //if (s == CableCaseFaces.CONNECTED)
+                    worldIn.setBlockState(currentPos, stateIn, 2);
             }
 
         }
@@ -140,12 +202,12 @@ public class BlockCableCase extends Block
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context)
     {
         VoxelShape shape = MIDDLE;
-        if (state.get(BlockProperties.CONNECTED_NORTH)) shape = VoxelShapes.or(shape,Connections.NORTH.getShape());
-        if (state.get(BlockProperties.CONNECTED_SOUTH)) shape = VoxelShapes.or(shape,Connections.SOUTH.getShape());
-        if (state.get(BlockProperties.CONNECTED_EAST)) shape = VoxelShapes.or(shape,Connections.EAST.getShape());
-        if (state.get(BlockProperties.CONNECTED_WEST)) shape = VoxelShapes.or(shape,Connections.WEST.getShape());
-        if (state.get(BlockProperties.CONNECTED_UP)) shape = VoxelShapes.or(shape,Connections.UP.getShape());
-        if (state.get(BlockProperties.CONNECTED_DOWN)) shape = VoxelShapes.or(shape,Connections.DOWN.getShape());
+        if (state.get(BlockProperties.CONNECTED_NORTH).getName().equals("connected")) shape = VoxelShapes.or(shape,Connections.NORTH.getShape());
+        if (state.get(BlockProperties.CONNECTED_SOUTH).getName().equals("connected")) shape = VoxelShapes.or(shape,Connections.SOUTH.getShape());
+        if (state.get(BlockProperties.CONNECTED_EAST).getName().equals("connected")) shape = VoxelShapes.or(shape,Connections.EAST.getShape());
+        if (state.get(BlockProperties.CONNECTED_WEST).getName().equals("connected")) shape = VoxelShapes.or(shape,Connections.WEST.getShape());
+        if (state.get(BlockProperties.CONNECTED_UP).getName().equals("connected")) shape = VoxelShapes.or(shape,Connections.UP.getShape());
+        if (state.get(BlockProperties.CONNECTED_DOWN).getName().equals("connected")) shape = VoxelShapes.or(shape,Connections.DOWN.getShape());
 
         return VoxelShapes.or(shape);
     }
@@ -180,4 +242,21 @@ public class BlockCableCase extends Block
             return CONNECTION_SIDES[value];
         }
     }
+
+    /*private static enum Dir
+    {
+        NORTH(Connections.NORTH),
+        SOUTH(Connections.SOUTH),
+        EAST(Connections.EAST),
+        WEST(Connections.WEST),
+        UP(Connections.UP),
+        DOWN(Connections.DOWN);
+
+        private final Connections connection;
+
+        Dir(Connections connection)
+        {
+            this.connection = connection;
+        }
+    }*/
 }

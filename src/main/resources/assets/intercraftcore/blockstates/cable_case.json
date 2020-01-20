@@ -2,46 +2,97 @@
   "multipart": [
     {
       "when": { "OR": [
-        {"north": "true|false","south": "true|false","east": "true|false","west": "true|false","up": "true|false","down": "true|false"}
+        { "north": "none|connected|plate|module","south": "none|connected|plate|module","east": "none|connected|plate|module","west": "none|connected|plate|module","up": "none|connected|plate|module","down": "none|connected|plate|module" }
       ]},
-      "apply": { "model": "intercraftcore:block/cable_case" }
+      "apply": { "model": "intercraftcore:block/cable_case/cable_case" }
     },
 
     {
       "when": {
-        "north": true
+        "north": "connected"
       },
-      "apply": { "model": "intercraftcore:block/cable_case_connection", "y": 180 }
+      "apply": { "model": "intercraftcore:block/cable_case/cable_case_connection", "y": 180 }
     },
     {
       "when": {
-        "south": true
+        "south": "connected"
       },
-      "apply": { "model": "intercraftcore:block/cable_case_connection" }
+      "apply": { "model": "intercraftcore:block/cable_case/cable_case_connection" }
     },
     {
       "when": {
-        "east": true
+        "east": "connected"
       },
-      "apply": { "model": "intercraftcore:block/cable_case_connection", "y": 270 }
+      "apply": { "model": "intercraftcore:block/cable_case/cable_case_connection", "y": 270 }
     },
     {
       "when": {
-        "west": true
+        "west": "connected"
       },
-      "apply": { "model": "intercraftcore:block/cable_case_connection", "y": 90 }
+      "apply": { "model": "intercraftcore:block/cable_case/cable_case_connection", "y": 90 }
+    },
+    {
+      "when": { "up": "connected" },
+      "apply": { "model": "intercraftcore:block/cable_case/cable_case_connection", "x": 90 }
+    },
+    {
+      "when": { "down": "connected" },
+      "apply": { "model": "intercraftcore:block/cable_case/cable_case_connection", "x": 270 }
+    },
+
+
+    {
+      "when": { "up": "connected" },
+      "apply": { "model": "intercraftcore:block/cable_case/cable_case_ladder_top" }
+    },
+    {
+      "when": { "OR": [
+        { "up": "connected" },
+        { "down": "connected" }
+      ]},
+      "apply": { "model": "intercraftcore:block/cable_case/cable_case_ladder_mid" }
+    },
+    {
+      "when": { "down": "connected" },
+      "apply": { "model": "intercraftcore:block/cable_case/cable_case_ladder_bot" }
+    },
+
+
+    {
+      "when": {
+        "north": "plate"
+      },
+      "apply": { "model": "intercraftcore:block/cable_case/cable_case_wall", "y": 180 }
     },
     {
       "when": {
-        "up": true
+        "south": "plate"
       },
-      "apply": { "model": "intercraftcore:block/cable_case_connection", "x": 90 }
+      "apply": { "model": "intercraftcore:block/cable_case/cable_case_wall" }
     },
     {
       "when": {
-        "down": true
+        "east": "plate"
       },
-      "apply": { "model": "intercraftcore:block/cable_case_connection", "x": 270 }
+      "apply": { "model": "intercraftcore:block/cable_case/cable_case_wall", "y": 270 }
+    },
+    {
+      "when": {
+        "west": "plate"
+      },
+      "apply": { "model": "intercraftcore:block/cable_case/cable_case_wall", "y": 90 }
+    },
+    {
+      "when": {
+        "up": "plate"
+      },
+      "apply": { "model": "intercraftcore:block/cable_case/cable_case_wall", "x": 90 }
+    },
+    {
+      "when": {
+        "down": "plate"
+      },
+      "apply": { "model": "intercraftcore:block/cable_case/cable_case_wall", "x": 270 }
     }
   ]
 }

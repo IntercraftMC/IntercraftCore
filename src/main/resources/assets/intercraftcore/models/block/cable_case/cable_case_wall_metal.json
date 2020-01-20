@@ -1,0 +1,6 @@
+{
+  "parent": "intercraftcore:block/cable_case/cable_case_wall",
+  "textures": {
+    "side": "minecraft:block/white_terracotta"
+  }
+}
