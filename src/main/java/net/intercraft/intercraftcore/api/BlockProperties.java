@@ -4,9 +4,6 @@ import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.EnumProperty;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class BlockProperties
 {   // If we divided it up into different mods, this would make it easier to have it here.
     public static final IntegerProperty DENSITY = IntegerProperty.create("density",0,3);

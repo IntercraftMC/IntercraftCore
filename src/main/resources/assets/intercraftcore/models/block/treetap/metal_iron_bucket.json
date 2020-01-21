@@ -1,8 +1,126 @@
 {
-    "parent": "intercraftcore:block/treetap/wood_oak_bucket",
+    "__comment": "Model generated using MrCrayfish's Model Creator (https://mrcrayfish.com/tools?id=mc)",
     "textures": {
-        "particle": "minecraft:block/iron_block",
         "side": "minecraft:block/iron_block",
-        "bottom": "minecraft:block/iron_block"
+        "handle": "minecraft:block/spruce_log"
+    },
+  "elements": [
+    {
+      "name": "Cube",
+      "from": [ 5, 1, 10 ],
+      "to": [ 11, 2, 16 ],
+      "faces": {
+        "north": { "texture": "#side", "uv": [ 1, 1, 7, 2 ] },
+        "east": { "texture": "#side", "uv": [ 9, 1, 15, 2 ] },
+        "south": { "texture": "#side", "uv": [ 1, 1, 7, 2 ] },
+        "west": { "texture": "#side", "uv": [ 9, 1, 15, 2 ] },
+        "up": { "texture": "#side", "uv": [ 0, 0, 6, 6 ], "tintindex": 282873 },
+        "down": { "texture": "#side", "uv": [ 5, 5, 11, 11 ], "tintindex": 282765 }
+      }
+    },
+    {
+      "name": "Cube",
+      "from": [ 5, 2, 15 ],
+      "to": [ 11, 8, 16 ],
+      "faces": {
+        "north": { "texture": "#side", "uv": [ 5, 5, 11, 11 ] },
+        "east": { "texture": "#side", "uv": [ 3, 5, 5, 11 ] },
+        "south": { "texture": "#side", "uv": [ 5, 5, 11, 11 ] },
+        "west": { "texture": "#side", "uv": [ 3, 5, 4, 11 ] },
+        "up": { "texture": "#side", "uv": [ 0, 0, 6, 1 ] }
+      }
+    },
+    {
+      "name": "Cube",
+      "from": [ 5, 2, 11 ],
+      "to": [ 6, 8, 15 ],
+      "faces": {
+        "east": { "texture": "#side", "uv": [ 6, 5, 10, 11 ] },
+        "west": { "texture": "#side", "uv": [ 6, 5, 10, 11 ] },
+        "up": { "texture": "#side", "uv": [ 0, 0, 1, 4 ] }
+      }
+    },
+    {
+      "name": "Cube",
+      "from": [ 5, 2, 10 ],
+      "to": [ 11, 8, 11 ],
+      "faces": {
+        "north": { "texture": "#side", "uv": [ 5, 5, 11, 11 ] },
+        "east": { "texture": "#side", "uv": [ 4, 5, 5, 11 ] },
+        "south": { "texture": "#side", "uv": [ 5, 5, 11, 11 ] },
+        "west": { "texture": "#side", "uv": [ 3, 5, 4, 11 ] },
+        "up": { "texture": "#side", "uv": [ 0, 0, 6, 1 ] }
+      }
+    },
+    {
+      "name": "Cube",
+      "from": [ 10, 2, 11 ],
+      "to": [ 11, 8, 15 ],
+      "faces": {
+        "east": { "texture": "#side", "uv": [ 6, 5, 10, 11 ] },
+        "west": { "texture": "#side", "uv": [ 6, 5, 10, 11 ] },
+        "up": { "texture": "#side", "uv": [ 0, 0, 1, 4 ] }
+      }
+    },
+    {
+      "name": "Cube",
+      "from": [ 10, 8, 13 ],
+      "to": [ 11, 9, 14 ],
+      "faces": {
+        "north": { "texture": "#handle", "uv": [ 0, 0, 1, 1 ] },
+        "east": { "texture": "#handle", "uv": [ 0, 0, 1, 1 ] },
+        "south": { "texture": "#handle", "uv": [ 0, 0, 1, 1 ] },
+        "west": { "texture": "#handle", "uv": [ 0, 0, 1, 1 ] },
+        "up": { "texture": "#handle", "uv": [ 0, 0, 1, 1 ] }
+      }
+    },
+    {
+      "name": "Cube",
+      "from": [ 9, 9, 13 ],
+      "to": [ 10, 10, 14 ],
+      "faces": {
+        "north": { "texture": "#handle", "uv": [ 0, 0, 1, 1 ] },
+        "east": { "texture": "#handle", "uv": [ 0, 0, 1, 1 ] },
+        "south": { "texture": "#handle", "uv": [ 0, 0, 1, 1 ] },
+        "west": { "texture": "#handle", "uv": [ 0, 0, 1, 1 ] },
+        "up": { "texture": "#handle", "uv": [ 0, 0, 1, 1 ] }
+      }
+    },
+    {
+      "name": "Cube",
+      "from": [ 7, 10, 13 ],
+      "to": [ 9, 11, 14 ],
+      "faces": {
+        "north": { "texture": "#handle", "uv": [ 0, 0, 2, 1 ] },
+        "east": { "texture": "#handle", "uv": [ 0, 0, 1, 1 ] },
+        "south": { "texture": "#handle", "uv": [ 0, 0, 2, 1 ] },
+        "west": { "texture": "#handle", "uv": [ 0, 0, 1, 1 ] },
+        "up": { "texture": "#handle", "uv": [ 0, 0, 2, 1 ] }
+      }
+    },
+    {
+      "name": "Cube",
+      "from": [ 6, 9, 13 ],
+      "to": [ 7, 10, 14 ],
+      "faces": {
+        "north": { "texture": "#handle", "uv": [ 0, 0, 1, 1 ] },
+        "east": { "texture": "#handle", "uv": [ 0, 0, 1, 1 ] },
+        "south": { "texture": "#handle", "uv": [ 0, 0, 1, 1 ] },
+        "west": { "texture": "#handle", "uv": [ 0, 0, 1, 1 ] },
+        "up": { "texture": "#handle", "uv": [ 0, 0, 1, 1 ] }
+      }
+    },
+    {
+      "name": "Cube",
+      "from": [ 5, 8, 13 ],
+      "to": [ 6, 9, 14 ],
+      "faces": {
+        "north": { "texture": "#handle", "uv": [ 0, 0, 1, 1 ] },
+        "east": { "texture": "#handle", "uv": [ 0, 0, 1, 1 ] },
+        "south": { "texture": "#handle", "uv": [ 0, 0, 1, 1 ] },
+        "west": { "texture": "#handle", "uv": [ 0, 0, 1, 1 ] },
+        "up": { "texture": "#handle", "uv": [ 0, 0, 1, 1 ] }
+      }
     }
+  ]
 }

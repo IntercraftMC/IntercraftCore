@@ -1,8 +1,6 @@
 {
-    "parent": "intercraftcore:block/treetap/wood_oak_bucket",
-    "textures": {
-        "particle": "minecraft:block/jungle_planks",
-        "side": "minecraft:block/jungle_planks",
-        "bottom": "minecraft:block/spruce_planks"
-    }
+  "parent": "intercraftcore:block/treetap/wood_oak_bucket",
+  "textures": {
+    "side": "minecraft:block/jungle_planks"
+  }
 }
