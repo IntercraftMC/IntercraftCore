@@ -10,23 +10,23 @@ public class Util
      */
 
     public static final float[][]
-            TCW = {
+            TCW2D = {
             {0,-1},
             {1,0}
     },
-            TACW = {
+            TACW2D = {
             {0,1},
             {-1,0}
     };
 
     /**
-     * Generate rotation Matrix
+     * Generate 2D rotation Matrix
      *
      * @param d Degrees to generate matrix from.
      * @return Double-Array Matrix
      */
 
-    public static float[][] generateMatrix(float d)
+    public static float[][] generate2DMatrix(float d)
     {
         return new float[][] {
                 {(float)Math.cos(d),(float)-Math.sin(d)},
@@ -35,40 +35,97 @@ public class Util
     }
 
     /**
-     * Rotate coordinates from Matrix in X/Y axis
+     * Generate 3D rotation Matrix
+     *
+     * @param d Degrees to generate matrix from.
+     * @param axis What axis to generate matrix from (x,y,z).
+     * @return Double-Array Matrix
+     */
+
+    public static float[][] generate3DMatrix(float d, char axis)
+    {
+        switch (axis) {
+            case 'x':
+                return new float[][] {
+                        {1, 0, 0},
+                        {0, (float)Math.cos(d), (float)-Math.sin(d)},
+                        {0, (float)Math.sin(d), (float)Math.cos(d)}
+                };
+            case 'z':
+                return new float[][] {
+                        {(float)Math.cos(d), 0, (float)Math.sin(d)},
+                        {0, 1, 0},
+                        {(float)-Math.sin(d), 0, (float)Math.cos(d)}
+                };
+            default: // 'y'
+                return new float[][] {
+                        {(float)Math.cos(d), (float)-Math.sin(d), 0},
+                        {(float)Math.sin(d), (float)Math.cos(d), 0},
+                        {0, 0, 1}
+                };
+        }
+    }
+
+    /**
+     * Rotate 3D coordinates from Matrix
      *
      * @param matrix Rotation matrix to be used.
      * @return New transformed coordinates.
      */
 
-    public static float[] rotateY(float x,float y,float z,float[][] matrix)
+    public static float[] rotate3D(float x, float y, float z, float[][] matrix)
+    {
+        return new float[] {matrix[0][0]*x+matrix[0][1]*y+matrix[0][2]*z,matrix[1][0]*x+matrix[1][1]*y+matrix[1][2]*z,matrix[2][0]*x+matrix[2][1]*y+matrix[2][2]*z};
+    }
+
+    public static short[] rotate3D(short x, short y, short z, float[][] matrix)
+    {
+        final float[] c = rotate3D((float)x,y,z,matrix);
+        return new short[] {(short)Math.round(c[0]),(short)Math.round(c[1]),(short)Math.round(c[2])};
+    }
+
+
+    /**
+     * Rotate 2D coordinates from Matrix in Y axis
+     *
+     * @param matrix Rotation matrix to be used.
+     * @return New transformed coordinates.
+     */
+
+    public static float[] rotateY(float x, float y, float z, float[][] matrix)
     {
         return new float[] {matrix[0][0]*x+matrix[0][1]*z,y,matrix[1][0]*x+matrix[1][1]*z};
     }
 
-    /**
-     * Rotate coordinates from degrees in X/Y axis
-     *
-     * @param d Degrees to generate matrix from.
-     * @return New transformed coordinates.
-     */
-
-    public static float[] rotateY(float x,float y,float z, float d)
-    {
-        return rotateY(x,y,z,generateMatrix(d));
-    }
-
-    public static short[] rotateY(short x,short y,short z,float[][] matrix)
+    public static short[] rotateY(short x,short y,short z, float[][] matrix)
     {
         final float[] c = rotateY((float)x,y,z,matrix);
         return new short[] {(short)Math.round(c[0]),(short)Math.round(c[1]),(short)Math.round(c[2])};
     }
 
-    public static short[] rotateY(short x,short y,short z,float d)
+    /**
+     * Rotate 2D coordinates from degrees in Y axis
+     *
+     * @param d Degrees to generate matrix from.
+     * @return New transformed coordinates.
+     */
+
+    public static float[] rotateY(float x, float y, float z, float d)
     {
-        return rotateY(x,y,z,generateMatrix(d));
+        return rotateY(x,y,z,generate2DMatrix(d));
     }
 
+    public static short[] rotateY(short x, short y, short z, float d)
+    {
+        return rotateY(x,y,z,generate2DMatrix(d));
+    }
+
+    /**
+     * Rotate coordinates from Matrix in X axis
+     *
+     * @param matrix Rotation matrix to be used.
+     * @return New transformed coordinates.
+     */
 
     public static float[] rotateX(float x,float y,float z,float[][] matrix)
     {
@@ -76,24 +133,17 @@ public class Util
         return new float[] {x,matrix[0][0]*y+matrix[0][1]*z,matrix[1][0]*y+matrix[1][1]*z};
     }
 
+    /**
+     * Rotate coordinates from degrees in Y axis
+     *
+     * @param d Degrees to generate matrix from.
+     * @return New transformed coordinates.
+     */
+
     public static float[] rotateX(float x,float y,float z, float d)
     {
-        return rotateX(x,y,z,generateMatrix(d));
+        return rotateX(x,y,z, generate2DMatrix(d));
     }
-
-    public static short[] rotateX(short x,short y,short z,float[][] matrix)
-    {
-        final float[] c = rotateX((float)x,y,z,matrix);
-        return new short[] {(short)Math.round(c[0]),(short)Math.round(c[1]),(short)Math.round(c[2])};
-    }
-
-    public static short[] rotateX(short x,short y,short z,float d)
-    {
-        return rotateX(x,y,z,generateMatrix(d));
-    }
-
-
-
 
 
 

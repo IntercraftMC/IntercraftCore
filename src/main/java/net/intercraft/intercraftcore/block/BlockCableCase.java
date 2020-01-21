@@ -8,6 +8,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Items;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
@@ -19,6 +20,7 @@ import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
@@ -57,14 +59,19 @@ public class BlockCableCase extends Block
         VoxelShape[] t = new VoxelShape[6];
         short[] k1 = {(short)(x1-8),y1,(short)(z1-8)};
         short[] k2 = {(short)(x2-8),y2,(short)(z2-8)};
-        t[0] = Block.makeCuboidShape(k1[0]+8,k1[1],k1[2]+8,k2[0]+8,k2[1],k2[2]+8);
-        for (byte i=1;i<4;i++) {
-            k1 = Util.rotateY(k1[0],k1[1],k1[2],Util.TCW);
-            k2 = Util.rotateY(k2[0],k2[1],k2[2],Util.TCW);
-            t[i] = Block.makeCuboidShape(k1[0]+8,k1[1],k1[2]+8,k2[0]+8,k2[1],k2[2]+8);
+        t[0] = Block.makeCuboidShape(k1[0],k1[1]+18,k1[2],k2[0],k2[1]+18,k2[2]);
+        for (byte i=1;i<t.length;i++) {
+            if (i < 3) {
+                k1 = Util.rotateY(k1[0], k1[1], k1[2], Util.generate3DMatrix(90, 'y'));
+                k2 = Util.rotateY(k2[0], k2[1], k2[2], Util.generate3DMatrix(90, 'y'));
+            } else {
+                k1 = Util.rotate3D(k1[0], k1[1], k1[2], Util.generate3DMatrix(90, 'x'));
+                k2 = Util.rotate3D(k2[0], k2[1], k2[2], Util.generate3DMatrix(180, 'x'));
+            }
+            t[i] = Block.makeCuboidShape(k1[0],k1[1]+18,k1[2],k2[0],k2[1]+18,k2[2]);
         }
-        t[4] = Block.makeCuboidShape(2,14,2,14,16,14);
-        t[5] = Block.makeCuboidShape(2,0,2,14,2,14);
+        /*t[4] = Block.makeCuboidShape(2,14,2,14,16,14);
+        t[5] = Block.makeCuboidShape(2,0,2,14,2,14);*/
         return t;
     }
 
@@ -106,8 +113,21 @@ public class BlockCableCase extends Block
         if (!worldIn.isRemote()) {
             Direction facing = hit.getFace();
 
-            System.out.println(facing);
-            worldIn.setBlockState(pos,state.with(getFace(facing),CableCaseFaces.PLATE));
+            if (player.isCreative()) {
+                if (player.getHeldItem(handIn).isEmpty())
+                    player.sendMessage(new StringTextComponent(facing.getName()));
+                else if (player.getHeldItem(handIn).getItem() == Items.STICK) {
+                    switch (state.get(getFace(facing))) {
+                        case NONE:
+                            worldIn.setBlockState(pos, state.with(getFace(facing),CableCaseFaces.CONNECTED));
+                            break;
+                        case CONNECTED:
+                            worldIn.setBlockState(pos, state.with(getFace(facing),CableCaseFaces.NONE));
+                    }
+                }
+            }
+
+
 
         }
         return true;
