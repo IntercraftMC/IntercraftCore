@@ -17,6 +17,7 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
@@ -26,6 +27,7 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
+import javax.vecmath.Vector3d;
 
 import static net.intercraft.intercraftcore.api.BlockProperties.CONNECTED_NORTH;
 import static net.intercraft.intercraftcore.api.BlockProperties.CONNECTED_SOUTH;
@@ -55,23 +57,24 @@ public class BlockCableCase extends Block
 
     private static VoxelShape[] getSides(short x1, short y1, short z1, short x2, short y2, short z2)
     {
-
         VoxelShape[] t = new VoxelShape[6];
-        short[] k1 = {(short)(x1-8),y1,(short)(z1-8)};
-        short[] k2 = {(short)(x2-8),y2,(short)(z2-8)};
-        t[0] = Block.makeCuboidShape(k1[0],k1[1]+18,k1[2],k2[0],k2[1]+18,k2[2]);
-        for (byte i=1;i<t.length;i++) {
-            if (i < 3) {
-                k1 = Util.rotateY(k1[0], k1[1], k1[2], Util.generate3DMatrix(90, 'y'));
-                k2 = Util.rotateY(k2[0], k2[1], k2[2], Util.generate3DMatrix(90, 'y'));
-            } else {
-                k1 = Util.rotate3D(k1[0], k1[1], k1[2], Util.generate3DMatrix(90, 'x'));
-                k2 = Util.rotate3D(k2[0], k2[1], k2[2], Util.generate3DMatrix(180, 'x'));
+        Vec3d k1 = new Vec3d(x1 - 8, y1 - 8, z1 - 8);
+        Vec3d k2 = new Vec3d(x2 - 8, y2 - 8, z2 - 8);
+
+        // West, North, East, South, Top, Bottom
+        for (int i = 0; i < 6; i++) {
+            if (i > 0) {
+                if (i < 4) {
+                    k1 = k1.rotateYaw((float) -Math.PI / 2f);
+                    k2 = k2.rotateYaw((float) -Math.PI / 2f);
+                } else {
+                    k1 = k1.rotatePitch((i - 3) * (float) Math.PI / 2f);
+                    k2 = k2.rotatePitch((i - 3) * (float) Math.PI / 2f);
+                }
             }
-            t[i] = Block.makeCuboidShape(k1[0],k1[1]+18,k1[2],k2[0],k2[1]+18,k2[2]);
+            t[i] = Block.makeCuboidShape(k1.x + 8, k1.y + 8, k1.z + 8, k2.x + 8, k2.y + 8, k2.z + 8);
         }
-        /*t[4] = Block.makeCuboidShape(2,14,2,14,16,14);
-        t[5] = Block.makeCuboidShape(2,0,2,14,2,14);*/
+
         return t;
     }
 
