@@ -4,9 +4,8 @@ public class Util
 {
 
     /**
-     * Clockwise rotation
-     *
-     * Anti-Clockwise rotation
+     * T Close-Wise rotation
+     * T Anti-Close-Wise rotation
      */
 
     public static final float[][]
@@ -17,13 +16,15 @@ public class Util
             TACW2D = {
             {0,1},
             {-1,0}
-    };
+    },
+    TCW3D = generate3DMatrix(90,'y'),
+    TACW3D = generate3DMatrix(270,'y');
 
     /**
      * Generate 2D rotation Matrix
      *
      * @param d Degrees to generate matrix from.
-     * @return Double-Array Matrix
+     * @return Double-Array matrix.
      */
 
     public static float[][] generate2DMatrix(float d)
@@ -39,29 +40,31 @@ public class Util
      *
      * @param d Degrees to generate matrix from.
      * @param axis What axis to generate matrix from (x,y,z).
-     * @return Double-Array Matrix
+     * @return Double-Array matrix.
      */
 
-    public static float[][] generate3DMatrix(float d, char axis)
+    public static float[][] generate3DMatrix(final float d, final char axis)
     {
+        final double r = Math.toRadians(d);
+        final float c = (float) Math.cos(r), s = (float) Math.sin(r);
         switch (axis) {
             case 'x':
                 return new float[][] {
-                        {1, 0, 0},
-                        {0, (float)Math.cos(d), (float)-Math.sin(d)},
-                        {0, (float)Math.sin(d), (float)Math.cos(d)}
+                        {1, 0, 0 },
+                        {0, c, -s},
+                        {0, s, c }
                 };
             case 'z':
                 return new float[][] {
-                        {(float)Math.cos(d), 0, (float)Math.sin(d)},
-                        {0, 1, 0},
-                        {(float)-Math.sin(d), 0, (float)Math.cos(d)}
+                        {c, -s, 0},
+                        {s, c,  0},
+                        {0, 0,  1}
                 };
             default: // 'y'
                 return new float[][] {
-                        {(float)Math.cos(d), (float)-Math.sin(d), 0},
-                        {(float)Math.sin(d), (float)Math.cos(d), 0},
-                        {0, 0, 1}
+                        {c,  0, s},
+                        {0,  1, 0},
+                        {-s, 0, c}
                 };
         }
     }
@@ -75,13 +78,32 @@ public class Util
 
     public static float[] rotate3D(float x, float y, float z, float[][] matrix)
     {
-        return new float[] {matrix[0][0]*x+matrix[0][1]*y+matrix[0][2]*z,matrix[1][0]*x+matrix[1][1]*y+matrix[1][2]*z,matrix[2][0]*x+matrix[2][1]*y+matrix[2][2]*z};
+        /*float t = x;
+        x = z;
+        z = t;*/
+
+        //return new float[] {matrix[0][0]*x+matrix[1][0]*y+matrix[2][0]*z,matrix[1][1]*x+matrix[1][1]*y+matrix[2][1]*z,matrix[0][2]*x+matrix[1][2]*y+matrix[2][2]*z};
+        return new float[] {
+                (x * matrix[0][0]) + (y * matrix[1][0]) + (z * matrix[2][0]),
+                (x * matrix[0][1]) + (y * matrix[1][1]) + (z * matrix[2][1]),
+                (x * matrix[0][2]) + (y * matrix[1][2]) + (z * matrix[2][2])
+        };
+    }
+
+    public static float[] rotate3D(float x, float y, float z, float d, char axis)
+    {
+        return rotate3D(x,y,z,generate3DMatrix(d,axis));
     }
 
     public static short[] rotate3D(short x, short y, short z, float[][] matrix)
     {
         final float[] c = rotate3D((float)x,y,z,matrix);
         return new short[] {(short)Math.round(c[0]),(short)Math.round(c[1]),(short)Math.round(c[2])};
+    }
+
+    public static short[] rotate3D(short x, short y, short z, float d, char axis)
+    {
+        return rotate3D(x,y,z,generate3DMatrix(d,axis));
     }
 
 
@@ -142,7 +164,7 @@ public class Util
 
     public static float[] rotateX(float x,float y,float z, float d)
     {
-        return rotateX(x,y,z, generate2DMatrix(d));
+        return rotateX(x,y,z,generate2DMatrix(d));
     }
 
 

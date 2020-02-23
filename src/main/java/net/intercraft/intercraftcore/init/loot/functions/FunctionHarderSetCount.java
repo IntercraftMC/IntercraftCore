@@ -5,11 +5,10 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 
 import net.intercraft.intercraftcore.Reference;
-import net.intercraft.intercraftcore.api.BlockProperties;
+import net.intercraft.intercraftcore.api.enumProperties.BlockProperties;
 import net.minecraft.block.BlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.storage.loot.*;

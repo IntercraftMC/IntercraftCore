@@ -1,7 +1,7 @@
 package net.intercraft.intercraftcore.client;
 
-import net.intercraft.intercraftcore.api.BlockProperties;
-import net.intercraft.intercraftcore.api.BucketType;
+import net.intercraft.intercraftcore.api.enumProperties.BlockProperties;
+import net.intercraft.intercraftcore.api.enumProperties.BucketType;
 import net.intercraft.intercraftcore.api.FluidType;
 import net.intercraft.intercraftcore.api.Util;
 import net.intercraft.intercraftcore.tileentity.TreeTapTileEntity;

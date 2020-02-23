@@ -1,8 +1,8 @@
 :heavy_check_mark: `:heavy_check_mark:` for approved and :heavy_multiplication_x: `:heavy_multiplication_x:` for disapproved.
 
-:large_orange_diamond: `:large_orange_diamond:` if its updated to 1.13.2.
+:large_orange_diamond: `:large_orange_diamond:` if its updated to 1.14.
 
-:large_blue_diamond: `:large_blue_diamond:` if its updated to 1.14.4.
+:large_blue_diamond: `:large_blue_diamond:` if its updated to 1.15.
 
 If mod uses a dependency add in parentheses the name of it at the end of the mod entry and link in the `Core mods/libraries` list, not after the new mod entry.
 
@@ -22,28 +22,28 @@ If mod uses a dependency add in parentheses the name of it at the end of the mod
 - [Pam's Harvestcraft](https://minecraft.curseforge.com/projects/pams-harvestcraft)
 - [PeacefulSurface](https://minecraft.curseforge.com/projects/peacefulsurface) :large_orange_diamond::large_blue_diamond:
 - [Railcraft](https://minecraft.curseforge.com/projects/railcraft)
-- [Regeneration](https://minecraft.curseforge.com/projects/regeneration) :large_orange_diamond:
+- [Regeneration](https://minecraft.curseforge.com/projects/regeneration)
 - [RetroComputers](https://minecraft.curseforge.com/projects/retrocomputers) (MCMultiPart, QuackLib, Shadowfacts' Forgelin) :heavy_check_mark:
 - [Rockhounding: Chemistry](https://minecraft.curseforge.com/projects/rockhounding-mod-chemistry) (Bookshelf, Guidebook, Redstone Flux, Rockhounding Mod: Core) :heavy_check_mark:
-- [Serene Seasons](https://minecraft.curseforge.com/projects/serene-seasons)
-- [SGCraft](https://ore.spongepowered.org/Dockter/SGCraft)
-- [TIS-3D](https://minecraft.curseforge.com/projects/tis-3d) :heavy_check_mark:
+- [Serene Seasons](https://minecraft.curseforge.com/projects/serene-seasons) :large_orange_diamond::large_blue_diamond:
+- [SGCraft](https://www.curseforge.com/minecraft/mc-mods/stargate-network)
+- [TIS-3D](https://minecraft.curseforge.com/projects/tis-3d) :heavy_check_mark::large_orange_diamond:
 - [The Betweenlands](https://minecraft.curseforge.com/projects/angry-pixel-the-betweenlands-mod) :heavy_multiplication_x:
 
 ## Core mods/libraries
 
-- [Bookshelf](https://minecraft.curseforge.com/projects/bookshelf) :large_blue_diamond:
-- [ElecCore](https://minecraft.curseforge.com/projects/eleccore) 
+- [Bookshelf](https://minecraft.curseforge.com/projects/bookshelf) :large_orange_diamond:
+- [ElecCore](https://minecraft.curseforge.com/projects/eleccore) :large_orange_diamond:
 - [ExplosionCrafting](https://minecraft.curseforge.com/projects/explosioncrafting) :heavy_multiplication_x:
-- [Guidebook](https://minecraft.curseforge.com/projects/guidebook)
-- [McJtyLib](https://minecraft.curseforge.com/projects/mcjtylib) :large_blue_diamond:
+- [Guidebook](https://minecraft.curseforge.com/projects/guidebook) :large_blue_diamond:
+- [McJtyLib](https://minecraft.curseforge.com/projects/mcjtylib) :large_orange_diamond::large_blue_diamond:
 - [MCMultiPart](https://minecraft.curseforge.com/projects/mcmultipart)
 - [MicdoodleCore](https://micdoodle8.com/mods/galacticraft)
 - [OreLib](https://minecraft.curseforge.com/projects/orelib)
-- [Phosphor](https://minecraft.curseforge.com/projects/phosphor)
+- [Phosphor](https://minecraft.curseforge.com/projects/phosphor) :large_orange_diamond::large_blue_diamond:
 - [Proportional Destruction Particles](https://minecraft.curseforge.com/projects/proportional-destruction-particles)
 - [QuackLib](https://minecraft.curseforge.com/projects/quacklib)
 - [Redstone Flux](https://minecraft.curseforge.com/projects/redstone-flux)
 - [Rockhounding Mod: Core](https://minecraft.curseforge.com/projects/rockhounding-mod-core)
-- [Shadowfacts' Forgelin](https://minecraft.curseforge.com/projects/shadowfacts-forgelin) :large_orange_diamond:
+- [Shadowfacts' Forgelin](https://minecraft.curseforge.com/projects/shadowfacts-forgelin) 
 - [The Spice of Life](https://minecraft.curseforge.com/projects/the-spice-of-life) :heavy_multiplication_x:

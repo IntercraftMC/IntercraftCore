@@ -1,7 +1,7 @@
 package net.intercraft.intercraftcore.init.gen;
 
 import net.intercraft.intercraftcore.init.IntercraftBlocks;
-import net.intercraft.intercraftcore.api.BlockProperties;
+import net.intercraft.intercraftcore.api.enumProperties.BlockProperties;
 import net.minecraft.block.BlockState;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStage;

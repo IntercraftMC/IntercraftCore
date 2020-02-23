@@ -4,7 +4,7 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 
 import net.intercraft.intercraftcore.Reference;
-import net.intercraft.intercraftcore.api.BlockProperties;
+import net.intercraft.intercraftcore.api.enumProperties.BlockProperties;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;

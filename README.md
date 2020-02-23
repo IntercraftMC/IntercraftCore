@@ -14,9 +14,9 @@ Core mod for InterCraft 1.14.4 modpack.
     - [ ] PCB Factory line (PCB crafting tree step 1 & 2 automated with program)
     - [ ] (Placeable) PCB (logic gates)
     
-    *Can be configurated however you want to make 1x1 logic gates (AND, NAND, OR, XOR, etc). Can be used in crafting ex. [OpenComputers](https://minecraft.curseforge.com/projects/opencomputers).*
+    *Can be configured however you want to make 1x1 logic gates (AND, NAND, OR, XOR, etc). Can be used in crafting ex. [OpenComputers](https://minecraft.curseforge.com/projects/opencomputers).*
 - Gen.
-    - [x] Ores ([hard](https://minecraft.curseforge.com/projects/harder-ores)) :heavy_check_mark:
+    - [X] Ores ([hard](https://minecraft.curseforge.com/projects/harder-ores)) :heavy_check_mark:
     
     *Ores which depending on the concentration of metal inside it will vary the break time of the block and amount of ore chunks dropped.*
     - [ ] Ore Gen.
@@ -31,7 +31,7 @@ Core mod for InterCraft 1.14.4 modpack.
 - Energy
     - [ ] Cables
     
-    *Regular old cables taking up space. But multiple cables (and pipes) can take up the same space like [EnderIO](https://minecraft.curseforge.com/projects/ender-io), also single cable lines can be dragged between connectors like [Immersive Engineering](https://minecraft.curseforge.com/projects/immersive-engineering).*
+    *Can be connected to connectors and hooks just like [Immersive Engineering](https://minecraft.curseforge.com/projects/immersive-engineering). Can also be dragged inside Cable Cases.*
     - [ ] Custom Batteries
     
     *Batteries which are modeled on real life batteries or Galvanic [Cells](https://en.wikipedia.org/wiki/Galvanic_cell) which are then placed into battery boxes to be usable in external machines.*

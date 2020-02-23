@@ -1,12 +1,11 @@
 package net.intercraft.intercraftcore.api;
 
 import net.intercraft.intercraftcore.Reference;
-import net.intercraft.intercraftcore.init.IntercraftParticles;
 import net.minecraft.particles.BasicParticleType;
 import net.minecraft.particles.ParticleType;
 import net.minecraft.particles.ParticleTypes;
 
-public enum     FluidType
+public enum FluidType
 {
     WATER(       "water",        (short)80,  0x4a73e7, "minecraft:block/water_still",                ParticleTypes.FALLING_WATER),
     MILK(        "milk",         (short)80,  0xe3e3e3, "minecraft:block/water_still",                ParticleTypes.FALLING_WATER),

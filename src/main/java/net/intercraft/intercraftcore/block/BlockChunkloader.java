@@ -1,7 +1,7 @@
 package net.intercraft.intercraftcore.block;
 
 import net.intercraft.intercraftcore.Reference;
-import net.intercraft.intercraftcore.api.BlockProperties;
+import net.intercraft.intercraftcore.api.enumProperties.BlockProperties;
 import net.intercraft.intercraftcore.init.IntercraftTileEntities;
 import net.intercraft.intercraftcore.tileentity.ChunkLoaderBaseTileEntity;
 import net.minecraft.block.Block;

@@ -1,7 +1,7 @@
 package net.intercraft.intercraftcore.tileentity;
 
 import net.intercraft.intercraftcore.IntercraftCore;
-import net.intercraft.intercraftcore.api.BlockProperties;
+import net.intercraft.intercraftcore.api.enumProperties.BlockProperties;
 import net.intercraft.intercraftcore.networking.messages.MessageChunkLoader;
 import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;

@@ -1,7 +1,8 @@
 package net.intercraft.intercraftcore.block;
 
-import net.intercraft.intercraftcore.api.BlockProperties;
-import net.intercraft.intercraftcore.api.BucketType;
+import net.intercraft.intercraftcore.api.UtilBlocks;
+import net.intercraft.intercraftcore.api.enumProperties.BlockProperties;
+import net.intercraft.intercraftcore.api.enumProperties.BucketType;
 import net.intercraft.intercraftcore.api.FluidType;
 import net.intercraft.intercraftcore.init.IntercraftItems;
 import net.intercraft.intercraftcore.tileentity.TreeTapTileEntity;
@@ -38,16 +39,18 @@ import static net.minecraft.state.properties.BlockStateProperties.HORIZONTAL_FAC
 
 public class BlockTreeTap extends Block
 {
-
-    protected static final VoxelShape SHAPE_WEST  = Block.makeCuboidShape(10.0D,1.0D, 5.0D,  16.0D, 11.0D, 11.0D);
-    protected static final VoxelShape SHAPE_EAST  = Block.makeCuboidShape(0.0D, 1.0D, 5.0D,  6.0D,  11.0D, 11.0D);
-    protected static final VoxelShape SHAPE_NORTH = Block.makeCuboidShape(5.0D, 1.0D, 10.0D, 11.0D, 11.0D, 16.0D);
-    protected static final VoxelShape SHAPE_SOUTH = Block.makeCuboidShape(5.0D, 1.0D, 0.0D,  11.0D, 11.0D, 6.0D);
-
+    /*protected static final VoxelShape
+            SHAPE_WEST,//  = Block.makeCuboidShape(10.0D,1.0D, 5.0D,  16.0D, 11.0D, 11.0D),
+            SHAPE_EAST,//  = Block.makeCuboidShape(0.0D, 1.0D, 5.0D,  6.0D,  11.0D, 11.0D),
+            SHAPE_NORTH,// = Block.makeCuboidShape(5.0D, 1.0D, 10.0D, 11.0D, 11.0D, 16.0D),
+            SHAPE_SOUTH;// = Block.makeCuboidShape(5.0D, 1.0D, 0.0D,  11.0D, 11.0D, 6.0D);*/
+    protected static final VoxelShape[] SHAPES = UtilBlocks.generateDirectionShapes(UtilBlocks.UP | UtilBlocks.DOWN,0,1,5,6,11,11);
 
     public BlockTreeTap()
     {
         super(Block.Properties.create(Material.ANVIL).hardnessAndResistance(5.0F, 6.0F).sound(SoundType.METAL));
+
+
 
         setRegistryName("treetap");
         setDefaultState(getDefaultState().with(HORIZONTAL_FACING, Direction.NORTH).with(BlockProperties.BUCKET, BucketType.NONE));
@@ -219,16 +222,16 @@ public class BlockTreeTap extends Block
     {
         switch (state.get(HORIZONTAL_FACING)) {
             case WEST:
-                return SHAPE_WEST;
+                return SHAPES[UtilBlocks.Connections.WEST.getOpposite().getValue()];
 
             case EAST:
-                return SHAPE_EAST;
+                return SHAPES[UtilBlocks.Connections.EAST.getOpposite().getValue()];
 
             case SOUTH:
-                return SHAPE_SOUTH;
+                return SHAPES[UtilBlocks.Connections.SOUTH.getOpposite().getValue()];
 
             default:
-                return SHAPE_NORTH;
+                return SHAPES[UtilBlocks.Connections.NORTH.getOpposite().getValue()];
         }
     }
 

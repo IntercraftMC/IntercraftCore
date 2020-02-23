@@ -1,7 +1,7 @@
 package net.intercraft.intercraftcore.block;
 
 import net.intercraft.intercraftcore.Authors;
-import net.intercraft.intercraftcore.api.BlockProperties;
+import net.intercraft.intercraftcore.api.enumProperties.BlockProperties;
 import net.intercraft.intercraftcore.tileentity.ChunkLoaderTimerTileEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;

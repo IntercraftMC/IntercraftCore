@@ -47,7 +47,7 @@ public class BlockDrain extends Block implements IWaterLoggable
         if (direction.getAxis().isHorizontal()) {
             state = state.with(HORIZONTAL_FACING, isSneaking ? direction : direction.rotateY()).with(HALF, context.getHitVec().y - (double)context.getPos().getY() > 0.5D ? Half.TOP : Half.BOTTOM);
         } else {
-            state = state.with(HORIZONTAL_FACING, isSneaking ? context.getPlacementHorizontalFacing().getOpposite().rotateY() : context.getPlacementHorizontalFacing().getOpposite()).with(HALF, direction == Direction.UP ? Half.BOTTOM : Half.TOP);
+            state = state.with(HORIZONTAL_FACING, isSneaking ? context.getPlacementHorizontalFacing().getOpposite() : context.getPlacementHorizontalFacing().rotateY().getOpposite()).with(HALF, direction == Direction.UP ? Half.BOTTOM : Half.TOP);
         }
 
         return state.with(WATERLOGGED, ifluidstate.getFluid() == Fluids.WATER);

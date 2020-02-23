@@ -2,7 +2,7 @@ package net.intercraft.intercraftcore.tileentity;
 
 import io.netty.buffer.Unpooled;
 import net.intercraft.intercraftcore.Reference;
-import net.intercraft.intercraftcore.api.BlockProperties;
+import net.intercraft.intercraftcore.api.enumProperties.BlockProperties;
 import net.intercraft.intercraftcore.init.IntercraftTileEntities;
 import net.intercraft.intercraftcore.inventory.container.ContainerChunkLoaderTimer;
 import net.minecraft.block.BlockState;

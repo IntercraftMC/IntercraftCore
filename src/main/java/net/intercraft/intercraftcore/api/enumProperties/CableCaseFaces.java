@@ -1,4 +1,4 @@
-package net.intercraft.intercraftcore.api;
+package net.intercraft.intercraftcore.api.enumProperties;
 
 import net.minecraft.util.IStringSerializable;
 
