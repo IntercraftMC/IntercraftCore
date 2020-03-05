@@ -1,0 +1,20 @@
+{
+    "textures": {
+        "side": "minecraft:block/black_concrete"
+    },
+    "elements": [
+        {
+            "name": "Cube",
+            "from": [ 0, 0, 14 ],
+            "to": [ 16, 16, 15 ],
+            "faces": {
+                "north": { "texture": "#side" },
+                "south": { "texture": "#side" },
+                "east": { "texture": "#side" },
+                "west": { "texture": "#side" },
+                "up": { "texture": "#side" },
+                "down": { "texture": "#side" }
+            }
+        }
+    ]
+}

@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "intercraftcore:white_crowbar",
+    "intercraftcore:orange_crowbar",
+    "intercraftcore:magenta_crowbar",
+    "intercraftcore:light_blue_crowbar",
+    "intercraftcore:yellow_crowbar",
+    "intercraftcore:lime_crowbar",
+    "intercraftcore:pink_crowbar",
+    "intercraftcore:gray_crowbar",
+    "intercraftcore:light_gray_crowbar",
+    "intercraftcore:cyan_crowbar",
+    "intercraftcore:purple_crowbar",
+    "intercraftcore:blue_crowbar",
+    "intercraftcore:brown_crowbar",
+    "intercraftcore:green_crowbar",
+    "intercraftcore:red_crowbar",
+    "intercraftcore:black_crowbar"
+  ]
+}

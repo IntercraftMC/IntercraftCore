@@ -76,6 +76,7 @@ public class IntercraftColorHandler
 
     public static List<Block> blocks = new ArrayList<Block>(){{
         add(IntercraftBlocks.AUTOCRAFTINGTABLE);
+        add(IntercraftBlocks.CABLECASE);
     }};
 
 
@@ -117,8 +118,9 @@ public class IntercraftColorHandler
 
                 IntercraftItems.HAZMAT_HELMET,
                 IntercraftItems.HAZMAT_CHESTPLATE,
-                IntercraftItems.HAZMAT_PANTS
-                //IntercraftItems.HAZMAT_BOOTS
+                IntercraftItems.HAZMAT_PANTS,
+
+                IntercraftItems.CROWBAR
         };
 
 
@@ -153,6 +155,8 @@ public class IntercraftColorHandler
                 event.getItemColors().register(new ItemColorHandler(((ItemBucketNonFluid)item).getTint(),1),item);
             else if (item instanceof ItemHazMatSuit)
                 event.getItemColors().register(new ItemColorHandler(((ItemHazMatSuit)item).getTint(),1),item);
+            else if (item instanceof ItemCrowbar)
+                event.getItemColors().register(new ItemColorHandler(((ItemCrowbar)item).getTint(),1),item);
             else if (item instanceof ItemSingleStackContainer && ((ItemSingleStackContainer)item).getTint() != -1) {
                 if (item instanceof ItemSingleStackGlassContainer)
                     event.getItemColors().register(new ItemColorHandler(((ItemSingleStackContainer) item).getTint()), item);
@@ -232,6 +236,8 @@ public class IntercraftColorHandler
                 event.getBlockColors().register(new BlockColorHandler(((BlockFrameElement) block).getTint()),block);
             else if (block instanceof BlockAutoCraftingTable)
                 event.getBlockColors().register(new BlockColorHandler(((BlockAutoCraftingTable) block).getTint()),block);
+            /*else if (block instanceof BlockCableCase)
+                event.getBlockColors().register(new BlockColorHandler(((BlockCableCase) block).getTint()),block);*/
 
 
 
@@ -293,7 +299,7 @@ public class IntercraftColorHandler
         }
 
         @Override
-        public int getColor(BlockState blockState, @Nullable IEnviromentBlockReader iEnviromentBlockReader, @Nullable BlockPos blockPos, int i)
+        public int getColor(BlockState blockState, @Nullable IEnviromentBlockReader iEnviromentBlockReader, @Nullable BlockPos blockPos, int tintIndex)
         {
             return tint;
         }

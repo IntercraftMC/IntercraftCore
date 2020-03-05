@@ -1,9 +1,11 @@
 package net.intercraft.intercraftcore;
 
 import com.mojang.blaze3d.platform.GlStateManager;
+import net.intercraft.intercraftcore.client.CableCaseTileEntityRenderer;
 import net.intercraft.intercraftcore.init.IntercraftItems;
 import net.intercraft.intercraftcore.init.IntercraftParticles;
 import net.intercraft.intercraftcore.particles.ParticleDropLiquidType;
+import net.intercraft.intercraftcore.tileentity.CableCaseTileEntity;
 import net.intercraft.intercraftcore.tileentity.TreeTapTileEntity;
 import net.intercraft.intercraftcore.client.TreeTapTileEntityRenderer;
 import net.minecraft.client.Minecraft;
@@ -83,6 +85,7 @@ public class ClientHandler
     public static void attachTER(final FMLClientSetupEvent event)
     {
         ClientRegistry.bindTileEntitySpecialRenderer(TreeTapTileEntity.class, new TreeTapTileEntityRenderer<>());
+        ClientRegistry.bindTileEntitySpecialRenderer(CableCaseTileEntity.class, new CableCaseTileEntityRenderer<>());
         //ForgeRegistries.ITEMS.getValue(new ResourceLocation(Reference.MODID,"large_glass_jar"));
     }
 

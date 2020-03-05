@@ -6,7 +6,6 @@ public enum CableCaseFaces implements IStringSerializable
 {
     NONE("none"),
     CONNECTED("connected"),
-    PLATE("plate"),
     MODULE("module");
 
     private final String name;

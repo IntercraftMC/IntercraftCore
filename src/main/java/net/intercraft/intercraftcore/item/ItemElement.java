@@ -7,17 +7,26 @@ import net.minecraft.item.Item;
 
 public class ItemElement extends Item
 {
-    protected Element element;
+    protected final Element element;
+    private final String suffix;
 
     /**
      * A generic Element Item
-     * @param element
+     *
+     * @param element The element type.
+     * @param registrySuffix The type of item.
      */
     public ItemElement(Element element, String registrySuffix)
     {
         super(new Item.Properties().group(IntercraftItemGroups.RESOURCES));
         this.element = element;
+        suffix = registrySuffix;
         setRegistryName(element.symbol + "_" + registrySuffix);
+    }
+
+    public String getSuffix()
+    {
+        return suffix;
     }
 
     public int getTint() {

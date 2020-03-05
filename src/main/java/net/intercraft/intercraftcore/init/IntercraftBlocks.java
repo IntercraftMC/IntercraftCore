@@ -1,6 +1,7 @@
 package net.intercraft.intercraftcore.init;
 
 import net.intercraft.intercraftcore.block.*;
+import net.intercraft.intercraftcore.block.cablecase.BlockCableCase;
 import net.intercraft.intercraftcore.block.group.BlockElementGroup;
 import net.intercraft.intercraftcore.block.group.BlockLithiumGroup;
 import net.intercraft.intercraftcore.block.group.BlockUraniumGroup;

@@ -1,7 +1,6 @@
 {
   "parent" : "intercraftcore:block/ore_faces/ore_0",
   "textures": {
-    "base": "minecraft:block/stone",
     "ore": "intercraftcore:block/ore_faces/ore_1"
   }
 }

@@ -41,6 +41,9 @@ public class IntercraftItems
     public static final ItemSingleStackGlassContainer LARGE_GLASS_JAR;
     public static final ItemColoredGroup<ItemSingleStackGlassContainer> LARGE_TINTED_GLASS_JAR;
 
+    public static final ItemColoredGroup<ItemCrowbar> CROWBAR;
+    public static final ItemWrench WRENCH;
+
 
     /**
      * Armour
@@ -107,11 +110,20 @@ public class IntercraftItems
             }
         };
 
+        CROWBAR = new ItemColoredGroup<ItemCrowbar>("%s_crowbar",(short) 1024) {
+            @Override
+            protected Constructor<ItemCrowbar> createConstructor() throws NoSuchMethodException
+            {
+                return ItemCrowbar.class.getConstructor(String.class, short.class, int.class);
+            }
+        };
+        WRENCH = new ItemWrench();
+
         //                                                                                                    TOP  MID  BOT
-        HAZMAT_HELMET     = new ItemColoredHazMatSuit("helmet",     EquipmentSlotType.HEAD, new float[] {0.6f,0.0f,0.0f}, new Item.Properties().maxStackSize(1).maxDamage(255).group(ItemGroup.COMBAT));
-        HAZMAT_CHESTPLATE = new ItemColoredHazMatSuit("chestplate", EquipmentSlotType.CHEST,new float[] {0.1f,0.6f,0.1f}, new Item.Properties().maxStackSize(1).maxDamage(255).group(ItemGroup.COMBAT));
-        HAZMAT_PANTS      = new ItemColoredHazMatSuit("pants",      EquipmentSlotType.LEGS, new float[] {0.0f,0.4f,0.2f}, new Item.Properties().maxStackSize(1).maxDamage(255).group(ItemGroup.COMBAT));
-        HAZMAT_BOOTS      = new ItemHazMatSuit("hazmat_boots",     EquipmentSlotType.FEET, new float[] {0.0f,0.1f,0.6f}, new Item.Properties().maxStackSize(1).maxDamage(255).group(ItemGroup.COMBAT));
+        HAZMAT_HELMET     = new ItemColoredHazMatSuit("helmet",      EquipmentSlotType.HEAD, new float[] {0.6f,0.0f,0.0f}, new Item.Properties().maxStackSize(1).maxDamage(255).group(ItemGroup.COMBAT));
+        HAZMAT_CHESTPLATE = new ItemColoredHazMatSuit("chestplate",  EquipmentSlotType.CHEST,new float[] {0.1f,0.6f,0.1f}, new Item.Properties().maxStackSize(1).maxDamage(255).group(ItemGroup.COMBAT));
+        HAZMAT_PANTS      = new ItemColoredHazMatSuit("pants",       EquipmentSlotType.LEGS, new float[] {0.0f,0.4f,0.2f}, new Item.Properties().maxStackSize(1).maxDamage(255).group(ItemGroup.COMBAT));
+        HAZMAT_BOOTS      = new ItemHazMatSuit(      "hazmat_boots",EquipmentSlotType.FEET, new float[] {0.0f,0.1f,0.6f}, new Item.Properties().maxStackSize(1).maxDamage(255).group(ItemGroup.COMBAT));
 
 
         DEVIL_MASK  = new ItemMask(   "devil_mask",  new ResourceLocation(Reference.MODID,"textures/masks/devil_mask.png"));
@@ -192,6 +204,9 @@ public class IntercraftItems
 
         registerItems(LEAD_BOX, STEEL_BOX, LARGE_GLASS_JAR);
         registerColoredGroup(LARGE_TINTED_GLASS_JAR);
+
+        registerColoredGroup(CROWBAR);
+        registerItems(WRENCH);
 
         registerColoredGroup(HAZMAT_HELMET,HAZMAT_CHESTPLATE,HAZMAT_PANTS);
         registerItems(HAZMAT_BOOTS,HAZMAT_MASK);
