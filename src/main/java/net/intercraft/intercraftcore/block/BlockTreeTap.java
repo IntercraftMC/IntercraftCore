@@ -26,7 +26,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
@@ -77,11 +76,7 @@ public class BlockTreeTap extends Block
          BucketType bucket = state.get(BlockProperties.BUCKET);
 
         if (player.isCreative() && stack.getItem() == Items.STICK) { // Debugging.
-            final String d = String.format(" Can fill: %s has volume: %s is type: %s and viscosity: %s.", tile.getCanFill(), tile.getVolume(), tile.getFluidType().getName(), tile.getFluidType().getViscosity());
-            if (worldIn.isRemote)
-                player.sendMessage(new StringTextComponent("[CLIENT]"+d));
-            else
-                player.sendMessage(new StringTextComponent("[SERVER]"+d));
+            UtilBlocks.isSyncedTest(String.format("Can fill: %s has volume: %s is type: %s and viscosity: %s.", tile.getCanFill(), tile.getVolume(), tile.getFluidType().getName(), tile.getFluidType().getViscosity()),player);
             return true;
         }
         if (!worldIn.isRemote) {

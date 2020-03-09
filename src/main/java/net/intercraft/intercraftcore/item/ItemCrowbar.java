@@ -1,17 +1,25 @@
 package net.intercraft.intercraftcore.item;
 
-import net.minecraft.item.AxeItem;
+import com.google.common.collect.Sets;
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemTier;
+import net.minecraft.item.ToolItem;
 
-public class ItemCrowbar extends AxeItem
+import java.util.Set;
+
+public class ItemCrowbar extends ToolItem
 {
+
+    private static final Set<Block> EFFECTIVE_ON = Sets.newHashSet(Blocks.IRON_DOOR,Blocks.IRON_TRAPDOOR);
+
     private final int tint;
 
     public ItemCrowbar(String name, short maxDamage, int tint)
     {
-        super(ItemTier.IRON,3,-2.6f,new Item.Properties().maxDamage(maxDamage).group(ItemGroup.TOOLS));
+        super(3,-2.6f, ItemTier.DIAMOND,EFFECTIVE_ON,new Item.Properties().maxDamage(maxDamage).group(ItemGroup.TOOLS));
         this.tint = tint;
 
         setRegistryName(name);

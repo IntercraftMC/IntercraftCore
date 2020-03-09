@@ -2,6 +2,7 @@ package net.intercraft.intercraftcore.tileentity;
 
 import net.intercraft.intercraftcore.init.IntercraftTileEntities;
 import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.network.NetworkManager;
@@ -53,7 +54,7 @@ public class CableCaseTileEntity extends TileEntity
         plates[side] = plate;
     }
 
-    private CompoundNBT writeToNBT(CompoundNBT compound)
+    private CompoundNBT writePlates(CompoundNBT compound)
     {
         ListNBT listNBT = new ListNBT();
         for (byte i=0;i<plates.length;i++) {
@@ -69,13 +70,16 @@ public class CableCaseTileEntity extends TileEntity
         return compound;
     }
 
-    private void readFromNBT(CompoundNBT compound)
+    private void readPlates(CompoundNBT compound)
     {
         ListNBT listNBT = (ListNBT) compound.get("plates");
         for (byte i=0;i<plates.length;i++) {
             String s = listNBT.getCompound(i).getString("plate");
             ResourceLocation rs = new ResourceLocation(s);
-            plates[i] = !(s.equals("null")) ? ForgeRegistries.ITEMS.getValue(rs) : null;
+            Item item = !(s.equals("null")) ? ForgeRegistries.ITEMS.getValue(rs) : null;
+            if (item == Items.AIR) item = ForgeRegistries.BLOCKS.getValue(rs).asItem();
+            plates[i] = item;
+
         }
     }
 
@@ -85,15 +89,14 @@ public class CableCaseTileEntity extends TileEntity
     {
         super.onDataPacket(net, pkt);
         CompoundNBT nbt = pkt.getNbtCompound();
-        readFromNBT(nbt);
-
+        readPlates(nbt);
     }
 
     @Override
     public CompoundNBT getUpdateTag()
     {
         CompoundNBT compound = super.getUpdateTag();
-        compound = writeToNBT(compound);
+        compound = writePlates(compound);
 
         return compound;
     }
@@ -102,13 +105,13 @@ public class CableCaseTileEntity extends TileEntity
     @Override
     public void handleUpdateTag(CompoundNBT tag)
     {
-        readFromNBT(tag);
+        readPlates(tag);
     }
 
     @Override
     public CompoundNBT write(CompoundNBT compound)
     {
-        compound = writeToNBT(compound);
+        compound = writePlates(compound);
         return super.write(compound);
     }
 
@@ -116,7 +119,7 @@ public class CableCaseTileEntity extends TileEntity
     public void read(CompoundNBT compound)
     {
         super.read(compound);
-        readFromNBT(compound);
+        readPlates(compound);
 
     }
 

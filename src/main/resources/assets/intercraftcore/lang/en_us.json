@@ -467,6 +467,8 @@
   "tooltip.intercraftcore.length.max": "Max length: %s",
   "tooltip.intercraftcore.length.size": "%s / %s",
 
+  "tooltip.intercraftcore.easter_egg.hazmat_mask": "§6§oAre you my mummy?§r",
+
 
   "info.intercraftcore.tip.container.open": "Hold %1$s and press %2$s to open",
   "info.intercraftcore.tip.container.open.annoyed": "Just hold %1$s and press %2$s to open, not that hard..",

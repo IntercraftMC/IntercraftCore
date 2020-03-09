@@ -1,5 +1,6 @@
 package net.intercraft.intercraftcore.client;
 
+import net.intercraft.intercraftcore.api.UtilBlocks;
 import net.intercraft.intercraftcore.api.enumProperties.BlockProperties;
 import net.intercraft.intercraftcore.api.enumProperties.BucketType;
 import net.intercraft.intercraftcore.api.FluidType;
@@ -78,16 +79,11 @@ public class TreeTapTileEntityRenderer<T extends TreeTapTileEntity> extends Tile
 
 
 
-        float[] c = te.getFluidType().getTint() != -1 ? div(Util.hex2rgb(te.fluidType.getTint())) : new float[] {1,1,1};
+        float[] c = te.getFluidType().getTint() != -1 ? UtilBlocks.toFractal(Util.hex2rgb(te.fluidType.getTint()),255) : new float[] {1,1,1};
 
         buffer.pos(xMin, yLev, zMax).color(c[0],c[1],c[2],1f).tex(u1, v2).lightmap(upLMa, upLMb).endVertex();
         buffer.pos(xMax, yLev, zMax).color(c[0],c[1],c[2],1f).tex(u2, v2).lightmap(upLMa, upLMb).endVertex();
         buffer.pos(xMax, yLev, zMin).color(c[0],c[1],c[2],1f).tex(u2, v1).lightmap(upLMa, upLMb).endVertex();
         buffer.pos(xMin, yLev, zMin).color(c[0],c[1],c[2],1f).tex(u1, v1).lightmap(upLMa, upLMb).endVertex();
-    }
-
-    private float[] div(int[] c)
-    {
-        return new float[]{c[0]/255f,c[1]/255f,c[2]/255f};
     }
 }

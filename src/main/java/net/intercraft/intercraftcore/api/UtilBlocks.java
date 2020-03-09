@@ -1,8 +1,10 @@
 package net.intercraft.intercraftcore.api;
 
 import net.minecraft.block.Block;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.util.text.StringTextComponent;
 
 public class UtilBlocks
 {
@@ -61,6 +63,46 @@ public class UtilBlocks
     public static VoxelShape[] generateDirectionShapes(int x1, int y1, int z1, int x2, int y2, int z2)
     {
         return generateDirectionShapes(0,x1,y1,z1,x2,y2,z2);
+    }
+
+    /**
+     * Send a message to the player checking client-server data sync
+     *
+     * @param message Data message.
+     * @param player Player to compare to.
+     * @param playerReceiver Player message receiver.
+     */
+
+    public static void isSyncedTest(String message, PlayerEntity player, PlayerEntity playerReceiver)
+    {
+        if (player.getEntityWorld().isRemote)
+            playerReceiver.sendMessage(new StringTextComponent("[CLIENT] "+message));
+        else
+            playerReceiver.sendMessage(new StringTextComponent("[SERVER] "+message));
+    }
+
+    /**
+     * Send a message to the player checking client-server data sync
+     *
+     * @param message Data message.
+     * @param player Player to compare to and message receiver.
+     */
+
+    public static void isSyncedTest(String message, PlayerEntity player)
+    {
+        isSyncedTest(message,player,player);
+    }
+
+    /**
+     * Convert int to fractal
+     *
+     * @param c Values.
+     * @param fractal The fractal to convert to.
+     */
+
+    public static float[] toFractal(int[] c, float fractal)
+    {
+        return new float[]{c[0]/fractal,c[1]/fractal,c[2]/fractal};
     }
 
     private static byte getCode(byte connection)

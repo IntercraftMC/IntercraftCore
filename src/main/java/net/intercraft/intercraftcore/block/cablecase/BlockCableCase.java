@@ -3,7 +3,6 @@ package net.intercraft.intercraftcore.block.cablecase;
 import net.intercraft.intercraftcore.api.UtilBlocks;
 import net.intercraft.intercraftcore.api.enumProperties.BlockProperties;
 import net.intercraft.intercraftcore.api.enumProperties.CableCaseFaces;
-import net.intercraft.intercraftcore.item.ItemCrowbar;
 import net.intercraft.intercraftcore.item.ItemElement;
 import net.intercraft.intercraftcore.tileentity.CableCaseTileEntity;
 import net.minecraft.block.Block;
@@ -26,7 +25,6 @@ import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
-import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
@@ -49,7 +47,9 @@ public class BlockCableCase extends Block
     public static final VoxelShape MIDDLE = Block.makeCuboidShape(2,2,2,14,14,14);
 
 
-    private static final ResourceLocation crowbars = new ResourceLocation("forge","crowbars");
+    private static final ResourceLocation
+            crowbars = new ResourceLocation("forge","crowbars"),
+            wrenches = new ResourceLocation("forge","wrenches");
 
     public BlockCableCase() {
 
@@ -65,8 +65,7 @@ public class BlockCableCase extends Block
     private static CableCaseTileEntity getTileEntity(BlockState state, IWorld worldIn, BlockPos pos)
     {
         CableCaseTileEntity te = state.getBlock().hasTileEntity(state) ? (CableCaseTileEntity)worldIn.getTileEntity(pos) : null;
-        if (te == null)
-            throw new NullPointerException(String.format("Could not find CableCaseTileEntity at [%d %d %d]!",pos.getX(),pos.getY(),pos.getZ()));
+        if (te == null) throw new NullPointerException(String.format("Could not find CableCaseTileEntity at [%d %d %d]!",pos.getX(),pos.getY(),pos.getZ()));
         else return te;
     }
 
@@ -76,7 +75,6 @@ public class BlockCableCase extends Block
         final CableCaseTileEntity[] t = {te,teOpp};
         for (byte i=0;i<2;i++) {
             final EnumProperty<CableCaseFaces> f = getPropertyFromDirection(facing);
-            //for (byte j=0;j<plates.length;j++)
             if (t[i].getPlate(getConnectionFromDirection(facing).getValue()) != null || s[i].get(f) == CableCaseFaces.MODULE) return false;
             facing = facing.getOpposite();
         }
@@ -86,6 +84,24 @@ public class BlockCableCase extends Block
     private static EnumProperty<CableCaseFaces> getPropertyFromDirection(Direction direction)
     {
         switch (direction) {
+            case SOUTH:
+                return BlockProperties.CONNECTED_SOUTH;
+            case EAST:
+                return BlockProperties.CONNECTED_EAST;
+            case WEST:
+                return BlockProperties.CONNECTED_WEST;
+            case UP:
+                return BlockProperties.CONNECTED_UP;
+            case DOWN:
+                return BlockProperties.CONNECTED_DOWN;
+            default:
+                return BlockProperties.CONNECTED_NORTH;
+        }
+    }
+
+    private static EnumProperty<CableCaseFaces> getPropertyFromConnection(UtilBlocks.Connections connection)
+    {
+        switch (connection) {
             case SOUTH:
                 return BlockProperties.CONNECTED_SOUTH;
             case EAST:
@@ -119,24 +135,6 @@ public class BlockCableCase extends Block
         }
     }
 
-    private static EnumProperty<CableCaseFaces> getPropertyFromConnection(UtilBlocks.Connections connection)
-    {
-        switch (connection) {
-            case SOUTH:
-                return BlockProperties.CONNECTED_SOUTH;
-            case EAST:
-                return BlockProperties.CONNECTED_EAST;
-            case WEST:
-                return BlockProperties.CONNECTED_WEST;
-            case UP:
-                return BlockProperties.CONNECTED_UP;
-            case DOWN:
-                return BlockProperties.CONNECTED_DOWN;
-            default:
-                return BlockProperties.CONNECTED_NORTH;
-        }
-    }
-
     @Override
     public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit)
     {
@@ -147,31 +145,27 @@ public class BlockCableCase extends Block
         CableCaseTileEntity te = getTileEntity(state,worldIn,pos);
 
         if (player.isCreative()) {
-            final String m = String.format("Facing: %s Plate: %s", facing.getName(), te.getPlate(getConnectionFromDirection(facing).getValue()));
             if (player.getHeldItem(handIn).isEmpty()) {
-                if (worldIn.isRemote)
-                    player.sendMessage(new StringTextComponent("[CLIENT] "+m));
-                else
-                    player.sendMessage(new StringTextComponent("[SERVER] "+m));
+                UtilBlocks.isSyncedTest(String.format("Facing: %s Item: %s", facing.getName(), te.getPlate(getConnectionFromDirection(facing).getValue())),player);
             }
         }
 
 
         if (!worldIn.isRemote()) {
 
-            if (stack.getItem() instanceof ItemElement) {
-                if (((ItemElement)stack.getItem()).getSuffix().equals("plate")) {
+            if (state.get(getPropertyFromDirection(facing)) == CableCaseFaces.NONE) {
+                if (ItemTags.getCollection().getOrCreate(crowbars).contains(stack.getItem())) {
+                    final byte p = getConnectionFromDirection(facing).getValue();
+                    if (te.getPlate(p) != null) {
+                        spawnAsEntity(worldIn, pos, new ItemStack(te.getPlate(p)));
+                        te.setPlate(null, p);
+                        if (!player.isCreative() && stack.getItem().isDamageable())
+                            stack.damageItem(1, player, entity -> entity.sendBreakAnimation(handIn));
+                    }
+                } else if (player.getHeldItem(handIn).getItem() != Items.AIR && ItemTags.getCollection().getOrCreate(wrenches).contains(player.getHeldItemOffhand().getItem())) {
                     te.setPlate(stack.getItem(), getConnectionFromDirection(facing).getValue());
                     if (!player.isCreative())
                         stack.shrink(1);
-                }
-            } else if (ItemTags.getCollection().getOrCreate(crowbars).contains(stack.getItem())) {
-                final byte p = getConnectionFromDirection(facing).getValue();
-                if (te.getPlate(p) != null) {
-                    spawnAsEntity(worldIn,pos,new ItemStack(te.getPlate(p)));
-                    te.setPlate(null,p);
-                    if (!player.isCreative() && stack.getItem().isDamageable())
-                        stack.damageItem(1,player,entity -> entity.sendBreakAnimation(handIn));
                 }
             }
 
