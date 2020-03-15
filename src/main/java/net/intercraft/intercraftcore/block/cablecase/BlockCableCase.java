@@ -9,6 +9,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -81,7 +82,7 @@ public class BlockCableCase extends Block
         return true;
     }
 
-    private static EnumProperty<CableCaseFaces> getPropertyFromDirection(Direction direction)
+    public static EnumProperty<CableCaseFaces> getPropertyFromDirection(Direction direction)
     {
         switch (direction) {
             case SOUTH:
@@ -99,7 +100,7 @@ public class BlockCableCase extends Block
         }
     }
 
-    private static EnumProperty<CableCaseFaces> getPropertyFromConnection(UtilBlocks.Connections connection)
+    public static EnumProperty<CableCaseFaces> getPropertyFromConnection(UtilBlocks.Connections connection)
     {
         switch (connection) {
             case SOUTH:
@@ -117,7 +118,7 @@ public class BlockCableCase extends Block
         }
     }
 
-    private static UtilBlocks.Connections getConnectionFromDirection(Direction direction)
+    public static UtilBlocks.Connections getConnectionFromDirection(Direction direction)
     {
         switch (direction) {
             case SOUTH:
@@ -163,9 +164,18 @@ public class BlockCableCase extends Block
                             stack.damageItem(1, player, entity -> entity.sendBreakAnimation(handIn));
                     }
                 } else if (player.getHeldItem(handIn).getItem() != Items.AIR && ItemTags.getCollection().getOrCreate(wrenches).contains(player.getHeldItemOffhand().getItem())) {
-                    te.setPlate(stack.getItem(), getConnectionFromDirection(facing).getValue());
-                    if (!player.isCreative())
-                        stack.shrink(1);
+                    Item it = player.getHeldItem(handIn).getItem();
+                    boolean valid = false;
+
+                    if (it instanceof ItemElement)if(((ItemElement)it).getSuffix().equals("plate"))valid = true;
+
+
+
+                    if (valid) {
+                        te.setPlate(stack.getItem(), getConnectionFromDirection(facing).getValue());
+                        if (!player.isCreative())
+                            stack.shrink(1);
+                    }
                 }
             }
 

@@ -1,4 +1,4 @@
-package net.intercraft.intercraftcore.item.group;
+package net.intercraft.intercraftcore.item.group.itemColoredGroup;
 
 import net.minecraft.item.Item;
 import org.apache.commons.lang3.ArrayUtils;
@@ -53,7 +53,7 @@ public abstract class ItemColoredGroup<T extends Item>
         try {
             return constructor.newInstance(ArrayUtils.add(args,tint));
         } catch (IllegalAccessException | InstantiationException | InvocationTargetException e) {
-            System.out.println(e.getClass().getSimpleName()+" Error on initializing "+name+" :(");
+            System.out.println(e.getClass().getSimpleName()+" Error on initializing "+name);
             e.printStackTrace();
         }
         return null;

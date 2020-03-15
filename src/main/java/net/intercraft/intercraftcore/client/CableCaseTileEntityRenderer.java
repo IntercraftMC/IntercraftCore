@@ -14,9 +14,12 @@ public class CableCaseTileEntityRenderer<T extends CableCaseTileEntity> extends 
 {
 
     private static final float
-            plateSize           = 0.8f, // The max side size of the plate.
-            plateConnectionSize = 0.2f, // The max connection side size of the plate.
-            plateWidth          = 0.2f; // The width of the plate.
+            plateSize           = 0.625f,  // The max side size of the plate.
+            plateConnectionSize = 0.200f,  // The max connection side size of the plate.
+            plateWidth          = 0.0625f, // The width of the plate.
+    min = 0.1875f, minZ = 0.125f, maxZ = 0.875f, max = min + plateSize; // Render Plate bounds.
+
+    private static float ALPHA = 1.0f;
 
 
     @Override
@@ -26,7 +29,6 @@ public class CableCaseTileEntityRenderer<T extends CableCaseTileEntity> extends 
 
         for (byte i=0;i<te.getPlates().length;i++) {
             if (te.getPlate(i) != null) {
-
                 renderPlate(te, i, te.getPlate(i) instanceof ItemElement ? Reference.MODID+":block/block_solid" : te.getPlate(i).getRegistryName().toString(), buffer);
             }
         }
@@ -40,13 +42,19 @@ public class CableCaseTileEntityRenderer<T extends CableCaseTileEntity> extends 
 
     }
 
+    private void renderModule(T te, BufferBuilder buffer)
+    {
+
+    }
+
 
     private void renderPlate(T te, byte plate, String texture, BufferBuilder buffer)
     {
         TextureAtlasSprite sprite = Minecraft.getInstance().getTextureMap().getAtlasSprite(texture);
         float u1 = sprite.getMinU(), v1 = sprite.getMinV(), u2 = sprite.getMaxU(), v2 = sprite.getMaxV();
 
-        float[] c = te.getPlate(plate) instanceof ItemElement ? UtilBlocks.toFractal(Util.hex2rgb(((ItemElement) te.getPlate(plate)).getTint()),255) : new float[] {1,1,1};
+        final float[] c = te.getPlate(plate) instanceof ItemElement ? UtilBlocks.toFractal(Util.hex2rgb(((ItemElement) te.getPlate(plate)).getTint()),255) : new float[] {1,1,1};
+        final UtilBlocks.Connections[] n = UtilBlocks.Connections.getConnectionFromValue(plate).getNeighbors();
 
         int combined, lma, lmb;
         switch (plate) {
@@ -55,11 +63,21 @@ public class CableCaseTileEntityRenderer<T extends CableCaseTileEntity> extends 
                 lma = combined >> 16 & 65535;
                 lmb = combined  & 65535;
 
+                buffer.pos(min,min,maxZ).color(c[0],c[1],c[2],ALPHA).tex(u2,v1).lightmap(lma,lmb).endVertex();
+                buffer.pos(min,max,maxZ).color(c[0],c[1],c[2],ALPHA).tex(u2,v2).lightmap(lma,lmb).endVertex();
+                buffer.pos(max,max,maxZ).color(c[0],c[1],c[2],ALPHA).tex(u1,v2).lightmap(lma,lmb).endVertex();
+                buffer.pos(max,min,maxZ).color(c[0],c[1],c[2],ALPHA).tex(u1,v1).lightmap(lma,lmb).endVertex();
+
                 break;
             case 0: // West
                 combined = getWorld().getCombinedLight(te.getPos().west(),0);
                 lma = combined >> 16 & 65535;
                 lmb = combined  & 65535;
+
+                buffer.pos(minZ,min,min).color(c[0],c[1],c[2],ALPHA).tex(u2,v1).lightmap(lma,lmb).endVertex();
+                buffer.pos(minZ,max,min).color(c[0],c[1],c[2],ALPHA).tex(u2,v2).lightmap(lma,lmb).endVertex();
+                buffer.pos(minZ,max,max).color(c[0],c[1],c[2],ALPHA).tex(u1,v2).lightmap(lma,lmb).endVertex();
+                buffer.pos(minZ,min,max).color(c[0],c[1],c[2],ALPHA).tex(u1,v1).lightmap(lma,lmb).endVertex();
 
                 break;
             case 2: // East
@@ -67,11 +85,21 @@ public class CableCaseTileEntityRenderer<T extends CableCaseTileEntity> extends 
                 lma = combined >> 16 & 65535;
                 lmb = combined  & 65535;
 
+                buffer.pos(maxZ,min,max).color(c[0],c[1],c[2],ALPHA).tex(u2,v1).lightmap(lma,lmb).endVertex();
+                buffer.pos(maxZ,max,max).color(c[0],c[1],c[2],ALPHA).tex(u2,v2).lightmap(lma,lmb).endVertex();
+                buffer.pos(maxZ,max,min).color(c[0],c[1],c[2],ALPHA).tex(u1,v2).lightmap(lma,lmb).endVertex();
+                buffer.pos(maxZ,min,min).color(c[0],c[1],c[2],ALPHA).tex(u1,v1).lightmap(lma,lmb).endVertex();
+
                 break;
             case 4: // Up
                 combined = getWorld().getCombinedLight(te.getPos().up(),0);
                 lma = combined >> 16 & 65535;
                 lmb = combined  & 65535;
+
+                buffer.pos(min,maxZ,max).color(c[0],c[1],c[2],ALPHA).tex(u1,v2).lightmap(lma,lmb).endVertex();
+                buffer.pos(max,maxZ,max).color(c[0],c[1],c[2],ALPHA).tex(u2,v2).lightmap(lma,lmb).endVertex();
+                buffer.pos(max,maxZ,min).color(c[0],c[1],c[2],ALPHA).tex(u2,v1).lightmap(lma,lmb).endVertex();
+                buffer.pos(min,maxZ,min).color(c[0],c[1],c[2],ALPHA).tex(u1,v1).lightmap(lma,lmb).endVertex();
 
                 break;
             case 5: // Down
@@ -79,30 +107,22 @@ public class CableCaseTileEntityRenderer<T extends CableCaseTileEntity> extends 
                 lma = combined >> 16 & 65535;
                 lmb = combined  & 65535;
 
+                buffer.pos(max,minZ,max).color(c[0],c[1],c[2],ALPHA).tex(u1,v2).lightmap(lma,lmb).endVertex();
+                buffer.pos(min,minZ,max).color(c[0],c[1],c[2],ALPHA).tex(u1,v1).lightmap(lma,lmb).endVertex();
+                buffer.pos(min,minZ,min).color(c[0],c[1],c[2],ALPHA).tex(u2,v1).lightmap(lma,lmb).endVertex();
+                buffer.pos(max,minZ,min).color(c[0],c[1],c[2],ALPHA).tex(u2,v2).lightmap(lma,lmb).endVertex();
+
                 break;
             default: // North
                 combined = getWorld().getCombinedLight(te.getPos().north(),0);
                 lma = combined >> 16 & 65535;
                 lmb = combined  & 65535;
 
+                buffer.pos(max,min,minZ).color(c[0],c[1],c[2],ALPHA).tex(u2,v1).lightmap(lma,lmb).endVertex();
+                buffer.pos(max,max,minZ).color(c[0],c[1],c[2],ALPHA).tex(u2,v2).lightmap(lma,lmb).endVertex();
+                buffer.pos(min,max,minZ).color(c[0],c[1],c[2],ALPHA).tex(u1,v2).lightmap(lma,lmb).endVertex();
+                buffer.pos(min,min,minZ).color(c[0],c[1],c[2],ALPHA).tex(u1,v1).lightmap(lma,lmb).endVertex();
+
         }
-
-
-
-        //int upCombined = getWorld().getCombinedLight(te.getPos().up(), 0);
-
-        //renderPlate(buffer,te,Direction.NORTH,u1,v1,u2,v2,1,1,1);
-
-
-        /*float xMin = 0.3f, xMax = 0.5f, zMin = 0.3f, zMax = 0.5f;
-
-        buffer.pos(xMin, 0.4f, zMax).tex(u1,v2).color(1,1,1,1).lightmap(upLMa,upLMb).endVertex();
-        buffer.pos(xMax, 0.4f, zMax).tex(u2,v2).color(1,1,1,1).lightmap(upLMa,upLMb).endVertex();
-        buffer.pos(xMax, 0.4f, zMin).tex(u2,v1).color(1,1,1,1).lightmap(upLMa,upLMb).endVertex();
-        buffer.pos(xMin, 0.4f, zMin).tex(u1,v1).color(1,1,1,1).lightmap(upLMa,upLMb).endVertex();*/
-
-
-
-
     }
 }

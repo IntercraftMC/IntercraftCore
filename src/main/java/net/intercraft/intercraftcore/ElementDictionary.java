@@ -13,7 +13,7 @@ public enum ElementDictionary
     COPPER(   "cu",0xc1834b,0x5e9c59, new ElementComposition[] {new ElementComposition("cu",0.99),new ElementComposition("au",0.01)}),
     GOLD(     "au",0xe7e74c,0xe7e74c, 3, new ElementComposition[] {new ElementComposition("au",0.99),new ElementComposition("cu",0.01)}),
     IRIDIUM(  "ir",0xffffff,0xf0ffd8, 3, new ElementComposition[] {new ElementComposition("ir",0.55),new ElementComposition("os",0.45)}),
-    IRON(     "fe",0xe5dddd,0xb6a8a8, 3, new ElementComposition[] {new ElementComposition("fe",1)}),
+    IRON(     "fe",0xe5dddd,0xd5c4ac, 3, new ElementComposition[] {new ElementComposition("fe",1)}),
     LEAD(     "pb",0x664c86,0xc1c2c5, new ElementComposition[] {new ElementComposition("pb",1)}),
     LITHIUM(  "li",0xdfe3ee,0xc1c2cf, new ElementComposition[] {new ElementComposition("li",1)}),
     MERCURY(  "hg",0xe8e9ee,0xbc2b3b, new ElementComposition[] {new ElementComposition("hg",1)}),
@@ -35,8 +35,6 @@ public enum ElementDictionary
     SILICON(  "si",    0x000000,0x000000, new ElementComposition[] {new ElementComposition("si",1)}),
     GALENA(   "pbag",  0x746486, new ElementComposition[] {new ElementComposition("pb",0.87),new ElementComposition("s",0.12),new ElementComposition("ag",0.01)}),
     SPODUMENE("lialsi",0xba6f87, new ElementComposition[] {new ElementComposition("li",0.95),new ElementComposition("al",0.04),new ElementComposition("si",0.01)}),
-
-
 
 
     /**
@@ -98,7 +96,7 @@ public enum ElementDictionary
         return composition;
     }
 
-    public ElementComposition getComposition(int index)
+    public ElementComposition getComposition(byte index)
     {
         return composition[index];
     }

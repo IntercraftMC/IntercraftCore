@@ -140,6 +140,7 @@ public class UtilBlocks
         {
             this.value = value;
         }
+
         public byte getValue()
         {
             return value;
@@ -148,22 +149,35 @@ public class UtilBlocks
         public Connections getOpposite()
         {
             switch (this) {
-                case NORTH:
-                    return SOUTH;
-                case SOUTH:
-                    return NORTH;
-                case EAST:
-                    return WEST;
-                case WEST:
-                    return EAST;
-                case UP:
-                    return DOWN;
-                case DOWN:
-                    return UP;
-                default:
-                    return NORTH;
+                case NORTH: return SOUTH;
+                case SOUTH: return NORTH;
+                case EAST: return WEST;
+                case WEST: return EAST;
+                case UP: return DOWN;
+                case DOWN: return UP;
+                default: return NORTH;
 
             }
+        }
+        
+        public Connections[] getNeighbors()
+        {
+            switch (this) {
+                case WEST: case EAST:
+                    return new Connections[] {NORTH, SOUTH, UP, DOWN};
+                case UP: case DOWN:
+                    return new Connections[] {WEST, NORTH, EAST, SOUTH};
+                default: // North + South
+                    return new Connections[] {WEST, EAST, UP, DOWN};
+            }
+        }
+
+        public static Connections getConnectionFromValue(byte value)
+        {
+            for (Connections c : Connections.values())
+                if (c.getValue() == value)
+                    return c;
+            return NORTH;
         }
     }
 }

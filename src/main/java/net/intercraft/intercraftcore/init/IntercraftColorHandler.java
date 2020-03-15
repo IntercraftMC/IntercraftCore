@@ -5,7 +5,7 @@ import net.intercraft.intercraftcore.block.BlockSolidElement;
 import net.intercraft.intercraftcore.block.BlockFrameElement;
 import net.intercraft.intercraftcore.block.group.BlockElementGroup;
 import net.intercraft.intercraftcore.item.*;
-import net.intercraft.intercraftcore.item.group.ItemColoredGroup;
+import net.intercraft.intercraftcore.item.group.itemColoredGroup.ItemColoredGroup;
 import net.intercraft.intercraftcore.item.group.ItemElementGroup;
 import net.intercraft.intercraftcore.block.BlockHardOre;
 import net.minecraft.block.Block;
@@ -76,7 +76,6 @@ public class IntercraftColorHandler
 
     public static List<Block> blocks = new ArrayList<Block>(){{
         add(IntercraftBlocks.AUTOCRAFTINGTABLE);
-        add(IntercraftBlocks.CABLECASE);
     }};
 
 

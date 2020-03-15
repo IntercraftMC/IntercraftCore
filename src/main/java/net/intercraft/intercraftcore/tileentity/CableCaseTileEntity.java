@@ -1,5 +1,8 @@
 package net.intercraft.intercraftcore.tileentity;
 
+import net.intercraft.intercraftcore.api.UtilBlocks;
+import net.intercraft.intercraftcore.api.enumProperties.CableCaseFaces;
+import net.intercraft.intercraftcore.block.cablecase.BlockCableCase;
 import net.intercraft.intercraftcore.init.IntercraftTileEntities;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
@@ -20,12 +23,13 @@ public class CableCaseTileEntity extends TileEntity
     private List<CableCaseWire> wires;
     private static final byte maxCap = 32;
 
-    private Item[] plates;
+    private final Item[] plates, modules;
 
     public CableCaseTileEntity()
     {
         super(IntercraftTileEntities.CABLECASE);
         plates = new Item[6];
+        modules = new Item[6];
         wires = new ArrayList<>();
     }
 
@@ -49,36 +53,62 @@ public class CableCaseTileEntity extends TileEntity
         return plates;
     }
 
-    public void setPlate(@Nullable Item plate, byte side)
+    public Item getModule(byte side)
+    {
+        return modules[side];
+    }
+
+    public Item[] getModules()
+    {
+        return modules;
+    }
+
+    public void setPlate(@Nullable Item plate, byte side, boolean sendMessage)
     {
         plates[side] = plate;
     }
 
-    private CompoundNBT writePlates(CompoundNBT compound)
+    public void setPlate(@Nullable Item plate, byte side)
+    {
+        setPlate(plate,side,false);
+    }
+
+    public void setModule(@Nullable Item module, byte side, boolean sendMessage)
+    {
+        getBlockState().with(BlockCableCase.getPropertyFromConnection(UtilBlocks.Connections.getConnectionFromValue(side)), module == null ? CableCaseFaces.NONE : CableCaseFaces.MODULE);
+        modules[side] = module;
+    }
+
+    public void setModule(@Nullable Item module, byte side)
+    {
+        setModule(module,side,false);
+    }
+
+    private CompoundNBT writeSides(CompoundNBT compound, Item[] array, String prefix)
     {
         ListNBT listNBT = new ListNBT();
-        for (byte i=0;i<plates.length;i++) {
+        for (byte i=0;i<array.length;i++) {
             CompoundNBT nbt = new CompoundNBT();
-            if (plates[i] != null)
-                nbt.putString("plate",plates[i].getRegistryName().toString());
+            if (array[i] != null)
+                nbt.putString(prefix,array[i].getRegistryName().toString());
             else
-                nbt.putString("plate","null");
+                nbt.putString(prefix,"null");
             listNBT.add(i,nbt);
 
         }
-        compound.put("plates",listNBT);
+        compound.put(prefix+"s",listNBT);
         return compound;
     }
 
-    private void readPlates(CompoundNBT compound)
+    private void readSides(CompoundNBT compound, Item[] array, String prefix)
     {
-        ListNBT listNBT = (ListNBT) compound.get("plates");
-        for (byte i=0;i<plates.length;i++) {
-            String s = listNBT.getCompound(i).getString("plate");
+        ListNBT listNBT = (ListNBT) compound.get(prefix+"s");
+        for (byte i=0;i<array.length;i++) {
+            String s = listNBT.getCompound(i).getString(prefix);
             ResourceLocation rs = new ResourceLocation(s);
             Item item = !(s.equals("null")) ? ForgeRegistries.ITEMS.getValue(rs) : null;
             if (item == Items.AIR) item = ForgeRegistries.BLOCKS.getValue(rs).asItem();
-            plates[i] = item;
+            array[i] = item;
 
         }
     }
@@ -89,14 +119,16 @@ public class CableCaseTileEntity extends TileEntity
     {
         super.onDataPacket(net, pkt);
         CompoundNBT nbt = pkt.getNbtCompound();
-        readPlates(nbt);
+        readSides(nbt,plates,"plate");
+        readSides(nbt,modules,"module");
     }
 
     @Override
     public CompoundNBT getUpdateTag()
     {
         CompoundNBT compound = super.getUpdateTag();
-        compound = writePlates(compound);
+        compound = writeSides(compound,plates,"plate");
+        compound = writeSides(compound,modules,"module");
 
         return compound;
     }
@@ -105,13 +137,15 @@ public class CableCaseTileEntity extends TileEntity
     @Override
     public void handleUpdateTag(CompoundNBT tag)
     {
-        readPlates(tag);
+        readSides(tag,plates,"plate");
+        readSides(tag,modules,"module");
     }
 
     @Override
     public CompoundNBT write(CompoundNBT compound)
     {
-        compound = writePlates(compound);
+        compound = writeSides(compound,plates,"plate");
+        compound = writeSides(compound,modules,"module");
         return super.write(compound);
     }
 
@@ -119,7 +153,8 @@ public class CableCaseTileEntity extends TileEntity
     public void read(CompoundNBT compound)
     {
         super.read(compound);
-        readPlates(compound);
+        readSides(compound,plates,"plate");
+        readSides(compound,modules,"module");
 
     }
 

@@ -1,7 +1,6 @@
-package net.intercraft.intercraftcore.item.group.ItemColoredGroups;
+package net.intercraft.intercraftcore.item.group.itemColoredGroup;
 
 import net.intercraft.intercraftcore.item.ItemHazMatSuit;
-import net.intercraft.intercraftcore.item.group.ItemColoredGroup;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.Item;
 
