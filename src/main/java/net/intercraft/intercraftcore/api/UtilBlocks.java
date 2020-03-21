@@ -9,6 +9,10 @@ import net.minecraft.util.text.StringTextComponent;
 public class UtilBlocks
 {
 
+    /**
+     * Bit flags for the directions.
+     */
+
     public static final byte
             WEST  = 0x1,
             NORTH = 0x2,
@@ -105,24 +109,6 @@ public class UtilBlocks
         return new float[]{c[0]/fractal,c[1]/fractal,c[2]/fractal};
     }
 
-    private static byte getCode(byte connection)
-    {
-        switch (connection) {
-            case 0:
-                return WEST;
-            case 2:
-                return EAST;
-            case 3:
-                return SOUTH;
-            case 4:
-                return UP;
-            case 5:
-                return DOWN;
-            default: // 1
-                return NORTH;
-        }
-    }
-
 
     public enum Connections
     {
@@ -135,6 +121,13 @@ public class UtilBlocks
 
 
         private final byte value;
+        private static final Connections DEFAULT = NORTH;
+
+        /**
+         * Sides (connections) interpreted as numbers
+         *
+         * @param value The id value.
+         */
 
         Connections(byte value)
         {
@@ -155,10 +148,13 @@ public class UtilBlocks
                 case WEST: return EAST;
                 case UP: return DOWN;
                 case DOWN: return UP;
-                default: return NORTH;
-
             }
+            return DEFAULT;
         }
+
+        /**
+         * Get four neighboring sides as an array
+         */
         
         public Connections[] getNeighbors()
         {
@@ -177,7 +173,7 @@ public class UtilBlocks
             for (Connections c : Connections.values())
                 if (c.getValue() == value)
                     return c;
-            return NORTH;
+            return DEFAULT;
         }
     }
 }

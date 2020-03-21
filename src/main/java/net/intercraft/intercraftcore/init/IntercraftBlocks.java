@@ -29,7 +29,7 @@ public class IntercraftBlocks
 
     public static final Block CABLECASE;
     public static final Block TREETAP;
-    public static final Block REDSTONEBEACON;
+    public static final Block REDSTONE_BEACON;
     public static final Block AUTOCRAFTINGTABLE;
     public static final Block DRAIN;
 
@@ -66,7 +66,7 @@ public class IntercraftBlocks
 
         CABLECASE = new BlockCableCase();
         TREETAP = new BlockTreeTap();
-        REDSTONEBEACON = new BlockRedstoneBeacon();
+        REDSTONE_BEACON = new BlockRedstoneBeacon();
         AUTOCRAFTINGTABLE = new BlockAutoCraftingTable();
         DRAIN = new BlockDrain();
 
@@ -122,7 +122,7 @@ public class IntercraftBlocks
                 CHUNKLOADER,CHUNKLOADER_REDSTONE,CHUNKLOADER_TIMER,
                 AUTOCRAFTINGTABLE
         );
-        registerBlocks(ItemGroup.REDSTONE,REDSTONEBEACON);
+        registerBlocks(ItemGroup.REDSTONE, REDSTONE_BEACON);
         registerBlocks(GRAVELSUBSTITUTE,SANDSUBSTITUTE);
 
         registerReplaceBlockItem(Blocks.STONE_PRESSURE_PLATE,    VANILLA_STONE_PRESSUREPLATE);
@@ -133,7 +133,7 @@ public class IntercraftBlocks
         registerReplaceBlockItem(Blocks.ACACIA_PRESSURE_PLATE,   VANILLA_ACACIA_PRESSUREPLATE);
         registerReplaceBlockItem(Blocks.DARK_OAK_PRESSURE_PLATE, VANILLA_DARKOAK_PRESSUREPLATE);
 
-        //registerBlocks(VANILLA_BUBBLE_COLUMN);
+        registerBlocks(VANILLA_BUBBLE_COLUMN);
 
         registerElementsBlocks(ALUMINIUM, COPPER, GOLD, IRIDIUM, IRON, LEAD, LITHIUM, SILVER, THORIUM, TIN, TITANIUM, TUNGSTEN, URANIUM, ZINC);
         registerElementsBlocks(BRASS, BRONZE, STEEL);

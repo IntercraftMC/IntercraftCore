@@ -1,0 +1,6 @@
+{
+  "parent": "intercraftcore:block/redstone_beacon/redstone_beacon",
+  "textures": {
+    "light": "intercraftcore:block/redstone_beacon_light_dark"
+  }
+}

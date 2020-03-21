@@ -1,8 +1,11 @@
 package net.intercraft.intercraftcore.item;
 
 import net.intercraft.intercraftcore.Reference;
+import net.intercraft.intercraftcore.client.models.ModelHazMatSuit;
 import net.intercraft.intercraftcore.init.capabilities.radiation.Radiation;
+import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;
@@ -42,11 +45,12 @@ public class ItemHazMatSuit extends ArmorItem
         return texture.toString();
     }
 
-    /*@OnlyIn(Dist.CLIENT)
     @Nullable
     @Override
     public <A extends BipedModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlotType armorSlot, A _default)
     {
+        ModelHazMatSuit model = new ModelHazMatSuit(tint);
+
         model.bipedHeadwear.showModel = armorSlot == EquipmentSlotType.HEAD;
         model.bipedHead.showModel = armorSlot == EquipmentSlotType.HEAD;
 
@@ -65,9 +69,8 @@ public class ItemHazMatSuit extends ArmorItem
         model.leftArmPose = _default.leftArmPose;
         model.rightArmPose = _default.rightArmPose;
 
-
         return (A) model;
-    }*/
+    }
 
     public void onEquipped()
     {

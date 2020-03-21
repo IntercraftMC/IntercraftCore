@@ -1,6 +1,5 @@
 {
-    "variants": {
-        "lit=true":  { "model": "minecraft:block/redstone_torch" },
-        "lit=false":  { "model": "minecraft:block/redstone_torch_off" }
-    }
+  "variants": {
+    "": { "model": "intercraftcore:block/redstone_beacon/redstone_beacon" }
+  }
 }

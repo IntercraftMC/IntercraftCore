@@ -1,6 +1,9 @@
 package net.intercraft.intercraftcore.block;
 
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.IWaterLoggable;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.fluid.IFluidState;
@@ -21,15 +24,14 @@ import static net.minecraft.state.properties.BlockStateProperties.*;
 public class BlockDrain extends Block implements IWaterLoggable
 {
     private static final VoxelShape
-            shapeUp   = Block.makeCuboidShape(0.0D, 15.0D, 0.0D, 16.0D, 16.0D, 16.0D),
-            shapeDown = Block.makeCuboidShape(0.0D, 0.0D,  0.0D, 16.0D, 1.0D,  16.0D);
+            shapeUp   = Block.makeCuboidShape(0.0f, 15.0f, 0.0f, 16.0f, 16.0f, 16.0f),
+            shapeDown = Block.makeCuboidShape(0.0f, 0.0f,  0.0f, 16.0f, 1.0f,  16.0f);
 
     public BlockDrain()
     {
         super(Block.Properties.create(Material.ANVIL).hardnessAndResistance(5.0f).sound(SoundType.METAL));
 
         setDefaultState(getDefaultState().with(HALF, Half.BOTTOM).with(HORIZONTAL_FACING, Direction.NORTH).with(WATERLOGGED,false));
-
         setRegistryName("drain");
     }
 
@@ -41,7 +43,6 @@ public class BlockDrain extends Block implements IWaterLoggable
         Direction direction = context.getFace();
         IFluidState ifluidstate = context.getWorld().getFluidState(context.getPos());
 
-        //boolean isSneaking = !(((Boolean)context.getPlayer().isSneaking()) == null) && context.getPlayer().isSneaking();
         boolean isSneaking = context.getPlayer().isSneaking();
 
         if (direction.getAxis().isHorizontal()) {
@@ -57,10 +58,7 @@ public class BlockDrain extends Block implements IWaterLoggable
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
     {
         super.fillStateContainer(builder);
-        builder.add(WATERLOGGED);
-        builder.add(HORIZONTAL_FACING);
-        builder.add(HALF);
-        //builder.add(DRAG);
+        builder.add(WATERLOGGED,HORIZONTAL_FACING,HALF);
     }
 
     public IFluidState getFluidState(BlockState state)

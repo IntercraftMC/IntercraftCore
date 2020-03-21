@@ -5,14 +5,12 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.TorchBlock;
 import net.minecraft.block.material.Material;
-import net.minecraft.particles.RedstoneParticleData;
 import net.minecraft.state.StateContainer;
 import net.minecraft.util.Direction;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 
@@ -22,23 +20,23 @@ import static net.minecraft.state.properties.BlockStateProperties.LIT;
 
 public class BlockRedstoneBeacon extends TorchBlock
 {
+    private static final ResourceLocation wrenches = new ResourceLocation("forge","wrenches");
+
     public BlockRedstoneBeacon()
     {
         super(Block.Properties.create(Material.REDSTONE_LIGHT).hardnessAndResistance(0).doesNotBlockMovement());
 
+        setDefaultState(getDefaultState().with(BlockProperties.RS_OUTPUT_STRENGTH,1).with(LIT, true));
         setRegistryName("redstone_beacon");
 
-        setDefaultState(getDefaultState().with(BlockProperties.RS_OUTPUT_STRENGTH,15).with(LIT, true));
     }
 
 
     @Override
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
     {
-        builder.add(BlockProperties.RS_OUTPUT_STRENGTH);
-        builder.add(LIT);
+        builder.add(BlockProperties.RS_OUTPUT_STRENGTH,LIT);
     }
-
 
     @Override
     public boolean canConnectRedstone(BlockState state, IBlockReader world, BlockPos pos, @Nullable Direction side)
@@ -58,7 +56,7 @@ public class BlockRedstoneBeacon extends TorchBlock
         return side == Direction.DOWN ? this.getWeakPower(blockState, blockAccess, pos, side) : 0;
     }
 
-    private boolean shouldBeOff(World worldIn, BlockPos pos)
+    private static boolean shouldBeOff(World worldIn, BlockPos pos)
     {
         return worldIn.isSidePowered(pos.down(), Direction.DOWN);
     }
@@ -66,13 +64,13 @@ public class BlockRedstoneBeacon extends TorchBlock
     @Override
     public void tick(BlockState state, World worldIn, BlockPos pos, Random random)
     {
-        boolean s = this.shouldBeOff(worldIn,pos);
+        boolean s = shouldBeOff(worldIn,pos);
 
         if (state.get(LIT)) {
             if (s) {
                 worldIn.setBlockState(pos,state.with(LIT,false));
             }
-        } else if (!s) {
+        } else {
             worldIn.setBlockState(pos,state.with(LIT,true));
         }
 
@@ -86,7 +84,7 @@ public class BlockRedstoneBeacon extends TorchBlock
         return blockState.get(LIT) && Direction.UP != side ? blockState.get(BlockProperties.RS_OUTPUT_STRENGTH) : 0;
     }
 
-    @OnlyIn(Dist.CLIENT)
+    /*@OnlyIn(Dist.CLIENT)
     public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
         if (stateIn.get(LIT)) {
             double d0 = (double)pos.getX() + 0.5D + (rand.nextDouble() - 0.5D) * 0.2D;
@@ -94,6 +92,6 @@ public class BlockRedstoneBeacon extends TorchBlock
             double d2 = (double)pos.getZ() + 0.5D + (rand.nextDouble() - 0.5D) * 0.2D;
             worldIn.addParticle(RedstoneParticleData.REDSTONE_DUST, d0, d1, d2, 0.0D, 0.0D, 0.0D);
         }
-    }
+    }*/
 
 }
