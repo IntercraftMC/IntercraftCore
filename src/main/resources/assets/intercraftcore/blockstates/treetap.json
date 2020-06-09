@@ -10,19 +10,19 @@
       "when": {
         "facing": "south"
       },
-      "apply": { "model": "intercraftcore:block/treetap/treetap", "y": 180 }
+      "apply": { "model": "intercraftcore:block/treetap/treetap", "uvlock": true, "y": 180 }
     },
     {
       "when": {
         "facing": "west"
       },
-      "apply": { "model": "intercraftcore:block/treetap/treetap", "y": 270 }
+      "apply": { "model": "intercraftcore:block/treetap/treetap", "uvlock": true, "y": 270 }
     },
     {
       "when": {
         "facing": "east"
       },
-      "apply": { "model": "intercraftcore:block/treetap/treetap", "y": 90 }
+      "apply": { "model": "intercraftcore:block/treetap/treetap", "uvlock": true, "y": 90 }
     },
 
 
@@ -36,19 +36,19 @@
       "when": {
         "facing": "south", "bucket": "wood_oak"
       },
-      "apply": { "model": "intercraftcore:block/treetap/wood_oak_bucket", "y": 180 }
+      "apply": { "model": "intercraftcore:block/treetap/wood_oak_bucket", "uvlock": true, "y": 180 }
     },
     {
       "when": {
         "facing": "west", "bucket": "wood_oak"
       },
-      "apply": { "model": "intercraftcore:block/treetap/wood_oak_bucket", "y": 270 }
+      "apply": { "model": "intercraftcore:block/treetap/wood_oak_bucket", "uvlock": true, "y": 270 }
     },
     {
       "when": {
         "facing": "east", "bucket": "wood_oak"
       },
-      "apply": { "model": "intercraftcore:block/treetap/wood_oak_bucket", "y": 90 }
+      "apply": { "model": "intercraftcore:block/treetap/wood_oak_bucket", "uvlock": true, "y": 90 }
     },
     {
       "when": {
@@ -60,19 +60,19 @@
       "when": {
         "facing": "south", "bucket": "wood_spruce"
       },
-      "apply": { "model": "intercraftcore:block/treetap/wood_spruce_bucket", "y": 180 }
+      "apply": { "model": "intercraftcore:block/treetap/wood_spruce_bucket", "uvlock": true, "y": 180 }
     },
     {
       "when": {
         "facing": "west", "bucket": "wood_spruce"
       },
-      "apply": { "model": "intercraftcore:block/treetap/wood_spruce_bucket", "y": 270 }
+      "apply": { "model": "intercraftcore:block/treetap/wood_spruce_bucket", "uvlock": true, "y": 270 }
     },
     {
       "when": {
         "facing": "east", "bucket": "wood_spruce"
       },
-      "apply": { "model": "intercraftcore:block/treetap/wood_spruce_bucket", "y": 90 }
+      "apply": { "model": "intercraftcore:block/treetap/wood_spruce_bucket", "uvlock": true, "y": 90 }
     },
     {
       "when": {
@@ -84,19 +84,19 @@
       "when": {
         "facing": "south", "bucket": "wood_birch"
       },
-      "apply": { "model": "intercraftcore:block/treetap/wood_birch_bucket", "y": 180 }
+      "apply": { "model": "intercraftcore:block/treetap/wood_birch_bucket", "uvlock": true, "y": 180 }
     },
     {
       "when": {
         "facing": "west", "bucket": "wood_birch"
       },
-      "apply": { "model": "intercraftcore:block/treetap/wood_birch_bucket", "y": 270 }
+      "apply": { "model": "intercraftcore:block/treetap/wood_birch_bucket", "uvlock": true, "y": 270 }
     },
     {
       "when": {
         "facing": "east", "bucket": "wood_birch"
       },
-      "apply": { "model": "intercraftcore:block/treetap/wood_birch_bucket", "y": 90 }
+      "apply": { "model": "intercraftcore:block/treetap/wood_birch_bucket", "uvlock": true, "y": 90 }
     },
     {
       "when": {
@@ -108,19 +108,19 @@
       "when": {
         "facing": "south", "bucket": "wood_jungle"
       },
-      "apply": { "model": "intercraftcore:block/treetap/wood_jungle_bucket", "y": 180 }
+      "apply": { "model": "intercraftcore:block/treetap/wood_jungle_bucket", "uvlock": true, "y": 180 }
     },
     {
       "when": {
         "facing": "west", "bucket": "wood_jungle"
       },
-      "apply": { "model": "intercraftcore:block/treetap/wood_jungle_bucket", "y": 270 }
+      "apply": { "model": "intercraftcore:block/treetap/wood_jungle_bucket", "uvlock": true, "y": 270 }
     },
     {
       "when": {
         "facing": "east", "bucket": "wood_jungle"
       },
-      "apply": { "model": "intercraftcore:block/treetap/wood_jungle_bucket", "y": 90 }
+      "apply": { "model": "intercraftcore:block/treetap/wood_jungle_bucket", "uvlock": true, "y": 90 }
     },
     {
       "when": {
@@ -132,19 +132,19 @@
       "when": {
         "facing": "south", "bucket": "wood_acacia"
       },
-      "apply": { "model": "intercraftcore:block/treetap/wood_acacia_bucket", "y": 180 }
+      "apply": { "model": "intercraftcore:block/treetap/wood_acacia_bucket", "uvlock": true, "y": 180 }
     },
     {
       "when": {
         "facing": "west", "bucket": "wood_acacia"
       },
-      "apply": { "model": "intercraftcore:block/treetap/wood_acacia_bucket", "y": 270 }
+      "apply": { "model": "intercraftcore:block/treetap/wood_acacia_bucket", "uvlock": true, "y": 270 }
     },
     {
       "when": {
         "facing": "east", "bucket": "wood_acacia"
       },
-      "apply": { "model": "intercraftcore:block/treetap/wood_acacia_bucket", "y": 90 }
+      "apply": { "model": "intercraftcore:block/treetap/wood_acacia_bucket", "uvlock": true, "y": 90 }
     },
     {
       "when": {
@@ -156,19 +156,19 @@
       "when": {
         "facing": "south", "bucket": "wood_dark_oak"
       },
-      "apply": { "model": "intercraftcore:block/treetap/wood_dark_oak_bucket", "y": 180 }
+      "apply": { "model": "intercraftcore:block/treetap/wood_dark_oak_bucket", "uvlock": true, "y": 180 }
     },
     {
       "when": {
         "facing": "west", "bucket": "wood_dark_oak"
       },
-      "apply": { "model": "intercraftcore:block/treetap/wood_dark_oak_bucket", "y": 270 }
+      "apply": { "model": "intercraftcore:block/treetap/wood_dark_oak_bucket", "uvlock": true, "y": 270 }
     },
     {
       "when": {
         "facing": "east", "bucket": "wood_dark_oak"
       },
-      "apply": { "model": "intercraftcore:block/treetap/wood_dark_oak_bucket", "y": 90 }
+      "apply": { "model": "intercraftcore:block/treetap/wood_dark_oak_bucket", "uvlock": true, "y": 90 }
     },
 
 
@@ -182,19 +182,19 @@
       "when": {
         "facing": "south", "bucket": "metal_iron"
       },
-      "apply": { "model": "intercraftcore:block/treetap/metal_iron_bucket", "y": 180 }
+      "apply": { "model": "intercraftcore:block/treetap/metal_iron_bucket", "uvlock": true, "y": 180 }
     },
     {
       "when": {
         "facing": "west", "bucket": "metal_iron"
       },
-      "apply": { "model": "intercraftcore:block/treetap/metal_iron_bucket", "y": 270 }
+      "apply": { "model": "intercraftcore:block/treetap/metal_iron_bucket", "uvlock": true, "y": 270 }
     },
     {
       "when": {
         "facing": "east", "bucket": "metal_iron"
       },
-      "apply": { "model": "intercraftcore:block/treetap/metal_iron_bucket", "y": 90 }
+      "apply": { "model": "intercraftcore:block/treetap/metal_iron_bucket", "uvlock": true, "y": 90 }
     }
   ]
 }

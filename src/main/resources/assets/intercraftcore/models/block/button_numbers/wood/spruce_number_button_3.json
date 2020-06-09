@@ -1,0 +1,1 @@
+{ "parent": "intercraftcore:block/button_numbers/stone/stone_number_button_3", "textures": { "particle": "minecraft:block/spruce_planks", "side": "minecraft:block/spruce_planks" } }

@@ -38,12 +38,7 @@ import static net.minecraft.state.properties.BlockStateProperties.HORIZONTAL_FAC
 
 public class BlockTreeTap extends Block
 {
-    /*protected static final VoxelShape
-            SHAPE_WEST,//  = Block.makeCuboidShape(10.0D,1.0D, 5.0D,  16.0D, 11.0D, 11.0D),
-            SHAPE_EAST,//  = Block.makeCuboidShape(0.0D, 1.0D, 5.0D,  6.0D,  11.0D, 11.0D),
-            SHAPE_NORTH,// = Block.makeCuboidShape(5.0D, 1.0D, 10.0D, 11.0D, 11.0D, 16.0D),
-            SHAPE_SOUTH;// = Block.makeCuboidShape(5.0D, 1.0D, 0.0D,  11.0D, 11.0D, 6.0D);*/
-    protected static final VoxelShape[] SHAPES = UtilBlocks.generateDirectionShapes(UtilBlocks.UP | UtilBlocks.DOWN,0,1,5,6,11,11);
+    protected static final VoxelShape[] SHAPES = UtilBlocks.generateDirectionShapes(UtilBlocks.UP | UtilBlocks.DOWN,5,1,0,11,11,6);
 
     public BlockTreeTap()
     {
@@ -58,9 +53,7 @@ public class BlockTreeTap extends Block
 
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
     {
-        builder.add(HORIZONTAL_FACING);
-        builder.add(BlockProperties.BUCKET);
-
+        builder.add(HORIZONTAL_FACING,BlockProperties.BUCKET);
     }
 
 
@@ -69,8 +62,8 @@ public class BlockTreeTap extends Block
     @Override
     public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit)
     {
-        TreeTapTileEntity tile = state.getBlock().hasTileEntity(state) ? (TreeTapTileEntity) worldIn.getTileEntity(pos) : null;
-        if (tile == null) throw new NullPointerException("Could not find TreeTapTileEntity!");
+        //TreeTapTileEntity tile = state.getBlock().hasTileEntity(state) ? (TreeTapTileEntity) worldIn.getTileEntity(pos) : null;
+        TreeTapTileEntity tile = UtilBlocks.getTileEntityThrowable(TreeTapTileEntity.class,worldIn,state,pos);
 
          ItemStack stack = player.getHeldItem(handIn);
          BucketType bucket = state.get(BlockProperties.BUCKET);

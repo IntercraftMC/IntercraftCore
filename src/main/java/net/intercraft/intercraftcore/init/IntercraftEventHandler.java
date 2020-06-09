@@ -54,10 +54,11 @@ import java.util.Random;
 public class IntercraftEventHandler
 {
 
-    private static final ResourceLocation cobblestoneID     = new ResourceLocation("forge","cobblestone");
-    private static final ResourceLocation gravelID          = new ResourceLocation("forge","gravel");
-    private static final ResourceLocation anvilID           = new ResourceLocation("minecraft","anvil");
-    private static final ResourceLocation smashableBlocksID = new ResourceLocation(Reference.MODID,"smashable_blocks");
+    private static final ResourceLocation
+            cobblestoneID     = new ResourceLocation("forge","cobblestone"),
+            gravelID          = new ResourceLocation("forge","gravel"),
+            anvilID           = new ResourceLocation("minecraft","anvil"),
+            smashableBlocksID = new ResourceLocation(Reference.MODID,"smashable_blocks");
 
 
     private static final float maxReactionVolume = 4.6f;

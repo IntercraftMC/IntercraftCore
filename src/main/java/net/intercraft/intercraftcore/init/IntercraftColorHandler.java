@@ -75,7 +75,7 @@ public class IntercraftColorHandler
      */
 
     public static List<Block> blocks = new ArrayList<Block>(){{
-        add(IntercraftBlocks.AUTOCRAFTINGTABLE);
+
     }};
 
 
@@ -96,6 +96,7 @@ public class IntercraftColorHandler
                 IntercraftItems.IRON,
                 IntercraftItems.LEAD,
                 IntercraftItems.LITHIUM,
+                IntercraftItems.NICKEL,
                 IntercraftItems.SILVER,
                 IntercraftItems.THORIUM,
                 IntercraftItems.TIN,
@@ -196,6 +197,7 @@ public class IntercraftColorHandler
                 IntercraftBlocks.IRON,
                 IntercraftBlocks.LEAD,
                 IntercraftBlocks.LITHIUM,
+                IntercraftBlocks.NICKEL,
                 IntercraftBlocks.SILVER,
                 IntercraftBlocks.THORIUM,
                 IntercraftBlocks.TIN,

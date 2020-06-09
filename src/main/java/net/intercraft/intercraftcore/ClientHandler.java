@@ -2,6 +2,9 @@ package net.intercraft.intercraftcore;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 import net.intercraft.intercraftcore.client.CableCaseTileEntityRenderer;
+import net.intercraft.intercraftcore.client.ZombiePlayerRender;
+import net.intercraft.intercraftcore.client.ZombiePlayerRenderFactory;
+import net.intercraft.intercraftcore.entity.monster.EntityZombiePlayer;
 import net.intercraft.intercraftcore.init.IntercraftItems;
 import net.intercraft.intercraftcore.init.IntercraftParticles;
 import net.intercraft.intercraftcore.particles.ParticleDropLiquidType;
@@ -11,6 +14,7 @@ import net.intercraft.intercraftcore.client.TreeTapTileEntityRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particles.ParticleType;
@@ -22,6 +26,7 @@ import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
@@ -82,10 +87,14 @@ public class ClientHandler
 
 
     @SubscribeEvent
-    public static void attachTER(final FMLClientSetupEvent event)
+    public static void bindRenderer(final FMLClientSetupEvent event)
     {
         ClientRegistry.bindTileEntitySpecialRenderer(TreeTapTileEntity.class, new TreeTapTileEntityRenderer<>());
         ClientRegistry.bindTileEntitySpecialRenderer(CableCaseTileEntity.class, new CableCaseTileEntityRenderer<>());
+
+        EntityRendererManager entityRendererManager = Minecraft.getInstance().getRenderManager();
+
+        RenderingRegistry.registerEntityRenderingHandler(EntityZombiePlayer.class, ZombiePlayerRenderFactory.INSTANCE);
         //ForgeRegistries.ITEMS.getValue(new ResourceLocation(Reference.MODID,"large_glass_jar"));
     }
 

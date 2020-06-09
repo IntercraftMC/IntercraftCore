@@ -1,5 +1,6 @@
 package net.intercraft.intercraftcore.block;
 
+import net.intercraft.intercraftcore.api.UtilBlocks;
 import net.intercraft.intercraftcore.api.enumProperties.BlockProperties;
 import net.intercraft.intercraftcore.tileentity.ChunkLoaderBaseTileEntity;
 import net.minecraft.block.Block;
@@ -30,7 +31,7 @@ public class BlockChunkloaderRedstone extends BlockChunkloader
 
         if (!worldIn.isRemote) {
 
-            ChunkLoaderBaseTileEntity tile = (ChunkLoaderBaseTileEntity) worldIn.getTileEntity(pos);
+            ChunkLoaderBaseTileEntity tile = UtilBlocks.getTileEntityThrowable(ChunkLoaderBaseTileEntity.class,worldIn,state,pos);
 
             if (!tile.getCanLoad()) {
                 BlockPos dub = getDuplicate(worldIn,pos);

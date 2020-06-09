@@ -8,7 +8,10 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.*;
+import net.minecraft.item.ArmorItem;
+import net.minecraft.item.ArmorMaterial;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
@@ -23,6 +26,8 @@ public class ItemHazMatSuit extends ArmorItem
     private final float[] protectionDivision;
     private final int tint;
 
+    private final BipedModel<LivingEntity> model;
+
     public ItemHazMatSuit(String name, EquipmentSlotType slot, float[] protectionDivision, Item.Properties properties, int tint)
     {
         super(ArmorMaterial.LEATHER, slot, properties);
@@ -30,6 +35,8 @@ public class ItemHazMatSuit extends ArmorItem
         //model = new ModelHazMatSuit(tint);
         this.protectionDivision = protectionDivision;
         this.tint = tint;
+
+        model = new ModelHazMatSuit(tint);
         setRegistryName(name);
     }
 
@@ -49,8 +56,6 @@ public class ItemHazMatSuit extends ArmorItem
     @Override
     public <A extends BipedModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlotType armorSlot, A _default)
     {
-        ModelHazMatSuit model = new ModelHazMatSuit(tint);
-
         model.bipedHeadwear.showModel = armorSlot == EquipmentSlotType.HEAD;
         model.bipedHead.showModel = armorSlot == EquipmentSlotType.HEAD;
 

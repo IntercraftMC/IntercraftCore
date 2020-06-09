@@ -18,6 +18,7 @@ build
 .gradle
 
 # other
+*.sh
 eclipse
 run
 

@@ -1,6 +1,6 @@
 package net.intercraft.intercraftcore.block;
 
-import net.intercraft.intercraftcore.Authors;
+import net.intercraft.intercraftcore.api.UtilBlocks;
 import net.intercraft.intercraftcore.api.enumProperties.BlockProperties;
 import net.intercraft.intercraftcore.tileentity.ChunkLoaderTimerTileEntity;
 import net.minecraft.block.BlockState;
@@ -44,8 +44,7 @@ public class BlockChunkloaderTimer extends BlockChunkloader
         if (!worldIn.isRemote) {
 
             // Open Gui.
-            ChunkLoaderTimerTileEntity tile = state.getBlock().hasTileEntity(state) ? (ChunkLoaderTimerTileEntity) worldIn.getTileEntity(pos) : null;
-            if (tile == null) throw new NullPointerException("Could not find ChunkLoaderTimerTileEntity! "+ Authors.SIMON.fault());
+            ChunkLoaderTimerTileEntity tile = UtilBlocks.getTileEntityThrowable(ChunkLoaderTimerTileEntity.class,worldIn,state,pos);
 
             player.openContainer(tile);
 

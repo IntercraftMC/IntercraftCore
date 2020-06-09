@@ -43,8 +43,8 @@ public class BlockCableCase extends Block
 {
 
     public static final VoxelShape[]
-            CONNECTION_SIDES = UtilBlocks.generateDirectionShapes(0,2,2,2,14,14),
-            MODULE_SIDES     = UtilBlocks.generateDirectionShapes(1,0,0,2,16,16);
+            CONNECTION_SIDES = UtilBlocks.generateDirectionShapes(2,2,0,14,14,2),
+            MODULE_SIDES     = UtilBlocks.generateDirectionShapes(0,0,1,16,16,2);
     public static final VoxelShape MIDDLE = Block.makeCuboidShape(2,2,2,14,14,14);
 
 

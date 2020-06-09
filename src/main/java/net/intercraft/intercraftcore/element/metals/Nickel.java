@@ -7,6 +7,6 @@ public class Nickel extends Element
 {
     public Nickel()
     {
-        super("nickel", ElementDictionary.NICKEL, GEAR);
+        super("nickel", ElementDictionary.NICKEL, CHUNK | ORE);
     }
 }

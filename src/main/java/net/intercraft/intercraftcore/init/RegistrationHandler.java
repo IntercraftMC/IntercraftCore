@@ -2,6 +2,7 @@ package net.intercraft.intercraftcore.init;
 
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.entity.EntityType;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.Item;
 import net.minecraft.particles.ParticleType;
@@ -17,16 +18,17 @@ import java.util.List;
 public class RegistrationHandler
 {
 
-    protected static final List<Block>           blocks         = new LinkedList<>();
-    protected static final List<Block>           fluidBlocks    = new LinkedList<>();
-    protected static final List<Item>            itemBlocks     = new LinkedList<>();
-    protected static final List<Item>            items          = new LinkedList<>();
-    protected static final List<ContainerType>   containerTypes = new LinkedList<>();
-    protected static final List<Effect>          effects        = new LinkedList<>();
-    protected static final List<TileEntityType>  tileentities   = new LinkedList<>();
-    protected static final List<Enchantment>     enchantments   = new LinkedList<>();
+    protected static final List<EntityType>     entities       = new LinkedList<>();
+    protected static final List<Block>          blocks         = new LinkedList<>();
+    protected static final List<Block>          fluidBlocks    = new LinkedList<>();
+    protected static final List<Item>           itemBlocks     = new LinkedList<>();
+    protected static final List<Item>           items          = new LinkedList<>();
+    protected static final List<ContainerType>  containerTypes = new LinkedList<>();
+    protected static final List<Effect>         effects        = new LinkedList<>();
+    protected static final List<TileEntityType> tileentities   = new LinkedList<>();
+    protected static final List<Enchantment>    enchantments   = new LinkedList<>();
 
-    protected static final List<StatType<?>>     stats          = new LinkedList<>();
+    protected static final List<StatType<?>>    stats          = new LinkedList<>();
     //protected static final List<ParticleType<?>> particles     = new LinkedList<>();
 
 
@@ -34,7 +36,9 @@ public class RegistrationHandler
     {
         Type generic = event.getGenericType();
 
-        if (generic == Block.class) {
+        if (generic == EntityType.class) {
+            registerEntities(event);
+        } else if (generic == Block.class) {
             registerBlocks(event);
         } else if (generic == Item.class) {
             registerItems(event);
@@ -55,6 +59,12 @@ public class RegistrationHandler
 
     }
 
+    protected static void registerEntities(final RegistryEvent.Register<EntityType<?>> event)
+    {
+        IntercraftEntities.register();
+        entities.forEach(entityType -> event.getRegistry().register(entityType));
+        System.out.println("Entity registration done.");
+    }
 
     protected static void registerBlocks(final RegistryEvent.Register<Block> event)
     {

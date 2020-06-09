@@ -51,7 +51,7 @@ public class ChunkLoaderBaseTileEntity extends TileEntity implements ITickableTi
     }
 
 
-    public void load(Chunk chunk)
+    protected static void load(Chunk chunk)
     {
         // Should do the chunkloading here..
 

@@ -27,7 +27,7 @@ import java.util.List;
 public class BlockChunkloader extends Block
 {
 
-    public static final VoxelShape shape = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 12.0D, 16.0D);
+    public static final VoxelShape SHAPE = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 12.0D, 16.0D);
 
 
     public BlockChunkloader(final String name)
@@ -161,6 +161,6 @@ public class BlockChunkloader extends Block
     @Override
     public VoxelShape getShape(BlockState state, IBlockReader blockReader, BlockPos pos, ISelectionContext selectionContext)
     {
-        return shape;
+        return SHAPE;
     }
 }

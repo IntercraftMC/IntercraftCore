@@ -200,6 +200,7 @@
   "item.intercraftcore.li_dust": "Lithium Dust",
   "item.intercraftcore.li_dustsmall": "Tiny Pile of Lithium",
   "item.intercraftcore.li_plate": "Lithium Plate",
+  "item.intercraftcore.ni_gear": "Nickel Gear",
   "item.intercraftcore.ni_ingot": "Nickel Ingot",
   "item.intercraftcore.ni_nugget": "Nickel Nugget",
   "item.intercraftcore.ni_dust": "Nickel Dust",
@@ -294,7 +295,6 @@
   "item.intercraftcore.fe_chunk": "Iron Chunk",
   "item.intercraftcore.pb_chunk": "Lead Chunk",
   "item.intercraftcore.li_chunk": "Lithium Chunk",
-  "item.intercraftcore.ni_chunk": "Nickel Chunk",
   "item.intercraftcore.ag_chunk": "Silver Chunk",
   "item.intercraftcore.th_chunk": "Thorium Chunk",
   "item.intercraftcore.sn_chunk": "Tin Chunk",
@@ -375,11 +375,6 @@
   "block.intercraftcore.li_ore.1": "Low Lithium Ore",
   "block.intercraftcore.li_ore.2": "Medium Lithium Ore",
   "block.intercraftcore.li_ore.3": "Rich Lithium Ore",
-  "block.intercraftcore.ni_ore": "Nickel Ore",
-  "block.intercraftcore.ni_ore.0": "Poor Nickel Ore",
-  "block.intercraftcore.ni_ore.1": "Low Nickel Ore",
-  "block.intercraftcore.ni_ore.2": "Medium Nickel Ore",
-  "block.intercraftcore.ni_ore.3": "Rich Nickel Ore",
   "block.intercraftcore.ag_ore": "Silver Ore",
   "block.intercraftcore.ag_ore.0": "Poor Silver Ore",
   "block.intercraftcore.ag_ore.1": "Low Silver Ore",
@@ -424,6 +419,14 @@
   "block.intercraftcore.chunkloader_timer": "Chunkloader (Timer)",
   "block.intercraftcore.chunkloader_array": "Chunkloader (Array)",
 
+  "block.intercraftcore.stone_number_button": "Numbered Stone Button (%s)",
+  "block.intercraftcore.oak_number_button": "Numbered Oak Button (%s)",
+  "block.intercraftcore.spruce_number_button": "Numbered Spruce Button (%s)",
+  "block.intercraftcore.birch_number_button": "Numbered Birch Button (%s)",
+  "block.intercraftcore.jungle_number_button": "Numbered Jungle Button (%s)",
+  "block.intercraftcore.acacia_number_button": "Numbered Acacia Button (%s)",
+  "block.intercraftcore.dark_oak_number_button": "Numbered Dark Oak Button (%s)",
+
   "enchantment.intercraftcore.auto_pickup": "Auto Pickup",
 
   "itemGroup.intercraftcore.resources": "Resources",
@@ -453,6 +456,9 @@
   "container.intercraftcore.itemstack_storage.large_green_glass_jar": "Large Green Stained Glass Jar",
   "container.intercraftcore.itemstack_storage.large_black_glass_jar": "Large Black Stained Glass Jar",
   "container.intercraftcore.itemstack_storage.large_red_glass_jar": "Large Red Stained Glass Jar",
+
+
+  "entity.intercraftcore.zombie_player": "Zombified %s",
 
 
   "effect.intercraftcore.radiation_sickness": "Radiation Sickness",
@@ -502,6 +508,17 @@
 
 
   "subtitle.intercraftcore.reaction_water": "Reaction in Water Hizzing",
+
+  "subtitle.intercraftcore.numbers.0": "Zero",
+  "subtitle.intercraftcore.numbers.1": "One",
+  "subtitle.intercraftcore.numbers.2": "Two",
+  "subtitle.intercraftcore.numbers.3": "Three",
+  "subtitle.intercraftcore.numbers.4": "Four",
+  "subtitle.intercraftcore.numbers.5": "Five",
+  "subtitle.intercraftcore.numbers.6": "Six",
+  "subtitle.intercraftcore.numbers.7": "Seven",
+  "subtitle.intercraftcore.numbers.8": "Eight",
+  "subtitle.intercraftcore.numbers.9": "Nine",
 
 
   "curios.identifier.pocket": "Pocket",

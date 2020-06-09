@@ -17,7 +17,7 @@ public enum ElementDictionary
     LEAD(     "pb",0x664c86,0xc1c2c5, new ElementComposition[] {new ElementComposition("pb",1)}),
     LITHIUM(  "li",0xdfe3ee,0xc1c2cf, new ElementComposition[] {new ElementComposition("li",1)}),
     MERCURY(  "hg",0xe8e9ee,0xbc2b3b, new ElementComposition[] {new ElementComposition("hg",1)}),
-    NICKEL(   "ni",0xdfe3ee,0xc1c2cf, new ElementComposition[] {new ElementComposition("ni",0.95),new ElementComposition("fe",0.05)}),
+    NICKEL(   "ni",0xF6E3A7,          new ElementComposition[] {new ElementComposition("ni",0.95),new ElementComposition("fe",0.05)}),
     SILVER(   "ag",0xffffff,0xdaf7f8, 3, new ElementComposition[] {new ElementComposition("ag",1)}),
     THORIUM(  "th",0x333,   0x444818, 3, new ElementComposition[] {new ElementComposition("th",1)}),
     TIN(      "sn",0x9daaae,0xc7bdc4, new ElementComposition[] {new ElementComposition("sn",1)}),
@@ -64,11 +64,11 @@ public enum ElementDictionary
 
     ElementDictionary(String symbol, int colorPrimary, int colorSecondary, float hardness, ElementComposition[] composition)
     {
-        this.symbol = symbol;
-        this.colorPrimary = colorPrimary;
+        this.symbol         = symbol;
+        this.colorPrimary   = colorPrimary;
         this.colorSecondary = colorSecondary;
-        this.hardness = hardness;
-        this.composition = composition;
+        this.hardness       = hardness;
+        this.composition    = composition;
     }
 
     public String getSymbol()

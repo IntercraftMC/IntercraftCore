@@ -83,7 +83,7 @@ public class IntercraftItems
      */
 
     public static final ItemElementGroup
-     /* Metals */   ALUMINIUM, COPPER, GOLD, IRIDIUM, IRON, LEAD, LITHIUM, SILVER, THORIUM, TIN, TITANIUM, TUNGSTEN, URANIUM, ZINC,
+     /* Metals */   ALUMINIUM, COPPER, GOLD, IRIDIUM, IRON, LEAD, LITHIUM, NICKEL, SILVER, THORIUM, TIN, TITANIUM, TUNGSTEN, URANIUM, ZINC,
      /* Minerals */ CARBON, SILICON,
      /* Alloys */   BRASS, BRONZE, ELECTRUM, STEEL;
 
@@ -178,6 +178,7 @@ public class IntercraftItems
         IRON      = new ItemElementGroup(new Iron());
         LEAD      = new ItemElementGroup(new Lead());
         LITHIUM   = new ItemLithiumGroup(new Lithium());
+        NICKEL    = new ItemElementGroup(new Nickel());
         SILVER    = new ItemElementGroup(new Silver());
         THORIUM   = new ItemElementGroup(new Thorium());
         TIN       = new ItemElementGroup(new Tin());
@@ -226,7 +227,7 @@ public class IntercraftItems
                 ELECTRUM_COIL, INSULATED_ELECTRUM_COIL
         );
 
-        registerElementItems(ALUMINIUM, COPPER, GOLD, IRIDIUM, IRON, LEAD, LITHIUM, SILVER, THORIUM, TIN, TITANIUM, TUNGSTEN, URANIUM, ZINC);
+        registerElementItems(ALUMINIUM, COPPER, GOLD, IRIDIUM, IRON, LEAD, LITHIUM, NICKEL, SILVER, THORIUM, TIN, TITANIUM, TUNGSTEN, URANIUM, ZINC);
         registerElementItems(CARBON, SILICON);
         registerElementItems(BRASS, BRONZE, ELECTRUM, STEEL);
     }
